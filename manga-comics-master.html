@@ -154,8 +154,8 @@ footer{padding:44px 32px;text-align:center;border-top:1px solid var(--border);
   .card-grid{grid-template-columns:1fr}
 }
 </style>
-</head>
-<body>
+<link rel="stylesheet" href="assets/css/library.css"></head>
+<body data-library-theme="manga">
 
 <header>
   <div class="hd-label">Curated Collection — Five Sources</div>
@@ -435,5 +435,5 @@ document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click',()=>
 document.getElementById('searchInput').addEventListener('input',e=>{searchVal=e.target.value;applyFilters();});
 buildFilters('all'); applyFilters();
 </script>
-</body>
+<script src="assets/js/library.js" defer></script></body>
 </html>

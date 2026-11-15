@@ -401,8 +401,8 @@ nav {
 }
 .reveal.visible { opacity:1; transform:translateY(0); }
 </style>
-</head>
-<body>
+<link rel="stylesheet" href="assets/css/library.css"></head>
+<body data-library-theme="learning">
 
 <nav>
   <div class="nav-logo">How to Live · 2026</div>
@@ -980,5 +980,5 @@ const ro = new IntersectionObserver((entries)=>{
 },{threshold:0.08});
 reveals.forEach(el=>ro.observe(el));
 </script>
-</body>
+<script src="assets/js/library.js" defer></script></body>
 </html>
