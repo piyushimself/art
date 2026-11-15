@@ -1,456 +1,52 @@
-/* Collection template components — shared across every content page */
-.atlas-progress{position:fixed;z-index:10020;top:0;left:0;width:0;height:3px;background:linear-gradient(90deg,#2F4BFF,#8A5CF6,#FF5D73);box-shadow:0 0 12px rgba(47,75,255,.25);pointer-events:none}
-.atlas-dock{position:fixed!important;z-index:10010!important;left:50%!important;bottom:max(14px,env(safe-area-inset-bottom))!important;transform:translateX(-50%)!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;width:max-content!important;max-width:calc(100vw - 24px)!important;padding:7px!important;border:1.5px solid var(--line)!important;border-radius:999px!important;background:color-mix(in srgb,var(--surface) 92%,transparent)!important;box-shadow:0 8px 30px rgba(27,26,58,.16)!important;backdrop-filter:blur(16px)!important}
-.atlas-dock a,.atlas-dock button,.atlas-dock label{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;min-height:40px!important;padding:7px 13px!important;border:1px solid transparent!important;border-radius:999px!important;background:transparent!important;color:var(--ink)!important;font:600 .88rem/1.2 var(--body)!important;text-decoration:none!important;white-space:nowrap!important;cursor:pointer}
-.atlas-dock a:hover,.atlas-dock button:hover{background:var(--bg)!important;border-color:var(--line)!important}
+/* Shared Atlas interaction layer. Page-specific layouts own their typography and colours. */
+:root{--atlas-ui-bg:#202627;--atlas-ui-surface:#29312e;--atlas-ui-ink:#eee9df;--atlas-ui-muted:#b8c1b8;--atlas-ui-line:#46504b;--atlas-ui-accent:#9eae96}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+.atlas-progress{position:fixed;z-index:10020;top:0;left:0;width:0;height:3px;background:linear-gradient(90deg,#b77a5c,#9eae96);pointer-events:none}
+.atlas-dock{position:fixed!important;z-index:10010!important;left:50%!important;bottom:max(12px,env(safe-area-inset-bottom))!important;transform:translateX(-50%)!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:4px!important;width:max-content!important;max-width:calc(100vw - 20px)!important;padding:5px!important;border:1px solid var(--atlas-ui-line)!important;border-radius:12px!important;background:rgba(29,35,34,.97)!important;color:var(--atlas-ui-ink)!important;box-shadow:0 8px 28px rgba(0,0,0,.35)!important;backdrop-filter:blur(16px)!important}
+.atlas-dock a,.atlas-dock button,.atlas-dock label{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;min-height:36px!important;padding:6px 11px!important;border:1px solid transparent!important;border-radius:8px!important;background:transparent!important;color:var(--atlas-ui-ink)!important;font:600 12px/1.2 system-ui,sans-serif!important;text-decoration:none!important;white-space:nowrap!important;cursor:pointer}
+.atlas-dock .atlas-home{background:#647760!important;color:#fff!important}
+.atlas-dock a:hover,.atlas-dock button:hover{background:#35403b!important}
 .atlas-dock [hidden]{display:none!important}
-.atlas-page-check,.atlas-item-check{display:inline-flex!important;align-items:center!important;gap:7px!important;width:max-content!important;max-width:100%!important;padding:6px 10px!important;border:1px solid var(--line)!important;border-radius:999px!important;background:var(--surface)!important;color:var(--mute)!important;font:500 .82rem/1.3 var(--body)!important;cursor:pointer!important;user-select:none}
-.atlas-page-check input,.atlas-item-check input{width:18px!important;height:18px!important;min-height:18px!important;margin:0!important;accent-color:#2F4BFF!important;flex:none!important}
-.atlas-item-check{margin:8px 0 2px!important}
-.atlas-trackable{scroll-margin-top:84px}
-.atlas-overlay{position:fixed!important;z-index:10030!important;inset:0!important;display:none!important;align-items:center!important;justify-content:center!important;padding:18px!important;background:rgba(15,18,36,.58)!important;backdrop-filter:blur(8px)!important}
+.atlas-page-check,.atlas-item-check{display:inline-flex!important;align-items:center!important;gap:6px!important;width:max-content!important;max-width:100%!important;padding:5px 8px!important;border:1px solid var(--atlas-ui-line)!important;border-radius:7px!important;background:var(--atlas-ui-surface)!important;color:var(--atlas-ui-muted)!important;font:500 12px/1.3 system-ui,sans-serif!important;cursor:pointer!important;user-select:none}
+.atlas-page-check input,.atlas-item-check input{width:16px!important;height:16px!important;min-height:16px!important;margin:0!important;accent-color:#9eae96!important;flex:none!important}
+.atlas-item-check{margin:7px 0 2px!important}
+.atlas-trackable{scroll-margin-top:80px}
+.atlas-overlay{position:fixed!important;z-index:10030!important;inset:0!important;display:none!important;align-items:center!important;justify-content:center!important;padding:16px!important;background:rgba(8,11,12,.76)!important;backdrop-filter:blur(8px)!important}
 .atlas-overlay.is-open{display:flex!important}
-.atlas-dialog{width:min(620px,100%)!important;max-height:min(80dvh,720px)!important;overflow:auto!important;padding:22px!important;border:1.5px solid var(--line)!important;border-radius:22px!important;background:var(--surface)!important;color:var(--ink)!important;box-shadow:0 24px 80px rgba(15,18,36,.25)!important}
+.atlas-dialog{width:min(600px,100%)!important;max-height:min(82dvh,700px)!important;overflow:auto!important;padding:20px!important;border:1px solid var(--atlas-ui-line)!important;border-radius:14px!important;background:#202627!important;color:#eee9df!important;box-shadow:0 24px 80px rgba(0,0,0,.4)!important}
 .atlas-dialog-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important}
-.atlas-dialog-head h2{margin:0!important;font:800 1.5rem/1.15 var(--display)!important}
-.atlas-close{width:42px!important;min-width:42px!important;padding:0!important;border:1px solid var(--line)!important;background:transparent!important;color:var(--ink)!important;font-size:1.5rem!important}
-.atlas-search{width:100%!important;margin:16px 0 8px!important}
-.atlas-hint,.atlas-empty{color:var(--mute)!important;font-size:.88rem!important}
-.atlas-results{display:grid!important;gap:7px!important;margin-top:12px!important}
-.atlas-result{display:grid!important;gap:3px!important;padding:12px 14px!important;border:1px solid var(--line)!important;border-radius:12px!important;background:var(--bg)!important;color:var(--ink)!important;text-decoration:none!important}
-.atlas-result small{color:var(--mute)!important}
-.atlas-toc{position:fixed!important;z-index:10005!important;right:16px!important;bottom:78px!important;width:min(320px,calc(100vw - 32px))!important;max-height:55dvh!important;overflow:auto!important;padding:16px!important;border:1.5px solid var(--line)!important;border-radius:18px!important;box-shadow:0 12px 36px rgba(27,26,58,.18)!important;display:none!important}
-.atlas-toc.is-open{display:grid!important;gap:8px!important}
-.atlas-toc h2{margin:0 0 5px!important;font-size:1.1rem!important}
-.atlas-toc a{display:block!important;padding:7px 9px!important;border-radius:8px!important;color:var(--ink)!important;font-size:.88rem!important;text-decoration:none!important}
-.atlas-toc a:hover{background:var(--bg)!important}
-.atlas-toc a[data-level="3"]{padding-left:20px!important;color:var(--mute)!important}
-.atlas-backtop{position:fixed!important;z-index:10008!important;right:18px!important;bottom:82px!important;width:44px!important;min-width:44px!important;padding:0!important;border:1px solid var(--line)!important;border-radius:50%!important;background:var(--surface)!important;color:var(--ink)!important;box-shadow:0 5px 18px rgba(27,26,58,.14)!important;opacity:0!important;pointer-events:none!important;transform:translateY(8px)!important;transition:opacity .18s,transform .18s!important}
+.atlas-dialog-head h2{margin:0!important;font:650 1.35rem/1.2 system-ui,sans-serif!important;color:#eee9df!important}
+.atlas-close{width:38px!important;min-width:38px!important;padding:0!important;border:1px solid var(--atlas-ui-line)!important;background:transparent!important;color:#eee9df!important;font-size:1.4rem!important}
+.atlas-search{width:100%!important;min-height:44px!important;margin:14px 0 7px!important;padding:10px 12px!important;border:1px solid var(--atlas-ui-line)!important;border-radius:8px!important;background:#171d1d!important;color:#eee9df!important}
+.atlas-hint,.atlas-empty{color:#aeb8af!important;font-size:.84rem!important}
+.atlas-results{display:grid!important;gap:6px!important;margin-top:10px!important}
+.atlas-result{display:grid!important;gap:3px!important;padding:11px 12px!important;border:1px solid var(--atlas-ui-line)!important;border-radius:8px!important;background:#29312e!important;color:#eee9df!important;text-decoration:none!important}
+.atlas-result small{color:#aeb8af!important}
+.atlas-toc{position:fixed!important;z-index:10005!important;right:14px!important;bottom:68px!important;width:min(300px,calc(100vw - 28px))!important;max-height:55dvh!important;overflow:auto!important;padding:14px!important;border:1px solid var(--atlas-ui-line)!important;border-radius:12px!important;background:#202627!important;color:#eee9df!important;box-shadow:0 12px 36px rgba(0,0,0,.3)!important;display:none!important}
+.atlas-toc.is-open{display:grid!important;gap:6px!important}
+.atlas-toc h2{margin:0 0 5px!important;font-size:1rem!important;color:#eee9df!important}
+.atlas-toc a{display:block!important;padding:7px 8px!important;border-radius:6px!important;color:#eee9df!important;font-size:.84rem!important;text-decoration:none!important}
+.atlas-toc a:hover{background:#29312e!important}
+.atlas-toc a[data-level="3"]{padding-left:18px!important;color:#aeb8af!important}
+.atlas-backtop{position:fixed!important;z-index:10008!important;right:14px!important;bottom:70px!important;width:38px!important;height:38px!important;min-width:38px!important;padding:0!important;border:1px solid var(--atlas-ui-line)!important;border-radius:50%!important;background:#202627!important;color:#eee9df!important;box-shadow:0 5px 18px rgba(0,0,0,.25)!important;opacity:0!important;pointer-events:none!important;transform:translateY(8px)!important;transition:opacity .18s,transform .18s!important}
 .atlas-backtop.is-visible{opacity:1!important;pointer-events:auto!important;transform:translateY(0)!important}
-.atlas-completed-panel{margin:18px auto!important;padding:0!important;border:1.5px solid var(--line)!important;border-radius:18px!important;overflow:hidden!important}
-.atlas-done-details>summary{padding:16px 18px!important;cursor:pointer!important;list-style:none!important}
+.atlas-completed-panel{margin:16px auto!important;padding:0!important;border:1px solid var(--atlas-ui-line)!important;border-radius:12px!important;overflow:hidden!important;background:#202627!important;color:#eee9df!important}
+.atlas-done-details>summary{padding:14px 16px!important;cursor:pointer!important;list-style:none!important}
 .atlas-done-details>summary::-webkit-details-marker{display:none}
 .atlas-done-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important}
-.atlas-done-kicker{font-size:.72rem!important;letter-spacing:.1em!important;text-transform:uppercase!important;color:var(--mute)!important}
-.atlas-done-head h2{margin:4px 0 0!important;font-size:1.25rem!important}
-.atlas-done-head h2 span{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 6px;border-radius:99px;background:var(--bg);font:600 .8rem var(--body)}
-.atlas-done-note{font-size:.8rem!important;color:var(--mute)!important}
-.atlas-done-list{display:grid!important;gap:0!important;border-top:1px solid var(--line)!important}
-.atlas-done-row{display:grid!important;grid-template-columns:34px 1fr!important;align-items:center!important;gap:10px!important;padding:10px 16px!important;border-bottom:1px solid var(--line)!important}
-.atlas-done-row:last-child{border-bottom:0!important}
+.atlas-done-kicker{font-size:.7rem!important;letter-spacing:.1em!important;text-transform:uppercase!important;color:#a9b99e!important}
+.atlas-done-head h2{margin:4px 0 0!important;font-size:1.15rem!important;color:#eee9df!important}
+.atlas-done-head h2 span{display:inline-grid;place-items:center;min-width:24px;height:24px;padding:0 6px;border-radius:99px;background:#29312e;color:#dce5d7;font:600 .78rem system-ui}
+.atlas-done-note{font-size:.78rem!important;color:#a6afa8!important}
+.atlas-done-list{display:grid!important;gap:0!important;border-top:1px solid #39433e!important}
+.atlas-done-row{display:grid!important;grid-template-columns:30px 1fr!important;align-items:center!important;gap:9px!important;padding:9px 14px!important;border-bottom:1px solid #343d39!important}
+.atlas-done-row:last-child{border-bottom:0}
 .atlas-done-row label{display:flex!important;align-items:center!important;justify-content:center!important}
-.atlas-done-row a{display:grid!important;gap:3px!important;color:var(--ink)!important;text-decoration:none!important}
-.atlas-done-row small{color:var(--mute)!important}
-.atlas-done-empty{padding:0 18px 16px!important;color:var(--mute)!important;font-size:.9rem!important}
-@media(max-width:560px){
- .atlas-dock{left:8px!important;right:8px!important;bottom:max(8px,env(safe-area-inset-bottom))!important;transform:none!important;width:auto!important;max-width:none!important;gap:2px!important;padding:5px!important}
- .atlas-dock a,.atlas-dock button,.atlas-dock label{flex:1 1 0!important;min-width:0!important;padding:7px 5px!important;font-size:.76rem!important}
- .atlas-dock .atlas-page-check{gap:4px!important}
- .atlas-done-head{align-items:flex-start!important;flex-direction:column!important}
- .atlas-backtop{right:12px!important;bottom:72px!important}
-}
-@media(prefers-reduced-motion:reduce){.atlas-backtop{transition:none!important}}
-
-
-/* Compact-card correction: content first, no oversized empty tiles */
-body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.panel,.section-card,.item-card){
-  min-height:0!important;
-}
-body :is(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid,.items-grid,.collection-grid,.entries-grid){
-  grid-auto-rows:min-content!important;
-  align-items:start!important;
-}
-body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.item-card){
-  height:auto!important;
-}
-body :is(.card img,.manga-card img,.film-card img,.movie-card img,.book-card img,.resource-card img,.item-card img){
-  max-height:190px!important;
-  object-fit:cover!important;
-}
-body :is(.card .body,.card-body,.card-content,.item-body,.manga-card .body,.film-card .body){
-  padding:12px!important;
-}
-body :is(.card h2,.card h3,.card h4,.manga-card h3,.film-card h3,.book-card h3,.resource-card h3){
-  margin:0 0 6px!important;
-  font-size:1.06rem!important;
-  line-height:1.24!important;
-}
-body :is(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p){
-  margin-block:4px!important;
-  font-size:.9rem!important;
-  line-height:1.55!important;
-}
-/* The home-page collection links become compact catalogue rows, not tall posters */
-body main .section .grid>.card{
-  display:grid!important;
-  grid-template-columns:minmax(0,1fr) auto!important;
-  grid-template-rows:auto auto auto!important;
-  align-content:start!important;
-  gap:5px 12px!important;
-  min-height:0!important;
-  height:auto!important;
-  padding:13px 15px!important;
-  border-radius:13px!important;
-}
-body main .section .grid>.card .card-top{
-  grid-column:1/-1!important;
-  margin:0 0 3px!important;
-}
-body main .section .grid>.card h3{
-  grid-column:1!important;
-  grid-row:2!important;
-  max-width:none!important;
-  margin:0!important;
-  font-size:1.08rem!important;
-  line-height:1.2!important;
-}
-body main .section .grid>.card p{
-  grid-column:1!important;
-  grid-row:3!important;
-  max-width:68ch!important;
-  margin:0!important;
-  font-size:.88rem!important;
-  line-height:1.48!important;
-}
-body main .section .grid>.card .card-bottom{
-  grid-column:2!important;
-  grid-row:2/4!important;
-  align-self:center!important;
-  gap:8px!important;
-  margin:0!important;
-  padding:0!important;
-  white-space:nowrap!important;
-  font-size:.68rem!important;
-}
-body main .section .grid>.card:before{width:90px!important;height:90px!important}
-@media(max-width:760px){
-  body :is(.card img,.manga-card img,.film-card img,.movie-card img,.book-card img,.resource-card img,.item-card img){
-    max-height:145px!important;
-  }
-  body main .section .grid>.card{
-    padding:12px!important;
-    gap:4px 8px!important;
-  }
-  body main .section .grid>.card h3{font-size:1rem!important}
-  body main .section .grid>.card p{font-size:.84rem!important;line-height:1.45!important}
-  body main .section .grid>.card .card-bottom{font-size:.62rem!important}
-}
-@media(max-width:420px){
-  body main .section .grid>.card .card-bottom span:first-child{max-width:90px!important;overflow:hidden!important;text-overflow:ellipsis!important}
-}
-
-
-/* FINAL DESIGN STANDARD — match the Manhwa 300 catalogue card proportions */
-:root{
- --bg:#fffaf1!important;
- --surface:#fffaf1!important;
- --ink:#24211d!important;
- --mute:#5f564b!important;
- --line:rgba(60,45,30,.20)!important;
- --atlas-accent:#9a5036;
- --atlas-accent-soft:#f4e6dc;
- --display:system-ui,-apple-system,"Segoe UI",sans-serif;
- --body:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
- color-scheme:light!important;
-}
-body[data-library-theme="manga"]{--atlas-accent:#98452f;--atlas-accent-soft:#f5e4dc}
-body[data-library-theme="culture"]{--atlas-accent:#315f70;--atlas-accent-soft:#e3eef0}
-body[data-library-theme="art"]{--atlas-accent:#9a5036;--atlas-accent-soft:#f5e8df}
-body[data-library-theme="learning"]{--atlas-accent:#42694f;--atlas-accent-soft:#e7efe5}
-body[data-library-theme="utility"]{--atlas-accent:#625486;--atlas-accent-soft:#eee9f5}
-html,body{background:#fffaf1!important;color:#24211d!important;color-scheme:light!important}
-body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;font-size:16px!important;line-height:1.65!important}
-body :is(h1,h2,h3,h4,h5,h6,strong,b,.card-title,.title){color:#24211d!important}
-body :is(p,li,dd,blockquote,label,small,.meta,.metadata,.muted,.hint,.helper,.caption,.description,.subtitle,.intro,.lead,.section-desc){color:#5f564b!important}
-body :is(a){text-decoration-color:rgba(36,33,29,.35);text-underline-offset:3px}
-body :is(a:hover){color:var(--atlas-accent)!important}
-body :is(input,select,textarea,button){color:#24211d}
-body :is(input[type=search],input[type=text],input[type=number],input[type=email],input[type=date],select,textarea){
- background:#fffdf8!important;color:#24211d!important;border:1px solid rgba(60,45,30,.28)!important;
-}
-body :is(input::placeholder,textarea::placeholder){color:#756d63!important;opacity:1!important}
-body :is(.pill,.filter,.chip,.tag,.badge,.cat-badge,.sort-sel){
- color:#4e473f!important;background:#f4efe5!important;border-color:rgba(60,45,30,.2)!important
-}
-body :is(.pill.active,.filter.active,.chip.active,.active-filter){
- color:#24211d!important;background:var(--atlas-accent-soft)!important;border-color:var(--atlas-accent)!important
-}
-body :is(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid,.items-grid,.collection-grid,.entries-grid){
- grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))!important;
- gap:10px!important;align-items:start!important;grid-auto-rows:min-content!important
-}
-body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card){
- box-sizing:border-box!important;min-width:0!important;min-height:0!important;height:auto!important;
- padding:14px 16px!important;border:1px solid rgba(60,45,30,.20)!important;
- border-radius:14px!important;background:#fffdf8!important;color:#24211d!important;
- box-shadow:none!important;overflow-wrap:anywhere!important
-}
-body :is(.card .body,.card-body,.card-content,.item-body,.manga-card .body,.film-card .body){
- min-width:0!important;padding:0!important
-}
-body :is(.card h2,.card h3,.card h4,.manga-card h3,.film-card h3,.book-card h3,.resource-card h3,.card-title){
- margin:0 0 6px!important;font-size:14px!important;line-height:1.4!important;font-weight:600!important
-}
-body :is(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p){
- margin:4px 0!important;font-size:13px!important;line-height:1.55!important;color:#5f564b!important
-}
-body :is(.card img,.manga-card img,.film-card img,.movie-card img,.book-card img,.resource-card img,.item-card img){
- max-width:100%!important;max-height:190px!important;object-fit:cover!important;border-radius:8px!important
-}
-body :is(.card .meta,.card small,.card .muted,.card .metadata,.card .platform-row,.card .cat-badge){
- font-size:12px!important;line-height:1.45!important;color:#62584d!important
-}
-body :is(.stats-bar,.stat-card,.summary-card,.toolbar,.controls,.filter-row,.search-wrap){
- color:#24211d!important
-}
-body :is(.stats-bar,.stat-card,.summary-card){background:#f4efe5!important;border-color:rgba(60,45,30,.18)!important}
-body :is(.atlas-dock,.atlas-dialog,.atlas-toc,.atlas-completed-panel,.atlas-result){
- background:#fffdf8!important;color:#24211d!important;border-color:rgba(60,45,30,.2)!important
-}
-body :is(.atlas-dock a,.atlas-dock button,.atlas-dock label,.atlas-toc a,.atlas-result strong){color:#24211d!important}
-body :is(.atlas-page-check,.atlas-item-check){background:#fffdf8!important;color:#4e473f!important;border-color:rgba(60,45,30,.22)!important}
-body :is(.eyebrow,.kicker,.label,.section-label,.overline,.section-index){color:var(--atlas-accent)!important}
-body :is(button,.btn,.button,[role=button]){border-color:rgba(60,45,30,.25)}
-body :is(button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:3px solid var(--atlas-accent)!important;outline-offset:2px!important}
-@media(max-width:600px){
- body{font-size:16px!important}
- body :is(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid,.items-grid,.collection-grid,.entries-grid){
-  grid-template-columns:minmax(0,1fr)!important;gap:10px!important
- }
- body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card){
-  padding:14px 16px!important;border-radius:14px!important
- }
- body :is(.card h2,.card h3,.card h4,.manga-card h3,.film-card h3,.book-card h3,.resource-card h3,.card-title){font-size:14px!important}
- body :is(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p){font-size:13px!important}
-}
-
-
-/* Harmonise legacy page colour tokens as well as the shared components */
-:root{
- --text:#24211d!important;--text2:#5f564b!important;--text3:#756d63!important;
- --card-bg:#fffdf8!important;--card-hover:#f4efe5!important;
- --pill-bg:#f4efe5!important;--pill-active-bg:#f0e2d7!important;--pill-active-text:#24211d!important;
- --border:rgba(60,45,30,.18)!important;--border2:rgba(60,45,30,.28)!important;
- --color-text-primary:#24211d!important;--color-text-secondary:#5f564b!important;--color-text-tertiary:#756d63!important;
- --color-border-primary:rgba(60,45,30,.3)!important;--color-border-secondary:rgba(60,45,30,.2)!important;--color-border-tertiary:rgba(60,45,30,.14)!important;
- --color-background-primary:#fffdf8!important;--color-background-secondary:#f4efe5!important;--color-background-tertiary:#eee6d9!important;
- --bg2:#f4efe5!important;--bg3:#eee6d9!important;
- --accent:var(--atlas-accent)!important;--accent2:var(--atlas-accent)!important;
- --coral:var(--atlas-accent)!important;--gold:#805a1b!important;--teal:#286d66!important;--blue:#315f70!important;--orange:#98452f!important;--green:#42694f!important;
-}
-
-
-/* QUIET EDITORIAL THEME — restrained colour, readable typography, light/dark modes */
-:root{
- --bg:#f3f1eb;--surface:#faf9f5;--ink:#292a28;--mute:#62645f;--line:rgba(42,44,40,.16);
- --atlas-accent:#65766b;--atlas-accent-soft:#e6ebe5;
- --display:Georgia,"Iowan Old Style","Palatino Linotype",serif;
- --body:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
- color-scheme:light;
-}
-html,body{background:#f3f1eb!important;color:#292a28!important;color-scheme:light!important}
-body{font-family:var(--body)!important;font-size:16px!important;line-height:1.7!important;letter-spacing:.005em}
-body :is(h1,h2,h3,h4,h5,h6,.card-title,.title){font-family:var(--display)!important;font-weight:600!important;letter-spacing:-.018em!important;color:#292a28!important}
-body :is(p,li,dd,blockquote,label,small,.meta,.metadata,.muted,.hint,.helper,.caption,.description,.subtitle,.intro,.lead,.section-desc){color:#62645f!important}
-body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card){background:#faf9f5!important;border-color:rgba(42,44,40,.16)!important;color:#292a28!important;box-shadow:0 1px 2px rgba(30,32,28,.035)!important}
-body :is(input,select,textarea){background:#fbfaf7!important;color:#292a28!important;border-color:rgba(42,44,40,.22)!important}
-body :is(.pill,.filter,.chip,.tag,.badge,.cat-badge,.sort-sel){background:#eeede7!important;color:#51544f!important;border-color:rgba(42,44,40,.14)!important}
-body :is(.pill.active,.filter.active,.chip.active,.active-filter){background:#e3e9e2!important;color:#303b33!important;border-color:#829286!important}
-body :is(.stats-bar,.stat-card,.summary-card,.toolbar,.controls,.filter-row,.search-wrap){background:#eeede7!important;color:#292a28!important;border-color:rgba(42,44,40,.14)!important}
-body :is(.atlas-dock,.atlas-dialog,.atlas-toc,.atlas-completed-panel,.atlas-result){background:#faf9f5!important;color:#292a28!important;border-color:rgba(42,44,40,.16)!important}
-body :is(.atlas-dock a,.atlas-dock button,.atlas-dock label,.atlas-toc a,.atlas-result strong){color:#292a28!important}
-body :is(.atlas-page-check,.atlas-item-check){background:#faf9f5!important;color:#51544f!important;border-color:rgba(42,44,40,.18)!important}
-body :is(button,.btn,.button,[role=button]){font-family:var(--body)!important}
-body :is(a:hover){color:#52695a!important}
-.atlas-theme-toggle{border:1px solid var(--line)!important;background:var(--surface)!important;color:var(--ink)!important}
-html[data-color-mode="dark"],html[data-color-mode="dark"] body,
-body[data-color-mode="dark"]{background:#171917!important;color:#e8e8e2!important;color-scheme:dark!important}
-html[data-color-mode="dark"] body :is(h1,h2,h3,h4,h5,h6,strong,b,.card-title,.title),
-body[data-color-mode="dark"] :is(h1,h2,h3,h4,h5,h6,strong,b,.card-title,.title){color:#e8e8e2!important}
-html[data-color-mode="dark"] body :is(p,li,dd,blockquote,label,small,.meta,.metadata,.muted,.hint,.helper,.caption,.description,.subtitle,.intro,.lead,.section-desc),
-body[data-color-mode="dark"] :is(p,li,dd,blockquote,label,small,.meta,.metadata,.muted,.hint,.helper,.caption,.description,.subtitle,.intro,.lead,.section-desc){color:#b6b9b1!important}
-html[data-color-mode="dark"] body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card,.atlas-dock,.atlas-dialog,.atlas-toc,.atlas-completed-panel,.atlas-result),
-body[data-color-mode="dark"] :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card,.atlas-dock,.atlas-dialog,.atlas-toc,.atlas-completed-panel,.atlas-result){background:#202320!important;color:#e8e8e2!important;border-color:#3b403b!important;box-shadow:none!important}
-html[data-color-mode="dark"] body :is(input,select,textarea),
-body[data-color-mode="dark"] :is(input,select,textarea){background:#202320!important;color:#e8e8e2!important;border-color:#454b45!important}
-html[data-color-mode="dark"] body :is(.pill,.filter,.chip,.tag,.badge,.cat-badge,.sort-sel,.stats-bar,.stat-card,.summary-card,.toolbar,.controls,.filter-row,.search-wrap),
-body[data-color-mode="dark"] :is(.pill,.filter,.chip,.tag,.badge,.cat-badge,.sort-sel,.stats-bar,.stat-card,.summary-card,.toolbar,.controls,.filter-row,.search-wrap){background:#292e29!important;color:#c8ccc4!important;border-color:#414741!important}
-html[data-color-mode="dark"] body :is(.pill.active,.filter.active,.chip.active,.active-filter),
-body[data-color-mode="dark"] :is(.pill.active,.filter.active,.chip.active,.active-filter){background:#354238!important;color:#e0e9df!important;border-color:#728775!important}
-html[data-color-mode="dark"] body :is(a,.atlas-dock a,.atlas-dock button,.atlas-dock label,.atlas-toc a,.atlas-result strong,.atlas-page-check,.atlas-item-check),
-body[data-color-mode="dark"] :is(a,.atlas-dock a,.atlas-dock button,.atlas-dock label,.atlas-toc a,.atlas-result strong,.atlas-page-check,.atlas-item-check){color:#d8ded5!important}
-html[data-color-mode="dark"] body :is(.atlas-page-check,.atlas-item-check),
-body[data-color-mode="dark"] :is(.atlas-page-check,.atlas-item-check){background:#252a25!important;border-color:#414741!important}
-html[data-color-mode="dark"] body :is(.atlas-done-row,.atlas-done-list),
-body[data-color-mode="dark"] :is(.atlas-done-row,.atlas-done-list){border-color:#3b403b!important}
-html[data-color-mode="dark"] .atlas-theme-toggle,
-body[data-color-mode="dark"] .atlas-theme-toggle{background:#292e29!important;color:#e8e8e2!important;border-color:#454b45!important}
-html[data-color-mode="dark"] body :is(button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible),
-body[data-color-mode="dark"] :is(button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline-color:#a7b9a8!important}
-
-/* Ensure the editorial serif display face wins over legacy page tokens */
-:root{--display:Georgia,"Iowan Old Style","Palatino Linotype",serif!important;--body:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important}
-body[data-library-theme]{--atlas-accent:#65766b!important;--atlas-accent-soft:#e6ebe5!important}
-
-
-/* ATLAS REDESIGN 2026-11 — clearer hierarchy, calmer palette, usable type scale */
-:root{
-  --bg:#f3f5f6!important;
-  --surface:#ffffff!important;
-  --ink:#202a35!important;
-  --mute:#586675!important;
-  --line:rgba(35,49,63,.16)!important;
-  --atlas-accent:#526d83!important;
-  --atlas-accent-soft:#e8eef2!important;
-  --display:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
-  --body:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
-  color-scheme:light!important;
-}
-html,body{background:#f3f5f6!important;color:#202a35!important;color-scheme:light!important}
-body{
-  font-family:var(--body)!important;
-  font-size:16px!important;
-  line-height:1.68!important;
-  letter-spacing:0!important;
-  -webkit-font-smoothing:antialiased;
-}
-body :is(h1,h2,h3,h4,h5,h6,.card-title,.title){
-  font-family:var(--display)!important;
-  color:#202a35!important;
-  font-weight:680!important;
-  letter-spacing:-.025em!important;
-  line-height:1.22!important;
-}
-body h1{font-size:clamp(2rem,4vw,3.15rem)!important;line-height:1.12!important}
-body h2{font-size:clamp(1.45rem,2.6vw,2rem)!important}
-body h3{font-size:1.12rem!important}
-body :is(p,li,dd,blockquote,label,small,.meta,.metadata,.muted,.hint,.helper,.caption,.description,.subtitle,.intro,.lead,.section-desc){
-  color:#586675!important;
-}
-body :is(p,li,dd){font-size:1rem!important;line-height:1.68!important}
-body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card){
-  background:#fff!important;
-  color:#202a35!important;
-  border:1px solid rgba(35,49,63,.15)!important;
-  border-radius:13px!important;
-  box-shadow:0 2px 8px rgba(28,43,56,.045)!important;
-  padding:16px 18px!important;
-  transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease!important;
-}
-body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card):hover{
-  border-color:rgba(82,109,131,.48)!important;
-  box-shadow:0 5px 16px rgba(28,43,56,.075)!important;
-}
-body :is(.card h2,.card h3,.card h4,.manga-card h3,.film-card h3,.book-card h3,.resource-card h3,.card-title){
-  color:#202a35!important;
-  font-size:1.08rem!important;
-  line-height:1.35!important;
-  font-weight:650!important;
-  margin:0 0 7px!important;
-}
-body :is(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p){
-  color:#586675!important;
-  font-size:.94rem!important;
-  line-height:1.58!important;
-}
-body :is(.card .meta,.card small,.card .muted,.card .metadata,.card .platform-row,.card .cat-badge){
-  color:#647383!important;
-  font-size:.78rem!important;
-  line-height:1.5!important;
-}
-body :is(input,select,textarea){
-  background:#fff!important;color:#202a35!important;border:1px solid rgba(35,49,63,.24)!important;
-  border-radius:9px!important;font:inherit!important;min-height:42px;
-}
-body :is(input::placeholder,textarea::placeholder){color:#6b7885!important;opacity:1!important}
-body :is(button,.btn,.button,[role=button]){
-  font-family:var(--body)!important;
-  border-radius:9px!important;
-}
-body :is(.pill,.filter,.chip,.tag,.badge,.cat-badge,.sort-sel){
-  background:#edf1f4!important;color:#435363!important;border:1px solid rgba(35,49,63,.12)!important;
-}
-body :is(.pill.active,.filter.active,.chip.active,.active-filter){
-  background:#e3ebf1!important;color:#243c50!important;border-color:#7890a3!important;
-}
-body :is(.stats-bar,.stat-card,.summary-card,.toolbar,.controls,.filter-row,.search-wrap){
-  background:#edf1f4!important;color:#202a35!important;border-color:rgba(35,49,63,.13)!important;
-}
-body :is(.atlas-dock,.atlas-dialog,.atlas-toc,.atlas-completed-panel,.atlas-result){
-  background:#fff!important;color:#202a35!important;border-color:rgba(35,49,63,.16)!important;
-}
-body :is(.atlas-dock a,.atlas-dock button,.atlas-dock label,.atlas-toc a,.atlas-result strong){color:#202a35!important}
-body :is(.atlas-page-check,.atlas-item-check){
-  background:#f7f9fa!important;color:#435363!important;border-color:rgba(35,49,63,.18)!important;
-}
-body :is(a:hover){color:#405e77!important}
-body :is(button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){
-  outline:3px solid #7894aa!important;outline-offset:3px!important;
-}
-.atlas-dock{
-  gap:5px!important;padding:6px!important;
-  border:1px solid rgba(35,49,63,.18)!important;
-  box-shadow:0 8px 28px rgba(22,35,47,.15)!important;
-}
-.atlas-dock a,.atlas-dock button,.atlas-dock label{
-  min-height:42px!important;padding:8px 14px!important;font-size:.86rem!important;font-weight:600!important;
-}
-.atlas-theme-toggle{background:#edf1f4!important;color:#263c4e!important;border-color:#d4dde4!important}
-.atlas-dialog{padding:24px!important;border-radius:16px!important}
-.atlas-result{padding:14px 16px!important;border-radius:10px!important}
-body main .section .grid>.card{
-  padding:17px 18px!important;
-  border-radius:13px!important;
-  gap:7px 14px!important;
-}
-body main .section .grid>.card h3{font-size:1.08rem!important;line-height:1.35!important}
-body main .section .grid>.card p{font-size:.92rem!important;line-height:1.55!important}
-body main .section .grid>.card .card-bottom{font-size:.72rem!important;color:#647383!important}
-@media(max-width:760px){
-  body{font-size:16px!important;line-height:1.65!important}
-  body :is(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid,.items-grid,.collection-grid,.entries-grid){
-    grid-template-columns:minmax(0,1fr)!important;gap:12px!important;
-  }
-  body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card){
-    padding:16px!important;border-radius:12px!important;
-  }
-  body :is(.card h2,.card h3,.card h4,.manga-card h3,.film-card h3,.book-card h3,.resource-card h3,.card-title){
-    font-size:1.08rem!important;
-  }
-  body :is(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p){
-    font-size:.94rem!important;line-height:1.58!important;
-  }
-}
-@media(max-width:560px){
-  .atlas-dock{left:7px!important;right:7px!important;bottom:max(7px,env(safe-area-inset-bottom))!important;gap:2px!important;padding:5px!important}
-  .atlas-dock a,.atlas-dock button,.atlas-dock label{min-height:42px!important;padding:7px 4px!important;font-size:.73rem!important}
-  .atlas-dock .atlas-page-check{gap:4px!important}
-  body main .section .grid>.card{padding:15px!important;gap:6px 8px!important}
-  body main .section .grid>.card h3{font-size:1.03rem!important}
-  body main .section .grid>.card p{font-size:.9rem!important;line-height:1.5!important}
-  body main .section .grid>.card .card-bottom{font-size:.65rem!important}
-}
-html[data-color-mode="dark"],html[data-color-mode="dark"] body,body[data-color-mode="dark"]{
-  background:#141a20!important;color:#e8edf1!important;color-scheme:dark!important;
-}
-html[data-color-mode="dark"] body :is(h1,h2,h3,h4,h5,h6,strong,b,.card-title,.title),
-body[data-color-mode="dark"] :is(h1,h2,h3,h4,h5,h6,strong,b,.card-title,.title){color:#e8edf1!important}
-html[data-color-mode="dark"] body :is(p,li,dd,blockquote,label,small,.meta,.metadata,.muted,.hint,.helper,.caption,.description,.subtitle,.intro,.lead,.section-desc),
-body[data-color-mode="dark"] :is(p,li,dd,blockquote,label,small,.meta,.metadata,.muted,.hint,.helper,.caption,.description,.subtitle,.intro,.lead,.section-desc){color:#b6c0c9!important}
-html[data-color-mode="dark"] body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card,.atlas-dock,.atlas-dialog,.atlas-toc,.atlas-completed-panel,.atlas-result),
-body[data-color-mode="dark"] :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card,.atlas-dock,.atlas-dialog,.atlas-toc,.atlas-completed-panel,.atlas-result){
-  background:#1d2730!important;color:#e8edf1!important;border-color:#35434e!important;box-shadow:none!important;
-}
-html[data-color-mode="dark"] body :is(input,select,textarea),
-body[data-color-mode="dark"] :is(input,select,textarea){background:#1d2730!important;color:#e8edf1!important;border-color:#46545f!important}
-html[data-color-mode="dark"] body :is(.pill,.filter,.chip,.tag,.badge,.cat-badge,.sort-sel,.stats-bar,.stat-card,.summary-card,.toolbar,.controls,.filter-row,.search-wrap),
-body[data-color-mode="dark"] :is(.pill,.filter,.chip,.tag,.badge,.cat-badge,.sort-sel,.stats-bar,.stat-card,.summary-card,.toolbar,.controls,.filter-row,.search-wrap){background:#27333d!important;color:#d1dbe2!important;border-color:#3c4a55!important}
-html[data-color-mode="dark"] body :is(.pill.active,.filter.active,.chip.active,.active-filter),
-body[data-color-mode="dark"] :is(.pill.active,.filter.active,.chip.active,.active-filter){background:#334858!important;color:#e5eef5!important;border-color:#7892a5!important}
-html[data-color-mode="dark"] body :is(a,.atlas-dock a,.atlas-dock button,.atlas-dock label,.atlas-toc a,.atlas-result strong,.atlas-page-check,.atlas-item-check),
-body[data-color-mode="dark"] :is(a,.atlas-dock a,.atlas-dock button,.atlas-dock label,.atlas-toc a,.atlas-result strong,.atlas-page-check,.atlas-item-check){color:#dce6ed!important}
-html[data-color-mode="dark"] body :is(.atlas-page-check,.atlas-item-check),
-body[data-color-mode="dark"] :is(.atlas-page-check,.atlas-item-check){background:#26323b!important;border-color:#40505c!important}
-html[data-color-mode="dark"] .atlas-theme-toggle,body[data-color-mode="dark"] .atlas-theme-toggle{background:#27333d!important;color:#e8edf1!important;border-color:#46545f!important}
-html[data-color-mode="dark"] body :is(button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible),
-body[data-color-mode="dark"] :is(button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline-color:#91aabd!important}
+.atlas-done-row input{accent-color:#9eae96!important}
+.atlas-done-row a{display:grid!important;gap:3px!important;color:#eee9df!important;text-decoration:none!important}
+.atlas-done-row a small{color:#a4ada5!important}
+.atlas-done-empty{padding:0 16px 14px!important;color:#b3bbb3!important;font-size:.88rem!important}
+.atlas-done-details>summary:after{content:"＋";float:right;color:#a9b99e;font:13px monospace;margin-top:-22px}
+.atlas-done-details[open]>summary:after{content:"−"}
+@media(max-width:560px){.atlas-dock{left:8px!important;right:8px!important;bottom:max(8px,env(safe-area-inset-bottom))!important;transform:none!important;width:auto!important;max-width:none!important;gap:2px!important;padding:4px!important}.atlas-dock a,.atlas-dock button,.atlas-dock label{flex:1 1 0!important;min-width:0!important;padding:6px 3px!important;font-size:10px!important}.atlas-done-head{align-items:flex-start!important;flex-direction:column!important}.atlas-backtop{right:10px!important;bottom:66px!important}}
+@media(prefers-reduced-motion:reduce){.atlas-backtop{transition:none!important}*{scroll-behavior:auto!important}}
