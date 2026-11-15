@@ -480,3 +480,15 @@ html[data-color-mode="dark"] body :is(button,.filter,.filter-btn,.filter-chip,.f
 html[data-color-mode="light"] body :is(button,.filter,.filter-btn,.filter-chip,.filter-option,.chip,.tag-btn,.theme-chip){background:#e7e5df!important}
 html[data-color-mode] body :is(button.active,.filter.active,.filter[aria-pressed="true"],.active-filter,[aria-selected="true"]){background:#526d63!important;color:#fff!important;border-color:#526d63!important}
 html[data-color-mode] body :is(.atlas-dock,.atlas-dialog,.atlas-toc,.atlas-backtop,.atlas-completed-panel){font-family:Inter,system-ui,sans-serif!important}
+
+/* Final contrast guard: prevent legacy inline/class text colours from disappearing
+   against the shared page surfaces. Preserve hierarchy through muted utility classes. */
+html[data-color-mode] body *{color:var(--atlas-page-fg)!important}
+html[data-color-mode] body :is(.muted,.meta,.metadata,.hint,.helper,.caption,.description,.subtitle,.eyebrow,.kicker,.secondary,.text-secondary){color:var(--atlas-page-muted)!important}
+html[data-color-mode="dark"] body a:not([class*="tag"]){color:#e0a58d!important}
+html[data-color-mode="light"] body a:not([class*="tag"]){color:#704638!important}
+html[data-color-mode] body :is(.tag,.badge,.pill,.chip,.label,.category,.genre,.status,.filter,.filter-btn,.filter-chip,.filter-option,.theme-chip){
+ background-color:var(--atlas-page-card)!important;border-color:var(--atlas-page-line)!important;
+}
+html[data-color-mode] body :is(button.active,.filter.active,.filter[aria-pressed="true"],.active-filter,[aria-selected="true"]){background:#526d63!important;color:#fff!important}
+html[data-color-mode] body :is(input,select,textarea,option){background-color:var(--atlas-page-surface)!important;color:var(--atlas-page-fg)!important}
