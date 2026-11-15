@@ -1,7 +1,7 @@
 /* The Atlas — lightweight navigation, page search and reading tools */
 (()=>{'use strict';
 /* Keep the shared responsive type/filter system current on every library page. */
-const atlasStyleHref='assets/css/mobile-system.css?v=uniform-20261116-readability-pass-2';
+const atlasStyleHref='assets/css/mobile-system.css?v=uniform-20261116-mobile-dock-3';
 let atlasStyle=document.querySelector('link[rel="stylesheet"][href*="mobile-system.css"]');
 if(atlasStyle){if(!atlasStyle.href.endsWith('uniform-20261116'))atlasStyle.href=atlasStyleHref;}
 else{atlasStyle=document.createElement('link');atlasStyle.rel='stylesheet';atlasStyle.href=atlasStyleHref;document.head.appendChild(atlasStyle);}
@@ -22,8 +22,11 @@ if(!body.dataset.libraryTheme)body.dataset.libraryTheme=inferredTheme;
 const theme=body.dataset.libraryTheme||'home';
 const progress=document.createElement('div');progress.className='atlas-progress';progress.setAttribute('aria-hidden','true');document.body.appendChild(progress);
 const dock=document.createElement('nav');dock.className='atlas-dock';dock.setAttribute('aria-label','Library tools');
-dock.innerHTML='<a class="atlas-home" href="index.html">← Library</a><button type="button" data-atlas-toc>Contents</button><button type="button" data-atlas-search>Search ⌕</button><button type="button" class="atlas-theme-toggle" data-atlas-theme aria-label="Switch to dark theme" aria-pressed="false">◐ Dark</button>';
+dock.innerHTML='<a class="atlas-home" href="index.html">← Library</a><button type="button" data-atlas-more aria-expanded="false">Tools ＋</button><button type="button" data-atlas-toc>Contents</button><button type="button" data-atlas-search>Search ⌕</button><button type="button" class="atlas-theme-toggle" data-atlas-theme aria-label="Switch to dark theme" aria-pressed="false">◐ Dark</button>';
 document.body.appendChild(dock);
+const moreToggle=dock.querySelector('[data-atlas-more]');
+moreToggle.addEventListener('click',()=>{const expanded=dock.classList.toggle('is-expanded');moreToggle.setAttribute('aria-expanded',String(expanded));moreToggle.textContent=expanded?'Close ×':'Tools ＋';});
+const dockStyle=document.createElement('style');dockStyle.textContent='@media(max-width:640px){.atlas-dock:not(.is-expanded)>:not(.atlas-home):not([data-atlas-more]){display:none!important}.atlas-dock:not(.is-expanded){width:auto!important;min-width:0!important;gap:5px!important;padding:5px!important}.atlas-dock.is-expanded{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;width:min(320px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)!important;gap:5px!important;padding:8px!important}.atlas-dock.is-expanded>*{min-width:0!important;white-space:nowrap!important}.atlas-dock.is-expanded .atlas-home{grid-column:1/-1}.atlas-dock [data-atlas-more]{background:var(--atlas-accent,#557d68)!important;color:#fff!important}}';document.head.appendChild(dockStyle);
 const themeToggle=dock.querySelector('[data-atlas-theme]');
 const root=document.documentElement;
 let colorMode='dark';try{colorMode=localStorage.getItem('atlas.color-mode')==='light'?'light':'dark';}catch(_){}
