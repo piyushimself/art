@@ -59,7 +59,7 @@ function addPageControl(){
  box.addEventListener('change',()=>{set('page',id,{title:pageTitle,page:pageFile,pageTitle:pageTitle,href:pageFile},box.checked);txt.textContent=box.checked?'Page saved':'Page done';});
  txt.textContent=box.checked?'Page saved':'Page done';
 }
-const selectors='main li, article li, .content li, .manga-card, .book, .practical-item, .task-item, .task-card, .film-card, .movie-card, .resource-card, .work-card, .entry, tbody tr';
+const selectors='main li, article li, .content li, .manga-card, .book, .practical-item, .task-item, .task-card, .film-card, .movie-card, .resource-card, .work-card, .entry, .lcard, .card, tbody tr';
 const seen=new WeakSet();
 function addItems(){
  if(document.body.dataset.libraryTheme==='home')return;
