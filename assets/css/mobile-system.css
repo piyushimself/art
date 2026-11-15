@@ -3,7 +3,7 @@
    This file standardizes layout behaviour only; it must not overwrite page tokens. */
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:84px;overflow-x:clip}
-body{min-width:0;max-width:100%;overflow-x:clip}
+body{margin:0;min-width:0;max-width:100%;overflow-x:clip}
 img,video,canvas,iframe{max-width:100%}
 svg{max-width:100%}
 input,select,textarea,button{max-width:100%}
