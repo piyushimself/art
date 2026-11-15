@@ -51,7 +51,7 @@ function checkbox(id,type,title,href,host,labelText){
 }
 function addPageControl(){
  const dock=document.querySelector('.atlas-dock');if(!dock||dock.querySelector('.atlas-page-check'))return;
- const id='page:'+pageFile;
+ const id='collection:'+pageFile;
  const lab=document.createElement('label');lab.className='atlas-page-check';
  const box=document.createElement('input');box.type='checkbox';box.checked=!!read().records[id];box.setAttribute('aria-label','Mark this page complete');
  const txt=document.createElement('span');txt.textContent='Page done';
