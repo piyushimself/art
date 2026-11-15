@@ -68,7 +68,7 @@ function addItems(){
   const raw=(node.innerText||node.textContent||'').replace(/\\s+/g,' ').trim();
   if(raw.length<18)return;
   if(node.matches('li')&&node.querySelector('ul,ol'))return;
-  const titleNode=node.querySelector('h2,h3,h4,.card-title,.book-title,.manga-title,.title-cell,.title,.name');
+  const titleNode=node.querySelector('h2,h3,h4,.card-title,.mc-title,.mt,.ep-title,.entry-title,.card-name,.book-title,.manga-title,.title-cell,.title,.name');
   let title=(titleNode&&titleNode.textContent||raw).replace(/\\s+/g,' ').trim();
   if(title.length>110)title=title.slice(0,107)+'…';
   const identity=pageFile+'|'+(node.getAttribute('data-id')||node.id||title+'|'+raw.slice(0,180));
