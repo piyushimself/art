@@ -257,3 +257,114 @@ body :is(input[type=checkbox],input[type=radio]){width:19px;height:19px;accent-c
  .atlas-backtop{right:12px!important;bottom:72px!important}
 }
 @media(prefers-reduced-motion:reduce){.atlas-backtop{transition:none!important}}
+
+
+/* ATLAS UNIFORM SCALE — shared across all collection and content pages
+   Medium page titles, compact controls, consistent mobile filter behaviour. */
+body :is(h1,.hero-title,.page-title,.main-title,.collection-title,.masthead-title){
+  font-size:clamp(2rem,3.8vw,2.9rem)!important;
+  line-height:1.08!important;
+  letter-spacing:-.035em!important;
+  font-weight:700!important;
+}
+body :is(.hero,.top,.hero-header,.page-hero,.hero-section,.masthead,.page-header){
+  min-height:0!important;
+  height:auto!important;
+  padding-block:clamp(22px,3.5vw,38px)!important;
+  margin-bottom:clamp(14px,2vw,22px)!important;
+}
+body :is(.hero .eyebrow,.hero .kicker,.page-header .eyebrow,.page-header .kicker){
+  margin-bottom:9px!important;
+  font-size:.7rem!important;
+  letter-spacing:.14em!important;
+}
+body :is(.hero p,.top p,.page-header p,.subtitle,.description,.intro,.lead){
+  font-size:.96rem!important;
+  line-height:1.6!important;
+  max-width:62ch!important;
+}
+body :is(input[type=search],input[type=text],input[type=number],input[type=email],input[type=date],select){
+  min-height:40px!important;
+  padding:8px 12px!important;
+  border-radius:9px!important;
+  font-size:13px!important;
+  line-height:1.35!important;
+}
+body :is(button,.btn,.button,[role=button]){
+  min-height:36px;
+  padding:7px 12px;
+  font-size:12px!important;
+  line-height:1.25!important;
+}
+body :is(.nav button,.tabs button,.tab-bar button,.nav-tabs a,.category-nav button,.filter-pills button,
+.filter,.filter-btn,.filter-chip,.filter-option,.tag,.tag-btn,.t-btn,.theme-chip,.chip,.category-chip){
+  min-height:34px!important;
+  padding:6px 11px!important;
+  border-radius:7px!important;
+  font-size:11px!important;
+  line-height:1.2!important;
+  letter-spacing:.015em!important;
+  white-space:nowrap!important;
+}
+body :is(.nav,.tabs,.tab-bar,.nav-tabs,.category-nav,.filter-pills,.filters,.tag-strip){
+  gap:6px!important;
+  margin-bottom:16px!important;
+}
+body :is(.theme-panel){padding-block:10px!important}
+body :is(.theme-panel-title){font-size:10px!important;margin-bottom:7px!important}
+body :is(.theme-grid){
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:6px!important;
+}
+body :is(.theme-chip){min-width:0!important;padding:6px 10px!important}
+body :is(.theme-n){font-size:14px!important}
+body :is(.theme-name){font-size:9px!important}
+@media(max-width:760px){
+  body :is(h1,.hero-title,.page-title,.main-title,.collection-title,.masthead-title){
+    font-size:clamp(1.8rem,7vw,2.35rem)!important;
+    line-height:1.08!important;
+  }
+  body :is(.hero,.top,.hero-header,.page-hero,.hero-section,.masthead,.page-header){
+    min-height:0!important;
+    padding-block:20px!important;
+    gap:12px!important;
+    margin-bottom:14px!important;
+  }
+  body :is(.hero p,.top p,.page-header p,.subtitle,.description,.intro,.lead){
+    font-size:.9rem!important;
+    line-height:1.55!important;
+  }
+  body :is(input[type=search],input[type=text],input[type=number],input[type=email],input[type=date],select){
+    min-height:38px!important;
+    padding:8px 10px!important;
+    font-size:12px!important;
+  }
+  body :is(.nav,.tabs,.tab-bar,.nav-tabs,.category-nav,.filter-pills,.filters,.tag-strip,.theme-grid){
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    gap:6px!important;
+    max-width:100%!important;
+    padding:2px 2px 8px!important;
+    margin-bottom:12px!important;
+    white-space:nowrap!important;
+    scrollbar-width:thin!important;
+    -webkit-overflow-scrolling:touch!important;
+  }
+  body :is(.nav button,.tabs button,.tab-bar button,.nav-tabs a,.category-nav button,.filter-pills button,
+  .filter,.filter-btn,.filter-chip,.filter-option,.tag,.tag-btn,.t-btn,.theme-chip,.chip,.category-chip){
+    flex:0 0 auto!important;
+    min-height:33px!important;
+    padding:6px 10px!important;
+    font-size:10.5px!important;
+  }
+  body :is(.theme-panel){padding:9px 14px!important}
+  body :is(.theme-chip){min-width:0!important}
+}
+@media(max-width:380px){
+  body :is(h1,.hero-title,.page-title,.main-title,.collection-title,.masthead-title){
+    font-size:1.75rem!important;
+  }
+}
