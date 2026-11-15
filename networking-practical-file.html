@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Networking Practical File: 10 Projects</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+:root{--bg:#f6f8fb;--grid:#dfe7f0;--card:#fff;--ink:#12213a;--mute:#52627a;--acc:#0b6b63;--acc2:#e6f3f1;--warn:#9a4a05;--warnbg:#fdf1e3;--code:#0f1b2d;--codeink:#d7e6f7;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1626;--grid:#1c2a40;--card:#14203a;--ink:#e4ecf7;--mute:#93a4bd;--acc:#4fd1c0;--acc2:#12312f;--warn:#f0b36b;--warnbg:#33260f;--code:#0a1120;--codeink:#cfe0f5;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1626;--grid:#1c2a40;--card:#14203a;--ink:#e4ecf7;--mute:#93a4bd;--acc:#4fd1c0;--acc2:#12312f;--warn:#f0b36b;--warnbg:#33260f;--code:#0a1120;--codeink:#cfe0f5;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:70px}
+body{margin:0;background:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px;color:var(--ink);font:16px/1.6 "IBM Plex Sans",system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px 16px 64px}
+header.top{padding:28px 0 8px}
+h1{font-size:clamp(1.9rem,6vw,2.7rem);line-height:1.1;margin:0 0 10px;letter-spacing:-.02em}
+h2{font-size:1.25rem;margin:0 0 8px}
+p{margin:0 0 10px;max-width:68ch}
+.lead{color:var(--mute);font-size:1.05rem}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:8px 0;border-bottom:2px solid var(--ink);display:flex;gap:12px;align-items:center;font-size:.9rem}
+.track{flex:1;height:10px;background:var(--grid);border-radius:5px;overflow:hidden}
+.fill{height:100%;width:0;background:var(--acc);transition:width .3s}
+.panel{background:var(--card);border:1.5px solid var(--ink);border-radius:6px;padding:16px;margin:16px 0}
+.panel.warn{background:var(--warnbg);border-color:var(--warn)}
+.panel.warn h2{color:var(--warn)}
+ul{margin:0 0 10px;padding-left:20px}
+li{margin-bottom:4px}
+details{background:var(--card);border:1.5px solid var(--ink);border-radius:6px;margin:12px 0}
+summary{cursor:pointer;padding:14px 16px;font-weight:600;list-style:none;display:flex;gap:12px;align-items:baseline}
+summary::-webkit-details-marker{display:none}
+summary .n{font-family:"IBM Plex Mono",monospace;background:var(--ink);color:var(--bg);border-radius:4px;padding:0 8px;flex:none}
+summary .w{margin-left:auto;font-weight:400;color:var(--mute);font-size:.85rem;flex:none}
+summary:focus-visible,input:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.body{padding:0 16px 16px;border-top:1px dashed var(--mute)}
+.body h3{font-size:1rem;margin:16px 0 6px;color:var(--acc)}
+.steps{list-style:none;padding:0}
+.steps label{display:flex;gap:10px;align-items:flex-start;cursor:pointer;padding:3px 0}
+.steps input{margin-top:5px;width:18px;height:18px;accent-color:var(--acc);flex:none}
+.steps input:checked+span{color:var(--mute);text-decoration:line-through}
+pre{background:var(--code);color:var(--codeink);padding:12px;border-radius:6px;overflow-x:auto;font:13px/1.5 "IBM Plex Mono",monospace;margin:8px 0}
+code{font-family:"IBM Plex Mono",monospace;font-size:.88em;background:var(--acc2);padding:1px 5px;border-radius:3px}
+.tag{display:inline-block;background:var(--acc2);color:var(--acc);border-radius:4px;padding:0 8px;margin:0 6px 6px 0;font-size:.85rem}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+td,th{border:1px solid var(--mute);padding:6px 8px;text-align:left}
+button{font:inherit;background:var(--ink);color:var(--bg);border:0;border-radius:4px;padding:6px 12px;cursor:pointer}
+@media print{.bar,button{display:none}details{display:block}details>.body{display:block}body{background:#fff}}
+</style>
+</head>
+<body>
+<main>
+<header class="top">
+<h1>Networking Practical File</h1>
+<p class="lead">Ten hands-on projects, built at home, for a complete beginner. One project per week, about 5 to 6 hours each. Tick each step as you finish it and your progress is saved in this browser.</p>
+</header>
+
+<div class="bar" role="status"><strong id="pct">0%</strong><div class="track"><div class="fill" id="fill"></div></div><button id="reset" type="button">Reset</button></div>
+
+<section class="panel">
+<h2>What you need</h2>
+<ul>
+<li>A laptop (Windows, macOS or Linux) and access to your home router</li>
+<li><a href="https://www.python.org/downloads/">Python 3</a>, <a href="https://www.wireshark.org/download.html">Wireshark</a>, <a href="https://www.virtualbox.org/">VirtualBox</a>, <a href="https://www.netacad.com/">Cisco Packet Tracer</a> (free account), <a href="https://nmap.org/download.html">Nmap</a></li>
+<li>A notebook or a text file for your lab record</li>
+</ul>
+<p>Install Python packages once: <code>pip install dnspython</code></p>
+</section>
+
+<section class="panel warn">
+<h2>Safety rules</h2>
+<ul>
+<li>Scan, sniff and test only your own devices and your own home network.</li>
+<li>Never capture traffic on a network you do not own, such as a café or office.</li>
+<li>Before changing router settings, write down the old value so you can undo it.</li>
+</ul>
+</section>
+
+<section class="panel">
+<h2>How to write each experiment</h2>
+<p>For every project record five things: <strong>aim, tools, steps you did, output (screenshot or text), and what broke and how you fixed it.</strong> Then answer the viva questions without looking.</p>
+</section>
+
+<div id="list"></div>
+
+<section class="panel">
+<h2>Lab record index</h2>
+<div class="tbl"><table id="idx"><thead><tr><th>No.</th><th>Project</th><th>Concept</th><th>Date done</th><th>Sign</th></tr></thead><tbody></tbody></table></div>
+<p style="margin-top:10px">Print this page to PDF to submit it as your file.</p>
+</section>
+</main>
+
+<script>
+var E=[
+{t:"Home Network",c:"IP addressing",w:"Week 1",
+aim:"Discover and document every device on your home network and understand how IP addresses are assigned.",
+tools:["Router admin page","Command prompt or terminal","Paper"],
+theory:"Every device needs an IP address to talk on a network. Your router runs DHCP, which hands out private addresses (192.168.x.x, 10.x.x.x, 172.16-31.x.x). The gateway is the router address that leads to the internet. A MAC address is the fixed hardware ID of a network card.",
+why:"Without correct addressing nothing can communicate. Knowing your own network is the base for every later project, and it is the first thing you check in any fault. Private ranges also let millions of homes reuse the same addresses without clashing.",how:"When a device joins, it sends a DHCP Discover broadcast. The router replies with an offer (IP, mask, gateway, DNS, lease time), the device requests it, and the router confirms. To reach a device on the same subnet your laptop uses ARP to learn its MAC. For anything outside the subnet it sends the packet to the gateway. The router then uses NAT to swap your private IP for the single public IP given by your ISP and remembers the mapping so replies come back to you.",
+steps:["Find your router address: run ipconfig (Windows) or ip route (Linux/macOS) and note the default gateway.","Open the gateway address in a browser and log in (password is often printed under the router).","Open the connected devices list and write each device name, IP and MAC.","Find the DHCP range and lease time in the router settings.","On your laptop run the commands below and note your IP, subnet mask, gateway and DNS server.","Run arp -a and match the MAC addresses with the router list.","Reserve a fixed IP for one device (DHCP reservation) and reboot it to confirm it stays the same.","Draw a map: internet, modem, router, then every device with its IP."],
+code:"ipconfig /all        # Windows\nip addr && ip route  # Linux\nifconfig             # macOS\narp -a\nping 192.168.1.1\ntracert google.com   # Windows (traceroute on Linux/macOS)",
+out:"Network map, table of devices (name, IP, MAC), DHCP range, and your laptop settings.",
+viva:["What is the difference between a private and a public IP?","What does DHCP do?","What is a default gateway?","Why do MAC addresses not travel across the internet?"]},
+
+{t:"Packet Sniffer",c:"Wireshark",w:"Week 2",
+aim:"Capture real traffic and identify the protocols behind one web page load.",
+tools:["Wireshark","A web browser"],
+theory:"Data travels in packets with headers added by each layer (Ethernet, IP, TCP/UDP, application). Wireshark shows each header. A TCP connection starts with a three-way handshake: SYN, SYN-ACK, ACK.",
+why:"Reading about protocols is abstract. A capture shows exactly what is sent, in what order, and where failures happen. It is also how you prove or disprove a theory when troubleshooting or investigating security issues.",how:"Wireshark puts your network card in a mode where it records frames passing the interface, then decodes each layer: Ethernet (MAC addresses), IP (source and destination), TCP/UDP (ports, flags, sequence numbers) and the application protocol. Each layer wraps the one above (encapsulation). A page load runs in this order: DHCP or existing lease, ARP for the gateway, DNS for the name, TCP handshake, TLS handshake, then encrypted HTTP data.",
+steps:["Install Wireshark and select your Wi-Fi or Ethernet interface.","Start a capture, then open one website in your browser, then stop the capture.","Apply the filter arp and find who-has requests.","Apply dns and find the query and answer for the website name.","Apply tcp.flags.syn==1 and find the SYN, SYN-ACK and ACK packets.","Apply tls and find the Client Hello. Note that page content is encrypted.","Right click a TCP packet, choose Follow, TCP Stream, and read the stream.","Write one page explaining the order of packets from DNS to the first data."],
+code:"# Useful display filters\narp\ndns\ntcp.flags.syn==1 && tcp.flags.ack==0\nip.addr==192.168.1.10\nhttp\ntls.handshake.type==1",
+out:"Screenshots of DNS, handshake and TLS packets with a one-line explanation under each.",
+viva:["What are the three steps of the TCP handshake?","Why can you not read HTTPS content?","What is the difference between a capture filter and a display filter?","Which layer does ARP work at?"]},
+
+{t:"DNS Lookup Tool",c:"DNS",w:"Week 3",
+aim:"Understand how names become IP addresses and build a small lookup tool.",
+tools:["nslookup / dig","Python 3 with dnspython","Wireshark"],
+theory:"DNS is the internet phone book. Record types: A (IPv4), AAAA (IPv6), MX (mail servers), NS (name servers), CNAME (alias), TXT (text). Your device asks a resolver, which asks root, TLD and authoritative servers.",
+why:"People remember names, computers route by numbers. Nearly every connection starts with a DNS lookup, so a DNS fault looks like the whole internet is down. DNS is also heavily used in email delivery and in security (spoofing, tunneling).",how:"Your device first checks its own cache, then asks the configured resolver (usually your router or ISP). If the resolver does not know the answer it asks a root server, which points to the .com TLD servers, which point to the domain's authoritative name server, which returns the record. The answer is cached for the record's TTL (time to live) in seconds. Queries normally use UDP port 53 and fall back to TCP for large replies.",
+steps:["Run nslookup example.com and read the answer.","Run dig example.com MX and dig example.com NS (Linux/macOS, or install BIND tools on Windows).","Run dig +trace example.com and follow root, .com and authoritative servers.","Save the script below as dnstool.py and run python dnstool.py example.com.","Capture the lookup in Wireshark with the filter dns and match query ID to answer.","Change your DNS to 1.1.1.1 on your laptop and compare lookup times."],
+code:"import sys, dns.resolver\ndomain = sys.argv[1]\nfor rtype in [\"A\", \"AAAA\", \"MX\", \"NS\", \"TXT\"]:\n    try:\n        for r in dns.resolver.resolve(domain, rtype):\n            print(rtype, r.to_text())\n    except Exception as e:\n        print(rtype, \"none:\", type(e).__name__)",
+out:"Script output for two domains, trace output, and a Wireshark screenshot of the query and answer.",
+viva:["What is the difference between an A and an MX record?","What does a recursive resolver do?","Why is DNS usually UDP port 53?","What is caching and TTL?"]},
+
+{t:"Subnet Calculator",c:"Subnetting",w:"Week 4",
+aim:"Learn CIDR and subnetting by hand, then automate it in Python.",
+tools:["Python 3 (ipaddress module)","Paper and pencil"],
+theory:"An IPv4 address has 32 bits. A /24 mask means 24 network bits and 8 host bits. Hosts per subnet = 2^(host bits) - 2 (network and broadcast addresses are reserved). Block size = 256 minus the mask octet. Example: /26 mask is 255.255.255.192, block size 64, 62 usable hosts.",
+why:"Subnetting divides a network into right-sized pieces. It reduces broadcast traffic, makes security rules possible between groups, and is how every real network, cloud VPC and firewall rule is planned.",how:"The mask splits an address into a network part and a host part. Keep the network bits and set all host bits to 0 to get the network address; set all host bits to 1 to get the broadcast address. Everything between is usable. To subnet, borrow bits from the host part: each borrowed bit doubles the number of subnets and halves the hosts in each. Example: 192.168.1.0/24 borrowing 2 bits gives four /26 subnets (.0, .64, .128, .192) with 62 hosts each.",
+steps:["Write the powers of two: 128, 64, 32, 16, 8, 4, 2, 1.","Convert 192.168.1.130 to binary by hand.","Work out by hand: network, broadcast and usable range for 192.168.1.130/26.","Split 192.168.10.0/24 into four equal subnets and list them.","Save the script below as subnet.py and check your hand answers.","Extend it to print the four subnets from step 4 using the subnets() method."],
+code:"import sys, ipaddress\nn = ipaddress.ip_network(sys.argv[1], strict=False)\nprint(\"Network  :\", n.network_address)\nprint(\"Mask     :\", n.netmask)\nprint(\"Broadcast:\", n.broadcast_address)\nprint(\"Hosts    :\", n.num_addresses - 2)\nprint(\"Range    :\", list(n.hosts())[0], \"-\", list(n.hosts())[-1])\n# python subnet.py 192.168.1.130/26",
+out:"Hand workings for 5 networks and the matching script output.",
+viva:["How many usable hosts are in a /27?","What is the broadcast address of 10.0.0.0/8?","Why subtract 2 from the host count?","What is CIDR notation?"]},
+
+{t:"Port Scanner",c:"TCP / UDP",w:"Week 5",
+aim:"Find open TCP ports on your own device using sockets, and compare with Nmap.",
+tools:["Python 3","Nmap"],
+theory:"A port identifies a service on a host (80 HTTP, 443 HTTPS, 22 SSH, 53 DNS). TCP is connection oriented and reliable. UDP is connectionless and faster but has no delivery guarantee. A TCP connect scan tries to complete the handshake: success means the port is open.",
+why:"IP finds the machine, the port finds the program. Knowing which ports are open shows what a device exposes, which is the first step of both defending and attacking a system.",how:"A TCP connect scan calls connect() for each port. If the target replies SYN-ACK the port is open and the scan completes the handshake; a RST reply means closed; no reply usually means a firewall is dropping packets (filtered). UDP has no handshake, so an open port often stays silent and only a closed one answers with an ICMP port unreachable, which makes UDP scans slow and less certain. Threads let the scanner test many ports at once instead of waiting for each timeout.",
+steps:["Pick a target you own: your own laptop (127.0.0.1) or a device on your LAN.","Start a test service: python -m http.server 8000 in another terminal.","Save the script below as scan.py and run python scan.py 127.0.0.1.","Confirm port 8000 appears as open.","Run nmap -sT 127.0.0.1 and compare results.","Capture your scan in Wireshark and spot the SYN and RST packets for closed ports.","Add a banner grab: after connecting, call s.recv(100) and print it."],
+code:"import socket, sys\nfrom concurrent.futures import ThreadPoolExecutor\nhost = sys.argv[1]\ndef scan(port):\n    s = socket.socket()\n    s.settimeout(0.5)\n    ok = s.connect_ex((host, port)) == 0\n    s.close()\n    return port if ok else None\nwith ThreadPoolExecutor(100) as ex:\n    print([p for p in ex.map(scan, range(1, 10001)) if p])",
+out:"Open port list from your script and from Nmap, plus the Wireshark SYN/RST screenshot.",
+viva:["What is the difference between TCP and UDP?","How does a closed port respond compared to a filtered one?","Why is scanning other networks illegal without permission?","What does a SYN scan do differently from a connect scan?"]},
+
+{t:"Chat App",c:"Sockets",w:"Week 6",
+aim:"Build a multi-user text chat with a TCP server and clients.",
+tools:["Python 3","Wireshark"],
+theory:"A socket is an endpoint of communication. The server binds to an IP and port, listens, and accepts clients. Each client connects to that address. TCP is a stream of bytes, so you must decide how messages are separated (here, one recv per message for simplicity).",
+why:"Every network application (web, email, games, messaging) is built on sockets. Building one shows how clients and servers really talk and why protocols need rules.",how:"The server creates a socket, binds it to an address and port, and calls listen. accept() blocks until a client connects and returns a new socket for that client. Both sides then use send and recv on their sockets. A TCP socket delivers a reliable ordered byte stream, so message boundaries are not preserved; real protocols add a length prefix or a delimiter. One thread per client lets the server serve many people at the same time.",
+steps:["Save the server code as server.py and run it.","Save the client code as client.py and run it in two separate terminals.","Type in one client and confirm the other receives the message.","Capture on the loopback interface in Wireshark and read your messages in the TCP stream.","Run the server on one device and a client on another on your Wi-Fi using the server LAN IP.","Add usernames: send a name first and prefix each message with it."],
+code:"# server.py\nimport socket, threading\nclients = []\ndef handle(c):\n    while True:\n        m = c.recv(1024)\n        if not m: break\n        for o in clients:\n            if o is not c: o.sendall(m)\n    clients.remove(c); c.close()\ns = socket.socket()\ns.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)\ns.bind((\"0.0.0.0\", 5000)); s.listen()\nwhile True:\n    c, a = s.accept(); clients.append(c)\n    threading.Thread(target=handle, args=(c,), daemon=True).start()\n\n# client.py\nimport socket, threading\ns = socket.socket(); s.connect((\"127.0.0.1\", 5000))\ndef rx():\n    while (m := s.recv(1024)): print(m.decode())\nthreading.Thread(target=rx, daemon=True).start()\nwhile True: s.sendall(input().encode())",
+out:"Screenshots of two chatting clients and the Wireshark stream.",
+viva:["What do bind, listen and accept do?","Why do we need threads on the server?","Why is the chat readable in Wireshark?","What would you add to make it secure?"]},
+
+{t:"VLAN Lab",c:"Network segmentation",w:"Week 7",
+aim:"Split one switch into separate networks and route between them.",
+tools:["Cisco Packet Tracer (or GNS3)"],
+theory:"A VLAN is a virtual LAN: devices in different VLANs cannot talk at layer 2 even on the same switch. Access ports carry one VLAN. Trunk ports carry many using 802.1Q tags. Routing between VLANs needs a layer 3 device (router-on-a-stick).",
+why:"Without segmentation every device sees every broadcast and can reach every other device. VLANs separate departments, guests, cameras and servers on the same hardware, limiting both noise and the damage of a compromised device.",how:"The switch keeps a separate MAC table and broadcast domain for each VLAN. Frames entering an access port get tagged internally with that VLAN ID. On a trunk link the frame carries an 802.1Q tag with the VLAN ID so the other end knows where it belongs. Because VLANs are different subnets, traffic between them must go up to a router (or layer 3 switch), which is where you can apply access rules.",
+steps:["Place one switch and four PCs. Give PC1 and PC2 192.168.10.x, PC3 and PC4 192.168.20.x.","Create VLAN 10 (Sales) and VLAN 20 (Staff) on the switch.","Assign ports to VLANs with the commands below.","Ping PC1 to PC2 (should work) and PC1 to PC3 (should fail).","Add a router, connect it to a trunk port, and create two subinterfaces (gateways .1 for each VLAN).","Set each PC default gateway and ping across VLANs again. It should now work.","Use show vlan brief and show interfaces trunk and screenshot the output."],
+code:"Switch(config)# vlan 10\nSwitch(config-vlan)# name Sales\nSwitch(config)# interface fa0/1\nSwitch(config-if)# switchport mode access\nSwitch(config-if)# switchport access vlan 10\nSwitch(config)# interface fa0/24\nSwitch(config-if)# switchport mode trunk\n\nRouter(config)# interface g0/0.10\nRouter(config-subif)# encapsulation dot1Q 10\nRouter(config-subif)# ip address 192.168.10.1 255.255.255.0",
+out:"Topology screenshot, ping results before and after routing, and show vlan output.",
+viva:["Why use VLANs?","Access port vs trunk port?","What is router-on-a-stick?","What does the 802.1Q tag contain?"]},
+
+{t:"Firewall Lab",c:"Traffic filtering",w:"Week 8",
+aim:"Build a virtual firewall and write rules that allow and block traffic.",
+tools:["VirtualBox","pfSense or OPNsense ISO","One Linux or Windows VM"],
+theory:"A firewall allows or blocks traffic by rules on source, destination, protocol and port. Rules are checked top to bottom and the first match wins. Default stance is deny. NAT lets many private devices share one public IP.",
+why:"A firewall enforces what is allowed to enter, leave or cross your network. It is the main control for reducing attack surface and it produces logs that show what is being attempted.",how:"The firewall inspects each packet or connection against an ordered rule list (interface, source, destination, protocol, port) and applies the first match: pass, block or reject. A stateful firewall remembers established connections, so replies to allowed outbound traffic are let back in automatically while unsolicited inbound traffic is dropped by default. NAT on the WAN side rewrites private addresses to the public one.",
+steps:["Create a VM for pfSense with two adapters: Adapter 1 NAT (WAN), Adapter 2 Internal Network named lan1 (LAN).","Install pfSense from the ISO and finish the console setup.","Create a client VM on the same internal network lan1.","Open the pfSense web page from the client (https://192.168.1.1) and complete the wizard.","Confirm the client can browse the internet through pfSense.","Add a rule on LAN: block ICMP from the client to any, with logging on.","Ping from the client (should fail), then check Status, System Logs, Firewall.","Add a rule to block one website port or IP and test it.","Move the block rule below the allow-all rule and observe that it stops working (rule order)."],
+code:"# Test from the client VM\nping 8.8.8.8\ncurl -I https://example.com\nnmap -p 22,80,443 192.168.1.1",
+out:"Screenshots of your rules, the blocked ping, and the firewall log entry.",
+viva:["What does first match wins mean?","Stateful vs stateless firewall?","What is NAT?","Why log blocked traffic?"]},
+
+{t:"VPN Setup",c:"Secure tunneling",w:"Week 9",
+aim:"Create an encrypted WireGuard tunnel between two devices and prove traffic is protected.",
+tools:["WireGuard on laptop and phone","A server: Raspberry Pi, spare PC, VM or router with WireGuard"],
+theory:"A VPN wraps your packets in an encrypted outer packet and sends them to a VPN server, which forwards them. Each WireGuard peer has a private key, a public key and AllowedIPs. Only peers with a known public key can connect.",
+why:"Public Wi-Fi and the internet in between are not trusted. A VPN gives confidentiality (nobody can read the traffic), integrity (nobody can change it) and lets you reach your home network safely from anywhere.",how:"Each peer has a key pair. The peers exchange public keys and use them to derive shared session keys, then every packet is encrypted and sent inside a UDP packet to the peer's endpoint. AllowedIPs works as both a routing table (which traffic goes into the tunnel) and a filter (which source addresses are accepted from that peer). Setting it to 0.0.0.0/0 sends all your traffic through the tunnel. The server forwards and NATs it onward to the internet.",
+steps:["Install WireGuard on the server (sudo apt install wireguard) and on your laptop.","Generate keys on both: wg genkey | tee private.key | wg pubkey > public.key","Write the server config wg0.conf and the client config as below (swap in your keys).","Start the server: sudo wg-quick up wg0 and enable IP forwarding.","Forward UDP port 51820 on your router to the server (for use outside home).","Connect the client and run ping 10.8.0.1.","Open Wireshark on the physical interface and confirm you only see encrypted WireGuard UDP packets.","Visit a what-is-my-IP page to confirm your traffic exits via the VPN."],
+code:"# Server /etc/wireguard/wg0.conf\n[Interface]\nAddress = 10.8.0.1/24\nListenPort = 51820\nPrivateKey = SERVER_PRIVATE_KEY\n[Peer]\nPublicKey = CLIENT_PUBLIC_KEY\nAllowedIPs = 10.8.0.2/32\n\n# Client config\n[Interface]\nAddress = 10.8.0.2/24\nPrivateKey = CLIENT_PRIVATE_KEY\n[Peer]\nPublicKey = SERVER_PUBLIC_KEY\nEndpoint = YOUR_PUBLIC_IP:51820\nAllowedIPs = 0.0.0.0/0",
+out:"Both configs with keys hidden, successful ping, and the encrypted Wireshark capture.",
+viva:["What does a VPN protect and not protect?","What is AllowedIPs?","Why is WireGuard UDP based?","What is the difference between a site-to-site and a remote-access VPN?"]},
+
+{t:"Network Monitor",c:"Troubleshooting",w:"Week 10",
+aim:"Monitor your network continuously and diagnose failures step by step.",
+tools:["Uptime Kuma (Docker) or Zabbix","ping, traceroute, nslookup, Wireshark"],
+theory:"Troubleshoot from the bottom up: cable or Wi-Fi, IP address, gateway, DNS, then application. Latency is the delay of a packet, jitter its variation, packet loss the share that never arrives.",
+why:"Networks fail at unexpected times. Monitoring tells you before users complain and the history shows patterns. A fixed troubleshooting method saves hours of guessing.",how:"The monitor sends a probe at a fixed interval (ICMP ping, HTTP request, DNS query, TCP port check) and records success, response time and status. Repeated failures raise an alert. When diagnosing, work up the layers: check link and Wi-Fi, check your IP, ping the gateway, ping an outside IP (8.8.8.8), then resolve a name, then test the application. The first step that fails tells you which layer is broken.",
+steps:["Install Docker and start Uptime Kuma with the command below, then open http://localhost:3001.","Add monitors: your router (ping), 8.8.8.8 (ping), example.com (HTTP) and a DNS monitor.","Let it run for a day and read the latency graph.","Break 1: turn off Wi-Fi on a device. Identify the failing layer.","Break 2: set a wrong DNS server. Ping 8.8.8.8 works but names fail.","Break 3: set a wrong default gateway. Local pings work but the internet does not.","For each break, write symptom, command used, root cause and fix.","Set up an alert (email or Telegram) for downtime."],
+code:"docker run -d --restart=always -p 3001:3001 -v uptime-kuma:/app/data --name uptime-kuma louislam/uptime-kuma:1\n\nping -c 4 192.168.1.1\nping -c 4 8.8.8.8\nping -c 4 google.com\ntraceroute google.com\nnslookup google.com",
+out:"Dashboard screenshot and the three-row fault table (symptom, command, cause, fix).",
+viva:["Ping works to 8.8.8.8 but not google.com. What is wrong?","What does traceroute show?","Latency vs bandwidth?","Which layer do you test first and why?"]}
+];
+
+var X=[
+{ex:"NAT table on the router\nInside (private)        Outside (public)\n192.168.1.10:50321  ->  49.36.8.5:61001  -> web server\n192.168.1.11:50322  ->  49.36.8.5:61002  -> web server\nReplies to 49.36.8.5:61001 go back to 192.168.1.10",
+plan:["Day 1: log in to the router, list devices","Day 2: read IP settings with ipconfig or ip addr","Day 3: arp -a, match MACs","Day 4: DHCP reservation and reboot test","Day 5: draw the map and write the record"],
+ans:["A private IP works only inside your LAN and is reused in every home. A public IP is unique on the internet and given by your ISP.","It automatically gives devices an IP, mask, gateway and DNS server for a limited lease time.","The router address a device sends packets to when the destination is outside its own subnet.","MAC addresses only matter on one local link. Each router replaces the MAC addresses when forwarding, so they never cross the internet."]},
+{ex:"TCP three-way handshake\nClient                          Server\n  |---- SYN, seq=x ------------->|\n  |<--- SYN-ACK, seq=y, ack=x+1 -|\n  |---- ACK, ack=y+1 ----------->|\n  |====== connection open =======|\nTeardown: FIN, ACK, FIN, ACK (or RST to abort)",
+plan:["Day 1: install Wireshark, first capture","Day 2: filter arp and dns","Day 3: find the TCP handshake","Day 4: TLS Client Hello, Follow TCP Stream","Day 5: one-page write-up of a page load"],
+ans:["SYN from client, SYN-ACK from server, ACK from client.","HTTPS is encrypted with TLS, so Wireshark sees only ciphertext after the handshake. You would need the session keys to decrypt it.","A capture filter limits what is recorded and is set before you start. A display filter hides packets after capture and can be changed any time.","ARP maps an IP to a MAC address on the local link, so it sits between layer 2 and layer 3."]},
+{ex:"Resolver chain for www.example.com\nLaptop -> Router/ISP resolver\n  -> Root server: ask the .com servers\n  -> .com TLD server: ask ns1.example.com\n  -> ns1.example.com: www = 93.184.216.34 (TTL 3600)\nAnswer cached for 3600 seconds",
+plan:["Day 1: nslookup and dig on 3 domains","Day 2: dig +trace","Day 3: write dnstool.py","Day 4: capture lookups in Wireshark","Day 5: compare DNS servers and record"],
+ans:["A maps a name to an IPv4 address. MX names the mail servers for a domain.","A server that does the whole search for you, asking other servers in turn, then caches the result.","Queries are tiny and one packet each way, so UDP avoids handshake delay. TCP is used when the reply is large.","Caching stores an answer so the next lookup is instant. TTL is how many seconds the answer may be kept."]},
+{ex:"Worked example: 192.168.1.130/26\nMask /26 = 255.255.255.192, last octet 11000000\nHost .130 = 10000010\nNetwork   = 10000000 = 192.168.1.128\nBroadcast = 10111111 = 192.168.1.191\nUsable    = .129 to .190 (62 hosts)\nBlock size 256-192 = 64 -> subnets .0 .64 .128 .192",
+plan:["Day 1: powers of two and binary conversion","Day 2: masks and CIDR table","Day 3: 10 hand problems","Day 4: write subnet.py","Day 5: check hand answers and record"],
+ans:["A /27 has 5 host bits: 2^5 - 2 = 30 usable hosts.","10.255.255.255 (the whole host part set to 1).","The first address names the network and the last is the broadcast, so neither can be given to a device.","Classless Inter-Domain Routing writes the address with the number of network bits, like 192.168.1.0/24."]},
+{ex:"Scan results\nPort 8000  SYN -> SYN-ACK        OPEN\nPort 9999  SYN -> RST            CLOSED\nPort 22    SYN -> (no reply)     FILTERED (firewall drops)\nUDP port   probe -> ICMP unreachable = closed; silence = open or filtered",
+plan:["Day 1: sockets and connect_ex basics","Day 2: write scan.py","Day 3: add threads and timeout","Day 4: compare with Nmap","Day 5: Wireshark view of the scan, banner grab"],
+ans:["TCP is connection based, ordered and reliable. UDP just sends datagrams with no handshake or delivery guarantee.","A closed port answers quickly with RST. A filtered port gives no answer because a firewall drops the packet.","Unauthorized scanning can be treated as unauthorized access under computer misuse laws, and it can break services.","A SYN scan sends SYN and never completes the handshake, so it is faster and quieter. A connect scan completes the full connection."]},
+{ex:"Socket call order\nServer: socket() > bind() > listen() > accept() > recv()/send() > close()\nClient: socket() > connect() > send()/recv() > close()\nServer keeps listening; each accept() returns a new socket per client",
+plan:["Day 1: one client, one server echo","Day 2: add threads","Day 3: broadcast to all clients","Day 4: capture in Wireshark","Day 5: usernames and record"],
+ans:["bind attaches the socket to an IP and port, listen marks it ready for connections, accept waits for a client and returns a socket for it.","Each recv blocks. One thread per client lets the server wait on everyone at once.","The messages are sent as plain text over TCP with no encryption.","Wrap the socket with TLS (ssl module) and add login and message length framing."]},
+{ex:"Topology\nPC1,PC2 (VLAN 10) --\\\n                        Switch ==trunk== Router (g0.10 / g0.20)\nPC3,PC4 (VLAN 20) --/\nPC1 to PC2: switched, works\nPC1 to PC3: needs the router, works only after subinterfaces",
+plan:["Day 1: install Packet Tracer, build topology","Day 2: create VLANs, assign ports","Day 3: prove isolation with ping","Day 4: trunk and router subinterfaces","Day 5: show commands and record"],
+ans:["To cut broadcast traffic, group devices logically and isolate them for security without buying separate switches.","An access port carries one untagged VLAN to an end device. A trunk carries many VLANs between switches or to a router using tags.","One router link split into subinterfaces, one per VLAN, to route between them.","The tag holds the VLAN ID (12 bits) and a priority value, inserted into the Ethernet frame."]},
+{ex:"Rule order matters\n1. Block  ICMP  LAN net -> any   (log)\n2. Pass   any   LAN net -> any\nPing is blocked. If rule 2 were first, ping would pass because the first match wins.",
+plan:["Day 1: create pfSense VM","Day 2: install and WAN/LAN setup","Day 3: client VM and web wizard","Day 4: block ICMP and one site","Day 5: rule order test, logs, record"],
+ans:["The firewall reads rules top to bottom and stops at the first rule that matches the packet.","Stateful tracks connections and allows replies automatically. Stateless checks every packet on its own.","Network Address Translation maps private addresses to a public one so many devices share one IP.","Logs show what was blocked and by which rule, which helps detect attacks and debug rules."]},
+{ex:"Packet inside the tunnel\n[ Outer IP: laptop -> VPN server | UDP 51820 | encrypted( [ Inner IP: 10.8.0.2 -> 10.8.0.1 | data ] ) ]\nWireshark on the physical interface shows only the outer part.",
+plan:["Day 1: install WireGuard, generate keys","Day 2: server config and start","Day 3: client config and ping","Day 4: router port forward, test remotely","Day 5: Wireshark proof and record"],
+ans:["It protects traffic from the client to the VPN server from eavesdropping on the local network. It does not make you anonymous or protect you after the server.","For each peer it lists the addresses to route into the tunnel and to accept from that peer.","UDP is lightweight, avoids TCP-in-TCP slowdowns and WireGuard handles its own reliability and handshake.","Site-to-site joins two whole networks. Remote-access connects a single user device to a network."]},
+{ex:"Troubleshooting ladder\n1 Link/Wi-Fi up?  2 IP correct?  3 ping gateway  4 ping 8.8.8.8  5 nslookup name  6 open the app\nFail at 3: local problem. Fail at 4: ISP or route. Fail at 5: DNS. Fail at 6: application.",
+plan:["Day 1: install Uptime Kuma","Day 2: add monitors","Day 3: break link, observe","Day 4: break DNS and gateway","Day 5: fault table, alerts, record"],
+ans:["DNS is failing: connectivity is fine but name resolution is not working. Check or change the DNS server.","It lists each router hop to a destination with its delay, showing where packets slow down or stop.","Latency is how long a packet takes. Bandwidth is how much data can be sent per second.","Start at the bottom (cable or Wi-Fi, then IP) because each higher layer depends on the lower ones."]}
+];
+
+var KEY="netfile-v1", done={};
+try{done=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){done={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(done))}catch(e){}}
+function el(tag,cls,txt){var x=document.createElement(tag);if(cls)x.className=cls;if(txt!=null)x.textContent=txt;return x}
+function list(items,cls){var u=el("ul",cls);items.forEach(function(i){u.appendChild(el("li",null,i))});return u}
+
+var total=0, list_=document.getElementById("list"), idx=document.querySelector("#idx tbody");
+E.forEach(function(e,i){
+  var d=el("details"), s=el("summary");
+  s.appendChild(el("span","n",String(i+1)));
+  s.appendChild(el("span",null,e.t+": "+e.c));
+  s.appendChild(el("span","w",e.w));
+  d.appendChild(s);
+  var b=el("div","body");
+  b.appendChild(el("h3",null,"Aim")); b.appendChild(el("p",null,e.aim));
+  b.appendChild(el("h3",null,"Tools"));
+  var tg=el("div"); e.tools.forEach(function(t){tg.appendChild(el("span","tag",t))}); b.appendChild(tg);
+  b.appendChild(el("h3",null,"Concept: what it is")); b.appendChild(el("p",null,e.theory));
+  b.appendChild(el("h3",null,"Why it matters")); b.appendChild(el("p",null,e.why));
+  b.appendChild(el("h3",null,"How it works")); b.appendChild(el("p",null,e.how));
+  b.appendChild(el("h3",null,"Diagram or worked example")); b.appendChild(el("pre",null,X[i].ex));
+  b.appendChild(el("h3",null,"Daily plan")); b.appendChild(list(X[i].plan));
+  b.appendChild(el("h3",null,"Steps"));
+  var u=el("ul","steps");
+  e.steps.forEach(function(st,j){
+    var id="p"+i+"s"+j; total++;
+    var li=el("li"), lb=el("label"), cb=document.createElement("input");
+    cb.type="checkbox"; cb.checked=!!done[id];
+    cb.addEventListener("change",function(){if(cb.checked)done[id]=1;else delete done[id];save();update()});
+    lb.appendChild(cb); lb.appendChild(el("span",null,st)); li.appendChild(lb); u.appendChild(li);
+  });
+  b.appendChild(u);
+  b.appendChild(el("h3",null,"Commands and code"));
+  b.appendChild(el("pre",null,e.code));
+  b.appendChild(el("h3",null,"What to record")); b.appendChild(el("p",null,e.out));
+  b.appendChild(el("h3",null,"Viva questions and answers"));
+  e.viva.forEach(function(q,k){var qd=el("details"),qs=el("summary",null,q);qs.style.fontWeight="400";qd.appendChild(qs);var qb=el("div","body");qb.appendChild(el("p",null,X[i].ans[k]));qd.appendChild(qb);b.appendChild(qd)});
+  d.appendChild(b); list_.appendChild(d);
+  var tr=el("tr");
+  [String(i+1),e.t,e.c,"",""].forEach(function(v){tr.appendChild(el("td",null,v))});
+  idx.appendChild(tr);
+});
+
+function update(){
+  var n=Object.keys(done).length, p=total?Math.round(n/total*100):0;
+  document.getElementById("pct").textContent=p+"%";
+  document.getElementById("fill").style.width=p+"%";
+}
+document.getElementById("reset").addEventListener("click",function(){
+  if(!confirm("Clear all ticked steps?"))return;
+  done={};save();
+  document.querySelectorAll(".steps input").forEach(function(c){c.checked=false});
+  update();
+});
+update();
+if(location.hash){var m=location.hash.match(/^#p(\d+)$/);if(m){var ds=document.querySelectorAll("details")[m[1]-1];if(ds){ds.open=true;ds.scrollIntoView()}}}
+</script>
+</body>
+</html>

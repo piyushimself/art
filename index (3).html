@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111315">
+<title>Personal Library</title>
+<style>
+:root{--bg:#111315;--panel:#191d20;--panel2:#202529;--ink:#f2eee7;--muted:#a6aaa8;--line:#343b3e;--gold:#d8b879;--mint:#9fc8b7}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.13;background-image:radial-gradient(#fff .5px,transparent .5px);background-size:7px 7px;mask-image:linear-gradient(to bottom,black,transparent 80%)}
+.wrap{max-width:1180px;margin:auto;padding:0 28px;position:relative}
+header{padding:72px 0 42px;border-bottom:1px solid var(--line)}
+.eyebrow{color:var(--gold);font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(42px,7vw,76px);letter-spacing:-.045em;line-height:1.02;margin:18px 0 16px}h1 em{color:var(--gold);font-weight:400}
+.intro{max-width:650px;color:var(--muted);font-size:16px}
+.header-bottom{display:flex;gap:9px;flex-wrap:wrap;margin-top:25px;color:var(--muted);font-size:12px}
+.pill{border:1px solid var(--line);padding:6px 10px;border-radius:99px}
+.toolbar{position:sticky;top:0;z-index:5;background:rgba(17,19,21,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);padding:13px 0}
+.controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+input{background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:11px 14px;font:inherit;outline:none;min-width:230px;flex:1}
+input:focus{border-color:var(--gold)}.count{font-size:12px;color:var(--muted);white-space:nowrap}
+main{padding:38px 0 80px}.section{margin:0 0 46px;scroll-margin-top:90px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:17px}
+.section-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);font-weight:700}
+h2{font-family:Georgia,serif;font-weight:400;font-size:30px;margin:4px 0 0}
+.section-desc{font-size:12px;color:var(--muted);max-width:370px;text-align:right}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.card{display:flex;flex-direction:column;min-height:185px;background:linear-gradient(145deg,var(--panel),#171a1c);border:1px solid var(--line);border-radius:13px;padding:19px;text-decoration:none;color:inherit;position:relative;overflow:hidden;transition:transform .22s,border-color .22s,background .22s;animation:rise .45s both}
+.card:after{content:"";position:absolute;width:110px;height:110px;border-radius:50%;right:-55px;top:-55px;background:var(--gold);opacity:.07;transition:transform .3s}
+.card:hover{transform:translateY(-4px);border-color:#8a7957;background:var(--panel2)}.card:hover:after{transform:scale(1.8)}
+.card:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.tag{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);font-weight:700}
+.arrow{color:var(--gold);font-size:18px}h3{font-family:Georgia,serif;font-weight:400;font-size:21px;line-height:1.15;margin:0 0 9px}
+.desc{font-size:12px;color:var(--muted);margin:0;max-width:95%}
+.filename{margin-top:auto;padding-top:18px;font-size:10px;color:#858c8d;overflow-wrap:anywhere}
+.empty{display:none;padding:36px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+footer{border-top:1px solid var(--line);padding:24px 0 40px;color:#858c8d;font-size:11px}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.wrap{padding:0 17px}header{padding-top:52px}.grid{grid-template-columns:1fr}.section-head{display:block}.section-desc{text-align:left;margin-top:8px}.card{min-height:160px}input{min-width:100%}}
+</style></head>
+<body>
+<header><div class="wrap">
+<div class="eyebrow">A personal space for curiosity & discovery</div>
+<h1>The <em>Personal</em><br>Library</h1>
+<p class="intro">A home for the things you collect, study and explore — from manga, comics and animation to art, journaling, technical learning and everyday tools.</p>
+<div class="header-bottom"><span class="pill">26 collections & tools</span><span class="pill">Stories & culture</span><span class="pill">Art & reflection</span><span class="pill">Learning & utility</span></div>
+</div></header>
+<div class="toolbar"><div class="wrap controls">
+<input id="search" type="search" placeholder="Search by title, topic or filename…" aria-label="Search library">
+<span class="count" id="count">26 of 26 pages</span>
+</div></div>
+<main class="wrap" id="content">
+<section class="section" data-section="anime">
+      <div class="section-head"><div><div class="section-kicker">01 / COLLECTION</div><h2>Anime, Manga &amp; Comics</h2></div>
+      <p class="section-desc">Stories, illustrated worlds and reading collections</p></div><div class="grid"><a class="card" href="manga-index.html" data-search="manga index manga-index.html a starting point for browsing the manga collection. anime &amp; manga">
+      <div class="meta"><span class="tag">Anime &amp; manga</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Manga Index</h3><p class="desc">A starting point for browsing the manga collection.</p><div class="filename">manga-index.html</div>
+    </a>
+<a class="card" href="manga-archive-v4.html" data-search="manga archive manga-archive-v4.html a searchable archive of manga titles and discoveries. anime &amp; manga">
+      <div class="meta"><span class="tag">Anime &amp; manga</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Manga Archive</h3><p class="desc">A searchable archive of manga titles and discoveries.</p><div class="filename">manga-archive-v4.html</div>
+    </a>
+<a class="card" href="manga-comics-master.html" data-search="manga &amp; comics master manga-comics-master.html a broad collection of manga and comics. anime &amp; manga">
+      <div class="meta"><span class="tag">Anime &amp; manga</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Manga &amp; Comics Master</h3><p class="desc">A broad collection of manga and comics.</p><div class="filename">manga-comics-master.html</div>
+    </a>
+<a class="card" href="manga-1000.html" data-search="manga 1000+ manga-1000.html a large-scale manga discovery and reference list. anime &amp; manga">
+      <div class="meta"><span class="tag">Anime &amp; manga</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Manga 1000+</h3><p class="desc">A large-scale manga discovery and reference list.</p><div class="filename">manga-1000.html</div>
+    </a>
+<a class="card" href="manga-guide.html" data-search="manga guide manga-guide.html a guide to exploring manga and finding new reads. anime &amp; manga">
+      <div class="meta"><span class="tag">Anime &amp; manga</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Manga Guide</h3><p class="desc">A guide to exploring manga and finding new reads.</p><div class="filename">manga-guide.html</div>
+    </a>
+<a class="card" href="manhwa_300_filter_app.html" data-search="manhwa 300 — filter app manhwa_300_filter_app.html filter and explore a curated manhwa collection. anime &amp; manga">
+      <div class="meta"><span class="tag">Anime &amp; manga</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Manhwa 300 — Filter App</h3><p class="desc">Filter and explore a curated manhwa collection.</p><div class="filename">manhwa_300_filter_app.html</div>
+    </a>
+<a class="card" href="manhwa300.html" data-search="manhwa 300 manhwa300.html a companion collection focused on manhwa. anime &amp; manga">
+      <div class="meta"><span class="tag">Anime &amp; manga</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Manhwa 300</h3><p class="desc">A companion collection focused on manhwa.</p><div class="filename">manhwa300.html</div>
+    </a>
+<a class="card" href="top500_manga.html" data-search="top 500 manga top500_manga.html a ranked manga discovery list. anime &amp; manga">
+      <div class="meta"><span class="tag">Anime &amp; manga</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Top 500 Manga</h3><p class="desc">A ranked manga discovery list.</p><div class="filename">top500_manga.html</div>
+    </a>
+<a class="card" href="top500_adult_manga.html" data-search="top 500 adult manga top500_adult_manga.html a mature-audience manga catalogue. anime &amp; manga">
+      <div class="meta"><span class="tag">Anime &amp; manga</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Top 500 Adult Manga</h3><p class="desc">A mature-audience manga catalogue.</p><div class="filename">top500_adult_manga.html</div>
+    </a>
+<a class="card" href="political-comics-list.html" data-search="political comics political-comics-list.html comics exploring politics, society and ideas. anime &amp; manga">
+      <div class="meta"><span class="tag">Anime &amp; manga</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Political Comics</h3><p class="desc">Comics exploring politics, society and ideas.</p><div class="filename">political-comics-list.html</div>
+    </a>
+<a class="card" href="taboo-comics.html" data-search="taboo comics taboo-comics.html a specialised comics collection for mature readers. anime &amp; manga">
+      <div class="meta"><span class="tag">Anime &amp; manga</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Taboo Comics</h3><p class="desc">A specialised comics collection for mature readers.</p><div class="filename">taboo-comics.html</div>
+    </a>
+<a class="card" href="anime-manga-values-curriculum.html" data-search="anime &amp; manga values curriculum anime-manga-values-curriculum.html use anime and manga stories as prompts for reflection and values. anime &amp; manga">
+      <div class="meta"><span class="tag">Anime &amp; manga</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Anime &amp; Manga Values Curriculum</h3><p class="desc">Use anime and manga stories as prompts for reflection and values.</p><div class="filename">anime-manga-values-curriculum.html</div>
+    </a></div>
+    </section><section class="section" data-section="culture">
+      <div class="section-head"><div><div class="section-kicker">02 / COLLECTION</div><h2>Animation &amp; Curated Library</h2></div>
+      <p class="section-desc">Animation, film discovery and collected references</p></div><div class="grid"><a class="card" href="300_animated_films.html" data-search="300 animated films 300_animated_films.html a collection for discovering animated films. animation &amp; culture">
+      <div class="meta"><span class="tag">Animation &amp; culture</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>300 Animated Films</h3><p class="desc">A collection for discovering animated films.</p><div class="filename">300_animated_films.html</div>
+    </a>
+<a class="card" href="The_Curators_Library.html" data-search="the curator’s library the_curators_library.html a curated library of selected works and references. animation &amp; culture">
+      <div class="meta"><span class="tag">Animation &amp; culture</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>The Curator’s Library</h3><p class="desc">A curated library of selected works and references.</p><div class="filename">The_Curators_Library.html</div>
+    </a></div>
+    </section><section class="section" data-section="art">
+      <div class="section-head"><div><div class="section-kicker">03 / COLLECTION</div><h2>Art, Making &amp; Writing</h2></div>
+      <p class="section-desc">Practical resources and prompts for creative expression</p></div><div class="grid"><a class="card" href="blackout_poetry_tutorial.html" data-search="blackout poetry tutorial blackout_poetry_tutorial.html create poems by selecting and erasing words from existing text. art &amp; writing">
+      <div class="meta"><span class="tag">Art &amp; writing</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Blackout Poetry Tutorial</h3><p class="desc">Create poems by selecting and erasing words from existing text.</p><div class="filename">blackout_poetry_tutorial.html</div>
+    </a>
+<a class="card" href="bob_ross_complete_guide.html" data-search="bob ross — complete guide bob_ross_complete_guide.html a guide to painting, techniques and creative practice. art &amp; writing">
+      <div class="meta"><span class="tag">Art &amp; writing</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Bob Ross — Complete Guide</h3><p class="desc">A guide to painting, techniques and creative practice.</p><div class="filename">bob_ross_complete_guide.html</div>
+    </a>
+<a class="card" href="free-art-resources.html" data-search="free art resources free-art-resources.html a collection of tools, references and resources for artists. art &amp; writing">
+      <div class="meta"><span class="tag">Art &amp; writing</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Free Art Resources</h3><p class="desc">A collection of tools, references and resources for artists.</p><div class="filename">free-art-resources.html</div>
+    </a>
+<a class="card" href="watercolour_tasks%20(1).html" data-search="watercolour tasks watercolour_tasks (1).html painting prompts and exercises for regular practice. art &amp; writing">
+      <div class="meta"><span class="tag">Art &amp; writing</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Watercolour Tasks</h3><p class="desc">Painting prompts and exercises for regular practice.</p><div class="filename">watercolour_tasks (1).html</div>
+    </a></div>
+    </section><section class="section" data-section="journal">
+      <div class="section-head"><div><div class="section-kicker">04 / COLLECTION</div><h2>Journaling &amp; Personal Growth</h2></div>
+      <p class="section-desc">Reflection, self-directed learning and human development</p></div><div class="grid"><a class="card" href="human-development-curriculum.html" data-search="human development curriculum human-development-curriculum.html a structured learning journey around human development. reflection">
+      <div class="meta"><span class="tag">Reflection</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Human Development Curriculum</h3><p class="desc">A structured learning journey around human development.</p><div class="filename">human-development-curriculum.html</div>
+    </a>
+<a class="card" href="life-fiction-curriculum.html" data-search="life &amp; fiction curriculum life-fiction-curriculum.html explore life and human questions through fiction and reading. reflection">
+      <div class="meta"><span class="tag">Reflection</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Life &amp; Fiction Curriculum</h3><p class="desc">Explore life and human questions through fiction and reading.</p><div class="filename">life-fiction-curriculum.html</div>
+    </a>
+<a class="card" href="living-curriculum-2026.html" data-search="living curriculum 2026 living-curriculum-2026.html an evolving map for self-directed learning and discovery. reflection">
+      <div class="meta"><span class="tag">Reflection</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Living Curriculum 2026</h3><p class="desc">An evolving map for self-directed learning and discovery.</p><div class="filename">living-curriculum-2026.html</div>
+    </a>
+<a class="card" href="marginalia-diary.html" data-search="marginalia diary marginalia-diary.html a space for notes, annotations and observations. reflection">
+      <div class="meta"><span class="tag">Reflection</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Marginalia Diary</h3><p class="desc">A space for notes, annotations and observations.</p><div class="filename">marginalia-diary.html</div>
+    </a>
+<a class="card" href="the-loom-tracker.html" data-search="the loom tracker the-loom-tracker.html track ongoing activities, habits or personal projects. reflection">
+      <div class="meta"><span class="tag">Reflection</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>The Loom Tracker</h3><p class="desc">Track ongoing activities, habits or personal projects.</p><div class="filename">the-loom-tracker.html</div>
+    </a></div>
+    </section><section class="section" data-section="tech">
+      <div class="section-head"><div><div class="section-kicker">05 / COLLECTION</div><h2>Technology &amp; Security Learning</h2></div>
+      <p class="section-desc">Hands-on technical learning and project-based study</p></div><div class="grid"><a class="card" href="Mastering_Solidity_50_Projects_Complete.html" data-search="mastering solidity — 50 projects mastering_solidity_50_projects_complete.html a project-based collection for learning solidity development. technical">
+      <div class="meta"><span class="tag">Technical</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Mastering Solidity — 50 Projects</h3><p class="desc">A project-based collection for learning Solidity development.</p><div class="filename">Mastering_Solidity_50_Projects_Complete.html</div>
+    </a>
+<a class="card" href="networking-practical-file.html" data-search="networking practical file networking-practical-file.html practical networking notes, exercises and reference material. technical">
+      <div class="meta"><span class="tag">Technical</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Networking Practical File</h3><p class="desc">Practical networking notes, exercises and reference material.</p><div class="filename">networking-practical-file.html</div>
+    </a></div>
+    </section><section class="section" data-section="tools">
+      <div class="section-head"><div><div class="section-kicker">06 / COLLECTION</div><h2>Everyday Tools</h2></div>
+      <p class="section-desc">Small utilities for planning and daily decisions</p></div><div class="grid"><a class="card" href="Meal_Picker_v2%20(2).html" data-search="meal picker meal_picker_v2 (2).html a helper for choosing meals. utility">
+      <div class="meta"><span class="tag">Utility</span><span class="arrow" aria-hidden="true">↗</span></div>
+      <h3>Meal Picker</h3><p class="desc">A helper for choosing meals.</p><div class="filename">Meal_Picker_v2 (2).html</div>
+    </a></div>
+    </section>
+<div class="empty" id="empty">No matching pages. Try another search term.</div>
+</main>
+<footer><div class="wrap">Your personal library · Keep this index.html alongside the linked HTML files in your GitHub repository.</div></footer>
+<script>
+const search=document.getElementById('search');
+const sections=[...document.querySelectorAll('.section')];
+const cards=[...document.querySelectorAll('.card')];
+const count=document.getElementById('count');
+function apply(){
+ const q=search.value.toLowerCase().trim();let shown=0;
+ sections.forEach(section=>{
+  let visible=false;
+  section.querySelectorAll('.card').forEach(card=>{
+   const ok=!q||card.dataset.search.includes(q);
+   card.style.display=ok?'flex':'none';
+   if(ok){visible=true;shown++;}
+  });
+  section.style.display=visible?'block':'none';
+ });
+ count.textContent=shown+' of '+cards.length+' pages';
+ document.getElementById('empty').style.display=shown?'none':'block';
+}
+search.addEventListener('input',apply);apply();
+</script></body></html>

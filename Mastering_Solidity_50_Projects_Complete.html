@@ -1,0 +1,3325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering Solidity: 50 Hands-On Projects</title>
+    <style>
+        :root {
+            --primary: #6d4aff;
+            --secondary: #917fff;
+            --bg-light: #f8f5ff;
+            --bg-dark: #1a1a2e;
+            --code-bg: #2d2d44;
+            --text-main: #2d2d44;
+            --text-muted: #666;
+            --border: #e0e0f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--text-main);
+            background: linear-gradient(135deg, #f5f3ff 0%, #ffffff 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(109, 74, 255, 0.3);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        section {
+            background: white;
+            margin-bottom: 40px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--primary);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h2::before {
+            content: "📚";
+            font-size: 1.5em;
+        }
+        
+        h3 {
+            color: var(--text-main);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .concept-badge {
+            display: inline-block;
+            background: var(--bg-light);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border: 2px solid var(--primary);
+        }
+        
+        pre {
+            background: var(--code-bg);
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 20px 0;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        code {
+            font-family: 'Courier New', monospace;
+        }
+        
+        .inline-code {
+            background: var(--bg-light);
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        .key-takeaways {
+            background: #f0f7ff;
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .key-takeaways h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .key-takeaways ul {
+            list-style: none;
+        }
+        
+        .key-takeaways li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .key-takeaways li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .project-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .part-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 40px 0 30px 0;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: var(--bg-dark);
+            color: white;
+            margin-top: 60px;
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 20px rgba(109, 74, 255, 0.4);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .print-btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        @media print {
+            .print-btn { display: none; }
+            nav { position: static; }
+            section { page-break-inside: avoid; }
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .container { padding: 20px; }
+            section { padding: 20px; }
+        }
+    
+        .lead { font-size: 1.05rem; margin-bottom: 15px; }
+        .security-note { background: #fff8e6; border: 2px solid #f5a623; border-radius: 8px; padding: 16px 20px; margin: 20px 0; }
+        .security-note h4 { color: #b45309; margin-bottom: 6px; }
+        .idx { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+        .idx a { border: 2px solid var(--primary); border-radius: 8px; padding: 8px 10px; text-decoration: none; color: var(--primary); font-weight: 700; display: flex; gap: 8px; align-items: baseline; font-size: .85rem; }
+        .idx a span { font-weight: 400; color: var(--text-muted); font-size: .8rem; }
+        .idx a.done { background: var(--bg-light); }
+        .idx a:hover { background: var(--primary); color: white; } .idx a:hover span { color: white; }
+        .legend { color: var(--text-muted); margin-top: 12px; font-size: .9rem; }
+        html { scroll-behavior: smooth; } section { scroll-margin-top: 70px; }
+        @media print { .security-note, .key-takeaways, section { break-inside: avoid; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#basic">Basic (1-20)</a></li>
+            <li><a href="#intermediate">Intermediate (21-50)</a></li>
+            <li><a href="#index">Index</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>🔗 Mastering Solidity</h1>
+            <p class="subtitle">50 Hands-On Projects: From Beginner to Advanced Smart Contract Development</p>
+            <p style="margin-top: 15px; opacity: 0.9;">Comprehensive Guide with Complete Code Examples</p>
+        </header>
+
+        <section id="introduction">
+            <h2>Introduction</h2>
+            <p>Welcome to this comprehensive Solidity tutorial. By the end of these 50 projects, you'll have hands-on experience with:</p>
+            <div class="key-takeaways">
+                <h4>What You'll Learn</h4>
+                <ul>
+                    <li>Smart contract fundamentals and structure</li>
+                    <li>Storage patterns and gas optimization</li>
+                    <li>Access control mechanisms (owner, roles)</li>
+                    <li>Token standards (ERC20, ERC721, ERC1155)</li>
+                    <li>Security patterns and common vulnerabilities</li>
+                    <li>DeFi primitives (staking, yield farming, flash loans)</li>
+                    <li>Cross-chain and oracle integration</li>
+                    <li>Real-world application patterns</li>
+                </ul>
+            </div>
+            <p><strong>⚠️ Important Notes:</strong></p>
+            <ul>
+                <li>Each project builds on previous knowledge - start from Project 1</li>
+                <li>Code targets Solidity ^0.8.19; the OpenZeppelin v5 examples need ^0.8.20</li>
+                <li>Test thoroughly on testnets before mainnet deployment</li>
+                <li>For production randomness, use Chainlink VRF</li>
+                <li>Consider gas costs in your implementations</li>
+            </ul>
+        </section>
+
+        <section id="index"><h2>Project Index</h2><div class="idx"><a href="#project-1" class="done">1<span>Hello World</span></a><a href="#project-2" class="done">2<span>Simple Storage</span></a><a href="#project-3" class="done">3<span>Counter</span></a><a href="#project-4" class="done">4<span>Boolean Flag</span></a><a href="#project-5" class="done">5<span>Owner-only Function</span></a><a href="#project-6" class="done">6<span>Mapping Basics</span></a><a href="#project-7" class="done">7<span>Array Operations</span></a><a href="#project-8" class="done">8<span>Structs and Nested Mappings</span></a><a href="#project-9" class="done">9<span>Enums</span></a><a href="#project-10" class="done">10<span>Ether Transfer</span></a><a href="#project-11" class="done">11<span>Gas Tracking</span></a><a href="#project-12" class="done">12<span>Modifier Basics</span></a><a href="#project-13" class="done">13<span>Timestamp Validation</span></a><a href="#project-14" class="done">14<span>Event Emission</span></a><a href="#project-15" class="">15<span>Fallback Function</span></a><a href="#project-16" class="done">16<span>Token Tracker</span></a><a href="#project-17" class="done">17<span>Multiplier Contract</span></a><a href="#project-18" class="done">18<span>Random Number Generator</span></a><a href="#project-19" class="done">19<span>Basic Voting</span></a><a href="#project-20" class="done">20<span>String Operations</span></a><a href="#project-21" class="done">21<span>ERC20 Token</span></a><a href="#project-22" class="done">22<span>Burnable Token</span></a><a href="#project-23" class="done">23<span>Mintable Token</span></a><a href="#project-24" class="done">24<span>Access Roles</span></a><a href="#project-25" class="done">25<span>Time-Locked Wallet</span></a><a href="#project-26" class="">26<span>Crowdfunding Contract</span></a><a href="#project-27" class="">27<span>Lottery Contract</span></a><a href="#project-28" class="">28<span>NFT (ERC721)</span></a><a href="#project-29" class="">29<span>NFT Marketplace</span></a><a href="#project-30" class="">30<span>Upgradeable Contracts</span></a><a href="#project-31" class="">31<span>Staking Contract</span></a><a href="#project-32" class="">32<span>Reentrancy Test</span></a><a href="#project-33" class="">33<span>Ownership Transfer</span></a><a href="#project-34" class="">34<span>Multisig Wallet</span></a><a href="#project-35" class="">35<span>Token Vesting</span></a><a href="#project-36" class="">36<span>DAO Contract</span></a><a href="#project-37" class="">37<span>Oracle Integration</span></a><a href="#project-38" class="">38<span>Yield Farming</span></a><a href="#project-39" class="">39<span>Escrow Contract</span></a><a href="#project-40" class="">40<span>Access Lists</span></a><a href="#project-41" class="">41<span>Gas Refunds</span></a><a href="#project-42" class="">42<span>Governance Contract</span></a><a href="#project-43" class="">43<span>Dynamic Fees</span></a><a href="#project-44" class="">44<span>Chain Interaction</span></a><a href="#project-45" class="">45<span>ERC1155 Token</span></a><a href="#project-46" class="">46<span>NFT Royalty System</span></a><a href="#project-47" class="">47<span>Subscription Contract</span></a><a href="#project-48" class="">48<span>Flash Loan</span></a><a href="#project-49" class="">49<span>Cross-Chain Bridge</span></a><a href="#project-50" class="">50<span>Deflationary Token</span></a></div><p class="legend">Filled tiles are projects marked complete in your checklist.</p></section>
+
+        <div class="part-header" id="basic">PART 1: BASIC PROJECTS (1-20)</div>
+
+        
+<section id="project-1">
+<h2><span class="project-number">1</span> Hello World</h2>
+<span class="concept-badge">Concept: Contract structure, public functions</span>
+<p class="lead">Every Solidity file starts with a licence and a pragma. A contract is like a class: it bundles state and functions. This one has no state at all, so it is marked pure.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract HelloWorld {
+    function greet() public pure returns (string memory) {
+        return "Hello, World!";
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li><b>public</b> makes the function callable from outside and inside the contract.</li><li><b>pure</b> promises the function neither reads nor writes blockchain state.</li><li>Strings need an explicit data location (<b>memory</b>) when returned.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Deployed bytecode is immutable. Even a trivial contract deserves a test on a local chain before it goes anywhere public.</p></div>
+</section>
+
+<section id="project-2">
+<h2><span class="project-number">2</span> Simple Storage</h2>
+<span class="concept-badge">Concept: State variables, getters, setters</span>
+<p class="lead">State variables live in the contract's permanent storage. A setter writes to storage (costs gas); a getter marked view only reads (free when called off-chain).</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract SimpleStorage {
+    uint256 private number;
+
+    function set(uint256 _n) external {
+        number = _n;
+    }
+
+    function get() external view returns (uint256) {
+        return number;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li><b>uint256</b> is the default unsigned integer; it holds 0 until written.</li><li><b>external</b> is slightly cheaper than public for functions only called from outside.</li><li>Declaring a variable <b>public</b> auto-generates a getter for you.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p><b>private</b> does not mean secret. Anyone can read raw storage slots from a node, so never keep passwords or secrets on-chain.</p></div>
+</section>
+
+<section id="project-3">
+<h2><span class="project-number">3</span> Counter</h2>
+<span class="concept-badge">Concept: Arithmetic operations</span>
+<p class="lead">Since Solidity 0.8 arithmetic is checked: overflow and underflow revert automatically. An explicit require gives callers a readable error message.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract Counter {
+    uint256 public count;
+
+    function increment() external {
+        count += 1;
+    }
+
+    function decrement() external {
+        require(count &gt; 0, "Counter: already zero");
+        count -= 1;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li><b>+=</b> and <b>-=</b> are checked operations in 0.8+.</li><li><b>require(cond, msg)</b> reverts the whole transaction if cond is false.</li><li>Reverted transactions undo all state changes but still cost the gas used.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Anyone can call these functions. If a counter drives business logic, add access control (Project 5) before shipping.</p></div>
+</section>
+
+<section id="project-4">
+<h2><span class="project-number">4</span> Boolean Flag</h2>
+<span class="concept-badge">Concept: Boolean operations</span>
+<p class="lead">Booleans are the simplest building block of switches, pause states and permission checks. Negation with ! flips the value.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract BooleanFlag {
+    bool public flag;
+
+    function toggle() external {
+        flag = !flag;
+    }
+
+    function set(bool value) external {
+        flag = value;
+    }
+
+    function both(bool a, bool b) external pure returns (bool) {
+        return a &amp;&amp; b;             // also: ||  and  !
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Default value of a bool is <b>false</b>.</li><li>Logical operators: <b>&amp;&amp;</b>, <b>||</b>, <b>!</b> - they short-circuit.</li><li>One bool still occupies a storage slot unless packed with neighbours.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>A flag anyone can flip is a vulnerability if it guards anything important. Restrict who may toggle it.</p></div>
+</section>
+
+<section id="project-5">
+<h2><span class="project-number">5</span> Owner-only Function</h2>
+<span class="concept-badge">Concept: Access control</span>
+<p class="lead">The constructor runs once at deployment, so msg.sender there is the deployer. Storing it as owner lets later functions verify the caller.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract OwnerOnly {
+    address public owner;
+    uint256 public secret;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    function setSecret(uint256 v) external {
+        require(msg.sender == owner, "not owner");
+        secret = v;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li><b>msg.sender</b> is the immediate caller of the current function.</li><li>The constructor executes only during deployment.</li><li>Make owner <b>immutable</b> when it never changes: cheaper reads.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Never authorise with <b>tx.origin</b>. A malicious contract called by the owner would pass that check (a classic phishing bug).</p></div>
+</section>
+
+<section id="project-6">
+<h2><span class="project-number">6</span> Mapping Basics</h2>
+<span class="concept-badge">Concept: Mappings</span>
+<p class="lead">A mapping is a hash table whose every possible key already exists with the default value 0. It is the workhorse for per-user data.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract MappingBasics {
+    mapping(address =&gt; uint256) public balances;
+
+    function credit(uint256 amount) external {
+        balances[msg.sender] += amount;
+    }
+
+    function debit(uint256 amount) external {
+        require(balances[msg.sender] &gt;= amount, "insufficient");
+        balances[msg.sender] -= amount;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Missing keys return <b>0</b>, there is no 'key not found'.</li><li>Mappings cannot be iterated or have their length read.</li><li>The value is keyed by <b>keccak256(key . slot)</b> internally.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>This toy lets anyone credit themselves. Real balances must change only through checked deposits or transfers.</p></div>
+</section>
+
+<section id="project-7">
+<h2><span class="project-number">7</span> Array Operations</h2>
+<span class="concept-badge">Concept: Arrays and loops</span>
+<p class="lead">Dynamic arrays can grow with push and shrink with pop. To delete from the middle cheaply, overwrite the slot with the last element and pop (swap-and-pop).</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract ArrayOps {
+    uint256[] public items;
+
+    function append(uint256 v) external { items.push(v); }
+
+    function update(uint256 i, uint256 v) external {
+        require(i &lt; items.length, "out of range");
+        items[i] = v;
+    }
+
+    // swap-and-pop: O(1), order is not preserved
+    function remove(uint256 i) external {
+        require(i &lt; items.length, "out of range");
+        items[i] = items[items.length - 1];
+        items.pop();
+    }
+
+    function sum() external view returns (uint256 total) {
+        for (uint256 i = 0; i &lt; items.length; i++) total += items[i];
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li><b>delete items[i]</b> only zeroes the slot, it leaves a hole.</li><li>Looping over storage arrays costs gas per element.</li><li>Out-of-range access reverts automatically, an explicit require is friendlier.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Unbounded loops over user-growable arrays can exceed the block gas limit and permanently brick a function (DoS). Prefer pull patterns or pagination.</p></div>
+</section>
+
+<section id="project-8">
+<h2><span class="project-number">8</span> Structs and Nested Mappings</h2>
+<span class="concept-badge">Concept: Structs, nested mappings</span>
+<p class="lead">Structs group related fields into one type. Nested mappings model relationships such as 'who follows whom' without any loops.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract Profiles {
+    struct Profile {
+        string name;
+        uint8 age;
+        bool active;
+    }
+
+    mapping(address =&gt; Profile) public profiles;
+    mapping(address =&gt; mapping(address =&gt; bool)) public follows;
+
+    function setProfile(string calldata name, uint8 age) external {
+        profiles[msg.sender] = Profile(name, age, true);
+    }
+
+    function follow(address who) external {
+        require(profiles[who].active, "no such profile");
+        follows[msg.sender][who] = true;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Struct fields are packed into slots in declaration order.</li><li><b>mapping(a => mapping(b => c))</b> is a two-key lookup table.</li><li>Use <b>calldata</b> for external function arguments you only read.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Storing personal data on a public chain is permanent. Treat every field as world-readable forever.</p></div>
+</section>
+
+<section id="project-9">
+<h2><span class="project-number">9</span> Enums</h2>
+<span class="concept-badge">Concept: Enum basics</span>
+<p class="lead">An enum names a fixed set of states. Combined with a modifier, it becomes a tiny state machine where only legal transitions are possible.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract Lifecycle {
+    enum State { Created, Locked, Released, Cancelled }
+    State public state;              // defaults to Created
+
+    modifier inState(State s) {
+        require(state == s, "wrong state");
+        _;
+    }
+
+    function lock() external inState(State.Created) {
+        state = State.Locked;
+    }
+
+    function release() external inState(State.Locked) {
+        state = State.Released;
+    }
+
+    function cancel() external {
+        require(state == State.Created || state == State.Locked, "too late");
+        state = State.Cancelled;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Enums are stored as small integers starting from 0.</li><li>Model transitions explicitly; forbid everything else.</li><li>The <b>_;</b> in a modifier marks where the function body runs.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>State machines without access control let anyone drive the transitions. Add ownership checks (Project 12) for real use.</p></div>
+</section>
+
+<section id="project-10">
+<h2><span class="project-number">10</span> Ether Transfer</h2>
+<span class="concept-badge">Concept: payable functions</span>
+<p class="lead">A function marked payable can receive ETH. Withdrawals should update internal accounting first and only then send ETH: the checks-effects-interactions order.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract EtherVault {
+    mapping(address =&gt; uint256) public balances;
+
+    function deposit() external payable {
+        balances[msg.sender] += msg.value;
+    }
+
+    function withdraw(uint256 amount) external {
+        require(balances[msg.sender] &gt;= amount, "insufficient");
+        balances[msg.sender] -= amount;               // effects first
+        (bool ok, ) = msg.sender.call{value: amount}(""); // interaction last
+        require(ok, "transfer failed");
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li><b>msg.value</b> is the ETH (in wei) sent with the call.</li><li>Prefer <b>call{value: x}</b> over transfer/send; check the return flag.</li><li>1 ether = 10<sup>18</sup> wei.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Sending ETH hands control to the recipient. If you update balances after the call, the recipient can re-enter (see Project 32).</p></div>
+</section>
+
+<section id="project-11">
+<h2><span class="project-number">11</span> Gas Tracking</h2>
+<span class="concept-badge">Concept: Gas optimization</span>
+<p class="lead">Storage writes (SSTORE) dominate gas cost. Caching a storage value in memory, doing the arithmetic there and writing back once is a standard optimisation. gasleft() lets you measure the difference.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract GasLab {
+    uint256 public total;
+    event GasUsed(string label, uint256 gas);
+
+    function costly(uint256 n) external {
+        uint256 g = gasleft();
+        for (uint256 i = 0; i &lt; n; i++) { total += i; }  // SSTORE each loop
+        emit GasUsed("costly", g - gasleft());
+    }
+
+    function cheaper(uint256 n) external {
+        uint256 g = gasleft();
+        uint256 t = total;                               // cache once
+        for (uint256 i = 0; i &lt; n; ) { t += i; unchecked { ++i; } }
+        total = t;                                       // single SSTORE
+        emit GasUsed("cheaper", g - gasleft());
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Read storage once, compute in memory, write back once.</li><li><b>unchecked</b> skips overflow checks: use only when overflow is impossible.</li><li>Run both functions in Remix and compare the emitted numbers.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Do not trade safety for tiny savings. Unchecked math is a common source of audit findings.</p></div>
+</section>
+
+<section id="project-12">
+<h2><span class="project-number">12</span> Modifier Basics</h2>
+<span class="concept-badge">Concept: Function modifiers</span>
+<p class="lead">Modifiers wrap a function with reusable checks. Several can be stacked and they execute left to right.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract Modifiers {
+    address public owner = msg.sender;
+    bool public paused;
+    uint256 public value;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "not owner");
+        _;
+    }
+    modifier whenNotPaused() {
+        require(!paused, "paused");
+        _;
+    }
+    modifier validAmount(uint256 a) {
+        require(a &gt; 0 &amp;&amp; a &lt;= 1_000, "bad amount");
+        _;
+    }
+
+    function setPaused(bool p) external onlyOwner { paused = p; }
+
+    function setValue(uint256 v) external whenNotPaused validAmount(v) {
+        value = v;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Modifiers can take arguments, as in <b>validAmount(v)</b>.</li><li>Code after <b>_;</b> runs after the body, handy for post-conditions.</li><li>Keep modifiers small: heavy logic hides inside them.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>A pause switch is only useful if the owner key is safe. Consider a multisig (Project 34) as owner.</p></div>
+</section>
+
+<section id="project-13">
+<h2><span class="project-number">13</span> Timestamp Validation</h2>
+<span class="concept-badge">Concept: block.timestamp</span>
+<p class="lead">block.timestamp is the current block's time in seconds. Use it for deadlines measured in minutes or longer, never for exact ordering.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract TimeGate {
+    uint256 public immutable deadline;
+    uint256 public joined;
+
+    constructor(uint256 duration) {
+        deadline = block.timestamp + duration;
+    }
+
+    modifier beforeDeadline() { require(block.timestamp &lt; deadline, "closed"); _; }
+    modifier afterDeadline()  { require(block.timestamp &gt;= deadline, "still open"); _; }
+
+    function join() external beforeDeadline { joined++; }
+
+    function timeLeft() external view returns (uint256) {
+        return block.timestamp &gt;= deadline ? 0 : deadline - block.timestamp;
+    }
+
+    function finalize() external view afterDeadline returns (uint256) {
+        return joined;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Time units: <b>1 minutes</b>, <b>1 hours</b>, <b>1 days</b> are built in.</li><li><b>immutable</b> values are set once in the constructor and cost no storage read.</li><li>Use &gt;= and &lt; consistently to avoid off-by-one gaps.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Block producers can nudge the timestamp by a few seconds. Never let a contract's fairness depend on second-level precision.</p></div>
+</section>
+
+<section id="project-14">
+<h2><span class="project-number">14</span> Event Emission</h2>
+<span class="concept-badge">Concept: Events and logging</span>
+<p class="lead">Events write cheap, searchable logs. Front ends and indexers subscribe to them instead of polling storage. Up to three parameters can be indexed for filtering.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract EventDemo {
+    uint256 public value;
+
+    event ValueChanged(
+        address indexed by,
+        uint256 oldValue,
+        uint256 newValue
+    );
+
+    function set(uint256 v) external {
+        uint256 old = value;
+        value = v;
+        emit ValueChanged(msg.sender, old, v);
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li><b>indexed</b> parameters become filterable topics.</li><li>Logs are far cheaper than storage but unreadable by contracts.</li><li>Emit an event for every important state change.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Off-chain monitoring of events is your alarm system: unexpected ownership or pause events are often the first sign of compromise.</p></div>
+</section>
+
+<section id="project-15">
+<h2><span class="project-number">15</span> Fallback Function</h2>
+<span class="concept-badge">Concept: fallback and receive functions</span>
+<p class="lead">receive() handles plain ETH transfers with empty calldata. fallback() handles calls to functions that do not exist. Having both lets you tell the two cases apart.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract FallbackDemo {
+    event Received(address indexed from, uint256 amount);
+    event FallbackCalled(address indexed from, uint256 amount, bytes data);
+    uint256 public totalReceived;
+
+    // empty calldata + ETH
+    receive() external payable {
+        totalReceived += msg.value;
+        emit Received(msg.sender, msg.value);
+    }
+
+    // unknown selector (payable is optional)
+    fallback() external payable {
+        totalReceived += msg.value;
+        emit FallbackCalled(msg.sender, msg.value, msg.data);
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Without receive(), plain ETH transfers to the contract revert.</li><li><b>msg.data</b> in fallback holds the raw calldata.</li><li>Proxies (Project 30) rely on fallback to forward every call.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Keep receive() tiny. With the 2300-gas stipend used by transfer/send, any storage write would fail.</p></div>
+</section>
+
+<section id="project-16">
+<h2><span class="project-number">16</span> Token Tracker</h2>
+<span class="concept-badge">Concept: Balances and mappings</span>
+<p class="lead">Mappings are great for lookups but cannot be listed. Keep a parallel array of holders (added once) if you need to enumerate them.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract TokenTracker {
+    mapping(address =&gt; uint256) public balanceOf;
+    address[] public holders;
+    mapping(address =&gt; bool) private isHolder;
+
+    constructor(uint256 supply) {
+        _credit(msg.sender, supply);
+    }
+
+    function transfer(address to, uint256 amount) external {
+        require(balanceOf[msg.sender] &gt;= amount, "insufficient");
+        balanceOf[msg.sender] -= amount;
+        _credit(to, amount);
+    }
+
+    function _credit(address to, uint256 amount) private {
+        if (!isHolder[to]) { isHolder[to] = true; holders.push(to); }
+        balanceOf[to] += amount;
+    }
+
+    function holderCount() external view returns (uint256) {
+        return holders.length;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>A bool mapping avoids pushing the same address twice.</li><li><b>private</b> functions are only callable from inside this contract.</li><li>This is the skeleton of ERC20 (Project 21).</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Do not loop over <b>holders</b> in a transaction: an attacker can grow it until the loop cannot fit in a block.</p></div>
+</section>
+
+<section id="project-17">
+<h2><span class="project-number">17</span> Multiplier Contract</h2>
+<span class="concept-badge">Concept: require statement and validation</span>
+<p class="lead">Validate inputs at the boundary. Here we reject zero and oversized values before doing arithmetic and storing the result.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract Multiplier {
+    uint256 public constant FACTOR = 7;
+    uint256 public constant MAX_INPUT = type(uint128).max;
+    uint256 public lastResult;
+
+    function multiply(uint256 x) external returns (uint256) {
+        require(x &gt; 0, "zero input");
+        require(x &lt;= MAX_INPUT, "input too large");
+        lastResult = x * FACTOR;
+        return lastResult;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li><b>constant</b> values are inlined at compile time.</li><li><b>type(uint128).max</b> gives the largest value of a type.</li><li>Fail early: cheap checks first, storage writes last.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>0.8 reverts on overflow, but inside <b>unchecked { }</b> blocks it wraps silently. Bound your inputs anyway.</p></div>
+</section>
+
+<section id="project-18">
+<h2><span class="project-number">18</span> Random Number Generator</h2>
+<span class="concept-badge">Concept: Hashing and randomness</span>
+<p class="lead">keccak256 turns any input into a 256-bit hash. Hashing block data plus a nonce looks random but is fully predictable, so this is a teaching example only.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract PseudoRandom {
+    uint256 private nonce;
+
+    // FOR LEARNING ONLY - predictable, never use for real value
+    function roll(uint256 max) external returns (uint256) {
+        require(max &gt; 0, "max is zero");
+        nonce++;
+        bytes32 h = keccak256(
+            abi.encodePacked(block.prevrandao, block.timestamp, msg.sender, nonce)
+        );
+        return uint256(h) % max;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li><b>abi.encodePacked</b> concatenates values before hashing.</li><li><b>block.prevrandao</b> replaced block.difficulty after the Merge.</li><li>Modulo by a non-power-of-two introduces slight bias.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>On-chain 'randomness' can be simulated by an attacker contract in the same transaction. Use Chainlink VRF or commit-reveal for anything valuable.</p></div>
+</section>
+
+<section id="project-19">
+<h2><span class="project-number">19</span> Basic Voting</h2>
+<span class="concept-badge">Concept: Basic logic and mapping</span>
+<p class="lead">A minimal ballot: each address may vote once for a candidate id, and a view function scans for the current leader.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract BasicVoting {
+    uint256 public immutable candidateCount;
+    mapping(uint256 =&gt; uint256) public votes;
+    mapping(address =&gt; bool) public hasVoted;
+
+    constructor(uint256 _count) {
+        require(_count &gt; 1, "need 2+ candidates");
+        candidateCount = _count;
+    }
+
+    function vote(uint256 id) external {
+        require(id &lt; candidateCount, "no such candidate");
+        require(!hasVoted[msg.sender], "already voted");
+        hasVoted[msg.sender] = true;
+        votes[id]++;
+    }
+
+    function leader() external view returns (uint256 best) {
+        for (uint256 i = 1; i &lt; candidateCount; i++) {
+            if (votes[i] &gt; votes[best]) best = i;
+        }
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Mark <b>hasVoted</b> before doing anything else to block double votes.</li><li><b>view</b> functions can loop freely because they cost no gas off-chain.</li><li>Ties resolve to the lowest id in this design.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>One address one vote is trivially bypassed with many addresses (Sybil attack). Real systems weight votes by tokens or verified identity.</p></div>
+</section>
+
+<section id="project-20">
+<h2><span class="project-number">20</span> String Operations</h2>
+<span class="concept-badge">Concept: Working with strings</span>
+<p class="lead">Solidity strings are byte arrays without helper methods. Use string.concat to join, bytes(s).length for size and hash comparison for equality.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract StringOps {
+    string public text;
+
+    function set(string calldata s) external {
+        text = s;
+    }
+
+    function append(string calldata s) external {
+        text = string.concat(text, s);
+    }
+
+    function length() external view returns (uint256) {
+        return bytes(text).length;          // bytes, not characters
+    }
+
+    function equals(string calldata s) external view returns (bool) {
+        return keccak256(bytes(text)) == keccak256(bytes(s));
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li><b>==</b> is not defined for strings; compare hashes.</li><li>Length counts UTF-8 bytes: an emoji is 4.</li><li>Prefer <b>bytes32</b> for short fixed labels, it is much cheaper.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Long user strings in storage are expensive and can be used to bloat state. Cap the length you accept.</p></div>
+</section>
+
+        <div class="part-header" id="intermediate">PART 2: INTERMEDIATE PROJECTS (21-50)</div>
+
+<section id="project-21">
+<h2><span class="project-number">21</span> ERC20 Token</h2>
+<span class="concept-badge">Concept: Token standards</span>
+<p class="lead">ERC20 is the fungible token interface: balances, transfers and delegated spending through allowances. Inherit from OpenZeppelin instead of hand-rolling it.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
+contract MyToken is ERC20 {
+    constructor(uint256 initialSupply) ERC20("MyToken", "MTK") {
+        _mint(msg.sender, initialSupply * 10 ** decimals());
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Default <b>decimals()</b> is 18: 1 token = 10<sup>18</sup> base units.</li><li><b>approve</b> + <b>transferFrom</b> let a contract spend on your behalf.</li><li><b>_mint</b> is internal; you decide who may call it.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Unlimited approvals to unknown contracts are a top way users lose funds. Approve only what is needed.</p></div>
+</section>
+
+<section id="project-22">
+<h2><span class="project-number">22</span> Burnable Token</h2>
+<span class="concept-badge">Concept: Token supply adjustments</span>
+<p class="lead">Burning permanently removes tokens from circulation. ERC20Burnable adds burn() for your own tokens and burnFrom() for allowances.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+
+contract BurnableToken is ERC20, ERC20Burnable {
+    constructor() ERC20("BurnToken", "BURN") {
+        _mint(msg.sender, 1_000_000 * 10 ** decimals());
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li><b>burn(n)</b> destroys n of the caller's tokens.</li><li><b>burnFrom(a, n)</b> burns from a using the caller's allowance.</li><li>totalSupply() shrinks accordingly.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Burn is irreversible. UIs should double-check amounts, and contracts should never burn on behalf of users without explicit consent.</p></div>
+</section>
+
+<section id="project-23">
+<h2><span class="project-number">23</span> Mintable Token</h2>
+<span class="concept-badge">Concept: Extending functionality</span>
+<p class="lead">Minting creates new tokens. Restrict it to the owner and enforce a hard cap so the supply cannot grow without limit.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MintableToken is ERC20, Ownable {
+    uint256 public constant MAX_SUPPLY = 10_000_000 * 1e18;
+
+    constructor() ERC20("MintToken", "MINT") Ownable(msg.sender) {}
+
+    function mint(address to, uint256 amount) external onlyOwner {
+        require(totalSupply() + amount &lt;= MAX_SUPPLY, "cap exceeded");
+        _mint(to, amount);
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>OpenZeppelin v5 Ownable takes the initial owner in its constructor.</li><li>A constant cap makes the maximum supply publicly verifiable.</li><li><b>onlyOwner</b> comes from the Ownable base contract.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>An owner who can mint freely is a centralisation risk. Users must trust that key; document it or move to a multisig/DAO.</p></div>
+</section>
+
+<section id="project-24">
+<h2><span class="project-number">24</span> Access Roles</h2>
+<span class="concept-badge">Concept: Role-based access control</span>
+<p class="lead">AccessControl replaces a single owner with named roles. An admin grants MINTER_ROLE and BURNER_ROLE to different accounts, following least privilege.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/AccessControl.sol";
+
+contract RoleToken is ERC20, AccessControl {
+    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+    bytes32 public constant BURNER_ROLE = keccak256("BURNER_ROLE");
+
+    constructor() ERC20("RoleToken", "ROLE") {
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+    }
+
+    function mint(address to, uint256 amt) external onlyRole(MINTER_ROLE) {
+        _mint(to, amt);
+    }
+
+    function burn(address from, uint256 amt) external onlyRole(BURNER_ROLE) {
+        _burn(from, amt);
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Roles are <b>bytes32</b> ids; DEFAULT_ADMIN_ROLE manages the others.</li><li>Grant with <b>grantRole(role, account)</b>, revoke with revokeRole.</li><li>Multiple accounts can hold one role.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>A burner who can burn <i>anyone's</i> tokens is powerful. Grant roles to contracts or multisigs, never to a hot wallet you do not control.</p></div>
+</section>
+
+<section id="project-25">
+            <h2><span class="project-number">25</span> Time-Locked Wallet</h2>
+            <span class="concept-badge">Concept: Timelock mechanism</span>
+<p class="lead">Funds can be deposited any time but only withdrawn after unlockTime. It is a building block for vesting and savings vaults.</p>
+            
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+
+contract TimeLockedWallet {
+    struct Lock {
+        uint256 amount;
+        uint256 unlockTime;
+        bool released;
+    }
+    
+    mapping(address => Lock[]) public locks;
+    address public owner;
+    
+    event Locked(address indexed user, uint256 amount, uint256 unlockTime);
+    event Released(address indexed user, uint256 amount);
+    
+    constructor() {
+        owner = msg.sender;
+    }
+    
+    function lock(uint256 _durationDays) public payable {
+        require(msg.value > 0, "Must send ether");
+        uint256 unlockTime = block.timestamp + (_durationDays * 1 days);
+        
+        locks[msg.sender].push(Lock({
+            amount: msg.value,
+            unlockTime: unlockTime,
+            released: false
+        }));
+        
+        emit Locked(msg.sender, msg.value, unlockTime);
+    }
+    
+    function release(uint256 _lockIndex) public {
+        Lock storage lockItem = locks[msg.sender][_lockIndex];
+        require(!lockItem.released, "Already released");
+        require(block.timestamp >= lockItem.unlockTime, "Not yet unlocked");
+        
+        uint256 amount = lockItem.amount;
+        lockItem.released = true;
+        
+        (bool sent, ) = payable(msg.sender).call{value: amount}("");
+        require(sent, "Transfer failed");
+        
+        emit Released(msg.sender, amount);
+    }
+    
+    function releaseAll() public {
+        uint256 totalReleased;
+        for (uint256 i = 0; i < locks[msg.sender].length; i++) {
+            Lock storage lockItem = locks[msg.sender][i];
+            if (!lockItem.released && block.timestamp >= lockItem.unlockTime) {
+                uint256 amount = lockItem.amount;
+                lockItem.released = true;
+                totalReleased += amount;
+                emit Released(msg.sender, amount);
+            }
+        }
+        if (totalReleased > 0) {
+            (bool sent, ) = payable(msg.sender).call{value: totalReleased}("");
+            require(sent, "Transfer failed");
+        }
+    }
+    
+    function getLockInfo(address _user, uint256 _index) 
+        public view returns (
+            uint256 amount,
+            uint256 unlockTime,
+            bool released,
+            uint256 timeRemaining
+        ) 
+    {
+        Lock memory lockItem = locks[_user][_index];
+        timeRemaining = block.timestamp >= lockItem.unlockTime ? 
+            0 : lockItem.unlockTime - block.timestamp;
+        return (lockItem.amount, lockItem.unlockTime, lockItem.released, timeRemaining);
+    }
+    
+    function getTotalLocked(address _user) public view returns (uint256) {
+        uint256 total;
+        for (uint256 i = 0; i < locks[_user].length; i++) {
+            if (!locks[_user][i].released) {
+                total += locks[_user][i].amount;
+            }
+        }
+        return total;
+    }
+    
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not owner");
+        _;
+    }
+}</code></pre>
+
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Funds remain inaccessible until unlock time</li>
+<li>Multiple lock periods possible per user</li>
+<li>User-controlled release (after time)</li>
+<li>Useful for vesting schedules</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>If the owner key is lost, funds are stuck forever after the lock. Design recovery deliberately or accept the trade-off.</p></div>
+</section>
+
+<section id="project-26">
+<h2><span class="project-number">26</span> Crowdfunding Contract</h2>
+<span class="concept-badge">Concept: Funding logic and state machines</span>
+<p class="lead">Backers send ETH until the deadline. If the goal is met the creator withdraws; otherwise each backer can reclaim their own contribution.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+
+contract Crowdfunding {
+    struct Campaign {
+        address creator;
+        uint256 goal;
+        uint256 raised;
+        uint256 deadline;
+        bool funded;
+        bool claimed;
+        bool refunded;
+    }
+    
+    Campaign[] public campaigns;
+    mapping(uint256 => mapping(address => uint256)) public contributions;
+    
+    event CampaignCreated(uint256 indexed id, address creator, uint256 goal);
+    event Contributed(uint256 indexed campaignId, address contributor, uint256 amount);
+    event CampaignFunded(uint256 indexed campaignId, uint256 raised);
+    event FundsClaimed(uint256 indexed campaignId, address recipient);
+    event Refunded(uint256 indexed campaignId, address contributor, uint256 amount);
+    
+    function createCampaign(uint256 _goal, uint256 _durationDays) public returns (uint256) {
+        require(_goal > 0, "Goal must be positive");
+        require(_durationDays > 0 && _durationDays <= 180, "Duration invalid");
+        
+        campaigns.push(Campaign({
+            creator: msg.sender,
+            goal: _goal,
+            raised: 0,
+            deadline: block.timestamp + (_durationDays * 1 days),
+            funded: false,
+            claimed: false,
+            refunded: false
+        }));
+        
+        emit CampaignCreated(campaigns.length - 1, msg.sender, _goal);
+        return campaigns.length - 1;
+    }
+    
+    function contribute(uint256 _campaignId) public payable {
+        require(msg.value > 0, "Must contribute");
+        Campaign storage campaign = campaigns[_campaignId];
+        require(block.timestamp < campaign.deadline, "Campaign ended");
+        
+        campaign.raised += msg.value;
+        contributions[_campaignId][msg.sender] += msg.value;
+        
+        emit Contributed(_campaignId, msg.sender, msg.value);
+        
+        if (campaign.raised >= campaign.goal && !campaign.funded) {
+            campaign.funded = true;
+            emit CampaignFunded(_campaignId, campaign.raised);
+        }
+    }
+    
+    function claimFunds(uint256 _campaignId) public {
+        Campaign storage campaign = campaigns[_campaignId];
+        require(msg.sender == campaign.creator, "Not creator");
+        require(campaign.funded, "Campaign not funded");
+        require(!campaign.claimed, "Already claimed");
+        require(block.timestamp > campaign.deadline, "Still collecting");
+        
+        campaign.claimed = true;
+        uint256 amount = campaign.raised;
+        
+        (bool sent, ) = payable(campaign.creator).call{value: amount}("");
+        require(sent, "Transfer failed");
+        
+        emit FundsClaimed(_campaignId, campaign.creator);
+    }
+    
+    function refund(uint256 _campaignId) public {
+        Campaign storage campaign = campaigns[_campaignId];
+        require(block.timestamp > campaign.deadline, "Still collecting");
+        require(!campaign.refunded, "Already refunded");
+        require(!campaign.funded || block.timestamp > campaign.deadline, "Cannot refund if funded");
+        require(contributions[_campaignId][msg.sender] > 0, "No contribution");
+        
+        uint256 amount = contributions[_campaignId][msg.sender];
+        contributions[_campaignId][msg.sender] = 0;
+        
+        campaign.refunded = true;
+        
+        (bool sent, ) = payable(msg.sender).call{value: amount}("");
+        require(sent, "Transfer failed");
+        
+        emit Refunded(_campaignId, msg.sender, amount);
+    }
+    
+    function getCampaign(uint256 _id) public view returns (
+        address creator,
+        uint256 goal,
+        uint256 raised,
+        uint256 deadline,
+        bool funded,
+        uint256 remainingTime
+    ) {
+        Campaign memory c = campaigns[_id];
+        return (
+            c.creator,
+            c.goal,
+            c.raised,
+            c.deadline,
+            c.funded,
+            block.timestamp >= c.deadline ? 0 : c.deadline - block.timestamp
+        );
+    }
+    
+    function progressPercentage(uint256 _campaignId) public view returns (uint256) {
+        Campaign memory c = campaigns[_campaignId];
+        return (c.raised * 100) / c.goal;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>All-or-nothing funding model</li>
+<li>Deadline-based refunds for unsuccessful campaigns</li>
+<li>Creator claims funds only if goal reached</li>
+<li>Individual contribution tracking</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Zero the contribution before sending ETH in refund(); otherwise a malicious backer can re-enter and drain the pool.</p></div>
+</section>
+
+<section id="project-27">
+<h2><span class="project-number">27</span> Lottery Contract</h2>
+<span class="concept-badge">Concept: Randomness and fairness</span>
+<p class="lead">Players pay a fixed fee to enter; the manager draws one winner who receives the pot. The randomness here is a placeholder, see the note below.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+
+contract Lottery {
+    struct Participant {
+        address addr;
+        uint256 joinTime;
+    }
+    
+    Participant[] participants;
+    address public owner;
+    uint256 public ticketPrice;
+    uint256 public drawTime;
+    address public winner;
+    bool public lotteryOpen;
+    
+    event TicketPurchased(address indexed player);
+    event DrawHeld(address indexed winner, uint256 prize);
+    event OwnerChanged(address oldOwner, address newOwner);
+    
+    constructor(uint256 _ticketPrice, uint256 _drawDelayHours) {
+        owner = msg.sender;
+        ticketPrice = _ticketPrice;
+        drawTime = block.timestamp + (_drawDelayHours * 1 hours);
+        lotteryOpen = true;
+    }
+    
+    function buyTicket() public payable {
+        require(lotteryOpen, "Lottery closed");
+        require(msg.value >= ticketPrice, "Insufficient payment");
+        
+        participants.push(Participant({
+            addr: msg.sender,
+            joinTime: block.timestamp
+        }));
+        
+        emit TicketPurchased(msg.sender);
+    }
+    
+    function drawWinner() public {
+        require(msg.sender == owner, "Only owner");
+        require(block.timestamp >= drawTime, "Not yet");
+        require(participants.length > 0, "No participants");
+        require(winner == address(0), "Already drawn");
+        
+        // ⚠️ WARNING: NOT SECURE FOR PRODUCTION
+        // Use Chainlink VRF for real lottery
+        uint256 random = uint256(keccak256(abi.encodePacked(
+            block.timestamp,
+            block.prevrandao,
+            participants.length
+        ))) % participants.length;
+        
+        winner = participants[random].addr;
+        lotteryOpen = false;
+        
+        (bool sent, ) = payable(winner).call{value: address(this).balance}("");
+        require(sent, "Transfer failed");
+        
+        emit DrawHeld(winner, address(this).balance);
+    }
+    
+    function changeOwner(address _newOwner) public {
+        require(msg.sender == owner, "Not owner");
+        emit OwnerChanged(owner, _newOwner);
+        owner = _newOwner;
+    }
+    
+    function resetLottery() public {
+        require(msg.sender == owner, "Only owner");
+        lotteryOpen = true;
+        drawTime = block.timestamp + (1 hours);
+        winner = address(0);
+        participants = new Participant[](0);
+    }
+    
+    function getParticipantCount() public view returns (uint256) {
+        return participants.length;
+    }
+    
+    function isWinning() public view returns (bool) {
+        return winner != address(0);
+    }
+    
+    receive() external payable {}
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Ticket-based participation</li>
+<li>Automatic prize distribution</li>
+<li>⚠️ Use Chainlink VRF for production randomness</li>
+<li>Time-delayed draws prevent front-running</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Block data is predictable, so a validator or contract can bias this draw. It is the standard example of insecure randomness (Project 18).</p></div>
+</section>
+
+<section id="project-28">
+<h2><span class="project-number">28</span> NFT (ERC721)</h2>
+<span class="concept-badge">Concept: ERC721 token standard</span>
+<p class="lead">ERC721 tokens are unique: every id has exactly one owner. OpenZeppelin provides ownership tracking, approvals and transfers; you add a minting rule.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+
+contract SimpleNFT {
+    string private _name;
+    string private _symbol;
+    uint256 private _tokenIdCounter;
+    
+    mapping(uint256 => address) private _owners;
+    mapping(address => uint256) private _balances;
+    mapping(uint256 => address) private _tokenApprovals;
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
+    
+    event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
+    event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
+    event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
+    
+    constructor(string memory name_, string memory symbol_) {
+        _name = name_;
+        _symbol = symbol_;
+    }
+    
+    function name() public view virtual returns (string memory) {
+        return _name;
+    }
+    
+    function symbol() public view virtual returns (string memory) {
+        return _symbol;
+    }
+    
+    function ownerOf(uint256 _tokenId) public view virtual returns (address) {
+        address owner = _owners[_tokenId];
+        require(owner != address(0), "Token does not exist");
+        return owner;
+    }
+    
+    function balanceOf(address _owner) public view virtual returns (uint256) {
+        require(_owner != address(0), "Zero address");
+        return _balances[_owner];
+    }
+    
+    function mint(address _to) public returns (uint256) {
+        uint256 newTokenId = _tokenIdCounter++;
+        _safeMint(_to, newTokenId);
+        return newTokenId;
+    }
+    
+    function _safeMint(address to, uint256 tokenId) internal virtual {
+        require(to != address(0), "Invalid recipient");
+        require(_owners[tokenId] == address(0), "Token already minted");
+        
+        _balances[to] += 1;
+        _owners[tokenId] = to;
+        
+        emit Transfer(address(0), to, tokenId);
+    }
+    
+    function approve(address _approved, uint256 _tokenId) public virtual {
+        address owner = _owners[_tokenId];
+        require(msg.sender == owner || isApprovedForAll(owner, msg.sender), 
+                "Not authorized");
+        
+        _tokenApprovals[_tokenId] = _approved;
+        emit Approval(owner, _approved, _tokenId);
+    }
+    
+    function getApproved(uint256 _tokenId) public view virtual returns (address) {
+        require(_owners[_tokenId] != address(0), "Token does not exist");
+        return _tokenApprovals[_tokenId];
+    }
+    
+    function setApprovalForAll(address _operator, bool _approved) public virtual {
+        _operatorApprovals[msg.sender][_operator] = _approved;
+        emit ApprovalForAll(msg.sender, _operator, _approved);
+    }
+    
+    function isApprovedForAll(address _owner, address _operator) public view virtual returns (bool) {
+        return _operatorApprovals[_owner][_operator];
+    }
+    
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _tokenId
+    ) public virtual {
+        require(_owns(_from, _tokenId), "Not owner");
+        require(_to != address(0), "Invalid recipient");
+        
+        _approveOrTransfer(msg.sender, _from, _to, _tokenId);
+        emit Transfer(_from, _to, _tokenId);
+    }
+    
+    function safeTransferFrom(
+        address _from,
+        address _to,
+        uint256 _tokenId
+    ) public virtual {
+        transferFrom(_from, _to, _tokenId);
+        require(_checkOnERC721Received(_from, _to, _tokenId, ""), 
+                "Receiver rejected");
+    }
+    
+    function _approveOrTransfer(
+        address spender,
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal {
+        address approved = getApproved(tokenId);
+        
+        if (approved != address(0) && approved != spender) {
+            delete _tokenApprovals[tokenId];
+        }
+        _balances[from] -= 1;
+        _balances[to] += 1;
+        _owners[tokenId] = to;
+    }
+    
+    function _owns(address _owner, uint256 _tokenId) internal view returns (bool) {
+        return _owners[_tokenId] == _owner;
+    }
+    
+    function _checkOnERC721Received(
+        address from,
+        address to,
+        uint256 tokenId,
+        bytes memory data
+    ) internal view returns (bool) {
+        if (to.code.length > 0) {
+            try IERC721Receiver(to).onERC721Received(msg.sender, from, tokenId, data) 
+                returns (bytes4 retval) 
+            {
+                return retval == IERC721Receiver.onERC721Received.selector;
+            } catch {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+    
+    function _exists(uint256 tokenId) internal view returns (bool) {
+        return _owners[tokenId] != address(0);
+    }
+}
+
+interface IERC721Receiver {
+    function onERC721Received(
+        address operator,
+        address from,
+        uint256 tokenId,
+        bytes calldata data
+    ) external returns (bytes4);
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Unique, non-fungible tokens</li>
+<li>Owner and approval tracking</li>
+<li>Safe transfer checks for contracts</li>
+<li>Basis for digital collectibles</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>_safeMint calls back into the recipient (onERC721Received), which is a re-entrancy entry point. Finish state changes before minting.</p></div>
+</section>
+
+<section id="project-29">
+<h2><span class="project-number">29</span> Marketplace</h2>
+<span class="concept-badge">Concept: Transfers and trading</span>
+<p class="lead">Sellers list an NFT at a price after approving the marketplace. A buyer pays and the contract moves the NFT and the ETH in one atomic transaction.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+
+interface INFT {
+    function transferFrom(address from, address to, uint256 tokenId) external;
+    function approve(address to, uint256 tokenId) external;
+    function ownerOf(uint256 tokenId) external view returns (address);
+}
+
+contract NFTMarketplace {
+    struct Listing {
+        address seller;
+        uint256 price;
+        bool active;
+    }
+    
+    mapping(uint256 => Listing) public listings;
+    address public nftContract;
+    
+    event Listed(uint256 indexed tokenId, address indexed seller, uint256 price);
+    event Purchased(uint256 indexed tokenId, address indexed buyer, uint256 price);
+    event Delisted(uint256 indexed tokenId);
+    
+    constructor(address _nftContract) {
+        nftContract = _nftContract;
+    }
+    
+    function listNFT(uint256 _tokenId, uint256 _price) public {
+        require(_price > 0, "Price must be positive");
+        INFT(nftContract).ownerOf(_tokenId); // Verify exists
+        
+        listings[_tokenId] = Listing({
+            seller: msg.sender,
+            price: _price,
+            active: true
+        });
+        
+        // Approve marketplace to transfer
+        INFT(nftContract).approve(address(this), _tokenId);
+        
+        emit Listed(_tokenId, msg.sender, _price);
+    }
+    
+    function purchaseNFT(uint256 _tokenId) public payable {
+        Listing storage listing = listings[_tokenId];
+        require(listing.active, "Not listed");
+        require(msg.value >= listing.price, "Insufficient payment");
+        require(msg.sender != listing.seller, "Cannot buy own NFT");
+        
+        listing.active = false;
+        
+        INFT(nftContract).transferFrom(listing.seller, msg.sender, _tokenId);
+        
+        (bool sent, ) = payable(listing.seller).call{value: msg.value}("");
+        require(sent, "Payment failed");
+        
+        emit Purchased(_tokenId, msg.sender, msg.value);
+    }
+    
+    function delistNFT(uint256 _tokenId) public {
+        Listing storage listing = listings[_tokenId];
+        require(listing.active, "Not listed");
+        require(msg.sender == listing.seller, "Not seller");
+        
+        listing.active = false;
+        emit Delisted(_tokenId);
+    }
+    
+    function getPrice(uint256 _tokenId) public view returns (uint256, bool) {
+        return (listings[_tokenId].price, listings[_tokenId].active);
+    }
+    
+    function getSeller(uint256 _tokenId) public view returns (address) {
+        return listings[_tokenId].seller;
+    }
+    
+    function withdraw() public {
+        address[] memory sellers = new address[](1);
+        sellers[0] = msg.sender;
+        // In production, track pending payments per seller
+    }
+    
+    receive() external payable {}
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>NFT listing and discovery</li>
+<li>Escrow-like marketplace behavior</li>
+<li>Direct peer-to-peer transfers</li>
+<li>No platform fees in this simple version</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Stale listings are dangerous: if the seller transfers the NFT away, buy() must fail cleanly. Re-check ownership at purchase time in production.</p></div>
+</section>
+
+<section id="project-30">
+<h2><span class="project-number">30</span> Upgradeable Contracts</h2>
+<span class="concept-badge">Concept: Proxy patterns</span>
+<p class="lead">A proxy holds the state and forwards every call to a logic contract using delegatecall. Upgrading means pointing the proxy at a new logic address. Pattern shown: EIP-1967 storage slots.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+
+abstract contract TransparentUpgradeableProxy {
+    address private _implementation;
+    address public admin;
+    
+    event Upgraded(address indexed implementation);
+    
+    constructor(address _implementation, address _admin) {
+        _implementation = _implementation;
+        admin = _admin;
+    }
+    
+    modifier onlyAdmin() {
+        require(msg.sender == admin, "Not admin");
+        _;
+    }
+    
+    function upgradeTo(address _newImplementation) public onlyAdmin {
+        require(_newImplementation != address(0), "Invalid address");
+        _implementation = _newImplementation;
+        emit Upgraded(_newImplementation);
+    }
+    
+    function implementation() public view returns (address) {
+        return _implementation;
+    }
+    
+    fallback() external payable {
+        // Delegate to implementation
+        assembly {
+            let impl := sload(0)
+            pop(delegatecall(gas(), impl, 0, 0, 0, 0))
+        }
+    }
+}
+
+contract LogicV1 {
+    string public data;
+    uint256 public version = 1;
+    
+    function setData(string memory _data) public {
+        data = _data;
+    }
+    
+    function getData() public view returns (string memory) {
+        return data;
+    }
+}
+
+contract LogicV2 {
+    string public data;
+    uint256 public version = 2;
+    string public newData;
+    
+    function setData(string memory _data) public {
+        data = _data;
+    }
+    
+    function setNewData(string memory _newData) public {
+        newData = _newData;
+    }
+    
+    function getData() public view returns (string memory, string memory) {
+        return (data, newData);
+    }
+}
+
+// Usage:
+/*
+TransparentUpgradeableProxy proxy = new TransparentUpgradeableProxy(
+    address(new LogicV1()),
+    adminAddress
+);
+
+LogicV1 logic = LogicV1(address(proxy));
+logic.setData("Initial data");
+
+// Later upgrade:
+proxy.upgradeTo(address(new LogicV2()));
+LogicV2 upgraded = LogicV2(address(proxy));
+upgraded.setNewData("Additional data");
+*/</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Deploy once, upgrade implementation</li>
+<li>Preserves storage and state</li>
+<li>Admin controls upgrades</li>
+<li>Use OpenZeppelin's Upgradeable for production</li>
+<li>Beware of storage collisions in upgrades</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Storage collisions, unprotected initializers and selector clashes are the classic proxy bugs. In production use OpenZeppelin's audited proxies, not a hand-rolled one.</p></div>
+</section>
+
+<section id="project-31">
+<h2><span class="project-number">31</span> Staking Contract</h2>
+<span class="concept-badge">Concept: Stake and rewards</span>
+<p class="lead">Users lock tokens and earn a time-based reward. Pending rewards are settled every time the position changes, so no loops over users are needed.</p>
+<pre><code>contract Staking {
+    mapping(address => uint256) public stakes;
+    mapping(address => uint256) public rewardDebt;
+    mapping(address => uint256) public lastDepositTime;
+    
+    uint256 public totalStaked;
+    uint256 public rewardRate = 1e18; // 1 token per second
+    uint256 public startTime;
+    
+    event Staked(address indexed user, uint256 amount);
+    event RewardsClaimed(address indexed user, uint256 amount);
+    event Withdrawn(address indexed user, uint256 amount);
+    
+    constructor() {
+        startTime = block.timestamp;
+    }
+    
+    function stake(uint256 _amount) public {
+        require(_amount > 0, "Amount must be positive");
+        
+        updateRewards(msg.sender);
+        
+        stakes[msg.sender] += _amount;
+        totalStaked += _amount;
+        lastDepositTime[msg.sender] = block.timestamp;
+        
+        emit Staked(msg.sender, _amount);
+    }
+    
+    function updateRewards(address _user) public {
+        if (stakes[_user] == 0) return;
+        
+        uint256 timeElapsed = block.timestamp - lastDepositTime[_user];
+        uint256 earned = (stakes[_user] * rewardRate * timeElapsed) / 10000;
+        
+        rewardDebt[_user] += earned;
+        lastDepositTime[_user] = block.timestamp;
+    }
+    
+    function claimRewards() public returns (uint256) {
+        updateRewards(msg.sender);
+        uint256 rewards = rewardDebt[msg.sender];
+        
+        require(rewards > 0, "No rewards");
+        
+        rewardDebt[msg.sender] = 0;
+        
+        (bool sent, ) = payable(msg.sender).call{value: rewards}("");
+        require(sent, "Transfer failed");
+        
+        emit RewardsClaimed(msg.sender, rewards);
+        return rewards;
+    }
+    
+    function withdraw(uint256 _amount) public {
+        require(stakes[msg.sender] >= _amount, "Insufficient stake");
+        
+        claimRewards();
+        
+        stakes[msg.sender] -= _amount;
+        totalStaked -= _amount;
+        
+        (bool sent, ) = payable(msg.sender).call{value: _amount}("");
+        require(sent, "Transfer failed");
+        
+        emit Withdrawn(msg.sender, _amount);
+    }
+    
+    function getEarned(address _user) public view returns (uint256) {
+        if (stakes[_user] == 0) return 0;
+        uint256 timeElapsed = block.timestamp - lastDepositTime[_user];
+        return rewardDebt[_user] + 
+               (stakes[_user] * rewardRate * timeElapsed) / 10000;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Accrues rewards over time</li>
+<li>Time-based reward calculation</li>
+<li>Can claim while keeping stake</li>
+<li>Base for DeFi staking protocols</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>If the pool cannot cover rewards, claim() reverts for everyone. Track liabilities and never let rewards eat principal.</p></div>
+</section>
+
+<section id="project-32">
+<h2><span class="project-number">32</span> Reentrancy Protection</h2>
+<span class="concept-badge">Concept: Vulnerability prevention</span>
+<p class="lead">Reentrancy happens when a contract sends ETH before updating its books; the recipient's code can call back in while the old balance is still recorded. Below: the vulnerable ordering and two fixes.</p>
+<pre><code>contract SecureVault {
+    mapping(address => uint256) public balances;
+    
+    // ✅ GOOD: Checks-Effects-Interactions pattern
+    function withdrawCEI() public {
+        uint256 balance = balances[msg.sender];
+        require(balance > 0, "No funds");
+        
+        balances[msg.sender] = 0; // Effect first
+        
+        (bool sent, ) = payable(msg.sender).call{value: balance}(""); // Interaction last
+        require(sent, "Transfer failed");
+    }
+    
+    // ❌ BAD: Vulnerable to reentrancy
+    /*
+    function withdrawBad() public {
+        (bool sent, ) = payable(msg.sender).call{value: balances[msg.sender]}("");
+        require(sent, "");
+        balances[msg.sender] = 0; // Too late! Attacker can re-enter
+    }
+    */
+    
+    // ✅ Alternative: ReentrancyGuard pattern
+    bool private locked;
+    
+    modifier nonReentrant() {
+        require(!locked, "Reentrancy detected");
+        locked = true;
+        _;
+        locked = false;
+    }
+    
+    function withdrawProtected() public nonReentrant {
+        uint256 balance = balances[msg.sender];
+        require(balance > 0, "No funds");
+        
+        balances[msg.sender] = 0;
+        
+        (bool sent, ) = payable(msg.sender).call{value: balance}("");
+        require(sent, "Transfer failed");
+    }
+    
+    function deposit() public payable {
+        balances[msg.sender] += msg.value;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Update state BEFORE external calls</li>
+<li>Use OpenZeppelin's ReentrancyGuard</li>
+<li>Checks-Effects-Interactions pattern is crucial</li>
+<li>Reentrancy caused major exploits (DAO hack)</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Cross-function and read-only reentrancy exist too: any external call is an untrusted hand-off. This pattern sits behind the 2016 DAO hack.</p></div>
+</section>
+
+<section id="project-33">
+<h2><span class="project-number">33</span> Ownership Transfer</h2>
+<span class="concept-badge">Concept: Ownable pattern</span>
+<p class="lead">Handing ownership to a wrong address is irreversible. A two-step transfer makes the new owner explicitly accept, proving the address is live and correct.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract TwoStepOwnable {
+    address public owner;
+    address public pendingOwner;
+
+    event OwnershipTransferStarted(address indexed from, address indexed to);
+    event OwnershipTransferred(address indexed from, address indexed to);
+
+    constructor() { owner = msg.sender; }
+
+    modifier onlyOwner() { require(msg.sender == owner, "not owner"); _; }
+
+    function transferOwnership(address newOwner) external onlyOwner {
+        pendingOwner = newOwner;
+        emit OwnershipTransferStarted(owner, newOwner);
+    }
+
+    function acceptOwnership() external {
+        require(msg.sender == pendingOwner, "not pending owner");
+        emit OwnershipTransferred(owner, msg.sender);
+        owner = msg.sender;
+        pendingOwner = address(0);
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>OpenZeppelin ships this as <b>Ownable2Step</b>.</li><li>Setting pendingOwner to zero cancels a transfer.</li><li>Emit events so monitors can alert on ownership changes.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Renouncing ownership (owner = 0) permanently disables every onlyOwner function. Make sure that is really intended.</p></div>
+</section>
+
+<section id="project-34">
+<h2><span class="project-number">34</span> Multisig Wallet</h2>
+<span class="concept-badge">Concept: Consensus mechanisms</span>
+<p class="lead">A multisig needs M of N owners to approve a transaction. One owner submits, others confirm, and once enough confirmations exist anyone among the owners can execute.</p>
+<pre><code>contract MultisigWallet {
+    struct Transaction {
+        address destination;
+        uint256 value;
+        bytes data;
+        bool executed;
+        uint8 confirmations;
+    }
+    
+    mapping(address => bool) public owners;
+    mapping(uint256 => mapping(address => bool)) public confirmations;
+    Transaction[] public transactions;
+    uint256 public required;
+    uint256 public transactionCount;
+    
+    event Submission(uint256 indexed txIndex);
+    event Confirmation(address indexed sender, uint256 indexed txIndex);
+    event Execution(uint256 indexed txIndex);
+    
+    constructor(address[] memory _owners, uint256 _required) {
+        for (uint256 i = 0; i < _owners.length; i++) {
+            owners[_owners[i]] = true;
+        }
+        required = _required;
+    }
+    
+    function submitTransaction(address _destination, uint256 _value, bytes memory _data) 
+        public returns (uint256) 
+    {
+        transactions.push(Transaction({
+            destination: _destination,
+            value: _value,
+            data: _data,
+            executed: false,
+            confirmations: 0
+        }));
+        
+        uint256 txIndex = transactions.length - 1;
+        emit Submission(txIndex);
+        
+        return txIndex;
+    }
+    
+    function confirmTransaction(uint256 _txIndex) public {
+        require(owners[msg.sender], "Not owner");
+        require(!confirmations[_txIndex][msg.sender], "Already confirmed");
+        require(!transactions[_txIndex].executed, "Already executed");
+        
+        confirmations[_txIndex][msg.sender] = true;
+        transactions[_txIndex].confirmations += 1;
+        
+        emit Confirmation(msg.sender, _txIndex);
+    }
+    
+    function executeTransaction(uint256 _txIndex) public {
+        require(owners[msg.sender], "Not owner");
+        Transaction storage transaction = transactions[_txIndex];
+        require(transaction.confirmations >= required, "Not enough confirmations");
+        require(!transaction.executed, "Already executed");
+        
+        transaction.executed = true;
+        emit Execution(_txIndex);
+        
+        (bool success, ) = transaction.destination.call{value: transaction.value}(transaction.data);
+        require(success, "Execution failed");
+    }
+    
+    function getConfirmations(uint256 _txIndex) 
+        public view returns (address[] memory) 
+    {
+        address[] memory confs = new address[](transactionCount);
+        uint256 idx = 0;
+        for (address ownerAddress = address(1); ownerAddress != address(0); ) {
+            if (confirmations[_txIndex][ownerAddress]) {
+                confs[idx] = ownerAddress;
+                idx++;
+            }
+            unchecked { ownerAddress = address(int256(uint256(ownerAddress)) + 1); }
+        }
+        return confs;
+    }
+    
+    function isConfirmed(uint256 _txIndex) public view returns (bool) {
+        return transactions[_txIndex].confirmations >= required;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Multiple owners must approve</li>
+<li>Threshold requirement (e.g., 3 of 5)</li>
+<li>Protects against single point of failure</li>
+<li>Foundation for Gnosis Safe</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Owners are the security boundary: 2-of-3 with keys on one laptop is really 1-of-1. Also consider a revoke-confirmation function.</p></div>
+</section>
+
+<section id="project-35">
+<h2><span class="project-number">35</span> Token Vesting</h2>
+<span class="concept-badge">Concept: Vesting and cliffs</span>
+<p class="lead">Tokens unlock gradually. Nothing is claimable before the cliff; afterwards the vested share grows linearly until the full duration has passed.</p>
+<pre><code>contract TokenVesting {
+    struct VestingSchedule {
+        address beneficiary;
+        uint256 cliff;
+        uint256 start;
+        uint256 duration;
+        uint256 totalAmount;
+        uint256 released;
+        bool revocable;
+    }
+    
+    ERC20Token public token;
+    address public owner;
+    VestingSchedule[] public vestingSchedules;
+    
+    event Released(address indexed beneficiary, uint256 amount);
+    event Revoked(address indexed beneficiary, uint256 amount);
+    
+    constructor(address _tokenAddress) {
+        token = ERC20Token(_tokenAddress);
+        owner = msg.sender;
+    }
+    
+    function createVesting(
+        address _beneficiary,
+        uint256 _cliff,
+        uint256 _duration,
+        uint256 _amount,
+        bool _revocable
+    ) public onlyOwner {
+        require(_cliff >= block.timestamp, "Cliff in past");
+        require(_duration > _cliff, "Invalid duration");
+        
+        uint256 vestingStart = _cliff;
+        uint256 vestingEnd = _cliff + _duration;
+        
+        token.transferFrom(msg.sender, address(this), _amount);
+        
+        vestingSchedules.push(VestingSchedule({
+            beneficiary: _beneficiary,
+            cliff: _cliff,
+            start: vestingStart,
+            duration: _duration,
+            totalAmount: _amount,
+            released: 0,
+            revocable: _revocable
+        }));
+    }
+    
+    function vestedAmount(uint256 _scheduleId) public view returns (uint256) {
+        VestingSchedule memory schedule = vestingSchedules[_scheduleId];
+        
+        if (block.timestamp < schedule.start) return 0;
+        if (block.timestamp >= schedule.start + schedule.duration) {
+            return schedule.totalAmount;
+        }
+        
+        uint256 elapsed = block.timestamp - schedule.start;
+        return (schedule.totalAmount * elapsed) / schedule.duration;
+    }
+    
+    function releasable(uint256 _scheduleId) public view returns (uint256) {
+        VestingSchedule storage schedule = vestingSchedules[_scheduleId];
+        uint256 vested = vestedAmount(_scheduleId);
+        return vested - schedule.released;
+    }
+    
+    function release(uint256 _scheduleId) public {
+        VestingSchedule storage schedule = vestingSchedules[_scheduleId];
+        require(msg.sender == schedule.beneficiary, "Not beneficiary");
+        
+        uint256 amount = releasable(_scheduleId);
+        require(amount > 0, "Nothing to release");
+        
+        schedule.released += amount;
+        token.transfer(schedule.beneficiary, amount);
+        
+        emit Released(schedule.beneficiary, amount);
+    }
+    
+    function revoke(uint256 _scheduleId) public {
+        VestingSchedule storage schedule = vestingSchedules[_scheduleId];
+        require(msg.sender == owner, "Not owner");
+        require(schedule.revocable, "Not revocable");
+        
+        uint256 unreleased = schedule.totalAmount - schedule.released;
+        schedule.totalAmount = schedule.released;
+        
+        token.transfer(owner, unreleased);
+        emit Revoked(schedule.beneficiary, unreleased);
+    }
+    
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not owner");
+        _;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Gradual token release over time</li>
+<li>Cliff period before any release</li>
+<li>Common for employee compensation</li>
+<li>Linear vesting schedule</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Revocable vesting needs an owner with clawback rights: document it clearly. Non-revocable is safer for the beneficiary.</p></div>
+</section>
+
+<section id="project-36">
+<h2><span class="project-number">36</span> DAO Contract</h2>
+<span class="concept-badge">Concept: DAOs and proposals</span>
+<p class="lead">Token holders create proposals, vote for or against, and after the deadline a passing proposal executes an on-chain call. Quorum prevents a handful of votes from deciding everything.</p>
+<pre><code>contract SimpleDAO {
+    struct Member {
+        uint256 votingPower;
+        bool joined;
+    }
+    
+    struct Proposal {
+        string description;
+        address proposer;
+        uint256 forVotes;
+        uint256 againstVotes;
+        uint256 startTime;
+        uint256 endTime;
+        bool executed;
+        bool passed;
+    }
+    
+    mapping(address => Member) public members;
+    Proposal[] public proposals;
+    mapping(uint256 => mapping(address => bool)) public hasVoted;
+    
+    address public owner;
+    uint256 public minVotingPower;
+    uint256 public proposalQuorum = 51; // Percentage
+    uint256 public votingDuration = 7 days;
+    
+    event MemberAdded(address indexed member, uint256 votingPower);
+    event ProposalCreated(uint256 indexed proposalId, address indexed proposer);
+    event Voted(uint256 indexed proposalId, address indexed voter, bool support);
+    event ProposalExecuted(uint256 indexed proposalId);
+    
+    constructor(uint256 _minVotingPower) {
+        owner = msg.sender;
+        minVotingPower = _minVotingPower;
+        
+        // Add owner as first member
+        members[msg.sender] = Member({
+            votingPower: 1000,
+            joined: true
+        });
+    }
+    
+    function addMember(address _member, uint256 _votingPower) public onlyOwner {
+        require(_votingPower >= minVotingPower, "Insufficient power");
+        members[_member] = Member({votingPower: _votingPower, joined: true});
+        emit MemberAdded(_member, _votingPower);
+    }
+    
+    function createProposal(string memory _description) public returns (uint256) {
+        require(members[msg.sender].joined, "Not a member");
+        require(bytes(_description).length > 0, "Empty description");
+        
+        proposals.push(Proposal({
+            description: _description,
+            proposer: msg.sender,
+            forVotes: 0,
+            againstVotes: 0,
+            startTime: block.timestamp,
+            endTime: block.timestamp + votingDuration,
+            executed: false,
+            passed: false
+        }));
+        
+        uint256 proposalId = proposals.length - 1;
+        emit ProposalCreated(proposalId, msg.sender);
+        return proposalId;
+    }
+    
+    function vote(uint256 _proposalId, bool _support) public {
+        Proposal storage proposal = proposals[_proposalId];
+        Member storage voter = members[msg.sender];
+        
+        require(voter.joined, "Not a member");
+        require(!hasVoted[_proposalId][msg.sender], "Already voted");
+        require(block.timestamp <= proposal.endTime, "Voting ended");
+        
+        hasVoted[_proposalId][msg.sender] = true;
+        
+        if (_support) {
+            proposal.forVotes += voter.votingPower;
+        } else {
+            proposal.againstVotes += voter.votingPower;
+        }
+        
+        emit Voted(_proposalId, msg.sender, _support);
+    }
+    
+    function executeProposal(uint256 _proposalId) public {
+        Proposal storage proposal = proposals[_proposalId];
+        
+        require(block.timestamp > proposal.endTime, "Still voting");
+        require(!proposal.executed, "Already executed");
+        
+        uint256 totalVotes = proposal.forVotes + proposal.againstVotes;
+        uint256 totalMembers = getTotalVotingPower();
+        
+        uint256 quorumReached = (totalVotes * 100) / totalMembers;
+        bool passed = proposal.forVotes > proposal.againstVotes;
+        bool meetsQuorum = quorumReached >= proposalQuorum;
+        
+        require(passed && meetsQuorum, "Proposal failed");
+        
+        proposal.passed = true;
+        proposal.executed = true;
+        
+        emit ProposalExecuted(_proposalId);
+    }
+    
+    function getTotalVotingPower() public view returns (uint256) {
+        uint256 total;
+        for (address account = address(1); account != address(0); ) {
+            if (members[account].joined) {
+                total += members[account].votingPower;
+            }
+            unchecked { account = address(int256(uint256(account)) + 1); }
+        }
+        return total;
+    }
+    
+    function getProposal(uint256 _id) public view returns (
+        uint256 forVotes,
+        uint256 againstVotes,
+        bool passed,
+        uint256 timeRemaining
+    ) {
+        Proposal memory p = proposals[_id];
+        return (
+            p.forVotes,
+            p.againstVotes,
+            p.passed,
+            block.timestamp >= p.endTime ? 0 : p.endTime - block.timestamp
+        );
+    }
+    
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not owner");
+        _;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>On-chain governance system</li>
+<li>Voting power based on membership</li>
+<li>Quorum requirements for validity</li>
+<li>Foundation for decentralized organizations</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Using live balances allows flash-loan voting: borrow tokens, vote, repay. Real DAOs use snapshot balances (ERC20Votes) taken before the proposal.</p></div>
+</section>
+
+<section id="project-37">
+<h2><span class="project-number">37</span> Oracle Integration</h2>
+<span class="concept-badge">Concept: Oracles and external calls</span>
+<p class="lead">Contracts cannot fetch web data themselves. A decentralised oracle network pushes prices on-chain; you read them and, crucially, validate them.</p>
+<pre><code>interface IChainlinkFeed {
+    function latestRoundData() 
+        external 
+        view 
+        returns (
+            uint80 roundId,
+            int256 answer,
+            uint256 startedAt,
+            uint256 updatedAt,
+            uint80 answeredInRound
+        );
+}
+
+contract OraclePriceOracle {
+    IChainlinkFeed public priceFeed;
+    address public owner;
+    uint256 public maxAge = 3600; // 1 hour
+    
+    event PriceUpdated(int256 price, uint256 timestamp);
+    
+    constructor(address _feedAddress) {
+        priceFeed = IChainlinkFeed(_feedAddress);
+        owner = msg.sender;
+    }
+    
+    function getLatestPrice() public view returns (int256) {
+        (, int256 answer,, uint256 updatedAt,) = priceFeed.latestRoundData();
+        require(updatedAt > block.timestamp - maxAge, "Stale price");
+        return answer;
+    }
+    
+    function isPriceStale() public view returns (bool) {
+        (, , , uint256 updatedAt,) = priceFeed.latestRoundData();
+        return block.timestamp - updatedAt > maxAge;
+    }
+    
+    function getWithDetails() 
+        public 
+        view 
+        returns (
+            int256 price,
+            uint256 timestamp,
+            uint80 roundId
+        ) 
+    {
+        (uint80 roundId, int256 price, , uint256 timestamp, ) = priceFeed.latestRoundData();
+        return (price, timestamp, roundId);
+    }
+    
+    // Example: Use in a stables coin peg check
+    function isPegged(int256 _expected, int256 _tolerance) public view returns (bool) {
+        int256 currentPrice = getLatestPrice();
+        int256 diff = currentPrice > _expected 
+            ? currentPrice - _expected 
+            : _expected - currentPrice;
+        return diff <= _tolerance;
+    }
+    
+    // Emergency update feed address
+    function updateFeed(address _newFeed) public {
+        require(msg.sender == owner, "Not owner");
+        priceFeed = IChainlinkFeed(_newFeed);
+    }
+    
+    function setMaxAge(uint256 _age) public {
+        require(msg.sender == owner, "Not owner");
+        maxAge = _age;
+    }
+    
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not owner");
+        _;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Fetches real-world data on-chain</li>
+<li>Chainlink is industry standard</li>
+<li>Check for stale data (timeliness)</li>
+<li>Essential for DeFi price feeds</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Never use a DEX spot price as an oracle: flash loans can move it within one transaction (Project 48). On L2s also check the sequencer uptime feed.</p></div>
+</section>
+
+<section id="project-38">
+<h2><span class="project-number">38</span> Yield Farming</h2>
+<span class="concept-badge">Concept: Pool distribution logic</span>
+<p class="lead">Rewards are distributed proportionally to each farmer's share. The trick is a global accumulator (accRewardPerShare) and per-user rewardDebt so that nothing loops over users.</p>
+<pre><code>interface IERC20 {
+    function transferFrom(address, address, uint256) external returns (bool);
+    function transfer(address, uint256) external returns (bool);
+    function balanceOf(address) external view returns (uint256);
+}
+
+contract YieldFarm {
+    IERC20 public lpToken; // Liquidity provider token
+    IERC20 public rewardToken;
+    
+    mapping(address => uint256) public userInfo; // Amount staked
+    mapping(address => uint256) public rewardPerTokenPaid;
+    mapping(address => uint256) public rewards;
+    
+    uint256 public totalSupply;
+    uint256 public rewardRate = 1e18; // Per second
+    uint256 public lastUpdateTime;
+    uint256 public rewardPerTokenStored;
+    
+    event Staked(address indexed user, uint256 amount);
+    event Withdrawn(address indexed user, uint256 amount);
+    event RewardPaid(address indexed user, uint256 reward);
+    
+    constructor(address _lpToken, address _rewardToken) {
+        lpToken = IERC20(_lpToken);
+        rewardToken = IERC20(_rewardToken);
+    }
+    
+    function rewardPerToken() public view returns (uint256) {
+        if (totalSupply == 0) {
+            return rewardPerTokenStored;
+        }
+        return rewardPerTokenStored + 
+            ((block.timestamp - lastUpdateTime) * rewardRate * 1e18) / totalSupply;
+    }
+    
+    function earned(address _account) public view returns (uint256) {
+        return (userInfo[_account] * (rewardPerToken() - rewardPerTokenPaid[_account])) / 1e18 +
+            rewards[_account];
+    }
+    
+    function stake(uint256 _amount) public {
+        require(_amount > 0, "Amount must be positive");
+        
+        updateReward(msg.sender);
+        
+        userInfo[msg.sender] += _amount;
+        totalSupply += _amount;
+        
+        lpToken.transferFrom(msg.sender, address(this), _amount);
+        
+        emit Staked(msg.sender, _amount);
+    }
+    
+    function withdraw(uint256 _amount) public {
+        require(_amount > 0, "Amount must be positive");
+        require(userInfo[msg.sender] >= _amount, "Insufficient stake");
+        
+        updateReward(msg.sender);
+        
+        userInfo[msg.sender] -= _amount;
+        totalSupply -= _amount;
+        
+        lpToken.transfer(msg.sender, _amount);
+        
+        emit Withdrawn(msg.sender, _amount);
+    }
+    
+    function claimReward() public returns (uint256) {
+        updateReward(msg.sender);
+        uint256 reward = rewards[msg.sender];
+        
+        if (reward > 0) {
+            rewards[msg.sender] = 0;
+            rewardToken.transfer(msg.sender, reward);
+            emit RewardPaid(msg.sender, reward);
+        }
+        
+        return reward;
+    }
+    
+    function updateReward(address _account) public {
+        rewardPerTokenStored = rewardPerToken();
+        lastUpdateTime = block.timestamp;
+        
+        if (_account != address(0)) {
+            rewards[_account] = earned(_account);
+            rewardPerTokenPaid[_account] = rewardPerTokenStored;
+        }
+    }
+    
+    function getAllowed() public view returns (IERC20, IERC20) {
+        return (lpToken, rewardToken);
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Stake LP tokens for rewards</li>
+<li>Continuous reward accrual</li>
+<li>Reward rate per second calculation</li>
+<li>Core mechanism for DeFi farms</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Fee-on-transfer or rebasing stake tokens break the accounting. Whitelist token types and fund the reward pool for the whole schedule.</p></div>
+</section>
+
+<section id="project-39">
+<h2><span class="project-number">39</span> Escrow Contract</h2>
+<span class="concept-badge">Concept: Escrow logic</span>
+<p class="lead">A buyer locks ETH for a seller. A neutral arbiter (or the buyer) releases funds when the deal is done, or refunds if it fails. The enum guarantees each escrow ends exactly once.</p>
+<pre><code>contract Escrow {
+    enum State { Created, Deposited, Released, Disputed, Resolved }
+    
+    struct Deal {
+        address buyer;
+        address seller;
+        address arbiter;
+        uint256 amount;
+        State state;
+    }
+    
+    Deal[] public deals;
+    
+    event DealCreated(uint256 indexed dealId, address indexed buyer, address indexed seller);
+    event FundsDeposited(uint256 indexed dealId);
+    event FundsReleased(uint256 indexed dealId, address to);
+    event DisputeRaised(uint256 indexed dealId);
+    event DisputeResolved(uint256 indexed dealId, address to);
+    
+    function createDeal(address _seller, address _arbiter) public payable returns (uint256) {
+        require(msg.value > 0, "Must send funds");
+        require(_seller != msg.sender, "Buyer and seller same");
+        require(_arbiter != msg.sender, "Arbiter cannot be buyer");
+        require(_arbiter != _seller, "Arbiter cannot be seller");
+        
+        deals.push(Deal({
+            buyer: msg.sender,
+            seller: _seller,
+            arbiter: _arbiter,
+            amount: msg.value,
+            state: State.Created
+        }));
+        
+        uint256 dealId = deals.length - 1;
+        emit DealCreated(dealId, msg.sender, _seller);
+        return dealId;
+    }
+    
+    function confirmDeposit(uint256 _dealId) public {
+        Deal storage deal = deals[_dealId];
+        require(msg.sender == deal.buyer, "Not buyer");
+        require(deal.state == State.Created, "Wrong state");
+        
+        deal.state = State.Deposited;
+        emit FundsDeposited(_dealId);
+    }
+    
+    function release(uint256 _dealId) public {
+        Deal storage deal = deals[_dealId];
+        require(msg.sender == deal.seller, "Not seller");
+        require(deal.state == State.Deposited, "Wrong state");
+        
+        deal.state = State.Released;
+        (bool sent, ) = payable(deal.seller).call{value: deal.amount}("");
+        require(sent, "Release failed");
+        
+        emit FundsReleased(_dealId, deal.seller);
+    }
+    
+    function raiseDispute(uint256 _dealId) public {
+        Deal storage deal = deals[_dealId];
+        require(
+            msg.sender == deal.buyer || msg.sender == deal.seller,
+            "Not party"
+        );
+        require(deal.state == State.Deposited, "Wrong state");
+        
+        deal.state = State.Disputed;
+        emit DisputeRaised(_dealId);
+    }
+    
+    function resolveDispute(uint256 _dealId, address _to) public {
+        Deal storage deal = deals[_dealId];
+        require(msg.sender == deal.arbiter, "Not arbiter");
+        require(deal.state == State.Disputed, "Not disputed");
+        
+        deal.state = State.Resolved;
+        (bool sent, ) = payable(_to).call{value: deal.amount}("");
+        require(sent, "Resolution failed");
+        
+        emit DisputeResolved(_dealId, _to);
+    }
+    
+    function refund(uint256 _dealId) public {
+        Deal storage deal = deals[_dealId];
+        require(msg.sender == deal.arbiter, "Not arbiter");
+        require(deal.state == State.Disputed, "Not disputed");
+        
+        deal.state = State.Resolved;
+        (bool sent, ) = payable(deal.buyer).call{value: deal.amount}("");
+        require(sent, "Refund failed");
+        
+        emit DisputeResolved(_dealId, deal.buyer);
+    }
+    
+    function getDeal(uint256 _id) 
+        public view returns (
+            address buyer,
+            address seller,
+            address arbiter,
+            uint256 amount,
+            uint8 state,
+            uint256 index
+        ) 
+    {
+        Deal memory d = deals[_id];
+        return (d.buyer, d.seller, d.arbiter, d.amount, uint8(d.state), _id);
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Third-party arbitration system</li>
+<li>Safe peer-to-peer transactions</li>
+<li>Dispute resolution mechanism</li>
+<li>Trustless escrow service</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>The arbiter is fully trusted. Choose it carefully, or use a multisig as arbiter (Project 34).</p></div>
+</section>
+
+<section id="project-40">
+<h2><span class="project-number">40</span> Access Lists</h2>
+<span class="concept-badge">Concept: Access management</span>
+<p class="lead">Whitelists grant access to approved addresses; blacklists block bad ones. Combining both gives an allow-then-deny check.</p>
+<pre><code>contract WhitelistBlacklist {
+    mapping(address => bool) public whitelist;
+    mapping(address => bool) public blacklist;
+    address public owner;
+    bool private whitelistMode;
+    bool private blacklistMode;
+    
+    event AddedToWhitelist(address indexed account);
+    event RemovedFromWhitelist(address indexed account);
+    event AddedToBlacklist(address indexed account);
+    event RemovedFromBlacklist(address indexed account);
+    event WhitelistToggled(bool enabled);
+    event BlacklistToggled(bool enabled);
+    
+    constructor() {
+        owner = msg.sender;
+        whitelist[msg.sender] = true; // Owner whitelisted by default
+    }
+    
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not owner");
+        _;
+    }
+    
+    modifier onlyWhitelisted() {
+        if (whitelistMode) {
+            require(whitelist[msg.sender], "Not whitelisted");
+        }
+        _;
+    }
+    
+    modifier notBlacklisted() {
+        if (blacklistMode) {
+            require(!blacklist[msg.sender], "Blacklisted");
+        }
+        _;
+    }
+    
+    function addToWhitelist(address _account) public onlyOwner {
+        whitelist[_account] = true;
+        emit AddedToWhitelist(_account);
+    }
+    
+    function removeFromWhitelist(address _account) public onlyOwner {
+        whitelist[_account] = false;
+        emit RemovedFromWhitelist(_account);
+    }
+    
+    function addToBlacklist(address _account) public onlyOwner {
+        blacklist[_account] = true;
+        emit AddedToBlacklist(_account);
+    }
+    
+    function removeFromBlacklist(address _account) public onlyOwner {
+        blacklist[_account] = false;
+        emit RemovedFromBlacklist(_account);
+    }
+    
+    function setWhitelistMode(bool _enabled) public onlyOwner {
+        whitelistMode = _enabled;
+        emit WhitelistToggled(_enabled);
+    }
+    
+    function setBlacklistMode(bool _enabled) public onlyOwner {
+        blacklistMode = _enabled;
+        emit BlacklistToggled(_enabled);
+    }
+    
+    function isInWhitelist(address _account) public view returns (bool) {
+        return whitelist[_account];
+    }
+    
+    function isInBlacklist(address _account) public view returns (bool) {
+        return blacklist[_account];
+    }
+    
+    // Protected function requiring both checks
+    function protectedAction() public onlyWhitelisted notBlacklisted {
+        // Action only accessible if whitelisted AND not blacklisted
+    }
+    
+    function emergencyBlacklist(address _account) public onlyOwner {
+        blacklist[_account] = true;
+        emit AddedToBlacklist(_account);
+        whitelist[_account] = false;
+        emit RemovedFromWhitelist(_account);
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Granular access control</li>
+<li>Whitelist allows only approved</li>
+<li>Blacklist blocks specific addresses</li>
+<li>Both lists can work together for layered control</li>
+<li>Emergency blacklisting revokes access instantly</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Address-based lists are bypassed by creating a new address. They control access, not identity.</p></div>
+</section>
+
+<section id="project-41">
+<h2><span class="project-number">41</span> Gas Refunds</h2>
+<span class="concept-badge">Concept: Refund mechanics</span>
+<p class="lead">A contract can reimburse trusted keepers for the gas they spend. Measure gasleft() before and after, add a fixed overhead, cap the gas price and pay the caller from a funded pool.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract GasRefund {
+    address public owner = msg.sender;
+    mapping(address =&gt; bool) public keepers;
+    uint256 public constant OVERHEAD = 30_000;      // gas outside the measured part
+    uint256 public constant MAX_GAS_PRICE = 100 gwei;
+    uint256 public counter;
+
+    modifier onlyOwner() { require(msg.sender == owner, "not owner"); _; }
+
+    receive() external payable {}                    // fund the refund pool
+
+    function setKeeper(address k, bool ok) external onlyOwner { keepers[k] = ok; }
+
+    function performTask() external {
+        require(keepers[msg.sender], "not a keeper");
+        uint256 startGas = gasleft();
+
+        counter++;                                   // the actual work
+
+        uint256 price = tx.gasprice &lt; MAX_GAS_PRICE ? tx.gasprice : MAX_GAS_PRICE;
+        uint256 refund = (startGas - gasleft() + OVERHEAD) * price;
+        if (refund &gt; address(this).balance) refund = address(this).balance;
+        (bool ok, ) = msg.sender.call{value: refund}("");
+        require(ok, "refund failed");
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li><b>tx.gasprice</b> is what the sender chose to pay per gas.</li><li>Capping the price stops keepers from over-billing the pool.</li><li>OVERHEAD approximates the intrinsic cost you cannot measure.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Without the keeper whitelist and cap, anyone can farm the pool by calling with a huge gas price. Never refund unauthenticated callers.</p></div>
+</section>
+
+<section id="project-42">
+<h2><span class="project-number">42</span> Governance Contract</h2>
+<span class="concept-badge">Concept: On-chain governance</span>
+<p class="lead">Members vote to change a protocol parameter (the fee). Passing proposals wait in a timelock queue before taking effect, giving users time to react or exit.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract FeeGovernance {
+    uint256 public feeBps = 30;
+    uint256 public constant MAX_FEE_BPS = 1_000;
+    uint256 public constant VOTING_PERIOD = 3 days;
+    uint256 public constant TIMELOCK = 2 days;
+    uint256 public immutable memberCount;
+    mapping(address =&gt; bool) public isMember;
+
+    struct Proposal { uint256 newFee; uint256 yes; uint256 no;
+                      uint256 voteEnd; uint256 eta; bool executed; }
+    Proposal[] public proposals;
+    mapping(uint256 =&gt; mapping(address =&gt; bool)) public voted;
+
+    constructor(address[] memory members) {
+        for (uint256 i = 0; i &lt; members.length; i++) isMember[members[i]] = true;
+        memberCount = members.length;
+    }
+
+    modifier onlyMember() { require(isMember[msg.sender], "not member"); _; }
+
+    function propose(uint256 newFee) external onlyMember returns (uint256 id) {
+        require(newFee &lt;= MAX_FEE_BPS, "fee too high");
+        id = proposals.length;
+        proposals.push(Proposal(newFee, 0, 0, block.timestamp + VOTING_PERIOD, 0, false));
+    }
+
+    function vote(uint256 id, bool support) external onlyMember {
+        Proposal storage p = proposals[id];
+        require(block.timestamp &lt; p.voteEnd, "voting closed");
+        require(!voted[id][msg.sender], "already voted");
+        voted[id][msg.sender] = true;
+        if (support) p.yes++; else p.no++;
+    }
+
+    function queue(uint256 id) external {
+        Proposal storage p = proposals[id];
+        require(block.timestamp &gt;= p.voteEnd &amp;&amp; p.eta == 0, "cannot queue");
+        require(p.yes &gt; p.no &amp;&amp; p.yes * 2 &gt; memberCount, "not passed");
+        p.eta = block.timestamp + TIMELOCK;
+    }
+
+    function execute(uint256 id) external {
+        Proposal storage p = proposals[id];
+        require(p.eta != 0 &amp;&amp; block.timestamp &gt;= p.eta, "timelock active");
+        require(!p.executed, "already executed");
+        p.executed = true;
+        feeBps = p.newFee;
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Lifecycle: propose, vote, queue, wait, execute.</li><li>A hard <b>MAX_FEE_BPS</b> bounds what governance can ever do.</li><li>Basis points: 100 bps = 1%.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Governance is a privileged actor. Bound its powers in code so a captured vote cannot set a 100% fee or drain funds.</p></div>
+</section>
+
+<section id="project-43">
+<h2><span class="project-number">43</span> Dynamic Fees</h2>
+<span class="concept-badge">Concept: Fee adjustment</span>
+<p class="lead">The fee depends on the payment size: bigger payments get a lower rate. The owner can adjust tiers but never above a hard cap.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract DynamicFees {
+    address public owner = msg.sender;
+    uint256 public constant MAX_FEE_BPS = 500;       // 5%
+    uint256 public smallFeeBps = 100;                // &lt; 1 ETH
+    uint256 public mediumFeeBps = 50;                // &lt; 10 ETH
+    uint256 public largeFeeBps = 25;                 // &gt;= 10 ETH
+    uint256 public feesCollected;
+
+    modifier onlyOwner() { require(msg.sender == owner, "not owner"); _; }
+
+    function feeBpsFor(uint256 amount) public view returns (uint256) {
+        if (amount &lt; 1 ether) return smallFeeBps;
+        if (amount &lt; 10 ether) return mediumFeeBps;
+        return largeFeeBps;
+    }
+
+    function setFees(uint256 s, uint256 m, uint256 l) external onlyOwner {
+        require(s &lt;= MAX_FEE_BPS &amp;&amp; m &lt;= MAX_FEE_BPS &amp;&amp; l &lt;= MAX_FEE_BPS, "above cap");
+        smallFeeBps = s; mediumFeeBps = m; largeFeeBps = l;
+    }
+
+    function pay(address payable to) external payable {
+        uint256 fee = msg.value * feeBpsFor(msg.value) / 10_000;
+        feesCollected += fee;
+        (bool ok, ) = to.call{value: msg.value - fee}("");
+        require(ok, "payment failed");
+    }
+
+    function withdrawFees() external onlyOwner {
+        uint256 amt = feesCollected;
+        feesCollected = 0;
+        (bool ok, ) = owner.call{value: amt}("");
+        require(ok, "withdraw failed");
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Divide by 10,000 to convert basis points to a ratio.</li><li>Rounding down favours the payer by up to 1 wei: acceptable here.</li><li>Emit an event when fees change so users can track it.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Tiered fees can be gamed by splitting payments. Decide whether that is acceptable, and never let an owner raise fees without a cap or delay.</p></div>
+</section>
+
+<section id="project-44">
+<h2><span class="project-number">44</span> Chain Interaction</h2>
+<span class="concept-badge">Concept: Inter-contract calls</span>
+<p class="lead">Contracts talk to each other through interfaces. Wrapping the call in try/catch lets the caller survive a failure in the other contract instead of reverting.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+interface ICounter {
+    function increment() external;
+    function count() external view returns (uint256);
+}
+
+contract Counter is ICounter {
+    uint256 public override count;
+
+    function increment() external override {
+        count += 1;
+    }
+}
+
+contract Caller {
+    ICounter public immutable target;
+    uint256 public failures;
+
+    constructor(address counter) {
+        target = ICounter(counter);
+    }
+
+    function bump() external returns (bool) {
+        try target.increment() {
+            return true;
+        } catch {
+            failures++;
+            return false;
+        }
+    }
+
+    function read() external view returns (uint256) {
+        return target.count();
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>An interface lists function signatures only, no logic.</li><li><b>try/catch</b> handles reverts of external calls, not internal errors.</li><li>Deploy Counter first, then pass its address to Caller.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Every external call hands control to code you did not write. Treat addresses passed in constructors as trusted only if you verified them.</p></div>
+</section>
+
+<section id="project-45">
+<h2><span class="project-number">45</span> ERC1155 Token</h2>
+<span class="concept-badge">Concept: ERC1155 standard</span>
+<p class="lead">ERC1155 holds many token types (fungible and non-fungible) in one contract, with batch transfers that save gas. Ideal for game items.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GameItems is ERC1155, Ownable {
+    uint256 public constant GOLD = 1;     // fungible
+    uint256 public constant SWORD = 2;    // semi-fungible
+    uint256 public constant CROWN = 3;    // unique (supply of 1)
+
+    constructor() ERC1155("ipfs://REPLACE_WITH_CID/{id}.json") Ownable(msg.sender) {
+        _mint(msg.sender, GOLD, 1_000_000, "");
+        _mint(msg.sender, SWORD, 100, "");
+        _mint(msg.sender, CROWN, 1, "");
+    }
+
+    function mint(address to, uint256 id, uint256 amount) external onlyOwner {
+        _mint(to, id, amount, "");
+    }
+
+    function mintBatch(address to, uint256[] calldata ids, uint256[] calldata amounts)
+        external onlyOwner
+    {
+        _mintBatch(to, ids, amounts, "");
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Balance lookup is <b>balanceOf(account, id)</b>.</li><li><b>safeBatchTransferFrom</b> moves many ids in one transaction.</li><li>The URI contains <b>{id}</b> which clients substitute per token.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Like ERC721, safe transfers call the receiver. Update your state before minting or transferring to contracts.</p></div>
+</section>
+
+<section id="project-46">
+<h2><span class="project-number">46</span> NFT Royalty System</h2>
+<span class="concept-badge">Concept: Revenue sharing</span>
+<p class="lead">EIP-2981 lets an NFT declare a royalty. This example enforces it in its own sale function by splitting the price between the creator and the seller.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/common/ERC2981.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RoyaltyNFT is ERC721, ERC2981, Ownable {
+    uint256 private _nextId;
+    mapping(uint256 =&gt; uint256) public price;       // 0 = not for sale
+
+    constructor() ERC721("RoyaltyNFT", "RNFT") Ownable(msg.sender) {
+        _setDefaultRoyalty(msg.sender, 500);        // 5% to the creator
+    }
+
+    function mint(address to) external onlyOwner returns (uint256 id) {
+        id = _nextId++;
+        _mint(to, id);
+    }
+
+    function list(uint256 id, uint256 _price) external {
+        require(ownerOf(id) == msg.sender, "not owner");
+        price[id] = _price;
+    }
+
+    function buy(uint256 id) external payable {
+        uint256 p = price[id];
+        address seller = ownerOf(id);
+        require(p &gt; 0 &amp;&amp; msg.value == p, "bad price");
+        (address receiver, uint256 royalty) = royaltyInfo(id, p);
+        delete price[id];
+        _transfer(seller, msg.sender, id);
+        _pay(receiver, royalty);
+        _pay(seller, p - royalty);
+    }
+
+    function _pay(address to, uint256 amt) private {
+        (bool ok, ) = to.call{value: amt}("");
+        require(ok, "payment failed");
+    }
+
+    function supportsInterface(bytes4 id)
+        public view override(ERC721, ERC2981) returns (bool)
+    {
+        return super.supportsInterface(id);
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li><b>royaltyInfo(id, price)</b> returns (receiver, amount).</li><li>Basis points again: 500 = 5%.</li><li>Both parents define supportsInterface, so you must override it.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>ERC-2981 is only a hint. Marketplaces may ignore it, so royalties are enforceable only inside sales that go through your own contract.</p></div>
+</section>
+
+<section id="project-47">
+<h2><span class="project-number">47</span> Subscription Contract</h2>
+<span class="concept-badge">Concept: Subscription logic</span>
+<p class="lead">Blockchains cannot auto-debit, so a keeper (or the merchant) calls charge() when a period is due. The subscriber pre-approves an allowance and can cancel at any time.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+
+contract Subscription {
+    using SafeERC20 for IERC20;
+
+    IERC20 public immutable token;
+    address public immutable merchant;
+    uint256 public immutable price;
+    uint256 public immutable period;
+
+    mapping(address =&gt; bool) public active;
+    mapping(address =&gt; uint256) public nextCharge;
+
+    event Subscribed(address indexed user);
+    event Cancelled(address indexed user);
+    event Charged(address indexed user, uint256 amount);
+
+    constructor(IERC20 _token, address _merchant, uint256 _price, uint256 _period) {
+        token = _token; merchant = _merchant; price = _price; period = _period;
+    }
+
+    function subscribe() external {
+        require(!active[msg.sender], "already subscribed");
+        active[msg.sender] = true;
+        emit Subscribed(msg.sender);
+        _charge(msg.sender);
+    }
+
+    function cancel() external {
+        active[msg.sender] = false;
+        emit Cancelled(msg.sender);
+    }
+
+    function charge(address user) external {
+        require(active[user], "not active");
+        require(block.timestamp &gt;= nextCharge[user], "not due yet");
+        _charge(user);
+    }
+
+    function _charge(address user) private {
+        nextCharge[user] = block.timestamp + period;
+        token.safeTransferFrom(user, merchant, price);
+        emit Charged(user, price);
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Users control spending through the ERC20 allowance they set.</li><li>Anyone can trigger charge(), but only when it is due.</li><li>Cancel takes effect immediately; no refund logic needed.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Approve only a few periods' worth of tokens, not unlimited. A compromised merchant contract could otherwise drain the allowance.</p></div>
+</section>
+
+<section id="project-48">
+<h2><span class="project-number">48</span> Flash Loan</h2>
+<span class="concept-badge">Concept: Borrowing and repayment in a single transaction</span>
+<p class="lead">A flash loan is uncollateralised because it must be repaid inside the same transaction. The pool lends, calls back the borrower, then checks its balance; if it is short, the whole transaction reverts as if nothing happened.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+
+interface IFlashBorrower {
+    function onFlashLoan(address token, uint256 amount, uint256 fee, bytes calldata data) external;
+}
+
+contract FlashLoanPool is ReentrancyGuard {
+    using SafeERC20 for IERC20;
+
+    IERC20 public immutable token;
+    uint256 public constant FEE_BPS = 9;             // 0.09%
+
+    constructor(IERC20 _token) { token = _token; }
+
+    function flashLoan(address borrower, uint256 amount, bytes calldata data)
+        external nonReentrant
+    {
+        uint256 balanceBefore = token.balanceOf(address(this));
+        require(amount &lt;= balanceBefore, "not enough liquidity");
+        uint256 fee = amount * FEE_BPS / 10_000;
+
+        token.safeTransfer(borrower, amount);
+        IFlashBorrower(borrower).onFlashLoan(address(token), amount, fee, data);
+
+        require(token.balanceOf(address(this)) &gt;= balanceBefore + fee, "loan not repaid");
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>The borrower repays by transferring tokens back inside onFlashLoan.</li><li>Atomicity is the collateral: failure reverts the entire transaction.</li><li><b>nonReentrant</b> stops nested loans that game the balance check.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Flash loans are why weak oracles and instantly-manipulable prices get exploited. Design protocols assuming attackers have unlimited capital for one transaction.</p></div>
+</section>
+
+<section id="project-49">
+<h2><span class="project-number">49</span> Cross-Chain Bridge</h2>
+<span class="concept-badge">Concept: Bridging and interoperability</span>
+<p class="lead">A lock-and-mint bridge: tokens are locked on the source chain, a relayer reports the event, and a wrapped token is minted on the destination. Burning the wrapped token later unlocks the original. Simplified with a single trusted relayer.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+
+// ---- Source chain: locks the real token ----
+contract BridgeSource {
+    using SafeERC20 for IERC20;
+    IERC20 public immutable token;
+    address public immutable relayer;
+    uint256 public nonce;
+    mapping(bytes32 =&gt; bool) public processed;
+
+    event Locked(address indexed from, address to, uint256 amount, uint256 nonce);
+
+    constructor(IERC20 _token, address _relayer) { token = _token; relayer = _relayer; }
+
+    function lock(address to, uint256 amount) external {
+        token.safeTransferFrom(msg.sender, address(this), amount);
+        emit Locked(msg.sender, to, amount, nonce++);
+    }
+
+    function unlock(address to, uint256 amount, uint256 srcChainId, uint256 destNonce) external {
+        require(msg.sender == relayer, "not relayer");
+        bytes32 id = keccak256(abi.encode(srcChainId, destNonce));
+        require(!processed[id], "already processed");   // replay protection
+        processed[id] = true;
+        token.safeTransfer(to, amount);
+    }
+}
+
+// ---- Destination chain: mints a wrapped token ----
+contract WrappedToken is ERC20 {
+    address public immutable bridge;
+    constructor(address _bridge) ERC20("Wrapped MTK", "wMTK") { bridge = _bridge; }
+    function mint(address to, uint256 a) external { require(msg.sender == bridge); _mint(to, a); }
+    function burn(address from, uint256 a) external { require(msg.sender == bridge); _burn(from, a); }
+}
+
+contract BridgeDest {
+    WrappedToken public immutable wrapped;
+    address public immutable relayer;
+    uint256 public nonce;
+    mapping(bytes32 =&gt; bool) public processed;
+
+    event Burned(address indexed from, address to, uint256 amount, uint256 nonce);
+
+    constructor(address _relayer) { relayer = _relayer; wrapped = new WrappedToken(address(this)); }
+
+    function mintWrapped(address to, uint256 amount, uint256 srcChainId, uint256 srcNonce) external {
+        require(msg.sender == relayer, "not relayer");
+        bytes32 id = keccak256(abi.encode(srcChainId, srcNonce));
+        require(!processed[id], "already processed");
+        processed[id] = true;
+        wrapped.mint(to, amount);
+    }
+
+    function bridgeBack(address to, uint256 amount) external {
+        wrapped.burn(msg.sender, amount);
+        emit Burned(msg.sender, to, amount, nonce++);
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li>Every cross-chain message needs a <b>unique id</b> and a processed set.</li><li>Supply invariant: locked on A always equals wrapped minted on B.</li><li>Trust model = whoever controls the relayer. Real bridges use many validators or light clients.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Bridges hold huge pooled funds and are among the most-hacked DeFi components (Ronin, Wormhole, Nomad). Key compromise and message validation are the usual culprits.</p></div>
+</section>
+
+<section id="project-50">
+<h2><span class="project-number">50</span> Deflationary Token</h2>
+<span class="concept-badge">Concept: Supply dynamics</span>
+<p class="lead">Every transfer burns a percentage, shrinking supply over time. In OpenZeppelin v5 you override the single _update hook that all mints, burns and transfers pass through.</p>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
+contract DeflationaryToken is ERC20 {
+    uint256 public constant BURN_BPS = 100;          // 1% per transfer
+
+    constructor() ERC20("DeflaToken", "DEFL") {
+        _mint(msg.sender, 1_000_000 * 10 ** decimals());
+    }
+
+    function _update(address from, address to, uint256 value) internal override {
+        // apply the burn only on real transfers, not on mint or burn
+        if (from != address(0) &amp;&amp; to != address(0)) {
+            uint256 burnAmount = value * BURN_BPS / 10_000;
+            if (burnAmount &gt; 0) {
+                super._update(from, address(0), burnAmount);
+                value -= burnAmount;
+            }
+        }
+        super._update(from, to, value);
+    }
+}</code></pre>
+<div class="key-takeaways">
+<h4>Key Takeaways</h4>
+<ul>
+<li><b>from == 0</b> means mint, <b>to == 0</b> means burn.</li><li>The receiver gets <b>value - burn</b>, so transfers are lossy.</li><li>totalSupply decreases automatically through the burn.</li>
+</ul>
+</div>
+<div class="security-note"><h4>Security Note</h4><p>Fee-on-transfer behaviour breaks protocols that assume the received amount equals the sent amount (AMMs, vaults, escrows). Test integrations explicitly.</p></div>
+</section>
+
+        <footer>
+            <p><strong>Mastering Solidity: 50 Hands-On Projects</strong></p>
+            <p style="opacity:.8">Educational code, not audited. Test on a testnet and get an audit before handling real funds.</p>
+        </footer>
+    </div>
+    <button class="print-btn" onclick="window.print()">Print / Save PDF</button>
+</body>
+</html>
