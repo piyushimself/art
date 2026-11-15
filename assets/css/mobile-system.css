@@ -1,250 +1,203 @@
-/*
- ATLAS / COLLECTION DESIGN SYSTEM
- A shared editorial visual language for every collection page.
- Content and page-specific interactions remain owned by each page.
-*/
+/* Collection template — shared visual system. Built from collection-template.html.
+   Keep page-specific content and interaction scripts intact. */
 :root{
- --atlas-bg:#f5f3ed;--atlas-surface:#fffefa;--atlas-surface-2:#eeece4;
- --atlas-ink:#252923;--atlas-muted:#687067;--atlas-soft:#8b9188;
- --atlas-line:rgba(37,41,35,.13);--atlas-accent:#a45f49;--atlas-accent-soft:rgba(164,95,73,.11);
- --atlas-radius:14px;--atlas-radius-sm:9px;--atlas-shadow:0 8px 28px rgba(31,36,29,.055);
- --atlas-content:1120px;--atlas-reading:72ch;
- --atlas-font-sans:Inter,"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
- --atlas-font-serif:"Source Serif 4",Georgia,serif;
+ --bg:#ECEAF6;--surface:#F8F7FC;--ink:#1B1A3A;--mute:#625F8C;--line:#CFCCE6;
+ --display:"Syne","Trebuchet MS",system-ui,sans-serif;
+ --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+ --content:1180px;--read:72ch;--radius:22px;
+ color-scheme:light;
 }
-body[data-library-theme="manga"],body[data-library-theme="culture"],body[data-library-theme="tech"]{
- --atlas-bg:#141713;--atlas-surface:#1c211c;--atlas-surface-2:#232a23;
- --atlas-ink:#edf0e8;--atlas-muted:#b0b8ad;--atlas-soft:#899389;
- --atlas-line:rgba(230,238,225,.13);--atlas-accent:#d0a16b;--atlas-accent-soft:rgba(208,161,107,.12);
- --atlas-shadow:0 12px 32px rgba(0,0,0,.16);
+@media(prefers-color-scheme:dark){
+ :root{--bg:#14132B;--surface:#1E1D3C;--ink:#EDEBFA;--mute:#A3A1CC;--line:#363461;color-scheme:dark}
 }
-html{scroll-behavior:smooth;scroll-padding-top:92px;overflow-x:clip}
+html{scroll-behavior:smooth;scroll-padding-top:84px;overflow-x:clip}
 *,*::before,*::after{box-sizing:border-box}
-body[data-library-theme]{
+body{
  margin:0!important;min-width:0!important;overflow-x:clip!important;
- background:var(--atlas-bg)!important;color:var(--atlas-ink)!important;
- font-family:var(--atlas-font-sans)!important;font-size:16px!important;
- line-height:1.68!important;-webkit-font-smoothing:antialiased;
- text-rendering:optimizeLegibility;
+ background:var(--bg)!important;color:var(--ink)!important;
+ font:400 16px/1.65 var(--body)!important;
+ -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility
 }
-body[data-library-theme]::before,body[data-library-theme]::after{pointer-events:none}
-body[data-library-theme]::before{opacity:.12!important}
-body[data-library-theme] :where(h1,h2,h3,h4,h5,h6){
- color:var(--atlas-ink);font-family:var(--atlas-font-serif)!important;
- letter-spacing:-.025em!important;line-height:1.18!important;
- text-wrap:pretty;
+body :where(p,li,dd,blockquote,label){font-family:var(--body)}
+body :where(p,li,dd){line-height:1.72}
+body :where(p){max-width:var(--read)}
+body :where(h1,h2,h3,h4,h5,h6){
+ color:var(--ink)!important;font-family:var(--display)!important;
+ font-weight:800!important;letter-spacing:-.025em!important;line-height:1.14!important;
+ text-wrap:pretty
 }
-body[data-library-theme] :where(p,li,dd,blockquote){line-height:1.72!important}
-body[data-library-theme] :where(p){max-width:var(--atlas-reading)}
-body[data-library-theme] :where(a){color:inherit;text-underline-offset:3px}
-body[data-library-theme] :where(button,input,select,textarea){font:inherit}
-body[data-library-theme] :where(button,a,input,select,textarea,[tabindex]):focus-visible{
- outline:3px solid var(--atlas-accent)!important;outline-offset:3px!important
+body :where(a){color:inherit;text-underline-offset:3px}
+body :where(img,video,svg,canvas,iframe){max-width:100%;height:auto}
+body :where(button,input,select,textarea){font:inherit}
+body :where(button,a,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #2F4BFF!important;outline-offset:3px!important}
+body ::selection{background:#2F4BFF;color:white}
+body :where(pre){max-width:100%;overflow:auto}
+body :where(ul,ol){padding-left:1.4em}
+body :where(hr){border:0;border-top:1.5px solid var(--line);margin:28px 0}
+body :where(.container,.wrapper,.wrap,.shell,.main,.main-content,.content,.page,.page-wrap,.page-content,.content-wrap,.app-container,.layout,.curriculum,.library,.dashboard,.inner,.main-container){
+ width:min(var(--content),calc(100% - 56px))!important;max-width:var(--content)!important;
+ margin-left:auto!important;margin-right:auto!important
 }
-body[data-library-theme] ::selection{background:var(--atlas-accent);color:#fff}
-body[data-library-theme] :where(img,video,canvas,svg,iframe){max-width:100%;height:auto}
-body[data-library-theme] :where(ul,ol){padding-left:1.35em}
-body[data-library-theme] :where(pre){max-width:100%;overflow:auto}
-body[data-library-theme] :where(input[type=text],input[type=search],input[type=email],input[type=number],input[type=date],select,textarea){
- min-width:0;max-width:100%;min-height:44px;padding:10px 13px!important;
- border:1px solid var(--atlas-line)!important;border-radius:var(--atlas-radius-sm)!important;
- background:var(--atlas-surface)!important;color:var(--atlas-ink)!important;
- font:14px/1.4 var(--atlas-font-sans)!important;box-shadow:none!important
+body :where(main){min-width:0}
+body :where(header:not(.atlas-dialog-head),.hero,.masthead,.page-header,.header,.top){
+ min-width:0
 }
-body[data-library-theme] :where(input,textarea)::placeholder{color:var(--atlas-soft)!important;opacity:1}
-body[data-library-theme] :where(button,.btn,.button,.pill,.filter){
- border-radius:999px;min-height:40px;transition:background .18s,border-color .18s,color .18s,transform .18s
+body :where(header h1,.hero h1,.masthead h1,.page-header h1,.top h1,h1){
+ font-size:clamp(2.15rem,6vw,4.8rem)!important;line-height:.99!important;
+ letter-spacing:-.04em!important;margin-top:0
 }
-body[data-library-theme] :where(button,.btn,.button){
- cursor:pointer
+body :where(h2){font-size:clamp(1.45rem,3.2vw,2rem)!important;line-height:1.12!important}
+body :where(h3){font-size:clamp(1.08rem,2vw,1.3rem)!important;line-height:1.2!important}
+body :where(.subtitle,.description,.intro,.lead,.hero p,.top p,.page-header p){
+ max-width:66ch;color:var(--mute)!important;font-size:1.05rem!important;line-height:1.7!important
 }
-body[data-library-theme] :where(button:hover,.btn:hover,.button:hover){transform:translateY(-1px)}
-/* Consistent page canvas and reading measure */
-body[data-library-theme] :where(.wrap,.header-inner,.main,.main-content,.content,.container,.wrapper,.shell,.curriculum,.page-wrap,.page-content,.content-wrap,.tier-block,.table-wrap,.controls,.stats-bar,.controls-wrap,.stats,.filters-wrap){
- max-width:var(--atlas-content)
+/* Header and hero: template's aligned two-column composition */
+body :where(.top,.hero-header,.page-hero,.hero-section,.masthead,.page-header){
+ display:grid;grid-template-columns:minmax(0,1.15fr) minmax(220px,.85fr);
+ gap:clamp(18px,4vw,40px);align-items:center;
+ padding-block:clamp(26px,5vw,56px)!important;margin-bottom:clamp(20px,3vw,36px)
 }
-body[data-library-theme] :where(.shell,.main-content,.page-wrap,.page-content,.content-wrap){
- width:min(var(--atlas-content),calc(100% - 56px));margin-inline:auto
+body :where(.hero svg,.hero img,.hero-art){width:100%;max-width:360px;height:auto;display:block;margin-inline:auto}
+body :where(.eyebrow,.kicker,.label,.section-label,.overline){
+ color:var(--mute)!important;font:600 .78rem/1.4 var(--body)!important;
+ letter-spacing:.12em!important;text-transform:uppercase
 }
-body[data-library-theme] :where(.shell){padding:clamp(28px,5vw,64px) 0 112px!important}
-body[data-library-theme] :where(.tier-block,.curriculum,.table-wrap,.main){
- margin-inline:auto
+/* Inputs, search, filters, view controls */
+body :where(input[type=search],input[type=text],input[type=number],input[type=email],input[type=date],select,textarea){
+ max-width:100%;min-width:0;min-height:46px;padding:10px 15px!important;
+ border:1.5px solid var(--line)!important;border-radius:999px!important;
+ background:var(--surface)!important;color:var(--ink)!important;
+ font:500 15px/1.4 var(--body)!important;box-shadow:none!important
 }
-body[data-library-theme] :where(.section,.stage-block,.arc-section,.curriculum-section){
- margin-block:clamp(28px,5vw,64px)!important
+body :where(textarea){border-radius:14px!important;min-height:100px}
+body :where(input::placeholder,textarea::placeholder){color:var(--mute)!important;opacity:.85}
+body :where(button,.btn,.button,[role=button]){
+ min-height:42px;border-radius:999px;cursor:pointer;
+ font-family:var(--body)!important;transition:background .16s,border-color .16s,transform .16s
 }
-body[data-library-theme] :where(.section-header,.stage-top,.arc-header,.curriculum-header){
- margin-bottom:clamp(16px,3vw,30px)
+body :where(.bar,.toolbar,.controls,.filters,.filter-bar,.control-bar,.search-controls,.topbar,.filter-row,.actions-row){
+ display:flex;align-items:center;flex-wrap:wrap;gap:10px;min-width:0;margin-bottom:18px
 }
-/* Editorial page headers: quieter, shorter, aligned to content */
-body[data-library-theme] :where(header:not(.atlas-dialog-head),.hero,.masthead,.page-header,.header){
- position:relative;isolation:isolate
+body :where(.bar input[type=search],.toolbar input[type=search],.controls input[type=search],.filters input[type=search]){
+ flex:1 1 240px;width:auto
 }
-body[data-library-theme] :where(header:not(.atlas-dialog-head),.hero,.masthead,.page-header,.header){
- padding-top:clamp(28px,5vw,64px)!important;
- padding-bottom:clamp(24px,4vw,48px)!important
+body :where(.nav,.tabs,.tab-bar,.nav-tabs,.category-nav,.filter-pills){
+ display:flex;flex-wrap:wrap;align-items:center;gap:8px;max-width:100%;margin-bottom:28px
 }
-body[data-library-theme] :where(header .header-inner,.hero .header-inner,.masthead-inner){
- width:min(var(--atlas-content),calc(100% - 56px));margin-inline:auto
+body :where(.nav button,.tabs button,.tab-bar button,.nav-tabs a,.category-nav button,.filter-pills button){
+ display:inline-flex;align-items:center;justify-content:center;gap:8px;
+ min-height:42px;padding:7px 14px!important;border:1.5px solid var(--line)!important;
+ background:var(--surface)!important;color:var(--ink)!important;font-size:14px!important
 }
-body[data-library-theme] :where(header h1,.hero h1,.masthead h1,.page-header h1){
- max-width:18ch;margin:0 auto 12px!important;
- font-size:clamp(34px,5vw,62px)!important;font-weight:650!important;
- line-height:1.04!important;letter-spacing:-.045em!important
+body :where(.nav button[aria-pressed=true],.tabs button[aria-selected=true],.tab-bar button.active,.nav-tabs .active,.filter.active,.active-filter){
+ background:var(--ink)!important;color:var(--bg)!important;border-color:var(--ink)!important
 }
-body[data-library-theme] :where(header p,.hero p,.masthead .sub,.hero-sub,.header-sub){
- max-width:66ch;margin-inline:auto;color:var(--atlas-muted)!important;
- font:15px/1.7 var(--atlas-font-sans)!important;letter-spacing:0!important
+/* Sections, cards and catalogue grids */
+body :where(section){min-width:0;margin-block:clamp(24px,4vw,48px)}
+body :where(.sec,.section-heading,.section-header,.stage-header,.category-heading,.collection-heading){
+ display:flex;flex-wrap:wrap;align-items:baseline;gap:5px 16px;
+ margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--ink)
 }
-body[data-library-theme] :where(.eyebrow,.kicker,.header-label,.header-eyebrow,.hero-kicker,.hero-eye,.label){
- color:var(--atlas-accent)!important;letter-spacing:.13em!important;font-size:10px!important;line-height:1.4!important
+body :where(.sec h2,.section-heading h2,.section-header h2,.category-heading h2){margin:0}
+body :where(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid,.items-grid,.collection-grid,.entries-grid){
+ display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,245px),1fr));gap:18px;min-width:0
 }
-/* Unified panels, cards and list rows */
-body[data-library-theme] :where(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.practical-item,.tier-block,.stage-block,.arc-section,.composer,.panel,.section-card){
- background:var(--atlas-surface)!important;color:var(--atlas-ink)!important;
- border:1px solid var(--atlas-line)!important;border-radius:var(--atlas-radius)!important;
- box-shadow:var(--atlas-shadow)!important
+body :where(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.panel,.section-card,.item-card){
+ min-width:0;max-width:100%;overflow-wrap:anywhere;
+ background:var(--surface)!important;color:var(--ink)!important;
+ border:1.5px solid var(--line)!important;border-radius:26px 7px 26px 7px!important;
+ box-shadow:none!important
 }
-body[data-library-theme] :where(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card){
- min-width:0;overflow-wrap:anywhere
+body :where(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.item-card){
+ display:flex;flex-direction:column;overflow:hidden
 }
-body[data-library-theme] :where(.card h2,.card h3,.manga-card h3,.film-card h3,.book-card h3,.resource-card h3){
- font-size:clamp(17px,2vw,21px)!important;line-height:1.28!important;margin:0 0 8px!important
+body :where(.card .body,.card-body,.card-content,.item-body,.manga-card .body,.film-card .body){
+ padding:16px!important;min-width:0
 }
-body[data-library-theme] :where(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p){
- color:var(--atlas-muted)!important;font-size:14px!important;line-height:1.65!important
+body :where(.card h2,.card h3,.card h4,.manga-card h3,.film-card h3,.book-card h3,.resource-card h3){
+ margin:0 0 8px!important;font-size:1.18rem!important;line-height:1.2!important
 }
-body[data-library-theme] :where(.card:hover,.manga-card:hover,.film-card:hover,.book-card:hover,.resource-card:hover){
- border-color:color-mix(in srgb,var(--atlas-accent),var(--atlas-line) 35%)!important
+body :where(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p,.meta,.muted,.metadata){
+ color:var(--mute)!important;line-height:1.65
 }
-body[data-library-theme] :where(.tier-header,.stage-top,.arc-header,.curriculum-header,.day-head){
- align-items:center;gap:16px
-}
-body[data-library-theme] :where(.tier-header,.curriculum-header,.stage-top,.arc-header){
- border-color:var(--atlas-line)!important
-}
-body[data-library-theme] :where(.tier-number,.stage-roman,.arc-count){color:var(--atlas-accent)!important;opacity:.55}
-/* Dense catalogues: filters, tables, metadata */
-body[data-library-theme] :where(.controls,.toolbar,.filters,.filter-bar,.control-bar,.search-controls,.controls-wrap,.topbar,.stats-bar){
- width:min(var(--atlas-content),calc(100% - 56px));margin-inline:auto;
- display:flex;align-items:center;flex-wrap:wrap;gap:10px;
-}
-body[data-library-theme] :where(.controls,.toolbar,.filters,.filter-bar,.control-bar,.search-controls,.controls-wrap,.topbar){
- padding:12px 0!important;background:color-mix(in srgb,var(--atlas-bg) 92%,transparent)!important;
- border-color:var(--atlas-line)!important;box-shadow:none!important
-}
-body[data-library-theme] :where(.controls input,.toolbar input,.filters input,.filter-bar input,.control-bar input,.search-controls input){
- flex:1 1 220px
-}
-body[data-library-theme] :where(.filter,.pill,.tab-btn,.arc-nav-btn){
- border:1px solid var(--atlas-line)!important;background:var(--atlas-surface)!important;
- color:var(--atlas-muted)!important;padding:8px 13px!important;font-size:12px!important
-}
-body[data-library-theme] :where(.filter.active,.pill.active,.tab-btn.active,.arc-nav-btn.active){
- background:var(--atlas-ink)!important;color:var(--atlas-bg)!important;border-color:var(--atlas-ink)!important
-}
-body[data-library-theme] :where(table){
- width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--atlas-line);
- border-radius:var(--atlas-radius);overflow:hidden;background:var(--atlas-surface)
-}
-body[data-library-theme] :where(th){
- background:var(--atlas-surface-2)!important;color:var(--atlas-muted)!important;
- font:600 11px/1.4 var(--atlas-font-sans)!important;letter-spacing:.06em;text-transform:uppercase
-}
-body[data-library-theme] :where(td,th){padding:11px 13px!important;border-bottom:1px solid var(--atlas-line)!important;text-align:left}
-body[data-library-theme] :where(td){font-size:13px;line-height:1.55;color:var(--atlas-ink)}
-body[data-library-theme] :where(.table-wrap){overflow-x:auto;-webkit-overflow-scrolling:touch}
-body[data-library-theme] :where(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid){
- display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr));gap:16px
-}
-/* Shared navigation dock and progress tools */
-.atlas-dock{
- right:20px;bottom:18px;padding:6px;gap:5px;border:1px solid var(--atlas-line);
- border-radius:999px;background:color-mix(in srgb,var(--atlas-surface) 92%,transparent);
- box-shadow:0 8px 28px rgba(0,0,0,.13);backdrop-filter:blur(18px)
-}
-.atlas-dock button,.atlas-dock a{
- min-height:42px;padding:0 14px;border-radius:999px;color:var(--atlas-ink);
- font:600 12px var(--atlas-font-sans)
-}
-.atlas-dock .atlas-home{background:var(--atlas-ink);color:var(--atlas-bg)}
-.atlas-overlay{padding:5vh 14px 20px}
-.atlas-dialog{background:var(--atlas-surface);color:var(--atlas-ink);border:1px solid var(--atlas-line);border-radius:20px}
-.atlas-toc{background:var(--atlas-surface);color:var(--atlas-ink);border-color:var(--atlas-line);border-radius:16px}
-.atlas-toc a:hover{background:var(--atlas-accent-soft)}
-.atlas-page-check,.atlas-item-check{
- border:1px solid var(--atlas-line);border-radius:8px;background:var(--atlas-surface);
- color:var(--atlas-muted);font:600 11px/1.2 var(--atlas-font-sans);padding:6px 9px
-}
-.atlas-page-check input,.atlas-item-check input{accent-color:var(--atlas-accent)}
-.atlas-trackable{scroll-margin-top:90px}
-.atlas-completed-panel{background:var(--atlas-surface)!important;border-color:var(--atlas-line)!important;color:var(--atlas-ink)!important;border-radius:var(--atlas-radius)!important;box-shadow:var(--atlas-shadow)}
-/* Utility alignment and sensible content rhythm */
-body[data-library-theme] :where(.header-meta,.hero-meta,.stats,.hero-stats,.card-tags,.tags,.tag-row){display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-body[data-library-theme] :where(.subtitle,.hero-sub,.description,.intro,.lead){max-width:68ch}
-body[data-library-theme] :where(hr){border:0;border-top:1px solid var(--atlas-line);margin:28px 0}
-body[data-library-theme] :where(figure){margin:0;max-width:100%}
-body[data-library-theme] :where(img){border-radius:8px}
-body[data-library-theme] :where(.sidebar){background:var(--atlas-surface)!important;border-color:var(--atlas-line)!important}
-body[data-library-theme] :where(.sidebar a,.sidebar button){color:var(--atlas-muted)}
-/* Mobile: reflow, don't merely shrink desktop */
+body :where(.tags,.tag-list,.chips,.badges){display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+body :where(.tags span,.tag,.chip,.badge){font-size:.82rem;line-height:1.4;padding:3px 9px;border:1px solid var(--line);border-radius:999px;color:var(--mute)}
+/* Lists and data tables */
+body :where(.list,.list-view,.rows-view){display:flex;flex-direction:column;gap:10px;min-width:0}
+body :where(.list .card,.list-view .card,.rows-view .card){flex-direction:row;align-items:stretch}
+body :where(table){width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;overflow:hidden}
+body :where(th){background:var(--surface);color:var(--mute);font:600 .78rem/1.4 var(--body);letter-spacing:.05em;text-transform:uppercase}
+body :where(td,th){padding:12px 14px!important;border-bottom:1px solid var(--line)!important;text-align:left;vertical-align:top}
+body :where(td){font-size:.92rem;line-height:1.55}
+body :where(.table-wrap,.table-container,.table-responsive){max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+body :where(footer){color:var(--mute)!important;font-size:.9rem;line-height:1.6;padding-top:12px}
+/* Progress and shared page controls */
+body :where(input[type=checkbox],input[type=radio]){width:19px;height:19px;accent-color:#2F4BFF;flex:none}
+.atlas-dock{background:var(--surface)!important;border:1px solid var(--line)!important;box-shadow:0 8px 24px rgba(20,19,43,.14)!important;backdrop-filter:blur(16px)}
+.atlas-dock button,.atlas-dock a{min-height:42px!important}
+.atlas-dialog,.atlas-toc,.atlas-completed-panel{background:var(--surface)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.atlas-trackable{scroll-margin-top:88px}
+/* Mobile: a phone layout, not a squeezed desktop page */
 @media(max-width:760px){
- body[data-library-theme]{font-size:15px!important;line-height:1.65!important}
- body[data-library-theme] :where(.wrap,.header-inner,.main,.main-content,.content,.container,.wrapper,.shell,.curriculum,.page-wrap,.page-content,.content-wrap,.tier-block,.table-wrap,.controls,.stats-bar,.controls-wrap,.stats,.filters-wrap){
+ body{font-size:16px!important;line-height:1.68!important}
+ body :where(.container,.wrapper,.wrap,.shell,.main,.main-content,.content,.page,.page-wrap,.page-content,.content-wrap,.app-container,.layout,.curriculum,.library,.dashboard,.inner,.main-container){
   width:calc(100% - 32px)!important;max-width:none!important;margin-inline:auto!important
  }
- body[data-library-theme] :where(.shell){padding:28px 0 104px!important}
- body[data-library-theme] :where(header:not(.atlas-dialog-head),.hero,.masthead,.page-header,.header){
-  padding:32px 16px 26px!important
+ body :where(.top,.hero-header,.page-hero,.hero-section,.masthead,.page-header){
+  grid-template-columns:1fr!important;gap:18px!important;padding-block:24px!important;margin-bottom:18px!important
  }
- body[data-library-theme] :where(header .header-inner,.hero .header-inner,.masthead-inner){width:100%!important}
- body[data-library-theme] :where(header h1,.hero h1,.masthead h1,.page-header h1){
-  font-size:clamp(30px,8.5vw,44px)!important;line-height:1.06!important;margin-bottom:10px!important
+ body :where(.hero){order:-1;max-width:320px;margin-inline:auto}
+ body :where(h1){font-size:clamp(2.15rem,10vw,3.35rem)!important;line-height:1.02!important}
+ body :where(h2){font-size:clamp(1.45rem,7vw,1.9rem)!important}
+ body :where(h3){font-size:1.16rem!important}
+ body :where(p,li,dd){font-size:1rem!important;line-height:1.72!important}
+ body :where(.bar,.toolbar,.controls,.filters,.filter-bar,.control-bar,.search-controls,.topbar,.filter-row,.actions-row){
+  gap:8px!important;width:100%;margin-bottom:14px
  }
- body[data-library-theme] :where(h2){font-size:clamp(22px,6vw,30px)!important}
- body[data-library-theme] :where(h3){font-size:19px!important}
- body[data-library-theme] :where(p,li,dd){font-size:14px!important;line-height:1.7!important}
- body[data-library-theme] :where(.controls,.toolbar,.filters,.filter-bar,.control-bar,.search-controls,.controls-wrap,.topbar,.stats-bar){
-  width:calc(100% - 32px)!important;padding:10px 0!important;gap:8px!important
+ body :where(.bar input[type=search],.toolbar input[type=search],.controls input[type=search],.filters input[type=search]){
+  flex:1 1 100%;width:100%!important
  }
- body[data-library-theme] :where(.controls input,.toolbar input,.filters input,.filter-bar input,.control-bar input,.search-controls input){flex:1 1 100%;width:100%}
- body[data-library-theme] :where(.controls select,.toolbar select,.filters select,.filter-bar select,.control-bar select){flex:1 1 130px;min-width:0}
- body[data-library-theme] :where(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid){
-  grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important
+ body :where(.bar select,.toolbar select,.controls select,.filters select){flex:1 1 130px;min-width:0}
+ body :where(.nav,.tabs,.tab-bar,.nav-tabs,.category-nav,.filter-pills){
+  flex-wrap:nowrap!important;overflow-x:auto!important;white-space:nowrap;
+  padding:2px 2px 10px;scrollbar-width:thin;-webkit-overflow-scrolling:touch
  }
- body[data-library-theme] :where(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card){
-  padding:14px!important;border-radius:12px!important
+ body :where(.nav button,.tabs button,.tab-bar button,.nav-tabs a,.category-nav button,.filter-pills button){flex:0 0 auto}
+ body :where(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid,.items-grid,.collection-grid,.entries-grid){
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important
  }
- body[data-library-theme] :where(.card h2,.card h3,.manga-card h3,.film-card h3,.book-card h3,.resource-card h3){font-size:16px!important}
- body[data-library-theme] :where(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p){font-size:13px!important}
- body[data-library-theme] :where(.stage-top,.arc-header,.manifesto,.tier-header){grid-template-columns:1fr!important;gap:10px!important}
- body[data-library-theme] :where(.stage-roman){display:none!important}
- body[data-library-theme] :where(.sidebar){position:relative!important;width:100%!important;height:auto!important;max-height:38vh}
- body[data-library-theme] :where(.app){display:block!important}
- body[data-library-theme] :where(.main){width:100%!important}
- body[data-library-theme] :where(.table-wrap){width:calc(100% - 32px)!important;padding:0!important}
- body[data-library-theme] :where(table){min-width:620px}
- body[data-library-theme] :where(.tabs,.tab-bar,.nav-tabs){max-width:100%;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
- body[data-library-theme] :where(.hero){min-height:0!important}
- body[data-library-theme] :where(.hero-stats,.stats,.stat-row){gap:14px!important;flex-wrap:wrap}
- body[data-library-theme] :where(.section,.stage-block,.arc-section,.curriculum-section){margin-block:28px!important;padding-block:24px!important}
- body[data-library-theme] :where(.modal,.dialog,.popup){width:calc(100vw - 24px)!important;max-width:none!important;max-height:86dvh;overflow:auto}
- .atlas-dock{left:8px!important;right:8px!important;bottom:8px!important;justify-content:space-around;gap:3px!important}
- .atlas-dock button,.atlas-dock a{flex:1;padding:0 8px!important;font-size:11px!important}
- .atlas-dock .atlas-page-check{font-size:9px!important;padding:0 7px!important}
- .atlas-toc{right:10px;bottom:66px;width:calc(100vw - 20px)}
- .atlas-backtop{left:10px;bottom:66px}
- .atlas-completed-panel{width:calc(100% - 24px)!important;margin-bottom:80px}
+ body :where(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.panel,.section-card,.item-card){
+  border-radius:20px 6px 20px 6px!important
+ }
+ body :where(.card .body,.card-body,.card-content,.item-body){padding:13px!important}
+ body :where(.card h2,.card h3,.card h4,.manga-card h3,.film-card h3,.book-card h3,.resource-card h3){font-size:1.02rem!important}
+ body :where(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p){font-size:.9rem!important}
+ body :where(.list .card,.list-view .card,.rows-view .card){flex-direction:row}
+ body :where(.list .body,.list-view .card-body){min-width:0}
+ body :where(.table-wrap,.table-container,.table-responsive){width:100%!important}
+ body :where(table){min-width:600px}
+ body :where(.sidebar){position:static!important;width:auto!important;max-height:none!important}
+ body :where(.app,.main-layout,.content-layout){display:block!important}
+ body :where(.modal,.dialog,.popup){width:calc(100vw - 24px)!important;max-width:none!important;max-height:88dvh;overflow:auto}
+ body :where(button,.btn,.button,[role=button]){min-height:44px}
+ .atlas-dock{left:8px!important;right:8px!important;bottom:8px!important;justify-content:space-around;gap:4px!important}
+ .atlas-dock button,.atlas-dock a{flex:1;min-width:0;padding-inline:7px!important;font-size:12px!important}
+ .atlas-toc{width:calc(100vw - 20px)!important;right:10px!important;bottom:66px!important}
 }
-@media(max-width:420px){
- body[data-library-theme] :where(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid){grid-template-columns:minmax(0,1fr)!important}
- body[data-library-theme] :where(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card){padding:15px!important}
- body[data-library-theme] :where(.header-meta,.hero-meta,.stats,.hero-stats){gap:7px!important}
+@media(max-width:520px){
+ body :where(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid,.items-grid,.collection-grid,.entries-grid){
+  grid-template-columns:minmax(0,1fr)!important;gap:12px!important
+ }
+ body :where(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.item-card){
+  display:grid;grid-template-columns:84px minmax(0,1fr);align-items:stretch
+ }
+ body :where(.card .art,.card .poster,.card .cover,.card .image,.manga-card .art,.film-card .art){
+  grid-row:1;grid-column:1;width:84px;height:100%;min-height:100px;aspect-ratio:auto;overflow:hidden
+ }
+ body :where(.card .body,.card-body,.card-content,.item-body){grid-column:2;grid-row:1;padding:13px!important}
+ body :where(.card .foot){grid-column:1/-1}
+ body :where(.list .card,.list-view .card,.rows-view .card){display:flex;flex-direction:row}
+ body :where(.list .card .art,.list-view .card .art){width:76px;flex:none}
 }
-@media(prefers-reduced-motion:reduce){
- *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
-}
-@media print{
- .atlas-dock,.atlas-overlay,.atlas-toc,.atlas-backtop,.atlas-progress{display:none!important}
- body[data-library-theme]{background:#fff!important;color:#111!important}
-}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+@media print{.atlas-dock,.atlas-overlay,.atlas-toc,.atlas-backtop{display:none!important}body{background:#fff!important;color:#111!important}}
