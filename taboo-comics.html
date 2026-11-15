@@ -626,8 +626,8 @@ footer {
 .hero-subtitle { animation-delay: .4s; }
 .hero-stats { animation-delay: .55s; }
 </style>
-</head>
-<body>
+<link rel="stylesheet" href="assets/css/library.css"></head>
+<body data-library-theme="manga">
 
 <!-- HERO -->
 <section class="hero">
@@ -2200,5 +2200,5 @@ document.querySelectorAll('.t-btn[data-tag]').forEach(btn => {
   btn.addEventListener('click', () => activateTag(btn.dataset.tag));
 });
 </script>
-</body>
+<script src="assets/js/library.js" defer></script></body>
 </html>

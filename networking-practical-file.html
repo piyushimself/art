@@ -48,8 +48,8 @@ td,th{border:1px solid var(--mute);padding:6px 8px;text-align:left}
 button{font:inherit;background:var(--ink);color:var(--bg);border:0;border-radius:4px;padding:6px 12px;cursor:pointer}
 @media print{.bar,button{display:none}details{display:block}details>.body{display:block}body{background:#fff}}
 </style>
-</head>
-<body>
+<link rel="stylesheet" href="assets/css/library.css"></head>
+<body data-library-theme="tech">
 <main>
 <header class="top">
 <h1>Networking Practical File</h1>
@@ -284,5 +284,5 @@ document.getElementById("reset").addEventListener("click",function(){
 update();
 if(location.hash){var m=location.hash.match(/^#p(\d+)$/);if(m){var ds=document.querySelectorAll("details")[m[1]-1];if(ds){ds.open=true;ds.scrollIntoView()}}}
 </script>
-</body>
+<script src="assets/js/library.js" defer></script></body>
 </html>
