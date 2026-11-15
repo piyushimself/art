@@ -5,7 +5,7 @@ const body=document.body;
 if(!body)return;
 const templateStyles=document.createElement('link');
 templateStyles.rel='stylesheet';
-templateStyles.href='assets/css/collection-template.css?v=20261115';
+templateStyles.href='assets/css/collection-template.css?v=20261115-compact';
 document.head.appendChild(templateStyles);
 const pageFile=(location.pathname.split('/').pop()||'index.html').toLowerCase();
 const inferredTheme=/(manga|manhwa|comic|taboo)/.test(pageFile)?'manga':/(film|cinema|movie|curator|arc)/.test(pageFile)?'culture':/(poetry|ross|art|watercolour|painting|resource)/.test(pageFile)?'art':/(curriculum|loom|marginalia|meal|fiction)/.test(pageFile)?'learning':'utility';
