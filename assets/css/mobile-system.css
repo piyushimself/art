@@ -1,0 +1,57 @@
+/* Atlas mobile-first page system — shared by every collection */
+:root{--atlas-mobile-max:1160px}
+html{scroll-padding-top:76px;overflow-x:clip}
+body{overflow-x:clip!important;min-width:0!important}
+img,video,canvas,svg,iframe{max-width:100%}
+button,a,input,select,textarea{touch-action:manipulation}
+button,select,input[type=checkbox],input[type=radio]{min-height:40px}
+:where(main,article,.main,.content,.container,.wrapper,.shell,.curriculum,.page-wrap,.page-content,.content-wrap){width:min(var(--atlas-mobile-max),calc(100% - 40px));max-width:var(--atlas-mobile-max);margin-left:auto;margin-right:auto}
+:where(header,section,footer,nav){min-width:0}
+:where(h1,h2,h3,h4,p,li,td,th){overflow-wrap:anywhere}
+:where(input[type=text],input[type=search],input[type=email],input[type=number],select,textarea){max-width:100%;min-width:0}
+:where(table){width:100%;border-collapse:collapse}
+:where(pre){max-width:100%;overflow:auto;white-space:pre}
+:where(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid){grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr));min-width:0}
+:where(.controls,.toolbar,.filters,.filter-bar,.control-bar,.search-controls){max-width:100%;flex-wrap:wrap}
+:where(.controls,.toolbar,.filters,.filter-bar,.control-bar){gap:8px}
+:where(.controls,.toolbar,.filters,.filter-bar,.control-bar):has(input[type=search]),:where(.controls,.toolbar,.filters,.filter-bar,.control-bar):has(input[type=text]){position:sticky;top:0;z-index:80;backdrop-filter:blur(14px)}
+:where(.card,.manga-card,.film-card,.book-card,.resource-card,.task-card,.episode-card){min-width:0;max-width:100%}
+:where(.card, .manga-card, .film-card, .book-card, .resource-card) :where(h2,h3,p){overflow-wrap:anywhere}
+.atlas-dock{z-index:9997;max-width:calc(100vw - 24px)}
+.atlas-dock button,.atlas-dock a{min-height:42px}
+.atlas-page-check,.atlas-item-check{min-height:34px}
+.atlas-trackable{scroll-margin-top:80px}
+.atlas-item-check{max-width:100%;white-space:nowrap}
+.atlas-completed-panel{box-sizing:border-box}
+@media(max-width:760px){
+ :where(main,article,.main,.content,.container,.wrapper,.shell,.curriculum,.page-wrap,.page-content,.content-wrap){width:calc(100% - 28px)!important;padding-left:0!important;padding-right:0!important}
+ :where(header,.hero,.masthead,.page-header,.header,.hero-section){padding-left:18px!important;padding-right:18px!important}
+ :where(h1){font-size:clamp(30px,9vw,52px)!important;line-height:1.06!important}
+ :where(h2){font-size:clamp(23px,6.5vw,34px)!important;line-height:1.15!important}
+ :where(p,li){font-size: max(14px,1em);line-height:1.65}
+ :where(.controls,.toolbar,.filters,.filter-bar,.control-bar,.search-controls){padding:10px 14px!important;gap:7px!important}
+ :where(.controls input,.toolbar input,.filters input,.filter-bar input,.control-bar input){width:100%;min-width:0}
+ :where(.controls select,.toolbar select,.filters select,.filter-bar select,.control-bar select){max-width:100%;min-width:0}
+ :where(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid){grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+ :where(.card,.manga-card,.film-card,.book-card,.resource-card,.task-card){padding:14px!important}
+ :where(.sidebar){position:relative!important;width:100%!important;height:auto!important;max-height:40vh}
+ :where(.app){display:block!important}
+ :where(.main-layout,.layout,.content-layout){display:block!important}
+ :where(table){display:block;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+ :where(.hero){min-height:0!important;padding-top:44px!important;padding-bottom:32px!important}
+ :where(.hero-stats,.stats,.stat-row){gap:14px!important;flex-wrap:wrap}
+ :where(.tabs,.tab-bar,.nav-tabs){max-width:100%;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+ :where(.tabs button,.tab-bar button,.nav-tabs a){flex:0 0 auto;min-height:42px}
+ :where(.section,.stage-block,.arc-section){padding-top:28px!important;padding-bottom:28px!important;margin-bottom:24px!important}
+ :where(.stage-top,.arc-header,.manifesto){grid-template-columns:1fr!important;gap:12px!important}
+ :where(.stage-roman){display:none!important}
+ :where(.modal,.dialog,.popup){width:calc(100vw - 24px)!important;max-width:none!important;max-height:86dvh;overflow:auto}
+}
+@media(max-width:420px){
+ :where(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid){grid-template-columns:minmax(0,1fr)!important}
+ :where(.card,.manga-card,.film-card,.book-card,.resource-card){padding:15px!important}
+ .atlas-dock{left:8px!important;right:8px!important;bottom:8px!important;gap:3px!important}
+ .atlas-dock button,.atlas-dock a{font-size:11px!important;padding:0 7px!important}
+ .atlas-dock .atlas-page-check{font-size:9px!important}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
