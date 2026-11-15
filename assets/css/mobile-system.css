@@ -368,3 +368,58 @@ body :is(.theme-name){font-size:9px!important}
     font-size:1.75rem!important;
   }
 }
+
+
+/* THEME CONTRACT v2 — the toggle controls the actual design tokens.
+   Dark is the default; light is an explicit user choice. */
+:root,html[data-color-mode="dark"]{
+ --bg:#17191b;--surface:#202427;--ink:#ece9e2;--mute:#b4b0a8;--line:#41474a;
+ --display:"Syne","Trebuchet MS",system-ui,sans-serif;
+ --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+ color-scheme:dark;
+}
+html[data-color-mode="light"]{
+ --bg:#f0eee9;--surface:#faf9f6;--ink:#242729;--mute:#555d60;--line:#c9c8c2;
+ color-scheme:light;
+}
+html[data-color-mode="dark"] body,
+html[data-color-mode="light"] body{background:var(--bg)!important;color:var(--ink)!important}
+html[data-color-mode] body :is(header,section,article,aside,main,footer,.panel,.card,.controls,.toolbar,.filter-panel,.searchbar,.sbar,.legend){
+ color:var(--ink);
+}
+html[data-color-mode="dark"] body :is(input,select,textarea),
+html[data-color-mode="dark"] body :is(.controls,.toolbar,.filter-panel,.searchbar,.sbar,.legend,.card,.panel){
+ background-color:var(--surface)!important;color:var(--ink)!important;border-color:var(--line)!important;
+}
+html[data-color-mode="light"] body :is(input,select,textarea),
+html[data-color-mode="light"] body :is(.controls,.toolbar,.filter-panel,.searchbar,.sbar,.legend,.card,.panel){
+ background-color:var(--surface)!important;color:var(--ink)!important;border-color:var(--line)!important;
+}
+html[data-color-mode] body :is(input,select,textarea)::placeholder{color:var(--mute)!important;opacity:1}
+html[data-color-mode] body :is(button,.filter,.filter-btn,.filter-chip,.filter-option,.chip,.tag-btn,.theme-chip){
+ border-color:var(--line)!important;
+}
+html[data-color-mode="dark"] body :is(button,.filter,.filter-btn,.filter-chip,.filter-option,.chip,.tag-btn,.theme-chip){
+ background-color:#292f32!important;color:#e8e6df!important;
+}
+html[data-color-mode="dark"] body :is(button.active,.filter.active,.filter[aria-pressed="true"],.active-filter){
+ background-color:#a85f4d!important;color:#fff!important;border-color:#c17b67!important;
+}
+html[data-color-mode="light"] body :is(button.active,.filter.active,.filter[aria-pressed="true"],.active-filter){
+ background-color:#344b45!important;color:#fff!important;border-color:#344b45!important;
+}
+html[data-color-mode] body :is(.muted,.meta,.metadata,.hint,.helper,.caption,.small,.small-text){color:var(--mute)!important}
+html[data-color-mode] body :is(h1,h2,h3,h4,h5,h6,p,li,label,small,strong){text-shadow:none}
+html[data-color-mode] body :is(.filters,.filter-row,.filter-bar,.tag-strip,.fg){
+ max-width:100%;min-width:0;
+}
+@media(max-width:760px){
+ html[data-color-mode] body :is(.filters,.filter-row,.filter-bar,.tag-strip,.fg){
+  display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;
+  max-width:100%!important;gap:6px!important;padding:3px 2px 8px!important;
+  -webkit-overflow-scrolling:touch!important;scrollbar-width:thin!important;
+ }
+ html[data-color-mode] body :is(.filters button,.filter-row button,.filter-bar button,.tag-strip button,.fg button){
+  flex:0 0 auto!important;min-height:34px!important;padding:6px 10px!important;font-size:11px!important;
+ }
+}
