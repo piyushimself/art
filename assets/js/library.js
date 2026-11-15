@@ -64,7 +64,7 @@ const seen=new WeakSet();
 function addItems(){
  if(document.body.dataset.libraryTheme==='home')return;
  document.querySelectorAll(selectors).forEach(node=>{
-  if(seen.has(node)||node.querySelector('.atlas-item-check')||node.closest('nav, .atlas-dock, .atlas-overlay, .atlas-toc, footer'))return;
+  if(seen.has(node)||node.querySelector('.atlas-item-check')||node.closest('nav, .atlas-dock, .atlas-overlay, .atlas-toc, footer')||node.parentElement?.closest('.atlas-trackable'))return;
   const raw=(node.innerText||node.textContent||'').replace(/\\s+/g,' ').trim();
   if(raw.length<18)return;
   if(node.matches('li')&&node.querySelector('ul,ol'))return;
