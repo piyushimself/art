@@ -5,7 +5,7 @@ const body=document.body;
 if(!body)return;
 const templateStyles=document.createElement('link');
 templateStyles.rel='stylesheet';
-templateStyles.href='assets/css/collection-template.css?v=20261115-atlas-redesign-3';
+templateStyles.href='assets/css/collection-template.css?v=20261115-premium-dark-4';
 document.head.appendChild(templateStyles);
 const pageFile=(location.pathname.split('/').pop()||'index.html').toLowerCase();
 const currentPage=PAGES.find(p=>decodeURIComponent(p.file).toLowerCase()===pageFile);
