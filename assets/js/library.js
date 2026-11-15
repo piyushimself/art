@@ -1,7 +1,7 @@
 /* The Atlas — lightweight navigation, page search and reading tools */
 (()=>{'use strict';
 /* Keep the shared responsive type/filter system current on every library page. */
-const atlasStyleHref='assets/css/mobile-system.css?v=uniform-20261116-theme-fix-2';
+const atlasStyleHref='assets/css/mobile-system.css?v=uniform-20261116-theme-fix-3';
 let atlasStyle=document.querySelector('link[rel="stylesheet"][href*="mobile-system.css"]');
 if(atlasStyle){if(!atlasStyle.href.endsWith('uniform-20261116'))atlasStyle.href=atlasStyleHref;}
 else{atlasStyle=document.createElement('link');atlasStyle.rel='stylesheet';atlasStyle.href=atlasStyleHref;document.head.appendChild(atlasStyle);}
@@ -11,7 +11,7 @@ const body=document.body;
 if(!body)return;
 const templateStyles=document.createElement('link');
 templateStyles.rel='stylesheet';
-templateStyles.href='assets/css/collection-template.css?v=20261115-premium-dark-4';
+templateStyles.href='assets/css/collection-template.css?v=20261116-toggle-fix-1';
 document.head.appendChild(templateStyles);
 const pageFile=(location.pathname.split('/').pop()||'index.html').toLowerCase();
 const currentPage=PAGES.find(p=>decodeURIComponent(p.file).toLowerCase()===pageFile);
