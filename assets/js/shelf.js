@@ -14,6 +14,8 @@ const resetButton=document.getElementById('shelfReset');
 if(!cards.length||!status)return;
 const safeRead=()=>{try{const raw=localStorage.getItem(KEY);const parsed=raw?JSON.parse(raw):[];return new Set(Array.isArray(parsed)?parsed.filter(x=>typeof x==='string'):[]);}catch(_){return new Set();}};
 let completed=safeRead();
+const validKeys=new Set(cards.map(keyFor));
+completed=new Set([...completed].filter(key=>validKeys.has(key)));
 let layout='grid';
 function save(){try{localStorage.setItem(KEY,JSON.stringify([...completed]));}catch(_){announce('Progress could not be saved in this browser.');}}
 function announce(message){let node=document.getElementById('shelfAnnounce');if(!node){node=document.createElement('p');node.id='shelfAnnounce';node.className='shelf-privacy';node.setAttribute('role','status');document.querySelector('.shelf-toolbar').appendChild(node);}node.textContent=message;}
@@ -70,6 +72,6 @@ resetButton.addEventListener('click',()=>{
  renderProgress();applyFilters();announce('Your local checklist has been reset.');
 });
 try{const savedLayout=localStorage.getItem(KEY+'.layout');if(savedLayout==='list')setLayout('list');}catch(_){}
-totalNode.textContent=String(cards.length);renderProgress();applyFilters();
+totalNode.textContent=String(cards.length);save();renderProgress();applyFilters();
 if(search&&search.value)syncSearch();
 })();
