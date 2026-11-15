@@ -78,3 +78,48 @@ body[data-library-theme] img{max-width:100%}
 .atlas-done-details[open]>summary:after{content:"−"}
 .atlas-done-details>.atlas-done-list{margin-top:8px}
 .atlas-done-details>.atlas-done-empty{margin-top:8px}
+
+
+/* Atlas home — align its title and filters with the collection-page scale */
+body[data-library-theme="home"] .hero{
+  min-height:0!important;
+  padding:34px 0 28px!important;
+}
+body[data-library-theme="home"] .hero h1{
+  font-size:clamp(38px,4.5vw,58px)!important;
+  line-height:1.02!important;
+  letter-spacing:-.04em!important;
+}
+body[data-library-theme="home"] .hero-copy{
+  font-size:16px!important;
+  line-height:1.6!important;
+}
+body[data-library-theme="home"] .searchbar{padding:12px 0 14px!important}
+body[data-library-theme="home"] .searchbox input{
+  min-height:42px!important;
+  padding:10px 14px!important;
+  font-size:14px!important;
+}
+body[data-library-theme="home"] .filters{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:7px!important;
+  margin-top:8px!important;
+}
+body[data-library-theme="home"] .filters .filter{
+  min-height:35px!important;
+  padding:7px 12px!important;
+  border-radius:7px!important;
+  font-size:12px!important;
+}
+@media(max-width:700px){
+  body[data-library-theme="home"] .hero{padding:24px 0 18px!important}
+  body[data-library-theme="home"] .hero h1{font-size:clamp(32px,8vw,42px)!important;line-height:1.06!important}
+  body[data-library-theme="home"] .hero-copy{font-size:14px!important}
+  body[data-library-theme="home"] .searchbox input{min-height:40px!important;font-size:13px!important}
+  body[data-library-theme="home"] .filters{
+    flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;
+    padding:2px 2px 8px!important;scrollbar-width:thin!important;
+  }
+  body[data-library-theme="home"] .filters .filter{flex:0 0 auto!important;font-size:11px!important}
+}
