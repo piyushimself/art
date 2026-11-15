@@ -291,3 +291,166 @@ body[data-color-mode="dark"] :is(button:focus-visible,a:focus-visible,input:focu
 /* Ensure the editorial serif display face wins over legacy page tokens */
 :root{--display:Georgia,"Iowan Old Style","Palatino Linotype",serif!important;--body:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important}
 body[data-library-theme]{--atlas-accent:#65766b!important;--atlas-accent-soft:#e6ebe5!important}
+
+
+/* ATLAS REDESIGN 2026-11 — clearer hierarchy, calmer palette, usable type scale */
+:root{
+  --bg:#f3f5f6!important;
+  --surface:#ffffff!important;
+  --ink:#202a35!important;
+  --mute:#586675!important;
+  --line:rgba(35,49,63,.16)!important;
+  --atlas-accent:#526d83!important;
+  --atlas-accent-soft:#e8eef2!important;
+  --display:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+  --body:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+  color-scheme:light!important;
+}
+html,body{background:#f3f5f6!important;color:#202a35!important;color-scheme:light!important}
+body{
+  font-family:var(--body)!important;
+  font-size:16px!important;
+  line-height:1.68!important;
+  letter-spacing:0!important;
+  -webkit-font-smoothing:antialiased;
+}
+body :is(h1,h2,h3,h4,h5,h6,.card-title,.title){
+  font-family:var(--display)!important;
+  color:#202a35!important;
+  font-weight:680!important;
+  letter-spacing:-.025em!important;
+  line-height:1.22!important;
+}
+body h1{font-size:clamp(2rem,4vw,3.15rem)!important;line-height:1.12!important}
+body h2{font-size:clamp(1.45rem,2.6vw,2rem)!important}
+body h3{font-size:1.12rem!important}
+body :is(p,li,dd,blockquote,label,small,.meta,.metadata,.muted,.hint,.helper,.caption,.description,.subtitle,.intro,.lead,.section-desc){
+  color:#586675!important;
+}
+body :is(p,li,dd){font-size:1rem!important;line-height:1.68!important}
+body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card){
+  background:#fff!important;
+  color:#202a35!important;
+  border:1px solid rgba(35,49,63,.15)!important;
+  border-radius:13px!important;
+  box-shadow:0 2px 8px rgba(28,43,56,.045)!important;
+  padding:16px 18px!important;
+  transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease!important;
+}
+body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card):hover{
+  border-color:rgba(82,109,131,.48)!important;
+  box-shadow:0 5px 16px rgba(28,43,56,.075)!important;
+}
+body :is(.card h2,.card h3,.card h4,.manga-card h3,.film-card h3,.book-card h3,.resource-card h3,.card-title){
+  color:#202a35!important;
+  font-size:1.08rem!important;
+  line-height:1.35!important;
+  font-weight:650!important;
+  margin:0 0 7px!important;
+}
+body :is(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p){
+  color:#586675!important;
+  font-size:.94rem!important;
+  line-height:1.58!important;
+}
+body :is(.card .meta,.card small,.card .muted,.card .metadata,.card .platform-row,.card .cat-badge){
+  color:#647383!important;
+  font-size:.78rem!important;
+  line-height:1.5!important;
+}
+body :is(input,select,textarea){
+  background:#fff!important;color:#202a35!important;border:1px solid rgba(35,49,63,.24)!important;
+  border-radius:9px!important;font:inherit!important;min-height:42px;
+}
+body :is(input::placeholder,textarea::placeholder){color:#6b7885!important;opacity:1!important}
+body :is(button,.btn,.button,[role=button]){
+  font-family:var(--body)!important;
+  border-radius:9px!important;
+}
+body :is(.pill,.filter,.chip,.tag,.badge,.cat-badge,.sort-sel){
+  background:#edf1f4!important;color:#435363!important;border:1px solid rgba(35,49,63,.12)!important;
+}
+body :is(.pill.active,.filter.active,.chip.active,.active-filter){
+  background:#e3ebf1!important;color:#243c50!important;border-color:#7890a3!important;
+}
+body :is(.stats-bar,.stat-card,.summary-card,.toolbar,.controls,.filter-row,.search-wrap){
+  background:#edf1f4!important;color:#202a35!important;border-color:rgba(35,49,63,.13)!important;
+}
+body :is(.atlas-dock,.atlas-dialog,.atlas-toc,.atlas-completed-panel,.atlas-result){
+  background:#fff!important;color:#202a35!important;border-color:rgba(35,49,63,.16)!important;
+}
+body :is(.atlas-dock a,.atlas-dock button,.atlas-dock label,.atlas-toc a,.atlas-result strong){color:#202a35!important}
+body :is(.atlas-page-check,.atlas-item-check){
+  background:#f7f9fa!important;color:#435363!important;border-color:rgba(35,49,63,.18)!important;
+}
+body :is(a:hover){color:#405e77!important}
+body :is(button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){
+  outline:3px solid #7894aa!important;outline-offset:3px!important;
+}
+.atlas-dock{
+  gap:5px!important;padding:6px!important;
+  border:1px solid rgba(35,49,63,.18)!important;
+  box-shadow:0 8px 28px rgba(22,35,47,.15)!important;
+}
+.atlas-dock a,.atlas-dock button,.atlas-dock label{
+  min-height:42px!important;padding:8px 14px!important;font-size:.86rem!important;font-weight:600!important;
+}
+.atlas-theme-toggle{background:#edf1f4!important;color:#263c4e!important;border-color:#d4dde4!important}
+.atlas-dialog{padding:24px!important;border-radius:16px!important}
+.atlas-result{padding:14px 16px!important;border-radius:10px!important}
+body main .section .grid>.card{
+  padding:17px 18px!important;
+  border-radius:13px!important;
+  gap:7px 14px!important;
+}
+body main .section .grid>.card h3{font-size:1.08rem!important;line-height:1.35!important}
+body main .section .grid>.card p{font-size:.92rem!important;line-height:1.55!important}
+body main .section .grid>.card .card-bottom{font-size:.72rem!important;color:#647383!important}
+@media(max-width:760px){
+  body{font-size:16px!important;line-height:1.65!important}
+  body :is(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid,.items-grid,.collection-grid,.entries-grid){
+    grid-template-columns:minmax(0,1fr)!important;gap:12px!important;
+  }
+  body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card){
+    padding:16px!important;border-radius:12px!important;
+  }
+  body :is(.card h2,.card h3,.card h4,.manga-card h3,.film-card h3,.book-card h3,.resource-card h3,.card-title){
+    font-size:1.08rem!important;
+  }
+  body :is(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p){
+    font-size:.94rem!important;line-height:1.58!important;
+  }
+}
+@media(max-width:560px){
+  .atlas-dock{left:7px!important;right:7px!important;bottom:max(7px,env(safe-area-inset-bottom))!important;gap:2px!important;padding:5px!important}
+  .atlas-dock a,.atlas-dock button,.atlas-dock label{min-height:42px!important;padding:7px 4px!important;font-size:.73rem!important}
+  .atlas-dock .atlas-page-check{gap:4px!important}
+  body main .section .grid>.card{padding:15px!important;gap:6px 8px!important}
+  body main .section .grid>.card h3{font-size:1.03rem!important}
+  body main .section .grid>.card p{font-size:.9rem!important;line-height:1.5!important}
+  body main .section .grid>.card .card-bottom{font-size:.65rem!important}
+}
+html[data-color-mode="dark"],html[data-color-mode="dark"] body,body[data-color-mode="dark"]{
+  background:#141a20!important;color:#e8edf1!important;color-scheme:dark!important;
+}
+html[data-color-mode="dark"] body :is(h1,h2,h3,h4,h5,h6,strong,b,.card-title,.title),
+body[data-color-mode="dark"] :is(h1,h2,h3,h4,h5,h6,strong,b,.card-title,.title){color:#e8edf1!important}
+html[data-color-mode="dark"] body :is(p,li,dd,blockquote,label,small,.meta,.metadata,.muted,.hint,.helper,.caption,.description,.subtitle,.intro,.lead,.section-desc),
+body[data-color-mode="dark"] :is(p,li,dd,blockquote,label,small,.meta,.metadata,.muted,.hint,.helper,.caption,.description,.subtitle,.intro,.lead,.section-desc){color:#b6c0c9!important}
+html[data-color-mode="dark"] body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card,.atlas-dock,.atlas-dialog,.atlas-toc,.atlas-completed-panel,.atlas-result),
+body[data-color-mode="dark"] :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card,.atlas-dock,.atlas-dialog,.atlas-toc,.atlas-completed-panel,.atlas-result){
+  background:#1d2730!important;color:#e8edf1!important;border-color:#35434e!important;box-shadow:none!important;
+}
+html[data-color-mode="dark"] body :is(input,select,textarea),
+body[data-color-mode="dark"] :is(input,select,textarea){background:#1d2730!important;color:#e8edf1!important;border-color:#46545f!important}
+html[data-color-mode="dark"] body :is(.pill,.filter,.chip,.tag,.badge,.cat-badge,.sort-sel,.stats-bar,.stat-card,.summary-card,.toolbar,.controls,.filter-row,.search-wrap),
+body[data-color-mode="dark"] :is(.pill,.filter,.chip,.tag,.badge,.cat-badge,.sort-sel,.stats-bar,.stat-card,.summary-card,.toolbar,.controls,.filter-row,.search-wrap){background:#27333d!important;color:#d1dbe2!important;border-color:#3c4a55!important}
+html[data-color-mode="dark"] body :is(.pill.active,.filter.active,.chip.active,.active-filter),
+body[data-color-mode="dark"] :is(.pill.active,.filter.active,.chip.active,.active-filter){background:#334858!important;color:#e5eef5!important;border-color:#7892a5!important}
+html[data-color-mode="dark"] body :is(a,.atlas-dock a,.atlas-dock button,.atlas-dock label,.atlas-toc a,.atlas-result strong,.atlas-page-check,.atlas-item-check),
+body[data-color-mode="dark"] :is(a,.atlas-dock a,.atlas-dock button,.atlas-dock label,.atlas-toc a,.atlas-result strong,.atlas-page-check,.atlas-item-check){color:#dce6ed!important}
+html[data-color-mode="dark"] body :is(.atlas-page-check,.atlas-item-check),
+body[data-color-mode="dark"] :is(.atlas-page-check,.atlas-item-check){background:#26323b!important;border-color:#40505c!important}
+html[data-color-mode="dark"] .atlas-theme-toggle,body[data-color-mode="dark"] .atlas-theme-toggle{background:#27333d!important;color:#e8edf1!important;border-color:#46545f!important}
+html[data-color-mode="dark"] body :is(button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible),
+body[data-color-mode="dark"] :is(button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline-color:#91aabd!important}
