@@ -19,121 +19,121 @@ body{
  font:400 16px/1.65 var(--body)!important;
  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility
 }
-body :where(p,li,dd,blockquote,label){font-family:var(--body)}
-body :where(p,li,dd){line-height:1.72}
-body :where(p){max-width:var(--read)}
-body :where(h1,h2,h3,h4,h5,h6){
+body :is(p,li,dd,blockquote,label){font-family:var(--body)}
+body :is(p,li,dd){line-height:1.72}
+body :is(p){max-width:var(--read)}
+body :is(h1,h2,h3,h4,h5,h6){
  color:var(--ink)!important;font-family:var(--display)!important;
  font-weight:800!important;letter-spacing:-.025em!important;line-height:1.14!important;
  text-wrap:pretty
 }
-body :where(a){color:inherit;text-underline-offset:3px}
-body :where(img,video,svg,canvas,iframe){max-width:100%;height:auto}
-body :where(button,input,select,textarea){font:inherit}
-body :where(button,a,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #2F4BFF!important;outline-offset:3px!important}
+body :is(a){color:inherit;text-underline-offset:3px}
+body :is(img,video,svg,canvas,iframe){max-width:100%;height:auto}
+body :is(button,input,select,textarea){font:inherit}
+body :is(button,a,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #2F4BFF!important;outline-offset:3px!important}
 body ::selection{background:#2F4BFF;color:white}
-body :where(pre){max-width:100%;overflow:auto}
-body :where(ul,ol){padding-left:1.4em}
-body :where(hr){border:0;border-top:1.5px solid var(--line);margin:28px 0}
-body :where(.container,.wrapper,.wrap,.shell,.main,.main-content,.content,.page,.page-wrap,.page-content,.content-wrap,.app-container,.layout,.curriculum,.library,.dashboard,.inner,.main-container){
+body :is(pre){max-width:100%;overflow:auto}
+body :is(ul,ol){padding-left:1.4em}
+body :is(hr){border:0;border-top:1.5px solid var(--line);margin:28px 0}
+body :is(.container,.wrapper,.wrap,.shell,.main,.main-content,.content,.page,.page-wrap,.page-content,.content-wrap,.app-container,.layout,.curriculum,.library,.dashboard,.inner,.main-container){
  width:min(var(--content),calc(100% - 56px))!important;max-width:var(--content)!important;
  margin-left:auto!important;margin-right:auto!important
 }
-body :where(main){min-width:0}
-body :where(header:not(.atlas-dialog-head),.hero,.masthead,.page-header,.header,.top){
+body :is(main){min-width:0}
+body :is(header:not(.atlas-dialog-head),.hero,.masthead,.page-header,.header,.top){
  min-width:0
 }
-body :where(header h1,.hero h1,.masthead h1,.page-header h1,.top h1,h1){
+body :is(header h1,.hero h1,.masthead h1,.page-header h1,.top h1,h1){
  font-size:clamp(2.15rem,6vw,4.8rem)!important;line-height:.99!important;
  letter-spacing:-.04em!important;margin-top:0
 }
-body :where(h2){font-size:clamp(1.45rem,3.2vw,2rem)!important;line-height:1.12!important}
-body :where(h3){font-size:clamp(1.08rem,2vw,1.3rem)!important;line-height:1.2!important}
-body :where(.subtitle,.description,.intro,.lead,.hero p,.top p,.page-header p){
+body :is(h2){font-size:clamp(1.45rem,3.2vw,2rem)!important;line-height:1.12!important}
+body :is(h3){font-size:clamp(1.08rem,2vw,1.3rem)!important;line-height:1.2!important}
+body :is(.subtitle,.description,.intro,.lead,.hero p,.top p,.page-header p){
  max-width:66ch;color:var(--mute)!important;font-size:1.05rem!important;line-height:1.7!important
 }
 /* Header and hero: template's aligned two-column composition */
-body :where(.top,.hero-header,.page-hero,.hero-section,.masthead,.page-header){
+body :is(.top,.hero-header,.page-hero,.hero-section,.masthead,.page-header){
  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(220px,.85fr);
  gap:clamp(18px,4vw,40px);align-items:center;
  padding-block:clamp(26px,5vw,56px)!important;margin-bottom:clamp(20px,3vw,36px)
 }
-body :where(.hero svg,.hero img,.hero-art){width:100%;max-width:360px;height:auto;display:block;margin-inline:auto}
-body :where(.eyebrow,.kicker,.label,.section-label,.overline){
+body :is(.hero svg,.hero img,.hero-art){width:100%;max-width:360px;height:auto;display:block;margin-inline:auto}
+body :is(.eyebrow,.kicker,.label,.section-label,.overline){
  color:var(--mute)!important;font:600 .78rem/1.4 var(--body)!important;
  letter-spacing:.12em!important;text-transform:uppercase
 }
 /* Inputs, search, filters, view controls */
-body :where(input[type=search],input[type=text],input[type=number],input[type=email],input[type=date],select,textarea){
+body :is(input[type=search],input[type=text],input[type=number],input[type=email],input[type=date],select,textarea){
  max-width:100%;min-width:0;min-height:46px;padding:10px 15px!important;
  border:1.5px solid var(--line)!important;border-radius:999px!important;
  background:var(--surface)!important;color:var(--ink)!important;
  font:500 15px/1.4 var(--body)!important;box-shadow:none!important
 }
-body :where(textarea){border-radius:14px!important;min-height:100px}
-body :where(input::placeholder,textarea::placeholder){color:var(--mute)!important;opacity:.85}
-body :where(button,.btn,.button,[role=button]){
+body :is(textarea){border-radius:14px!important;min-height:100px}
+body :is(input::placeholder,textarea::placeholder){color:var(--mute)!important;opacity:.85}
+body :is(button,.btn,.button,[role=button]){
  min-height:42px;border-radius:999px;cursor:pointer;
  font-family:var(--body)!important;transition:background .16s,border-color .16s,transform .16s
 }
-body :where(.bar,.toolbar,.controls,.filters,.filter-bar,.control-bar,.search-controls,.topbar,.filter-row,.actions-row){
+body :is(.bar,.toolbar,.controls,.filters,.filter-bar,.control-bar,.search-controls,.topbar,.filter-row,.actions-row){
  display:flex;align-items:center;flex-wrap:wrap;gap:10px;min-width:0;margin-bottom:18px
 }
-body :where(.bar input[type=search],.toolbar input[type=search],.controls input[type=search],.filters input[type=search]){
+body :is(.bar input[type=search],.toolbar input[type=search],.controls input[type=search],.filters input[type=search]){
  flex:1 1 240px;width:auto
 }
-body :where(.nav,.tabs,.tab-bar,.nav-tabs,.category-nav,.filter-pills){
+body :is(.nav,.tabs,.tab-bar,.nav-tabs,.category-nav,.filter-pills){
  display:flex;flex-wrap:wrap;align-items:center;gap:8px;max-width:100%;margin-bottom:28px
 }
-body :where(.nav button,.tabs button,.tab-bar button,.nav-tabs a,.category-nav button,.filter-pills button){
+body :is(.nav button,.tabs button,.tab-bar button,.nav-tabs a,.category-nav button,.filter-pills button){
  display:inline-flex;align-items:center;justify-content:center;gap:8px;
  min-height:42px;padding:7px 14px!important;border:1.5px solid var(--line)!important;
  background:var(--surface)!important;color:var(--ink)!important;font-size:14px!important
 }
-body :where(.nav button[aria-pressed=true],.tabs button[aria-selected=true],.tab-bar button.active,.nav-tabs .active,.filter.active,.active-filter){
+body :is(.nav button[aria-pressed=true],.tabs button[aria-selected=true],.tab-bar button.active,.nav-tabs .active,.filter.active,.active-filter){
  background:var(--ink)!important;color:var(--bg)!important;border-color:var(--ink)!important
 }
 /* Sections, cards and catalogue grids */
-body :where(section){min-width:0;margin-block:clamp(24px,4vw,48px)}
-body :where(.sec,.section-heading,.section-header,.stage-header,.category-heading,.collection-heading){
+body :is(section){min-width:0;margin-block:clamp(24px,4vw,48px)}
+body :is(.sec,.section-heading,.section-header,.stage-header,.category-heading,.collection-heading){
  display:flex;flex-wrap:wrap;align-items:baseline;gap:5px 16px;
  margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--ink)
 }
-body :where(.sec h2,.section-heading h2,.section-header h2,.category-heading h2){margin:0}
-body :where(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid,.items-grid,.collection-grid,.entries-grid){
+body :is(.sec h2,.section-heading h2,.section-header h2,.category-heading h2){margin:0}
+body :is(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid,.items-grid,.collection-grid,.entries-grid){
  display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,245px),1fr));gap:18px;min-width:0
 }
-body :where(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.panel,.section-card,.item-card){
+body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.panel,.section-card,.item-card){
  min-width:0;max-width:100%;overflow-wrap:anywhere;
  background:var(--surface)!important;color:var(--ink)!important;
  border:1.5px solid var(--line)!important;border-radius:26px 7px 26px 7px!important;
  box-shadow:none!important
 }
-body :where(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.item-card){
+body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.item-card){
  display:flex;flex-direction:column;overflow:hidden
 }
-body :where(.card .body,.card-body,.card-content,.item-body,.manga-card .body,.film-card .body){
+body :is(.card .body,.card-body,.card-content,.item-body,.manga-card .body,.film-card .body){
  padding:16px!important;min-width:0
 }
-body :where(.card h2,.card h3,.card h4,.manga-card h3,.film-card h3,.book-card h3,.resource-card h3){
+body :is(.card h2,.card h3,.card h4,.manga-card h3,.film-card h3,.book-card h3,.resource-card h3){
  margin:0 0 8px!important;font-size:1.18rem!important;line-height:1.2!important
 }
-body :where(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p,.meta,.muted,.metadata){
+body :is(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p,.meta,.muted,.metadata){
  color:var(--mute)!important;line-height:1.65
 }
-body :where(.tags,.tag-list,.chips,.badges){display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-body :where(.tags span,.tag,.chip,.badge){font-size:.82rem;line-height:1.4;padding:3px 9px;border:1px solid var(--line);border-radius:999px;color:var(--mute)}
+body :is(.tags,.tag-list,.chips,.badges){display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+body :is(.tags span,.tag,.chip,.badge){font-size:.82rem;line-height:1.4;padding:3px 9px;border:1px solid var(--line);border-radius:999px;color:var(--mute)}
 /* Lists and data tables */
-body :where(.list,.list-view,.rows-view){display:flex;flex-direction:column;gap:10px;min-width:0}
-body :where(.list .card,.list-view .card,.rows-view .card){flex-direction:row;align-items:stretch}
-body :where(table){width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;overflow:hidden}
-body :where(th){background:var(--surface);color:var(--mute);font:600 .78rem/1.4 var(--body);letter-spacing:.05em;text-transform:uppercase}
-body :where(td,th){padding:12px 14px!important;border-bottom:1px solid var(--line)!important;text-align:left;vertical-align:top}
-body :where(td){font-size:.92rem;line-height:1.55}
-body :where(.table-wrap,.table-container,.table-responsive){max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
-body :where(footer){color:var(--mute)!important;font-size:.9rem;line-height:1.6;padding-top:12px}
+body :is(.list,.list-view,.rows-view){display:flex;flex-direction:column;gap:10px;min-width:0}
+body :is(.list .card,.list-view .card,.rows-view .card){flex-direction:row;align-items:stretch}
+body :is(table){width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;overflow:hidden}
+body :is(th){background:var(--surface);color:var(--mute);font:600 .78rem/1.4 var(--body);letter-spacing:.05em;text-transform:uppercase}
+body :is(td,th){padding:12px 14px!important;border-bottom:1px solid var(--line)!important;text-align:left;vertical-align:top}
+body :is(td){font-size:.92rem;line-height:1.55}
+body :is(.table-wrap,.table-container,.table-responsive){max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+body :is(footer){color:var(--mute)!important;font-size:.9rem;line-height:1.6;padding-top:12px}
 /* Progress and shared page controls */
-body :where(input[type=checkbox],input[type=radio]){width:19px;height:19px;accent-color:#2F4BFF;flex:none}
+body :is(input[type=checkbox],input[type=radio]){width:19px;height:19px;accent-color:#2F4BFF;flex:none}
 .atlas-dock{background:var(--surface)!important;border:1px solid var(--line)!important;box-shadow:0 8px 24px rgba(20,19,43,.14)!important;backdrop-filter:blur(16px)}
 .atlas-dock button,.atlas-dock a{min-height:42px!important}
 .atlas-dialog,.atlas-toc,.atlas-completed-panel{background:var(--surface)!important;color:var(--ink)!important;border-color:var(--line)!important}
@@ -141,64 +141,64 @@ body :where(input[type=checkbox],input[type=radio]){width:19px;height:19px;accen
 /* Mobile: a phone layout, not a squeezed desktop page */
 @media(max-width:760px){
  body{font-size:16px!important;line-height:1.68!important}
- body :where(.container,.wrapper,.wrap,.shell,.main,.main-content,.content,.page,.page-wrap,.page-content,.content-wrap,.app-container,.layout,.curriculum,.library,.dashboard,.inner,.main-container){
+ body :is(.container,.wrapper,.wrap,.shell,.main,.main-content,.content,.page,.page-wrap,.page-content,.content-wrap,.app-container,.layout,.curriculum,.library,.dashboard,.inner,.main-container){
   width:calc(100% - 32px)!important;max-width:none!important;margin-inline:auto!important
  }
- body :where(.top,.hero-header,.page-hero,.hero-section,.masthead,.page-header){
+ body :is(.top,.hero-header,.page-hero,.hero-section,.masthead,.page-header){
   grid-template-columns:1fr!important;gap:18px!important;padding-block:24px!important;margin-bottom:18px!important
  }
- body :where(.hero){order:-1;max-width:320px;margin-inline:auto}
- body :where(h1){font-size:clamp(2.15rem,10vw,3.35rem)!important;line-height:1.02!important}
- body :where(h2){font-size:clamp(1.45rem,7vw,1.9rem)!important}
- body :where(h3){font-size:1.16rem!important}
- body :where(p,li,dd){font-size:1rem!important;line-height:1.72!important}
- body :where(.bar,.toolbar,.controls,.filters,.filter-bar,.control-bar,.search-controls,.topbar,.filter-row,.actions-row){
+ body :is(.hero){order:-1;max-width:320px;margin-inline:auto}
+ body :is(h1){font-size:clamp(2.15rem,10vw,3.35rem)!important;line-height:1.02!important}
+ body :is(h2){font-size:clamp(1.45rem,7vw,1.9rem)!important}
+ body :is(h3){font-size:1.16rem!important}
+ body :is(p,li,dd){font-size:1rem!important;line-height:1.72!important}
+ body :is(.bar,.toolbar,.controls,.filters,.filter-bar,.control-bar,.search-controls,.topbar,.filter-row,.actions-row){
   gap:8px!important;width:100%;margin-bottom:14px
  }
- body :where(.bar input[type=search],.toolbar input[type=search],.controls input[type=search],.filters input[type=search]){
+ body :is(.bar input[type=search],.toolbar input[type=search],.controls input[type=search],.filters input[type=search]){
   flex:1 1 100%;width:100%!important
  }
- body :where(.bar select,.toolbar select,.controls select,.filters select){flex:1 1 130px;min-width:0}
- body :where(.nav,.tabs,.tab-bar,.nav-tabs,.category-nav,.filter-pills){
+ body :is(.bar select,.toolbar select,.controls select,.filters select){flex:1 1 130px;min-width:0}
+ body :is(.nav,.tabs,.tab-bar,.nav-tabs,.category-nav,.filter-pills){
   flex-wrap:nowrap!important;overflow-x:auto!important;white-space:nowrap;
   padding:2px 2px 10px;scrollbar-width:thin;-webkit-overflow-scrolling:touch
  }
- body :where(.nav button,.tabs button,.tab-bar button,.nav-tabs a,.category-nav button,.filter-pills button){flex:0 0 auto}
- body :where(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid,.items-grid,.collection-grid,.entries-grid){
+ body :is(.nav button,.tabs button,.tab-bar button,.nav-tabs a,.category-nav button,.filter-pills button){flex:0 0 auto}
+ body :is(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid,.items-grid,.collection-grid,.entries-grid){
   grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important
  }
- body :where(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.panel,.section-card,.item-card){
+ body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.panel,.section-card,.item-card){
   border-radius:20px 6px 20px 6px!important
  }
- body :where(.card .body,.card-body,.card-content,.item-body){padding:13px!important}
- body :where(.card h2,.card h3,.card h4,.manga-card h3,.film-card h3,.book-card h3,.resource-card h3){font-size:1.02rem!important}
- body :where(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p){font-size:.9rem!important}
- body :where(.list .card,.list-view .card,.rows-view .card){flex-direction:row}
- body :where(.list .body,.list-view .card-body){min-width:0}
- body :where(.table-wrap,.table-container,.table-responsive){width:100%!important}
- body :where(table){min-width:600px}
- body :where(.sidebar){position:static!important;width:auto!important;max-height:none!important}
- body :where(.app,.main-layout,.content-layout){display:block!important}
- body :where(.modal,.dialog,.popup){width:calc(100vw - 24px)!important;max-width:none!important;max-height:88dvh;overflow:auto}
- body :where(button,.btn,.button,[role=button]){min-height:44px}
+ body :is(.card .body,.card-body,.card-content,.item-body){padding:13px!important}
+ body :is(.card h2,.card h3,.card h4,.manga-card h3,.film-card h3,.book-card h3,.resource-card h3){font-size:1.02rem!important}
+ body :is(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p){font-size:.9rem!important}
+ body :is(.list .card,.list-view .card,.rows-view .card){flex-direction:row}
+ body :is(.list .body,.list-view .card-body){min-width:0}
+ body :is(.table-wrap,.table-container,.table-responsive){width:100%!important}
+ body :is(table){min-width:600px}
+ body :is(.sidebar){position:static!important;width:auto!important;max-height:none!important}
+ body :is(.app,.main-layout,.content-layout){display:block!important}
+ body :is(.modal,.dialog,.popup){width:calc(100vw - 24px)!important;max-width:none!important;max-height:88dvh;overflow:auto}
+ body :is(button,.btn,.button,[role=button]){min-height:44px}
  .atlas-dock{left:8px!important;right:8px!important;bottom:8px!important;justify-content:space-around;gap:4px!important}
  .atlas-dock button,.atlas-dock a{flex:1;min-width:0;padding-inline:7px!important;font-size:12px!important}
  .atlas-toc{width:calc(100vw - 20px)!important;right:10px!important;bottom:66px!important}
 }
 @media(max-width:520px){
- body :where(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid,.items-grid,.collection-grid,.entries-grid){
+ body :is(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid,.items-grid,.collection-grid,.entries-grid){
   grid-template-columns:minmax(0,1fr)!important;gap:12px!important
  }
- body :where(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.item-card){
-  display:grid;grid-template-columns:84px minmax(0,1fr);align-items:stretch
+ body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.item-card){
+  display:flex;flex-direction:column
  }
- body :where(.card .art,.card .poster,.card .cover,.card .image,.manga-card .art,.film-card .art){
-  grid-row:1;grid-column:1;width:84px;height:100%;min-height:100px;aspect-ratio:auto;overflow:hidden
+ body :is(.card .art,.card .poster,.card .cover,.card .image,.manga-card .art,.film-card .art){
+  width:100%;height:auto;min-height:0;aspect-ratio:4/3;overflow:hidden
  }
- body :where(.card .body,.card-body,.card-content,.item-body){grid-column:2;grid-row:1;padding:13px!important}
- body :where(.card .foot){grid-column:1/-1}
- body :where(.list .card,.list-view .card,.rows-view .card){display:flex;flex-direction:row}
- body :where(.list .card .art,.list-view .card .art){width:76px;flex:none}
+ body :is(.card .body,.card-body,.card-content,.item-body){padding:14px!important}
+ body :is(.card h2,.card h3,.card h4){font-size:1.12rem!important}
+ body :is(.list .card,.list-view .card,.rows-view .card){display:flex;flex-direction:row}
+ body :is(.list .card .art,.list-view .card .art){width:76px;min-height:0;aspect-ratio:auto;flex:none}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 @media print{.atlas-dock,.atlas-overlay,.atlas-toc,.atlas-backtop{display:none!important}body{background:#fff!important;color:#111!important}}
