@@ -20,7 +20,8 @@ body{
  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility
 }
 body :is(p,li,dd,blockquote,label){font-family:var(--body)}
-body :is(p,li,dd){line-height:1.72}
+body :is(p,li,dd,blockquote){font-size:1rem!important;line-height:1.72!important}
+body :is(.meta,.metadata,.muted,.hint,.helper,.caption,.small,.small-text){font-size:max(.85rem,1em)!important;line-height:1.55!important}
 body :is(p){max-width:var(--read)}
 body :is(h1,h2,h3,h4,h5,h6){
  color:var(--ink)!important;font-family:var(--display)!important;
@@ -119,7 +120,7 @@ body :is(.card h2,.card h3,.card h4,.manga-card h3,.film-card h3,.book-card h3,.
  margin:0 0 8px!important;font-size:1.18rem!important;line-height:1.2!important
 }
 body :is(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p,.meta,.muted,.metadata){
- color:var(--mute)!important;line-height:1.65
+ color:var(--mute)!important;font-size:.94rem!important;line-height:1.65
 }
 body :is(.tags,.tag-list,.chips,.badges){display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 body :is(.tags span,.tag,.chip,.badge){font-size:.82rem;line-height:1.4;padding:3px 9px;border:1px solid var(--line);border-radius:999px;color:var(--mute)}
