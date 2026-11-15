@@ -72,7 +72,7 @@ html[data-color-mode="light"] .atlas-done-kicker{color:#526d63!important}
    over legacy per-page dock declarations. */
 @media(max-width:640px){
  .atlas-dock:not(.is-expanded){left:auto!important;right:12px!important;bottom:max(12px,env(safe-area-inset-bottom))!important;transform:none!important;width:auto!important;max-width:calc(100vw - 24px)!important;min-width:0!important;display:flex!important;gap:5px!important;padding:5px!important}
- .atlas-dock:not(.is-expanded)>:not(.atlas-home):not([data-atlas-more]){display:none!important}
+ .atlas-dock:not(.is-expanded)>:not(.atlas-home):not([data-atlas-more]):not(.atlas-page-check){display:none!important}
  .atlas-dock:not(.is-expanded) .atlas-home,.atlas-dock:not(.is-expanded) [data-atlas-more]{flex:0 0 auto!important;min-width:0!important;min-height:36px!important;padding:6px 11px!important}
  .atlas-dock.is-expanded{left:12px!important;right:12px!important;bottom:max(12px,env(safe-area-inset-bottom))!important;transform:none!important;width:auto!important;max-width:none!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:5px!important;padding:8px!important}
  .atlas-dock.is-expanded>*{min-width:0!important;white-space:nowrap!important}
