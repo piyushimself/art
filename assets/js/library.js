@@ -1,7 +1,7 @@
 /* The Atlas — lightweight navigation, page search and reading tools */
 (()=>{'use strict';
 /* Keep the shared responsive type/filter system current on every library page. */
-const atlasStyleHref='assets/css/mobile-system.css?v=uniform-20261116-palette-safe-4';
+const atlasStyleHref='assets/css/mobile-system.css?v=uniform-20261116-top500-title-5';
 let atlasStyle=document.querySelector('link[rel="stylesheet"][href*="mobile-system.css"]');
 if(atlasStyle){if(!atlasStyle.href.includes('uniform-20261116-palette-safe-4'))atlasStyle.href=atlasStyleHref;}
 else{atlasStyle=document.createElement('link');atlasStyle.rel='stylesheet';atlasStyle.href=atlasStyleHref;document.head.appendChild(atlasStyle);}
@@ -11,14 +11,55 @@ const body=document.body;
 if(!body)return;
 const templateStyles=document.createElement('link');
 templateStyles.rel='stylesheet';
-templateStyles.href='assets/css/collection-template.css?v=20261116-mobile-dock-2';
+templateStyles.href='assets/css/collection-template.css?v=20261116-top500-title-5';
 document.head.appendChild(templateStyles);
 const pageFile=(location.pathname.split('/').pop()||'index.html').toLowerCase();
 const currentPage=PAGES.find(p=>decodeURIComponent(p.file).toLowerCase()===pageFile);
-if(currentPage){document.title=currentPage.title;const heading=document.querySelector('h1');if(heading)heading.textContent=currentPage.title;}
+if(currentPage){document.title=currentPage.title;}
 
 const inferredTheme=/(manga|manhwa|comic|taboo)/.test(pageFile)?'manga':/(film|cinema|movie|curator|arc)/.test(pageFile)?'culture':/(poetry|ross|art|watercolour|painting|resource)/.test(pageFile)?'art':/(curriculum|loom|marginalia|meal|fiction)/.test(pageFile)?'learning':'utility';
 if(!body.dataset.libraryTheme)body.dataset.libraryTheme=inferredTheme;
+/* Page-specific repair: Top 500 Adult Manga.
+   Preserve its authored two-line title and dark masthead; the shared colour
+   token layer must not turn the masthead into a pale panel with invisible text. */
+if(pageFile==='top-500-adult-manga.html'){
+ const pageFix=document.createElement('style');
+ pageFix.textContent=`
+  body[data-library-theme="manga"]>header{
+   display:block!important;min-height:0!important;height:auto!important;
+   padding:38px 24px 28px!important;margin:0!important;
+   background:#0d0d0d!important;color:#f5f0e8!important;
+   border-bottom:1px solid #343434!important;
+  }
+  body[data-library-theme="manga"]>header h1{
+   display:block!important;color:#f5f0e8!important;
+   font-family:"Bebas Neue",Impact,sans-serif!important;
+   font-size:clamp(42px,9vw,76px)!important;line-height:.96!important;
+   letter-spacing:.025em!important;margin:0!important;
+  }
+  body[data-library-theme="manga"]>header h1 span{color:#c0392b!important}
+  body[data-library-theme="manga"]>header p{
+   color:#b9b4aa!important;font-size:12px!important;line-height:1.55!important;
+   letter-spacing:.12em!important;margin:12px 0 0!important;max-width:68ch!important;
+  }
+  body[data-library-theme="manga"]>header .header-meta{
+   display:flex!important;gap:8px!important;flex-wrap:wrap!important;margin-top:18px!important;
+  }
+  body[data-library-theme="manga"]>header .meta-pill{
+   background:#1b1d1e!important;color:#c5c0b8!important;
+   border:1px solid #393d3e!important;padding:7px 10px!important;
+   font-size:10px!important;letter-spacing:.08em!important;
+  }
+  body[data-library-theme="manga"]>header .meta-pill b{color:#e06a54!important}
+  @media(max-width:640px){
+   body[data-library-theme="manga"]>header{padding:28px 20px 22px!important}
+   body[data-library-theme="manga"]>header h1{font-size:clamp(40px,11vw,58px)!important}
+   body[data-library-theme="manga"]>header .header-meta{gap:7px!important;margin-top:14px!important}
+   body[data-library-theme="manga"]>header .meta-pill{padding:6px 8px!important;font-size:9px!important}
+  }`;
+ document.head.appendChild(pageFix);
+}
+
 const theme=body.dataset.libraryTheme||'home';
 const progress=document.createElement('div');progress.className='atlas-progress';progress.setAttribute('aria-hidden','true');document.body.appendChild(progress);
 const dock=document.createElement('nav');dock.className='atlas-dock';dock.setAttribute('aria-label','Library tools');
