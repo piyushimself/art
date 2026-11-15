@@ -492,3 +492,14 @@ html[data-color-mode] body :is(.tag,.badge,.pill,.chip,.label,.category,.genre,.
 }
 html[data-color-mode] body :is(button.active,.filter.active,.filter[aria-pressed="true"],.active-filter,[aria-selected="true"]){background:#526d63!important;color:#fff!important}
 html[data-color-mode] body :is(input,select,textarea,option){background-color:var(--atlas-page-surface)!important;color:var(--atlas-page-fg)!important}
+
+
+/* Mobile navigation dock: collapsed by default, expanded only on request. */
+@media(max-width:640px){
+ .atlas-dock:not(.is-expanded)>:not(.atlas-home):not([data-atlas-more]){display:none!important}
+ .atlas-dock:not(.is-expanded){width:auto!important;min-width:0!important;gap:5px!important;padding:5px!important}
+ .atlas-dock.is-expanded{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;width:min(320px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)!important;gap:5px!important;padding:8px!important}
+ .atlas-dock.is-expanded>*{min-width:0!important;white-space:nowrap!important}
+ .atlas-dock.is-expanded .atlas-home{grid-column:1/-1}
+ .atlas-dock [data-atlas-more]{background:#557d68!important;color:#fff!important}
+}
