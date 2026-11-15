@@ -39,8 +39,8 @@
 
 /* Warm editorial palette — parchment, olive and muted terracotta */
 :root{
- --bg:#f4f1e9;--ink:#28352f;--muted:#68736b;--line:rgba(40,53,47,.16);
- --panel:#ebe7dc;--coral:#a65f49;--lime:#9aa987;--violet:#8b9181;
+ --bg:#f4f1e9!important;--ink:#28352f!important;--muted:#68736b!important;--line:rgba(40,53,47,.16)!important;
+ --panel:#ebe7dc!important;--coral:#a65f49!important;--lime:#9aa987!important;--violet:#8b9181!important;
 }
 body{background:var(--bg)!important;color:var(--ink)!important}
 body:before{opacity:.22!important;background-image:linear-gradient(rgba(64,75,65,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(64,75,65,.045) 1px,transparent 1px)!important}
