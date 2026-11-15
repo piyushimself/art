@@ -5,7 +5,7 @@ const body=document.body;
 if(!body)return;
 const templateStyles=document.createElement('link');
 templateStyles.rel='stylesheet';
-templateStyles.href='assets/css/collection-template.css?v=20261115-manhwa-294-final';
+templateStyles.href='assets/css/collection-template.css?v=20261115-quiet-theme-toggle';
 document.head.appendChild(templateStyles);
 const pageFile=(location.pathname.split('/').pop()||'index.html').toLowerCase();
 const currentPage=PAGES.find(p=>decodeURIComponent(p.file).toLowerCase()===pageFile);
@@ -16,8 +16,14 @@ if(!body.dataset.libraryTheme)body.dataset.libraryTheme=inferredTheme;
 const theme=body.dataset.libraryTheme||'home';
 const progress=document.createElement('div');progress.className='atlas-progress';progress.setAttribute('aria-hidden','true');document.body.appendChild(progress);
 const dock=document.createElement('nav');dock.className='atlas-dock';dock.setAttribute('aria-label','Library tools');
-dock.innerHTML='<a class="atlas-home" href="index.html">← Library</a><button type="button" data-atlas-toc>Contents</button><button type="button" data-atlas-search>Search ⌕</button>';
+dock.innerHTML='<a class="atlas-home" href="index.html">← Library</a><button type="button" data-atlas-toc>Contents</button><button type="button" data-atlas-search>Search ⌕</button><button type="button" class="atlas-theme-toggle" data-atlas-theme aria-label="Switch to dark theme" aria-pressed="false">◐ Dark</button>';
 document.body.appendChild(dock);
+const themeToggle=dock.querySelector('[data-atlas-theme]');
+const root=document.documentElement;
+let colorMode='light';try{colorMode=localStorage.getItem('atlas.color-mode')==='dark'?'dark':'light';}catch(_){}
+function applyColorMode(mode){colorMode=mode;root.dataset.colorMode=mode;body.dataset.colorMode=mode;const dark=mode==='dark';themeToggle.textContent=dark?'☼ Light':'◐ Dark';themeToggle.setAttribute('aria-pressed',String(dark));themeToggle.setAttribute('aria-label',dark?'Switch to light theme':'Switch to dark theme');try{localStorage.setItem('atlas.color-mode',mode);}catch(_){}}
+applyColorMode(colorMode);
+themeToggle.addEventListener('click',()=>applyColorMode(colorMode==='dark'?'light':'dark'));
 const back=document.createElement('button');back.className='atlas-backtop';back.type='button';back.textContent='↑';back.setAttribute('aria-label','Back to top');document.body.appendChild(back);
 const overlay=document.createElement('div');overlay.className='atlas-overlay';overlay.innerHTML='<section class="atlas-dialog" role="dialog" aria-modal="true" aria-labelledby="atlasSearchTitle"><div class="atlas-dialog-head"><h2 id="atlasSearchTitle">Search the library</h2><button class="atlas-close" type="button" aria-label="Close">×</button></div><input class="atlas-search" type="search" placeholder="Search collections, topics and pages…" autocomplete="off"><p class="atlas-hint">Search all pages. Press Enter to find the term inside this page. Shortcut: Ctrl / ⌘ + K</p><div class="atlas-results" aria-live="polite"></div></section>';
 document.body.appendChild(overlay);
