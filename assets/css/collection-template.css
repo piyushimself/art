@@ -287,3 +287,7 @@ html[data-color-mode="dark"] .atlas-theme-toggle,
 body[data-color-mode="dark"] .atlas-theme-toggle{background:#292e29!important;color:#e8e8e2!important;border-color:#454b45!important}
 html[data-color-mode="dark"] body :is(button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible),
 body[data-color-mode="dark"] :is(button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline-color:#a7b9a8!important}
+
+/* Ensure the editorial serif display face wins over legacy page tokens */
+:root{--display:Georgia,"Iowan Old Style","Palatino Linotype",serif!important;--body:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important}
+body[data-library-theme]{--atlas-accent:#65766b!important;--atlas-accent-soft:#e6ebe5!important}
