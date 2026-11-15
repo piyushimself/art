@@ -1,7 +1,7 @@
 /* The Atlas — lightweight navigation, page search and reading tools */
 (()=>{'use strict';
 /* Keep the shared responsive type/filter system current on every library page. */
-const atlasStyleHref='assets/css/mobile-system.css?v=uniform-20261116-readability-pass-1';
+const atlasStyleHref='assets/css/mobile-system.css?v=uniform-20261116-readability-pass-2';
 let atlasStyle=document.querySelector('link[rel="stylesheet"][href*="mobile-system.css"]');
 if(atlasStyle){if(!atlasStyle.href.endsWith('uniform-20261116'))atlasStyle.href=atlasStyleHref;}
 else{atlasStyle=document.createElement('link');atlasStyle.rel='stylesheet';atlasStyle.href=atlasStyleHref;document.head.appendChild(atlasStyle);}
