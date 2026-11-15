@@ -32,3 +32,7 @@
 .grid.shelf-list .shelf-item .card{padding-bottom:14px}
 @media(max-width:720px){.shelf-toolbar{align-items:flex-start;flex-direction:column}.shelf-progress{width:100%;max-width:none}.shelf-actions{width:100%}.grid.shelf-list .card{grid-template-columns:1fr;padding:14px 120px 50px 15px;gap:7px}.grid.shelf-list .card-top{flex-direction:row;align-items:center}.grid.shelf-list .card-bottom{justify-content:flex-start}}
 @media(prefers-reduced-motion:reduce){.shelf-meter span{transition:none}}
+
+.content-advisory{display:flex;gap:12px;align-items:flex-start;margin:22px auto 0;padding:12px 15px;border:1px solid rgba(241,189,118,.38);border-radius:11px;background:rgba(241,189,118,.07);color:#d6c9b4;font-size:11px;line-height:1.65}
+.content-advisory strong{white-space:nowrap;color:#f1bd76;font:11px 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em}
+@media(max-width:560px){.content-advisory{display:block}.content-advisory strong{display:block;margin-bottom:4px}}
