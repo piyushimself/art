@@ -50,3 +50,19 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
 .atlas-done-details[open]>summary:after{content:"−"}
 @media(max-width:560px){.atlas-dock{left:8px!important;right:8px!important;bottom:max(8px,env(safe-area-inset-bottom))!important;transform:none!important;width:auto!important;max-width:none!important;gap:2px!important;padding:4px!important}.atlas-dock a,.atlas-dock button,.atlas-dock label{flex:1 1 0!important;min-width:0!important;padding:6px 3px!important;font-size:10px!important}.atlas-done-head{align-items:flex-start!important;flex-direction:column!important}.atlas-backtop{right:10px!important;bottom:66px!important}}
 @media(prefers-reduced-motion:reduce){.atlas-backtop{transition:none!important}*{scroll-behavior:auto!important}}
+
+/* Light-mode surfaces for the shared navigation, search, contents and tracker UI. */
+html[data-color-mode="light"]{
+ --atlas-ui-bg:#f0eee9;--atlas-ui-surface:#faf9f6;--atlas-ui-ink:#242729;
+ --atlas-ui-muted:#555d60;--atlas-ui-line:#c9c8c2;--atlas-ui-accent:#526d63;
+}
+html[data-color-mode="light"] .atlas-dock{background:rgba(250,249,246,.97)!important;color:#242729!important;box-shadow:0 8px 26px rgba(20,25,25,.14)!important}
+html[data-color-mode="light"] .atlas-dock a,html[data-color-mode="light"] .atlas-dock button{color:#242729!important}
+html[data-color-mode="light"] .atlas-dock .atlas-home{background:#526d63!important;color:#fff!important}
+html[data-color-mode="light"] .atlas-overlay{background:rgba(20,25,25,.48)!important}
+html[data-color-mode="light"] .atlas-dialog,html[data-color-mode="light"] .atlas-toc,html[data-color-mode="light"] .atlas-backtop,html[data-color-mode="light"] .atlas-completed-panel{background:#faf9f6!important;color:#242729!important;border-color:#c9c8c2!important}
+html[data-color-mode="light"] .atlas-dialog-head h2,html[data-color-mode="light"] .atlas-close,html[data-color-mode="light"] .atlas-toc h2,html[data-color-mode="light"] .atlas-toc a,html[data-color-mode="light"] .atlas-backtop,html[data-color-mode="light"] .atlas-done-head h2,html[data-color-mode="light"] .atlas-done-row a{color:#242729!important}
+html[data-color-mode="light"] .atlas-search,html[data-color-mode="light"] .atlas-result,html[data-color-mode="light"] .atlas-done-head h2 span{background:#f0eee9!important;color:#242729!important;border-color:#c9c8c2!important}
+html[data-color-mode="light"] .atlas-hint,html[data-color-mode="light"] .atlas-empty,html[data-color-mode="light"] .atlas-result small,html[data-color-mode="light"] .atlas-done-note,html[data-color-mode="light"] .atlas-done-row a small,html[data-color-mode="light"] .atlas-done-empty{color:#555d60!important}
+html[data-color-mode="light"] .atlas-done-list,html[data-color-mode="light"] .atlas-done-row{border-color:#d7d5ce!important}
+html[data-color-mode="light"] .atlas-done-kicker{color:#526d63!important}
