@@ -71,3 +71,10 @@ body[data-library-theme] img{max-width:100%}
 .atlas-done-row a:hover{color:#9ed8c2}
 .atlas-done-empty{font:10px 'DM Sans',sans-serif;color:#9ba7b9;margin:5px 0}
 @media(max-width:700px){.atlas-completed-panel{width:calc(100% - 28px)}.atlas-done-list{grid-template-columns:1fr}.atlas-done-head{align-items:flex-start}.atlas-done-row a{display:block}.atlas-done-row a small{display:block;margin-top:2px}.atlas-dock .atlas-page-check{font-size:9px;padding:0 6px}}
+
+.atlas-done-details>summary{display:block;cursor:pointer;list-style:none}
+.atlas-done-details>summary::-webkit-details-marker{display:none}
+.atlas-done-details>summary:after{content:"＋";float:right;color:#9ed8c2;font:14px 'DM Mono',monospace;margin-top:-25px}
+.atlas-done-details[open]>summary:after{content:"−"}
+.atlas-done-details>.atlas-done-list{margin-top:8px}
+.atlas-done-details>.atlas-done-empty{margin-top:8px}
