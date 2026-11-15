@@ -72,7 +72,7 @@ const dockStyle=document.createElement('style');dockStyle.textContent='@media(ma
 const themeToggle=dock.querySelector('[data-atlas-theme]');
 const root=document.documentElement;
 let colorMode='dark';try{colorMode=localStorage.getItem('atlas.color-mode')==='light'?'light':'dark';}catch(_){}
-function applyColorMode(mode){colorMode=mode;root.dataset.colorMode=mode;body.dataset.colorMode=mode;const dark=mode==='dark';themeToggle.textContent=dark?'☼ Light':'◐ Dark';themeToggle.setAttribute('aria-pressed',String(dark));themeToggle.setAttribute('aria-label',dark?'Switch to light theme':'Switch to dark theme');try{localStorage.setItem('atlas.color-mode',mode);}catch(_){}}
+function applyColorMode(mode){colorMode=mode;root.dataset.colorMode=mode;body.dataset.colorMode=mode;const dark=mode==='dark';themeToggle.textContent=dark?'☼ UI Light':'◐ UI Dark';themeToggle.setAttribute('aria-pressed',String(dark));themeToggle.setAttribute('aria-label',dark?'Switch library tools to light theme':'Switch library tools to dark theme');try{localStorage.setItem('atlas.color-mode',mode);}catch(_){}}
 applyColorMode(colorMode);
 themeToggle.addEventListener('click',()=>applyColorMode(colorMode==='dark'?'light':'dark'));
 const back=document.createElement('button');back.className='atlas-backtop';back.type='button';back.textContent='↑';back.setAttribute('aria-label','Back to top');document.body.appendChild(back);
