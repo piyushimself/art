@@ -238,3 +238,52 @@ body :is(button:focus-visible,a:focus-visible,input:focus-visible,select:focus-v
  --accent:var(--atlas-accent)!important;--accent2:var(--atlas-accent)!important;
  --coral:var(--atlas-accent)!important;--gold:#805a1b!important;--teal:#286d66!important;--blue:#315f70!important;--orange:#98452f!important;--green:#42694f!important;
 }
+
+
+/* QUIET EDITORIAL THEME — restrained colour, readable typography, light/dark modes */
+:root{
+ --bg:#f3f1eb;--surface:#faf9f5;--ink:#292a28;--mute:#62645f;--line:rgba(42,44,40,.16);
+ --atlas-accent:#65766b;--atlas-accent-soft:#e6ebe5;
+ --display:Georgia,"Iowan Old Style","Palatino Linotype",serif;
+ --body:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ color-scheme:light;
+}
+html,body{background:#f3f1eb!important;color:#292a28!important;color-scheme:light!important}
+body{font-family:var(--body)!important;font-size:16px!important;line-height:1.7!important;letter-spacing:.005em}
+body :is(h1,h2,h3,h4,h5,h6,.card-title,.title){font-family:var(--display)!important;font-weight:600!important;letter-spacing:-.018em!important;color:#292a28!important}
+body :is(p,li,dd,blockquote,label,small,.meta,.metadata,.muted,.hint,.helper,.caption,.description,.subtitle,.intro,.lead,.section-desc){color:#62645f!important}
+body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card){background:#faf9f5!important;border-color:rgba(42,44,40,.16)!important;color:#292a28!important;box-shadow:0 1px 2px rgba(30,32,28,.035)!important}
+body :is(input,select,textarea){background:#fbfaf7!important;color:#292a28!important;border-color:rgba(42,44,40,.22)!important}
+body :is(.pill,.filter,.chip,.tag,.badge,.cat-badge,.sort-sel){background:#eeede7!important;color:#51544f!important;border-color:rgba(42,44,40,.14)!important}
+body :is(.pill.active,.filter.active,.chip.active,.active-filter){background:#e3e9e2!important;color:#303b33!important;border-color:#829286!important}
+body :is(.stats-bar,.stat-card,.summary-card,.toolbar,.controls,.filter-row,.search-wrap){background:#eeede7!important;color:#292a28!important;border-color:rgba(42,44,40,.14)!important}
+body :is(.atlas-dock,.atlas-dialog,.atlas-toc,.atlas-completed-panel,.atlas-result){background:#faf9f5!important;color:#292a28!important;border-color:rgba(42,44,40,.16)!important}
+body :is(.atlas-dock a,.atlas-dock button,.atlas-dock label,.atlas-toc a,.atlas-result strong){color:#292a28!important}
+body :is(.atlas-page-check,.atlas-item-check){background:#faf9f5!important;color:#51544f!important;border-color:rgba(42,44,40,.18)!important}
+body :is(button,.btn,.button,[role=button]){font-family:var(--body)!important}
+body :is(a:hover){color:#52695a!important}
+.atlas-theme-toggle{border:1px solid var(--line)!important;background:var(--surface)!important;color:var(--ink)!important}
+html[data-color-mode="dark"],html[data-color-mode="dark"] body,
+body[data-color-mode="dark"]{background:#171917!important;color:#e8e8e2!important;color-scheme:dark!important}
+html[data-color-mode="dark"] body :is(h1,h2,h3,h4,h5,h6,strong,b,.card-title,.title),
+body[data-color-mode="dark"] :is(h1,h2,h3,h4,h5,h6,strong,b,.card-title,.title){color:#e8e8e2!important}
+html[data-color-mode="dark"] body :is(p,li,dd,blockquote,label,small,.meta,.metadata,.muted,.hint,.helper,.caption,.description,.subtitle,.intro,.lead,.section-desc),
+body[data-color-mode="dark"] :is(p,li,dd,blockquote,label,small,.meta,.metadata,.muted,.hint,.helper,.caption,.description,.subtitle,.intro,.lead,.section-desc){color:#b6b9b1!important}
+html[data-color-mode="dark"] body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card,.atlas-dock,.atlas-dialog,.atlas-toc,.atlas-completed-panel,.atlas-result),
+body[data-color-mode="dark"] :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.section-card,.item-card,.atlas-dock,.atlas-dialog,.atlas-toc,.atlas-completed-panel,.atlas-result){background:#202320!important;color:#e8e8e2!important;border-color:#3b403b!important;box-shadow:none!important}
+html[data-color-mode="dark"] body :is(input,select,textarea),
+body[data-color-mode="dark"] :is(input,select,textarea){background:#202320!important;color:#e8e8e2!important;border-color:#454b45!important}
+html[data-color-mode="dark"] body :is(.pill,.filter,.chip,.tag,.badge,.cat-badge,.sort-sel,.stats-bar,.stat-card,.summary-card,.toolbar,.controls,.filter-row,.search-wrap),
+body[data-color-mode="dark"] :is(.pill,.filter,.chip,.tag,.badge,.cat-badge,.sort-sel,.stats-bar,.stat-card,.summary-card,.toolbar,.controls,.filter-row,.search-wrap){background:#292e29!important;color:#c8ccc4!important;border-color:#414741!important}
+html[data-color-mode="dark"] body :is(.pill.active,.filter.active,.chip.active,.active-filter),
+body[data-color-mode="dark"] :is(.pill.active,.filter.active,.chip.active,.active-filter){background:#354238!important;color:#e0e9df!important;border-color:#728775!important}
+html[data-color-mode="dark"] body :is(a,.atlas-dock a,.atlas-dock button,.atlas-dock label,.atlas-toc a,.atlas-result strong,.atlas-page-check,.atlas-item-check),
+body[data-color-mode="dark"] :is(a,.atlas-dock a,.atlas-dock button,.atlas-dock label,.atlas-toc a,.atlas-result strong,.atlas-page-check,.atlas-item-check){color:#d8ded5!important}
+html[data-color-mode="dark"] body :is(.atlas-page-check,.atlas-item-check),
+body[data-color-mode="dark"] :is(.atlas-page-check,.atlas-item-check){background:#252a25!important;border-color:#414741!important}
+html[data-color-mode="dark"] body :is(.atlas-done-row,.atlas-done-list),
+body[data-color-mode="dark"] :is(.atlas-done-row,.atlas-done-list){border-color:#3b403b!important}
+html[data-color-mode="dark"] .atlas-theme-toggle,
+body[data-color-mode="dark"] .atlas-theme-toggle{background:#292e29!important;color:#e8e8e2!important;border-color:#454b45!important}
+html[data-color-mode="dark"] body :is(button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible),
+body[data-color-mode="dark"] :is(button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline-color:#a7b9a8!important}
