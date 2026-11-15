@@ -98,5 +98,5 @@ if(document.body.dataset.libraryTheme!=='home'){
 renderDashboard();
 window.addEventListener('atlas-progress-change',renderDashboard);
 window.addEventListener('storage',e=>{if(e.key===STORE)renderDashboard();});
-})();
 window.addEventListener('pageshow',renderDashboard);
+})();
