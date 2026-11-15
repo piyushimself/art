@@ -25,3 +25,4 @@ totalNode.textContent=String(cards.length);renderProgress();applyFilters();if(se
 window.addEventListener('atlas-progress-change',()=>{document.querySelectorAll('.shelf-check input').forEach(i=>{const card=i.closest('.shelf-item')?.querySelector('.card');if(card){i.checked=completed(keyFor(card));i.nextElementSibling.textContent=i.checked?'Completed':'Mark done';}});renderProgress();applyFilters();});
 window.addEventListener('storage',e=>{if(e.key===STORE){renderProgress();applyFilters();}});
 })();
+window.addEventListener('pageshow',()=>{document.querySelectorAll('.shelf-check input').forEach(i=>{const card=i.closest('.shelf-item')?.querySelector('.card');if(card){i.checked=completed(keyFor(card));i.nextElementSibling.textContent=i.checked?'Completed':'Mark done';}});renderProgress();applyFilters();});
