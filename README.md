@@ -1,20 +1,20 @@
 # The Atlas — Personal Library
 
-A personal, static library for exploring manga and comics, art, learning, cinema, technology and everyday tools.
+A personal, static library for manga and comics, art and making, life and learning, cinema and culture.
 
 ## Browse
 - Open `index.html` for the searchable library.
-- Use the category filters and search field to narrow collections.
+- Four worlds: **Manga & Comics**, **Art & Making**, **Life, Learning & Everyday**, and **Cinema & Culture**.
+- Search by title, topic or keyword.
 - Switch between **Grid** and **List** layouts.
-- Mark collections complete with the checkboxes.
-- Use the status filter to show all, completed, or unfinished collections.
+- Mark collections complete with the checkboxes and filter by progress.
 
 ## Personal progress and privacy
 - Completion states and layout preference are stored in this browser's `localStorage` only.
-- No account, analytics endpoint, server-side profile, or remote progress sync is used by the tracker.
-- Clearing this browser's site data will clear the checklist.
+- The tracker makes no network requests and sends no progress to a server.
+- Clearing this browser's site data clears the checklist.
 - Use **Reset progress** to clear the local checklist deliberately.
-- Do not use the tracker on a shared/public browser if you want your progress to remain private.
+- Avoid using the tracker on a shared/public browser if you want your progress to remain private.
 
 ## Content and publication notes
 - This is a personal index, not an endorsement of every listed work.
