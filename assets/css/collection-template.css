@@ -223,3 +223,18 @@ body :is(button:focus-visible,a:focus-visible,input:focus-visible,select:focus-v
  body :is(.card h2,.card h3,.card h4,.manga-card h3,.film-card h3,.book-card h3,.resource-card h3,.card-title){font-size:14px!important}
  body :is(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p){font-size:13px!important}
 }
+
+
+/* Harmonise legacy page colour tokens as well as the shared components */
+:root{
+ --text:#24211d!important;--text2:#5f564b!important;--text3:#756d63!important;
+ --card-bg:#fffdf8!important;--card-hover:#f4efe5!important;
+ --pill-bg:#f4efe5!important;--pill-active-bg:#f0e2d7!important;--pill-active-text:#24211d!important;
+ --border:rgba(60,45,30,.18)!important;--border2:rgba(60,45,30,.28)!important;
+ --color-text-primary:#24211d!important;--color-text-secondary:#5f564b!important;--color-text-tertiary:#756d63!important;
+ --color-border-primary:rgba(60,45,30,.3)!important;--color-border-secondary:rgba(60,45,30,.2)!important;--color-border-tertiary:rgba(60,45,30,.14)!important;
+ --color-background-primary:#fffdf8!important;--color-background-secondary:#f4efe5!important;--color-background-tertiary:#eee6d9!important;
+ --bg2:#f4efe5!important;--bg3:#eee6d9!important;
+ --accent:var(--atlas-accent)!important;--accent2:var(--atlas-accent)!important;
+ --coral:var(--atlas-accent)!important;--gold:#805a1b!important;--teal:#286d66!important;--blue:#315f70!important;--orange:#98452f!important;--green:#42694f!important;
+}
