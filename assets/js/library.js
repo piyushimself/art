@@ -40,7 +40,7 @@ function write(data){try{localStorage.setItem(STORE,JSON.stringify(data));window
 function set(type,id,meta,done){const data=read();if(done){data.records[id]=Object.assign({id,type,done:true,updatedAt:Date.now()},meta||{});}else{delete data.records[id];}write(data);}
 function list(){return Object.values(read().records).filter(x=>x&&x.done);}
 window.AtlasProgress={set:set,list:list,read:read,storeKey:STORE};
-const safeHref=v=>{const s=String(v||'');return /^(?!\\/\\/)(?![a-z][a-z0-9+.-]*:)[\\w%(). -]+\\.html(?:#[\\w-]+)?$/i.test(s)?s:'#';};\nconst esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeHref=v=>{const s=String(v||'');return /^(?!\/\/)(?![a-z][a-z0-9+.-]*:)[\w%(). -]+\.html(?:#[\w-]+)?$/i.test(s)?s:'#';};
 const hash=s=>{let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return(h>>>0).toString(36);};
 function checkbox(id,type,title,href,host,labelText){
  const lab=document.createElement('label');lab.className='atlas-item-check';lab.title='Save this item to your Atlas checklist';
@@ -85,7 +85,7 @@ function renderDashboard(){
  let panel=document.getElementById('atlas-completed-panel');
  if(!panel){panel=document.createElement('section');panel.id='atlas-completed-panel';panel.className='atlas-completed-panel';panel.setAttribute('aria-label','Your completed items');const toolbar=document.querySelector('.shelf-toolbar');if(toolbar)toolbar.insertAdjacentElement('afterend',panel);else document.body.prepend(panel);}
  const records=list().sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
- const rows=records.map(r=>'<div class="atlas-done-row"><label><input type="checkbox" checked data-atlas-uncheck="'+esc(r.id)+'"><span class="atlas-done-check">✓</span></label><a href="'+esc(r.href||r.page||'#')+'"><span>'+esc(r.title||r.pageTitle||r.page||'Completed item')+'</span><small>'+esc(r.pageTitle||r.page||'Library')+' · '+esc(r.type||'item')+'</small></a></div>').join('');
+ const rows=records.map(r=>'<div class="atlas-done-row"><label><input type="checkbox" checked data-atlas-uncheck="'+esc(r.id)+'"><span class="atlas-done-check">✓</span></label><a href="'+esc(safeHref(r.href||r.page))+'"><span>'+esc(r.title||r.pageTitle||r.page||'Completed item')+'</span><small>'+esc(r.pageTitle||r.page||'Library')+' · '+esc(r.type||'item')+'</small></a></div>').join('');
  panel.innerHTML='<div class="atlas-done-head"><div><span class="atlas-done-kicker">YOUR PERSONAL CHECKLIST</span><h2>Completed & saved <span>'+records.length+'</span></h2></div><span class="atlas-done-note">Saved in this browser</span></div>'+(rows?'<div class="atlas-done-list">'+rows+'</div>':'<p class="atlas-done-empty">Nothing checked yet. Open any collection and use “Add to tracker” beside an item, or mark the page complete.</p>');
  panel.querySelectorAll('[data-atlas-uncheck]').forEach(box=>box.addEventListener('change',()=>{const id=box.getAttribute('data-atlas-uncheck');const data=read();delete data.records[id];write(data);}));
 }
