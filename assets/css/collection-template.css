@@ -79,3 +79,66 @@ html[data-color-mode="light"] .atlas-done-kicker{color:#526d63!important}
  .atlas-dock.is-expanded .atlas-home{grid-column:1/-1}
  .atlas-dock [data-atlas-more]{background:#557d68!important;color:#fff!important}
 }
+
+/* Responsive audit refinements — targeted exceptions for page layouts that
+   use bespoke structures rather than the common .grid/.container patterns. */
+@media(max-width:760px){
+ body[data-atlas-page="asian-cinema-curriculum.html"] .films-grid,
+ body[data-atlas-page="four-arcs-library.html"] .arc-grid,
+ body[data-atlas-page="watercolour-journal.html"] .grid{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+ body[data-atlas-page="human-development-curriculum.html"] .hero{
+  min-height:0!important;padding:44px 20px 36px!important;
+ }
+ body[data-atlas-page="human-development-curriculum.html"] .hero h1{
+  font-size:clamp(30px,8vw,46px)!important;line-height:1.12!important;
+ }
+ body[data-atlas-page="human-development-curriculum.html"] .preamble{
+  padding:36px 20px 30px!important;
+ }
+ body[data-atlas-page="human-development-curriculum.html"] .preamble p{
+  font-size:1.05rem!important;line-height:1.7!important;
+ }
+ body[data-atlas-page="human-development-curriculum.html"] .phase-header{
+  grid-template-columns:1fr!important;padding-inline:20px!important;gap:12px!important;margin-bottom:28px!important;
+ }
+ body[data-atlas-page="human-development-curriculum.html"] .phase-intro-box{padding-inline:20px!important}
+ body[data-atlas-page="asian-cinema-curriculum.html"] header{padding:30px 20px 26px!important}
+ body[data-atlas-page="asian-cinema-curriculum.html"] header h1{font-size:clamp(30px,8vw,46px)!important;line-height:1.1!important}
+ body[data-atlas-page="asian-cinema-curriculum.html"] .controls-wrap{padding:14px 16px!important}
+ body[data-atlas-page="asian-cinema-curriculum.html"] .main{padding:26px 16px 48px!important}
+ body[data-atlas-page="four-arcs-library.html"] .hero{
+  min-height:0!important;padding:56px 20px 42px!important;
+ }
+ body[data-atlas-page="four-arcs-library.html"] .hero-sub{margin-bottom:28px!important}
+ body[data-atlas-page="four-arcs-library.html"] .arc-section{padding:44px 0!important}
+ body[data-atlas-page="four-arcs-library.html"] .arc-header{
+  grid-template-columns:minmax(0,1fr)!important;padding:0 20px 24px!important;gap:12px!important;
+ }
+ body[data-atlas-page="four-arcs-library.html"] .arc-filters{padding:0 16px 18px!important}
+ body[data-atlas-page="four-arcs-library.html"] .arc-grid{padding:0 16px 28px!important}
+ body[data-atlas-page="four-arcs-library.html"] .arc-table{overflow-x:auto;padding-inline:16px!important}
+ body[data-atlas-page="loom-tracker.html"] .shell{width:100%!important;padding:34px 16px 120px!important}
+ body[data-atlas-page="loom-tracker.html"] .weave-grid{max-width:100%!important;overflow-x:auto!important}
+ body[data-atlas-page="loom-tracker.html"] .streak-grid{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))!important}
+ body[data-atlas-page="loom-tracker.html"] .card{padding:16px!important;margin-bottom:16px!important}
+ body[data-atlas-page="watercolour-journal.html"] .grid{padding:18px 16px 44px!important;gap:14px!important}
+ body[data-atlas-page="watercolour-journal.html"] .filter-bar{
+  justify-content:flex-start!important;flex-wrap:nowrap!important;overflow-x:auto!important;padding:18px 16px 12px!important;
+ }
+ body[data-atlas-page="watercolour-journal.html"] .header{padding:36px 18px 28px!important}
+ body[data-atlas-page="blackout-poetry.html"] .section{min-height:0!important;padding:24px 18px 40px!important}
+ body[data-atlas-page="blackout-poetry.html"] p.body-text{text-align:left!important}
+ body[data-atlas-page="sensual-mood-cinema.html"] .tab-btn{padding:12px 14px!important;font-size:10px!important}
+ body[data-atlas-page="sensual-mood-cinema.html"] .hero{padding:34px 18px 26px!important}
+ body[data-atlas-page="sensual-mood-cinema.html"] .hero h1{font-size:clamp(28px,8vw,42px)!important;letter-spacing:1px!important}
+ body[data-atlas-page="cinema-obscura.html"] .tw,
+ body[data-atlas-page="animated-film-atlas.html"] .table-wrap{width:100%;max-width:100%;overflow-x:auto!important}
+}
+@media(min-width:761px) and (max-width:1024px){
+ body[data-atlas-page="asian-cinema-curriculum.html"] .films-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body[data-atlas-page="four-arcs-library.html"] .arc-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body[data-atlas-page="watercolour-journal.html"] .grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body[data-atlas-page="human-development-curriculum.html"] .phase-header{padding-inline:28px!important}
+}
