@@ -50,3 +50,91 @@
  .atlas-backtop{right:12px!important;bottom:72px!important}
 }
 @media(prefers-reduced-motion:reduce){.atlas-backtop{transition:none!important}}
+
+
+/* Compact-card correction: content first, no oversized empty tiles */
+body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.panel,.section-card,.item-card){
+  min-height:0!important;
+}
+body :is(.grid,.cards,.card-grid,.film-grid,.manga-grid,.book-grid,.resource-grid,.items-grid,.collection-grid,.entries-grid){
+  grid-auto-rows:min-content!important;
+  align-items:start!important;
+}
+body :is(.card,.manga-card,.film-card,.movie-card,.book-card,.resource-card,.task-card,.episode-card,.entry,.lcard,.work-card,.item-card){
+  height:auto!important;
+}
+body :is(.card img,.manga-card img,.film-card img,.movie-card img,.book-card img,.resource-card img,.item-card img){
+  max-height:190px!important;
+  object-fit:cover!important;
+}
+body :is(.card .body,.card-body,.card-content,.item-body,.manga-card .body,.film-card .body){
+  padding:12px!important;
+}
+body :is(.card h2,.card h3,.card h4,.manga-card h3,.film-card h3,.book-card h3,.resource-card h3){
+  margin:0 0 6px!important;
+  font-size:1.06rem!important;
+  line-height:1.24!important;
+}
+body :is(.card p,.manga-card p,.film-card p,.book-card p,.resource-card p){
+  margin-block:4px!important;
+  font-size:.9rem!important;
+  line-height:1.55!important;
+}
+/* The home-page collection links become compact catalogue rows, not tall posters */
+body main .section .grid>.card{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  grid-template-rows:auto auto auto!important;
+  align-content:start!important;
+  gap:5px 12px!important;
+  min-height:0!important;
+  height:auto!important;
+  padding:13px 15px!important;
+  border-radius:13px!important;
+}
+body main .section .grid>.card .card-top{
+  grid-column:1/-1!important;
+  margin:0 0 3px!important;
+}
+body main .section .grid>.card h3{
+  grid-column:1!important;
+  grid-row:2!important;
+  max-width:none!important;
+  margin:0!important;
+  font-size:1.08rem!important;
+  line-height:1.2!important;
+}
+body main .section .grid>.card p{
+  grid-column:1!important;
+  grid-row:3!important;
+  max-width:68ch!important;
+  margin:0!important;
+  font-size:.88rem!important;
+  line-height:1.48!important;
+}
+body main .section .grid>.card .card-bottom{
+  grid-column:2!important;
+  grid-row:2/4!important;
+  align-self:center!important;
+  gap:8px!important;
+  margin:0!important;
+  padding:0!important;
+  white-space:nowrap!important;
+  font-size:.68rem!important;
+}
+body main .section .grid>.card:before{width:90px!important;height:90px!important}
+@media(max-width:760px){
+  body :is(.card img,.manga-card img,.film-card img,.movie-card img,.book-card img,.resource-card img,.item-card img){
+    max-height:145px!important;
+  }
+  body main .section .grid>.card{
+    padding:12px!important;
+    gap:4px 8px!important;
+  }
+  body main .section .grid>.card h3{font-size:1rem!important}
+  body main .section .grid>.card p{font-size:.84rem!important;line-height:1.45!important}
+  body main .section .grid>.card .card-bottom{font-size:.62rem!important}
+}
+@media(max-width:420px){
+  body main .section .grid>.card .card-bottom span:first-child{max-width:90px!important;overflow:hidden!important;text-overflow:ellipsis!important}
+}
