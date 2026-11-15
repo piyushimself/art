@@ -80,7 +80,8 @@ function addItems(){
   seen.add(node);
  });
 }
-function syncControls(){const records=read().records;document.querySelectorAll('[data-atlas-progress-id]').forEach(box=>{box.checked=!!records[box.dataset.atlasProgressId];const text=box.nextElementSibling;if(text){const type=box.dataset.atlasProgressType;text.textContent=box.checked?(type==='collection'?'Page saved':'Saved'):(type==='collection'?'Page done':'Add to tracker');}});}\nfunction renderDashboard(){
+function syncControls(){const records=read().records;document.querySelectorAll('[data-atlas-progress-id]').forEach(box=>{box.checked=!!records[box.dataset.atlasProgressId];const text=box.nextElementSibling;if(text){const type=box.dataset.atlasProgressType;text.textContent=box.checked?(type==='collection'?'Page saved':'Saved'):(type==='collection'?'Page done':'Add to tracker');}});}
+function renderDashboard(){
  if(document.body.dataset.libraryTheme!=='home')return;
  let panel=document.getElementById('atlas-completed-panel');
  if(!panel){panel=document.createElement('section');panel.id='atlas-completed-panel';panel.className='atlas-completed-panel';panel.setAttribute('aria-label','Your completed items');const toolbar=document.querySelector('.shelf-toolbar');if(toolbar)toolbar.insertAdjacentElement('afterend',panel);else document.body.prepend(panel);}
