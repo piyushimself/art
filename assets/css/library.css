@@ -1,4 +1,5 @@
 /* The Atlas — shared reading and navigation layer */
+body[data-library-theme="home"]{--atlas-bg:#101114;--atlas-ink:#f1eee7;--atlas-muted:#a7a39d;--atlas-line:rgba(255,255,255,.13);--atlas-accent:#f16d5f;--atlas-panel:#191b20}
 :root{--atlas-bg:#101114;--atlas-paper:#f4efe5;--atlas-ink:#24211d;--atlas-muted:#77736c;--atlas-line:rgba(80,70,60,.18);--atlas-accent:#e45b4f;--atlas-panel:#fffaf1;--atlas-shadow:0 18px 55px rgba(0,0,0,.16);--atlas-radius:18px}
 body[data-library-theme="manga"]{--atlas-bg:#101114;--atlas-ink:#f2eee7;--atlas-muted:#a6a09a;--atlas-line:rgba(255,255,255,.13);--atlas-accent:#f06a5d;--atlas-panel:#1b1c21}
 body[data-library-theme="art"]{--atlas-bg:#f4efe5;--atlas-ink:#29231e;--atlas-muted:#756d63;--atlas-line:rgba(60,45,30,.17);--atlas-accent:#c6533e;--atlas-panel:#fffaf1}
