@@ -1,77 +1,27 @@
-/* Personal Shelf — browser-local collection progress */
+/* Homepage collection tracker — shares completion records with every content page */
 (()=>{'use strict';
-const KEY='atlas.personal-shelf.progress.v1';
-const cards=[...document.querySelectorAll('.card')];
-const status=document.getElementById('shelfStatus');
-const doneNode=document.getElementById('shelfDone');
-const totalNode=document.getElementById('shelfTotal');
-const percentNode=document.getElementById('shelfPercent');
-const meter=document.getElementById('shelfMeter');
-const fill=document.getElementById('shelfMeterFill');
-const gridButton=document.getElementById('shelfGrid');
-const listButton=document.getElementById('shelfList');
-const resetButton=document.getElementById('shelfReset');
+const LEGACY='atlas.personal-shelf.progress.v1',STORE='atlas.progress.v2';
+const cards=[...document.querySelectorAll('.shelf-item .card, .grid>.card, .card')].filter((c,i,a)=>a.indexOf(c)===i);
+const status=document.getElementById('shelfStatus'),doneNode=document.getElementById('shelfDone'),totalNode=document.getElementById('shelfTotal'),percentNode=document.getElementById('shelfPercent'),meter=document.getElementById('shelfMeter'),fill=document.getElementById('shelfMeterFill'),gridButton=document.getElementById('shelfGrid'),listButton=document.getElementById('shelfList'),resetButton=document.getElementById('shelfReset');
 if(!cards.length||!status)return;
-const safeRead=()=>{try{const raw=localStorage.getItem(KEY);const parsed=raw?JSON.parse(raw):[];return new Set(Array.isArray(parsed)?parsed.filter(x=>typeof x==='string'):[]);}catch(_){return new Set();}};
-let completed=safeRead();
-const validKeys=new Set(cards.map(keyFor));
-completed=new Set([...completed].filter(key=>validKeys.has(key)));
-let layout='grid';
-function save(){try{localStorage.setItem(KEY,JSON.stringify([...completed]));}catch(_){announce('Progress could not be saved in this browser.');}}
-function announce(message){let node=document.getElementById('shelfAnnounce');if(!node){node=document.createElement('p');node.id='shelfAnnounce';node.className='shelf-privacy';node.setAttribute('role','status');document.querySelector('.shelf-toolbar').appendChild(node);}node.textContent=message;}
-function keyFor(card){return card.getAttribute('href')||card.querySelector('h3')?.textContent.trim()||'collection';}
-function renderProgress(){
- const count=completed.size,total=cards.length,pct=total?Math.round(count/total*100):0;
- doneNode.textContent=String(count);totalNode.textContent=String(total);percentNode.textContent=pct+'%';
- fill.style.width=pct+'%';meter.setAttribute('aria-valuemax',String(total));meter.setAttribute('aria-valuenow',String(count));
-}
-function applyFilters(){
- const mode=status.value;
- document.querySelectorAll('.section').forEach(section=>{
-  let any=false;
-  section.querySelectorAll('.shelf-item').forEach(item=>{
-   const card=item.querySelector('.card');
-   const isDone=completed.has(keyFor(card));
-   const visible=!card.hidden&&(mode==='all'||(mode==='done'&&isDone)||(mode==='open'&&!isDone));
-   item.hidden=!visible;item.classList.toggle('is-done',isDone);
-   any=any||visible;
-  });
-  section.hidden=!any;
- });
-}
-cards.forEach(card=>{
- const key=keyFor(card);
- const item=document.createElement('div');item.className='shelf-item';
- card.parentNode.insertBefore(item,card);item.appendChild(card);
- const label=document.createElement('label');label.className='shelf-check';
- const input=document.createElement('input');input.type='checkbox';input.checked=completed.has(key);input.setAttribute('aria-label','Mark '+(card.querySelector('h3')?.textContent.trim()||'collection')+' as completed');
- const text=document.createElement('span');text.textContent=input.checked?'Completed':'Mark done';
- label.append(input,text);item.appendChild(label);
- input.addEventListener('change',()=>{
-  if(input.checked)completed.add(key);else completed.delete(key);
-  text.textContent=input.checked?'Completed':'Mark done';save();renderProgress();applyFilters();
- });
-});
-function syncSearch(){cards.forEach(card=>{const item=card.closest('.shelf-item');if(item){item.hidden=card.hidden;}});applyFilters();}
-const search=document.getElementById('librarySearch');
-if(search)search.addEventListener('input',()=>{requestAnimationFrame(syncSearch);});
-document.querySelectorAll('.filter').forEach(button=>button.addEventListener('click',()=>requestAnimationFrame(syncSearch)));
-status.addEventListener('change',applyFilters);
-function setLayout(next){
- layout=next;document.querySelectorAll('.grid').forEach(g=>g.classList.toggle('shelf-list',layout==='list'));
- gridButton.classList.toggle('is-active',layout==='grid');listButton.classList.toggle('is-active',layout==='list');
- gridButton.setAttribute('aria-pressed',String(layout==='grid'));listButton.setAttribute('aria-pressed',String(layout==='list'));
- try{localStorage.setItem(KEY+'.layout',layout);}catch(_){}
-}
-gridButton.addEventListener('click',()=>setLayout('grid'));
-listButton.addEventListener('click',()=>setLayout('list'));
-resetButton.addEventListener('click',()=>{
- if(!completed.size)return announce('There is no saved progress to reset.');
- if(!window.confirm('Reset completion for every collection on this device?'))return;
- completed.clear();save();document.querySelectorAll('.shelf-check input').forEach(input=>{input.checked=false;input.nextElementSibling.textContent='Mark done';});
- renderProgress();applyFilters();announce('Your local checklist has been reset.');
-});
-try{const savedLayout=localStorage.getItem(KEY+'.layout');if(savedLayout==='list')setLayout('list');}catch(_){}
-totalNode.textContent=String(cards.length);save();renderProgress();applyFilters();
-if(search&&search.value)syncSearch();
+function read(){try{const d=JSON.parse(localStorage.getItem(STORE)||'{}');return d&&d.records&&typeof d.records==='object'?d:{records:{}};}catch(_){return{records:{}};}}
+function write(d){try{localStorage.setItem(STORE,JSON.stringify(d));window.dispatchEvent(new CustomEvent('atlas-progress-change'));return true;}catch(_){announce('Progress could not be saved in this browser.');return false;}}
+function keyFor(card){return 'collection:'+(card.getAttribute('href')||card.querySelector('h3')?.textContent.trim()||'collection').split('#')[0];}
+function titleFor(card){return card.querySelector('h3')?.textContent.trim()||'Collection';}
+function migrate(){try{const old=JSON.parse(localStorage.getItem(LEGACY)||'[]');if(!Array.isArray(old)||!old.length)return;const d=read();old.filter(x=>typeof x==='string').forEach(x=>{const key='collection:'+x.split('#')[0];if(!d.records[key]){const card=cards.find(c=>(c.getAttribute('href')||'').split('#')[0]===x.split('#')[0]);d.records[key]={id:key,type:'collection',done:true,title:card?titleFor(card):x,page:x.split('#')[0],pageTitle:card?titleFor(card):x,href:x.split('#')[0],updatedAt:Date.now()};}});write(d);}catch(_){}}
+migrate();
+function completed(key){return !!read().records[key];}
+function announce(msg){let n=document.getElementById('shelfAnnounce');if(!n){n=document.createElement('p');n.id='shelfAnnounce';n.className='shelf-privacy';n.setAttribute('role','status');document.querySelector('.shelf-toolbar')?.append(n);}if(n)n.textContent=msg;}
+function renderProgress(){const d=read().records;const count=cards.filter(c=>d[keyFor(c)]).length,total=cards.length,pct=total?Math.round(count/total*100):0;doneNode.textContent=String(count);totalNode.textContent=String(total);percentNode.textContent=pct+'%';fill.style.width=pct+'%';meter.setAttribute('aria-valuemax',String(total));meter.setAttribute('aria-valuenow',String(count));}
+function applyFilters(){const mode=status.value;document.querySelectorAll('.section').forEach(section=>{let any=false;section.querySelectorAll('.shelf-item').forEach(item=>{const card=item.querySelector('.card');const isDone=completed(keyFor(card));const visible=!card.hidden&&(mode==='all'||(mode==='done'&&isDone)||(mode==='open'&&!isDone));item.hidden=!visible;item.classList.toggle('is-done',isDone);any=any||visible;});section.hidden=!any;});}
+cards.forEach(card=>{const key=keyFor(card);let item=card.closest('.shelf-item');if(!item){item=document.createElement('div');item.className='shelf-item';card.parentNode.insertBefore(item,card);item.append(card);}const label=document.createElement('label');label.className='shelf-check';const input=document.createElement('input');input.type='checkbox';input.checked=completed(key);input.setAttribute('aria-label','Mark '+titleFor(card)+' as completed');const txt=document.createElement('span');txt.textContent=input.checked?'Completed':'Mark done';label.append(input,txt);item.append(label);input.addEventListener('change',()=>{const d=read();if(input.checked)d.records[key]={id:key,type:'collection',done:true,title:titleFor(card),page:card.getAttribute('href'),pageTitle:titleFor(card),href:card.getAttribute('href'),updatedAt:Date.now()};else delete d.records[key];write(d);txt.textContent=input.checked?'Completed':'Mark done';renderProgress();applyFilters();});});
+function syncSearch(){cards.forEach(card=>{const item=card.closest('.shelf-item');if(item)item.hidden=card.hidden;});applyFilters();}
+const search=document.getElementById('librarySearch');if(search)search.addEventListener('input',()=>requestAnimationFrame(syncSearch));document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>requestAnimationFrame(syncSearch)));status.addEventListener('change',applyFilters);
+function setLayout(next){document.querySelectorAll('.grid').forEach(g=>g.classList.toggle('shelf-list',next==='list'));gridButton.classList.toggle('is-active',next==='grid');listButton.classList.toggle('is-active',next==='list');gridButton.setAttribute('aria-pressed',String(next==='grid'));listButton.setAttribute('aria-pressed',String(next==='list'));try{localStorage.setItem(STORE+'.layout',next);}catch(_){}}
+gridButton.addEventListener('click',()=>setLayout('grid'));listButton.addEventListener('click',()=>setLayout('list'));
+resetButton.addEventListener('click',()=>{const d=read();const keys=cards.map(keyFor);if(!keys.some(k=>d.records[k]))return announce('There is no collection progress to reset.');if(!confirm('Reset completion for all collections on this device? Item-level checkmarks on content pages will be kept.'))return;keys.forEach(k=>delete d.records[k]);write(d);document.querySelectorAll('.shelf-check input').forEach(i=>{i.checked=false;i.nextElementSibling.textContent='Mark done';});renderProgress();applyFilters();announce('Collection progress reset. Item-level checkmarks were kept.');});
+try{if(localStorage.getItem(STORE+'.layout')==='list')setLayout('list');}catch(_){}
+totalNode.textContent=String(cards.length);renderProgress();applyFilters();if(search&&search.value)syncSearch();
+window.addEventListener('atlas-progress-change',()=>{document.querySelectorAll('.shelf-check input').forEach(i=>{const card=i.closest('.shelf-item')?.querySelector('.card');if(card){i.checked=completed(keyFor(card));i.nextElementSibling.textContent=i.checked?'Completed':'Mark done';}});renderProgress();applyFilters();});
+window.addEventListener('storage',e=>{if(e.key===STORE){renderProgress();applyFilters();}});
 })();
