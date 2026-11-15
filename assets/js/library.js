@@ -44,7 +44,7 @@ const safeHref=v=>{const s=String(v||'');return /^(?!\/\/)(?![a-z][a-z0-9+.-]*:)
 const hash=s=>{let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return(h>>>0).toString(36);};
 function checkbox(id,type,title,href,host,labelText){
  const lab=document.createElement('label');lab.className='atlas-item-check';lab.title='Save this item to your Atlas checklist';
- const box=document.createElement('input');box.type='checkbox';box.checked=!!read().records[id];box.setAttribute('aria-label','Mark '+title+' as completed');
+ const box=document.createElement('input');box.type='checkbox';box.dataset.atlasProgressId=id;box.dataset.atlasProgressType=type;box.checked=!!read().records[id];box.setAttribute('aria-label','Mark '+title+' as completed');
  const txt=document.createElement('span');txt.textContent=box.checked?'Saved':'Add to tracker';
  lab.append(box,txt);lab.addEventListener('click',e=>e.stopPropagation());host.appendChild(lab);
  box.addEventListener('change',()=>{set(type,id,{title:title,page:pageFile,pageTitle:pageTitle,href:href},box.checked);txt.textContent=box.checked?'Saved':'Add to tracker';});
@@ -53,7 +53,7 @@ function addPageControl(){
  const dock=document.querySelector('.atlas-dock');if(!dock||dock.querySelector('.atlas-page-check'))return;
  const id='collection:'+pageFile;
  const lab=document.createElement('label');lab.className='atlas-page-check';
- const box=document.createElement('input');box.type='checkbox';box.checked=!!read().records[id];box.setAttribute('aria-label','Mark this page complete');
+ const box=document.createElement('input');box.type='checkbox';box.dataset.atlasProgressId=id;box.dataset.atlasProgressType='collection';box.checked=!!read().records[id];box.setAttribute('aria-label','Mark this page complete');
  const txt=document.createElement('span');txt.textContent='Page done';
  lab.append(box,txt);dock.insertBefore(lab,dock.firstChild);
  box.addEventListener('change',()=>{set('page',id,{title:pageTitle,page:pageFile,pageTitle:pageTitle,href:pageFile},box.checked);txt.textContent=box.checked?'Page saved':'Page done';});
@@ -80,7 +80,7 @@ function addItems(){
   seen.add(node);
  });
 }
-function renderDashboard(){
+function syncControls(){const records=read().records;document.querySelectorAll('[data-atlas-progress-id]').forEach(box=>{box.checked=!!records[box.dataset.atlasProgressId];const text=box.nextElementSibling;if(text){const type=box.dataset.atlasProgressType;text.textContent=box.checked?(type==='collection'?'Page saved':'Saved'):(type==='collection'?'Page done':'Add to tracker');}});}\nfunction renderDashboard(){
  if(document.body.dataset.libraryTheme!=='home')return;
  let panel=document.getElementById('atlas-completed-panel');
  if(!panel){panel=document.createElement('section');panel.id='atlas-completed-panel';panel.className='atlas-completed-panel';panel.setAttribute('aria-label','Your completed items');const toolbar=document.querySelector('.shelf-toolbar');if(toolbar)toolbar.insertAdjacentElement('afterend',panel);else document.body.prepend(panel);}
@@ -97,7 +97,7 @@ if(document.body.dataset.libraryTheme!=='home'){
  observer.observe(document.body,{childList:true,subtree:true});
 }
 renderDashboard();
-window.addEventListener('atlas-progress-change',renderDashboard);
-window.addEventListener('storage',e=>{if(e.key===STORE)renderDashboard();});
-window.addEventListener('pageshow',renderDashboard);
+window.addEventListener('atlas-progress-change',()=>{syncControls();renderDashboard();});
+window.addEventListener('storage',e=>{if(e.key===STORE){syncControls();renderDashboard();}});
+window.addEventListener('pageshow',()=>{syncControls();renderDashboard();});
 })();
