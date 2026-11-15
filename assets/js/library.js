@@ -5,7 +5,7 @@ const body=document.body;
 if(!body)return;
 const templateStyles=document.createElement('link');
 templateStyles.rel='stylesheet';
-templateStyles.href='assets/css/collection-template.css?v=20261115-quiet-theme-toggle';
+templateStyles.href='assets/css/collection-template.css?v=20261115-quiet-theme-toggle-2';
 document.head.appendChild(templateStyles);
 const pageFile=(location.pathname.split('/').pop()||'index.html').toLowerCase();
 const currentPage=PAGES.find(p=>decodeURIComponent(p.file).toLowerCase()===pageFile);
