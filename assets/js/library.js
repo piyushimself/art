@@ -29,3 +29,73 @@ function onScroll(){const max=document.documentElement.scrollHeight-innerHeight;
 addEventListener('scroll',onScroll,{passive:true});onScroll();back.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
 if(theme==='home'){const old=document.querySelector('[data-atlas-toc]');if(old)old.hidden=true;}
 })();
+
+/* Atlas shared checklist — one progress store for every page */
+(()=>{'use strict';
+const STORE='atlas.progress.v2';
+const pageFile=(location.pathname.split('/').pop()||'index.html');
+const pageTitle=(document.title||pageFile).replace(/\\s*[—|].*$/,'').trim();
+function read(){try{const v=JSON.parse(localStorage.getItem(STORE)||'{}');return v&&v.records&&typeof v.records==='object'?v:{records:{}};}catch(_){return{records:{}};}}
+function write(data){try{localStorage.setItem(STORE,JSON.stringify(data));window.dispatchEvent(new CustomEvent('atlas-progress-change'));return true;}catch(_){return false;}}
+function set(type,id,meta,done){const data=read();if(done){data.records[id]=Object.assign({id,type,done:true,updatedAt:Date.now()},meta||{});}else{delete data.records[id];}write(data);}
+function list(){return Object.values(read().records).filter(x=>x&&x.done);}
+window.AtlasProgress={set:set,list:list,read:read,storeKey:STORE};
+const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const hash=s=>{let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return(h>>>0).toString(36);};
+function checkbox(id,type,title,href,host,labelText){
+ const lab=document.createElement('label');lab.className='atlas-item-check';lab.title='Save this item to your Atlas checklist';
+ const box=document.createElement('input');box.type='checkbox';box.checked=!!read().records[id];box.setAttribute('aria-label','Mark '+title+' as completed');
+ const txt=document.createElement('span');txt.textContent=box.checked?'Saved':'Add to tracker';
+ lab.append(box,txt);host.appendChild(lab);
+ box.addEventListener('change',()=>{set(type,id,{title:title,page:pageFile,pageTitle:pageTitle,href:href},box.checked);txt.textContent=box.checked?'Saved':'Add to tracker';});
+}
+function addPageControl(){
+ const dock=document.querySelector('.atlas-dock');if(!dock||dock.querySelector('.atlas-page-check'))return;
+ const id='page:'+pageFile;
+ const lab=document.createElement('label');lab.className='atlas-page-check';
+ const box=document.createElement('input');box.type='checkbox';box.checked=!!read().records[id];box.setAttribute('aria-label','Mark this page complete');
+ const txt=document.createElement('span');txt.textContent='Page done';
+ lab.append(box,txt);dock.insertBefore(lab,dock.firstChild);
+ box.addEventListener('change',()=>{set('page',id,{title:pageTitle,page:pageFile,pageTitle:pageTitle,href:pageFile},box.checked);txt.textContent=box.checked?'Page saved':'Page done';});
+ txt.textContent=box.checked?'Page saved':'Page done';
+}
+const selectors='main li, article li, .content li, .manga-card, .book, .practical-item, .task-item, .task-card, .film-card, .movie-card, .resource-card, .work-card, .entry, tbody tr';
+const seen=new WeakSet();
+function addItems(){
+ if(document.body.dataset.libraryTheme==='home')return;
+ document.querySelectorAll(selectors).forEach(node=>{
+  if(seen.has(node)||node.querySelector('.atlas-item-check')||node.closest('nav, .atlas-dock, .atlas-overlay, .atlas-toc, footer'))return;
+  const raw=(node.innerText||node.textContent||'').replace(/\\s+/g,' ').trim();
+  if(raw.length<18)return;
+  if(node.matches('li')&&node.querySelector('ul,ol'))return;
+  const titleNode=node.querySelector('h2,h3,h4,.card-title,.book-title,.manga-title,.title-cell,.title,.name');
+  let title=(titleNode&&titleNode.textContent||raw).replace(/\\s+/g,' ').trim();
+  if(title.length>110)title=title.slice(0,107)+'…';
+  const identity=pageFile+'|'+(node.getAttribute('data-id')||node.id||title+'|'+raw.slice(0,180));
+  const id='item:'+pageFile+':'+hash(identity);
+  node.id=node.id||('atlas-'+hash(identity));
+  const host=node.tagName==='TR'?(node.cells[0]||node):node;
+  checkbox(id,'item',title,pageFile+'#'+node.id,host);
+  node.classList.add('atlas-trackable');
+  seen.add(node);
+ });
+}
+function renderDashboard(){
+ if(document.body.dataset.libraryTheme!=='home')return;
+ let panel=document.getElementById('atlas-completed-panel');
+ if(!panel){panel=document.createElement('section');panel.id='atlas-completed-panel';panel.className='atlas-completed-panel';panel.setAttribute('aria-label','Your completed items');const toolbar=document.querySelector('.shelf-toolbar');if(toolbar)toolbar.insertAdjacentElement('afterend',panel);else document.body.prepend(panel);}
+ const records=list().sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
+ const rows=records.map(r=>'<div class="atlas-done-row"><label><input type="checkbox" checked data-atlas-uncheck="'+esc(r.id)+'"><span class="atlas-done-check">✓</span></label><a href="'+esc(r.href||r.page||'#')+'"><span>'+esc(r.title||r.pageTitle||r.page||'Completed item')+'</span><small>'+esc(r.pageTitle||r.page||'Library')+' · '+esc(r.type||'item')+'</small></a></div>').join('');
+ panel.innerHTML='<div class="atlas-done-head"><div><span class="atlas-done-kicker">YOUR PERSONAL CHECKLIST</span><h2>Completed & saved <span>'+records.length+'</span></h2></div><span class="atlas-done-note">Saved in this browser</span></div>'+(rows?'<div class="atlas-done-list">'+rows+'</div>':'<p class="atlas-done-empty">Nothing checked yet. Open any collection and use “Add to tracker” beside an item, or mark the page complete.</p>');
+ panel.querySelectorAll('[data-atlas-uncheck]').forEach(box=>box.addEventListener('change',()=>{const id=box.getAttribute('data-atlas-uncheck');const data=read();delete data.records[id];write(data);}));
+}
+addPageControl();
+addItems();
+if(document.body.dataset.libraryTheme!=='home'){
+ const observer=new MutationObserver(()=>addItems());
+ observer.observe(document.body,{childList:true,subtree:true});
+}
+renderDashboard();
+window.addEventListener('atlas-progress-change',renderDashboard);
+window.addEventListener('storage',e=>{if(e.key===STORE)renderDashboard();});
+})();
