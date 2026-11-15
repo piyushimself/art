@@ -425,81 +425,19 @@ html[data-color-mode] body :is(.filters,.filter-row,.filter-bar,.tag-strip,.fg){
 }
 
 
-/* ATLAS READABILITY PASS — normalize legacy page palettes under the shared toggle.
-   The aliases below cover the variable names used by the individual HTML documents. */
-html[data-color-mode="dark"]{
- color-scheme:dark;
- --atlas-page-bg:#17191b;--atlas-page-surface:#222729;--atlas-page-card:#292f32;
- --atlas-page-fg:#eeeae2;--atlas-page-muted:#bdc0ba;--atlas-page-line:#454d50;
- --bg:#17191b!important;--bg2:#202427!important;--bg3:#292f32!important;--bg4:#303739!important;
- --surface:#222729!important;--surface2:#292f32!important;--surface3:#303739!important;
- --panel:#222729!important;--card:#292f32!important;--card-h:#303739!important;
- --ink:#eeeae2!important;--text:#eeeae2!important;--text2:#d1d0c9!important;--text3:#b8b9b3!important;--text4:#999e9c!important;
- --paper:#17191b!important;--paper2:#222729!important;--paper-dark:#222729!important;--paper-mid:#292f32!important;
- --cream:#17191b!important;--warm-white:#222729!important;--parchment:#17191b!important;--parchment2:#222729!important;--parchment3:#292f32!important;
- --deep:#17191b!important;--black:#17191b!important;--near-black:#202427!important;--dark:#222729!important;--mid:#303739!important;
- --aged:#292f32!important;--panel-bg:#222729!important;--highlight:#343b3d!important;
- --muted:#bdc0ba!important;--mute:#bdc0ba!important;--text-muted:#bdc0ba!important;--ink-dim:#c4c1b8!important;--ink-soft:#c4c1b8!important;
- --border:#454d50!important;--line:#454d50!important;--hairline:#454d50!important;
- --color-text-primary:#eeeae2!important;--color-text-secondary:#bdc0ba!important;--color-text-tertiary:#a4aaa7!important;
- --color-background-primary:#17191b!important;--color-background-secondary:#222729!important;--color-background-tertiary:#292f32!important;
- --font-sans:Inter,system-ui,-apple-system,"Segoe UI",sans-serif!important;
+/* Theme-safe compatibility layer.
+   Collection pages own their palettes: several intentionally reuse --ink/--paper
+   for opposite roles in hero panels. Do not remap those aliases or force text
+   colours across every descendant; that caused white-on-cream sections. */
+html[data-color-mode="dark"],html[data-color-mode="light"]{
+ --atlas-page-line:#687174;
 }
-html[data-color-mode="light"]{
- color-scheme:light;
- --atlas-page-bg:#f0eee9;--atlas-page-surface:#faf9f6;--atlas-page-card:#e7e5df;
- --atlas-page-fg:#242729;--atlas-page-muted:#555d60;--atlas-page-line:#c9c8c2;
- --bg:#f0eee9!important;--bg2:#e7e5df!important;--bg3:#deddd7!important;--bg4:#d5d4ce!important;
- --surface:#faf9f6!important;--surface2:#f2f0eb!important;--surface3:#e7e5df!important;
- --panel:#faf9f6!important;--card:#faf9f6!important;--card-h:#f0eee9!important;
- --ink:#242729!important;--text:#242729!important;--text2:#3d4548!important;--text3:#555d60!important;--text4:#687174!important;
- --paper:#f0eee9!important;--paper2:#e7e5df!important;--paper-dark:#e7e5df!important;--paper-mid:#deddd7!important;
- --cream:#f0eee9!important;--warm-white:#faf9f6!important;--parchment:#f0eee9!important;--parchment2:#e7e5df!important;--parchment3:#deddd7!important;
- --deep:#f0eee9!important;--black:#242729!important;--near-black:#e7e5df!important;--dark:#e7e5df!important;--mid:#deddd7!important;
- --aged:#e7e5df!important;--panel-bg:#faf9f6!important;--highlight:#e5e2d9!important;
- --muted:#555d60!important;--mute:#555d60!important;--text-muted:#555d60!important;--ink-dim:#555d60!important;--ink-soft:#41494c!important;
- --border:#c9c8c2!important;--line:#c9c8c2!important;--hairline:#c9c8c2!important;
- --color-text-primary:#242729!important;--color-text-secondary:#555d60!important;--color-text-tertiary:#687174!important;
- --color-background-primary:#f0eee9!important;--color-background-secondary:#faf9f6!important;--color-background-tertiary:#e7e5df!important;
- --font-sans:Inter,system-ui,-apple-system,"Segoe UI",sans-serif!important;
+html[data-color-mode="dark"]{color-scheme:dark;--atlas-page-surface:#222729;--atlas-page-fg:#eeeae2;--atlas-page-muted:#bdc0ba;--atlas-page-line:#454d50}
+html[data-color-mode="light"]{color-scheme:light;--atlas-page-surface:#faf9f6;--atlas-page-fg:#242729;--atlas-page-muted:#555d60;--atlas-page-line:#c9c8c2}
+html[data-color-mode] body :is(input,select,textarea){
+ background-color:var(--atlas-page-surface)!important;
+ color:var(--atlas-page-fg)!important;
+ border-color:var(--atlas-page-line)!important;
 }
-html[data-color-mode] body{background:var(--atlas-page-bg)!important;color:var(--atlas-page-fg)!important;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif!important}
-html[data-color-mode] body :is(p,li,label,dt,dd,td,th,figcaption,blockquote,legend,summary,h1,h2,h3,h4,h5,h6){color:var(--atlas-page-fg)!important}
-html[data-color-mode] body :is(small,.muted,.meta,.metadata,.hint,.helper,.caption,.description,.subtitle,.eyebrow,.kicker){color:var(--atlas-page-muted)!important}
-html[data-color-mode] body :is(input,select,textarea){background:var(--atlas-page-surface)!important;color:var(--atlas-page-fg)!important;border-color:var(--atlas-page-line)!important}
 html[data-color-mode] body :is(input,textarea)::placeholder{color:var(--atlas-page-muted)!important;opacity:1}
-html[data-color-mode] body :is(article,.card,.panel,.item-card,.entry-card,.book-card,.manga-card,.film-card,.resource-card,.list-card,.content-card,.controls,.toolbar,.filter-panel,.search-panel,.searchbar,.sbar,.legend,.modal,.dialog){
- background-color:var(--atlas-page-surface)!important;color:var(--atlas-page-fg)!important;border-color:var(--atlas-page-line)!important;
-}
-html[data-color-mode="dark"] body a:not([class*="tag"]){color:#d6a18a}
-html[data-color-mode="light"] body a:not([class*="tag"]){color:#704638}
-html[data-color-mode] body :is(button,.filter,.filter-btn,.filter-chip,.filter-option,.chip,.tag-btn,.theme-chip){
- color:var(--atlas-page-fg)!important;border-color:var(--atlas-page-line)!important;
-}
-html[data-color-mode="dark"] body :is(button,.filter,.filter-btn,.filter-chip,.filter-option,.chip,.tag-btn,.theme-chip){background:#303739!important}
-html[data-color-mode="light"] body :is(button,.filter,.filter-btn,.filter-chip,.filter-option,.chip,.tag-btn,.theme-chip){background:#e7e5df!important}
-html[data-color-mode] body :is(button.active,.filter.active,.filter[aria-pressed="true"],.active-filter,[aria-selected="true"]){background:#526d63!important;color:#fff!important;border-color:#526d63!important}
 html[data-color-mode] body :is(.atlas-dock,.atlas-dialog,.atlas-toc,.atlas-backtop,.atlas-completed-panel){font-family:Inter,system-ui,sans-serif!important}
-
-/* Final contrast guard: prevent legacy inline/class text colours from disappearing
-   against the shared page surfaces. Preserve hierarchy through muted utility classes. */
-html[data-color-mode] body *{color:var(--atlas-page-fg)!important}
-html[data-color-mode] body :is(.muted,.meta,.metadata,.hint,.helper,.caption,.description,.subtitle,.eyebrow,.kicker,.secondary,.text-secondary){color:var(--atlas-page-muted)!important}
-html[data-color-mode="dark"] body a:not([class*="tag"]){color:#e0a58d!important}
-html[data-color-mode="light"] body a:not([class*="tag"]){color:#704638!important}
-html[data-color-mode] body :is(.tag,.badge,.pill,.chip,.label,.category,.genre,.status,.filter,.filter-btn,.filter-chip,.filter-option,.theme-chip){
- background-color:var(--atlas-page-card)!important;border-color:var(--atlas-page-line)!important;
-}
-html[data-color-mode] body :is(button.active,.filter.active,.filter[aria-pressed="true"],.active-filter,[aria-selected="true"]){background:#526d63!important;color:#fff!important}
-html[data-color-mode] body :is(input,select,textarea,option){background-color:var(--atlas-page-surface)!important;color:var(--atlas-page-fg)!important}
-
-
-/* Mobile navigation dock: collapsed by default, expanded only on request. */
-@media(max-width:640px){
- .atlas-dock:not(.is-expanded)>:not(.atlas-home):not([data-atlas-more]){display:none!important}
- .atlas-dock:not(.is-expanded){width:auto!important;min-width:0!important;gap:5px!important;padding:5px!important}
- .atlas-dock.is-expanded{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;width:min(320px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)!important;gap:5px!important;padding:8px!important}
- .atlas-dock.is-expanded>*{min-width:0!important;white-space:nowrap!important}
- .atlas-dock.is-expanded .atlas-home{grid-column:1/-1}
- .atlas-dock [data-atlas-more]{background:#557d68!important;color:#fff!important}
-}
