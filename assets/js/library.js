@@ -20,7 +20,7 @@ dock.innerHTML='<a class="atlas-home" href="index.html">← Library</a><button t
 document.body.appendChild(dock);
 const themeToggle=dock.querySelector('[data-atlas-theme]');
 const root=document.documentElement;
-let colorMode='light';try{colorMode=localStorage.getItem('atlas.color-mode')==='dark'?'dark':'light';}catch(_){}
+let colorMode='dark';try{colorMode=localStorage.getItem('atlas.color-mode')==='light'?'light':'dark';}catch(_){}
 function applyColorMode(mode){colorMode=mode;root.dataset.colorMode=mode;body.dataset.colorMode=mode;const dark=mode==='dark';themeToggle.textContent=dark?'☼ Light':'◐ Dark';themeToggle.setAttribute('aria-pressed',String(dark));themeToggle.setAttribute('aria-label',dark?'Switch to light theme':'Switch to dark theme');try{localStorage.setItem('atlas.color-mode',mode);}catch(_){}}
 applyColorMode(colorMode);
 themeToggle.addEventListener('click',()=>applyColorMode(colorMode==='dark'?'light':'dark'));
