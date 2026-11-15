@@ -40,13 +40,13 @@ function write(data){try{localStorage.setItem(STORE,JSON.stringify(data));window
 function set(type,id,meta,done){const data=read();if(done){data.records[id]=Object.assign({id,type,done:true,updatedAt:Date.now()},meta||{});}else{delete data.records[id];}write(data);}
 function list(){return Object.values(read().records).filter(x=>x&&x.done);}
 window.AtlasProgress={set:set,list:list,read:read,storeKey:STORE};
-const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeHref=v=>{const s=String(v||'');return /^(?!\\/\\/)(?![a-z][a-z0-9+.-]*:)[\\w%(). -]+\\.html(?:#[\\w-]+)?$/i.test(s)?s:'#';};\nconst esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const hash=s=>{let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return(h>>>0).toString(36);};
 function checkbox(id,type,title,href,host,labelText){
  const lab=document.createElement('label');lab.className='atlas-item-check';lab.title='Save this item to your Atlas checklist';
  const box=document.createElement('input');box.type='checkbox';box.checked=!!read().records[id];box.setAttribute('aria-label','Mark '+title+' as completed');
  const txt=document.createElement('span');txt.textContent=box.checked?'Saved':'Add to tracker';
- lab.append(box,txt);host.appendChild(lab);
+ lab.append(box,txt);lab.addEventListener('click',e=>e.stopPropagation());host.appendChild(lab);
  box.addEventListener('change',()=>{set(type,id,{title:title,page:pageFile,pageTitle:pageTitle,href:href},box.checked);txt.textContent=box.checked?'Saved':'Add to tracker';});
 }
 function addPageControl(){
