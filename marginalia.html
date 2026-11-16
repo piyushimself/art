@@ -567,7 +567,7 @@
       const safeLink = safeHttpUrl(e.link);
       const linkHtml = safeLink ? '<div class="body-text"><a href="' + escapeAttr(safeLink) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(safeLink) + '</a></div>' : '';
       const safeTag = VALID_TAGS.has(e.tag) ? e.tag : 'thought';
-      return \`
+      return `
       <article class="entry" data-id="${escapeAttr(e.id)}">
         <div class="stamp"><div class="d1">${stamp.d1}</div><div class="d2">${stamp.d2}</div></div>
         <div class="entry-head">
