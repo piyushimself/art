@@ -422,3 +422,131 @@ html[data-color-mode="dark"] body :is(
 ){
  border-radius:6px;
 }
+
+
+/* =========================================================
+   ATLAS GLOBAL LIGHT THEME — consistent companion to dark mode
+   Every registered page uses the same readable paper palette.
+   Brand typography and media remain page-specific.
+   ========================================================= */
+html[data-color-mode="light"]{
+ color-scheme:light;
+ --atlas-ui-bg:#f3f4f1;
+ --atlas-ui-surface:#ffffff;
+ --atlas-ui-ink:#252d2a;
+ --atlas-ui-muted:#59645f;
+ --atlas-ui-line:#d5dcd7;
+ --atlas-ui-accent:#426f5c;
+
+ --bg:#f3f4f1;--bg2:#ecefeb;--bg3:#e4e9e5;
+ --background:#f3f4f1;--surface:#ffffff;--surface-2:#f7f8f6;
+ --card:#ffffff;--panel:#ffffff;--paper:#f7f8f6;
+ --cream:#f7f8f6;--warm-white:#ffffff;--parchment:#f3f4f1;
+ --parchment2:#ffffff;--parchment3:#ecefeb;--cream-white:#f7f8f6;
+ --ink:#252d2a;--text:#252d2a;--text2:#46534d;--text3:#59645f;
+ --text-muted:#59645f;--muted:#59645f;--ink-soft:#46534d;
+ --bark:#e4e9e5;--bark-light:#59645f;
+ --line:#d5dcd7;--border:#d5dcd7;
+ --accent:#426f5c;--accent2:#426f5c;
+ --gold:#8a6b35;--gold-light:#9b7a42;
+ --atlas-bg:#f3f4f1;--atlas-paper:#ffffff;--atlas-ink:#252d2a;
+ --atlas-muted:#59645f;--atlas-line:#d5dcd7;--atlas-panel:#ffffff;
+ --atlas-shadow:0 12px 30px rgba(30,45,38,.08);
+ background:#f3f4f1!important;
+}
+html[data-color-mode="light"] body,
+html[data-color-mode="light"] body[data-library-theme]{
+ background:#f3f4f1!important;
+ background-color:#f3f4f1!important;
+ color:#252d2a!important;
+ color-scheme:light;
+}
+
+/* Shared content surfaces across editorial, catalogue and utility pages. */
+html[data-color-mode="light"] body :is(
+ .hero,.hero-inner,.hero-content,.hero-panel,.hero-card,
+ header,.header,.masthead,.page-header,.page-hero,.hero-header,
+ .preamble,.intro,.intro-panel,.title-panel,
+ .filter-wrap,.filter-bar,.filter-panel,.filters,.controls,.controls-wrap,
+ .toolbar,.searchbar,.search-panel,.search-wrap,.legend,.stats-panel,
+ .card,.card-inner,.panel,.tile,.content-card,.resource-card,.manga-card,
+ .film-card,.arc-card,.entry-card,.item-card,.task-card,.prompt-card,
+ .chapter-card,.episode-card,.season-block,.season-header,.phase-header,
+ .phase-intro-box,.progress-wrap,.tip-block,.callout,.quote-block,
+ .table-wrap,.table-container,.table-responsive,.table-scroll
+){
+ background-color:#ffffff!important;
+ color:#252d2a!important;
+ border-color:#d5dcd7!important;
+ box-shadow:0 4px 16px rgba(30,45,38,.055);
+}
+
+/* Override legacy inline pastel, cream and high-contrast dark panels. */
+html[data-color-mode="light"] body [style*="background-color"],
+html[data-color-mode="light"] body [style*="background:"]{
+ background-color:#ffffff!important;
+ background-image:none!important;
+ color:#252d2a!important;
+ border-color:#d5dcd7!important;
+}
+
+/* Stable text contrast; muted copy remains visibly secondary. */
+html[data-color-mode="light"] body :is(
+ h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,
+ label,legend,th,td,.subtitle,.description,.subtext,.eyebrow,
+ .section-title,.section-label,.hero-sub,.hero-copy,.header-sub,
+ .header-eyebrow,.stat-label,.meta-label,.muted,.muted-text
+){
+ color:#303a35!important;
+}
+html[data-color-mode="light"] body :is(
+ small,.muted,.muted-text,.subtitle,.description,.subtext,
+ .eyebrow,.stat-label,.meta-label
+){color:#59645f!important}
+html[data-color-mode="light"] body :is(strong,b,em){color:#202925}
+html[data-color-mode="light"] body a:not(.atlas-home):not(.atlas-result){color:#315f4c}
+html[data-color-mode="light"] body a:hover{color:#204a39}
+
+/* Filters and labels use restrained contrast rather than pale pastel fills. */
+html[data-color-mode="light"] body :is(
+ .tag,.badge,.chip,.pill,.genre,.category,.meta-pill,.level-pill,
+ .filter-btn,.tab-btn,.ftab,.filter,.filter-chip,.nav-tab,.tab,
+ .status,.label,.count-badge,.fb,.f-btn
+){
+ background:#edf1ed!important;
+ color:#394740!important;
+ border-color:#d0d9d2!important;
+}
+html[data-color-mode="light"] body :is(
+ .filter-btn.active,.tab-btn.active,.ftab.active,.filter.active,
+ .filter-chip.active,.nav-tab.active,.tab.active,.fb.active,.f-btn.on,
+ [aria-pressed="true"]
+){
+ background:#426f5c!important;
+ color:#ffffff!important;
+ border-color:#426f5c!important;
+}
+
+/* Forms, tables and separators remain legible in both modes. */
+html[data-color-mode="light"] body :is(input,select,textarea){
+ background-color:#ffffff!important;
+ color:#252d2a!important;
+ border-color:#c8d1ca!important;
+ accent-color:#426f5c;
+}
+html[data-color-mode="light"] body :is(input,select,textarea)::placeholder{
+ color:#77827b!important;opacity:1;
+}
+html[data-color-mode="light"] body :is(button,.button,.btn){
+ color:#252d2a;
+ border-color:#c8d1ca;
+}
+html[data-color-mode="light"] body table{color:#303a35!important;border-color:#d5dcd7!important}
+html[data-color-mode="light"] body :is(th,td,hr,.divider,.separator){border-color:#d5dcd7!important}
+html[data-color-mode="light"] body :is(img,video,canvas,svg,iframe){filter:none}
+html[data-color-mode="light"] ::selection{background:#c9dfd1;color:#1d3025}
+
+/* Keep bespoke accent text visible when a legacy page uses inline colour. */
+html[data-color-mode="light"] body :is(.accent,.eyebrow,.kicker,.section-kicker){
+ color:#426f5c!important;
+}
