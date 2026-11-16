@@ -113,7 +113,7 @@ function checkbox(id,type,title,href,host,labelText){
  const lab=document.createElement('label');lab.className='atlas-item-check';lab.title='Save this item to your Atlas checklist';
  const box=document.createElement('input');box.type='checkbox';box.dataset.atlasProgressId=id;box.dataset.atlasProgressType=type;box.checked=!!read().records[id];box.setAttribute('aria-label','Mark '+title+' as completed');
  const txt=document.createElement('span');txt.textContent=box.checked?'Saved':'Add to tracker';
- lab.append(box,txt);lab.addEventListener('click',e=>e.stopPropagation());if(host.matches('a,button'))host.insertAdjacentElement('afterend',lab);else host.appendChild(lab);
+ lab.append(box,txt);lab.addEventListener('click',e=>e.stopPropagation());if(host.matches('a.card')){lab.classList.add('atlas-item-check--inside-link');host.appendChild(lab);}else if(host.matches('a,button'))host.insertAdjacentElement('afterend',lab);else host.appendChild(lab);
  box.addEventListener('change',()=>{set(type,id,{title:title,page:pageFile,pageTitle:pageTitle,href:href},box.checked);txt.textContent=box.checked?'Saved':'Add to tracker';});
 }
 function addPageControl(){
