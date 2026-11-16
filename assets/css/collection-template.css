@@ -142,3 +142,16 @@ html[data-color-mode="light"] .atlas-done-kicker{color:#526d63!important}
  body[data-atlas-page="watercolour-journal.html"] .grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
  body[data-atlas-page="human-development-curriculum.html"] .phase-header{padding-inline:28px!important}
 }
+
+
+/* Tracker placement: keep checkboxes inside card surfaces, never as grid siblings. */
+.atlas-trackable:has(>.atlas-item-check--inside-link){padding-bottom:52px!important}
+.atlas-item-check--inside-link{position:absolute!important;right:12px!important;bottom:12px!important;margin:0!important;z-index:4!important}
+body[data-library-theme="art"] .atlas-item-check--inside-link,
+body[data-library-theme="learning"] .atlas-item-check--inside-link{
+ background:#fffaf1!important;color:#51483e!important;border-color:rgba(75,58,39,.22)!important;
+}
+body[data-library-theme="art"] .atlas-item-check--inside-link:hover,
+body[data-library-theme="learning"] .atlas-item-check--inside-link:hover{
+ background:#f3eadb!important;color:#29231e!important;
+}
