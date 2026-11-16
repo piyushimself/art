@@ -434,6 +434,82 @@
     .free-badge { font-size: 9px; }
   }
 
+
+  /* LIGHT ART THEME FIX — keep this page coherent with the library's paper palette.
+     The previous dark-page tokens produced pale text on the cream art background. */
+  :root {
+    --bg: #f4efe5;
+    --bg2: #fffaf1;
+    --bg3: #eee6d8;
+    --border: rgba(60,45,30,.16);
+    --border-hover: rgba(60,45,30,.30);
+    --text: #29231e;
+    --text2: #5f574e;
+    --text3: #756d63;
+    --accent: #986d2e;
+    --accent2: #34745f;
+    --accent3: #76519a;
+    --red: #a84e49;
+    --blue: #426c9e;
+  }
+
+  body { background: var(--bg); color: var(--text); }
+  .hero { border-bottom-color: var(--border); }
+  .hero-eyebrow { color: #805a25; }
+  .hero h1, .stat-n { color: var(--text); }
+  .hero h1 em { color: #986d2e; }
+  .hero p, .card-desc, .tip-block p { color: var(--text2); }
+  .stat-l, .section-title, footer { color: var(--text3); }
+
+  .filter-wrap {
+    background: #29231e;
+    border-bottom-color: rgba(255,255,255,.12);
+  }
+  .ftab { color: #d6cec1; }
+  .ftab:hover { color: #fffaf1; }
+  .ftab.active { color: #e7bd72; border-bottom-color: #c99a4c; }
+
+  .card {
+    background: var(--bg2);
+    border-color: var(--border);
+    box-shadow: 0 3px 12px rgba(55,42,26,.045);
+  }
+  .card:hover {
+    background: #fffdf8;
+    border-color: var(--border-hover);
+    box-shadow: 0 8px 22px rgba(55,42,26,.09);
+  }
+  .card-name { color: var(--text); }
+  .card-link-icon { color: var(--text3); }
+  .t-gold { background: #f5ead4; color: #79551f; border-color: #e8d4ad; }
+  .t-teal { background: #e3efe8; color: #285f4b; border-color: #c5dfd0; }
+  .t-purple { background: #eee6f5; color: #68458a; border-color: #d9c8e8; }
+  .t-red { background: #f5e5e2; color: #91443e; border-color: #e9c9c4; }
+  .t-blue { background: #e5edf6; color: #365d8a; border-color: #c9d8e9; }
+  .t-dim { background: #eeeae2; color: #625b51; border-color: #ded7ca; }
+  .free-badge {
+    background: #e3efe8;
+    color: #285f4b;
+    border-color: #c5dfd0;
+  }
+
+  .tip-block {
+    background: #f8f1e4;
+    border-color: #e5d4b4;
+    border-left-color: #986d2e;
+  }
+  .tip-label { color: #805a25; }
+  footer { border-top-color: var(--border); }
+
+  .card:focus-visible, .ftab:focus-visible {
+    outline-color: #805a25;
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 760px) {
+    .filter-wrap { background: #29231e; }
+  }
+
 </style>
 <link rel="stylesheet" href="assets/css/library.css"><link rel="stylesheet" href="assets/css/mobile-system.css?v=template-20261115">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
