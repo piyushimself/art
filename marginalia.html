@@ -449,7 +449,7 @@
 
 </div>
 
-<div class="lightbox" id="lightbox"><img id="lightboxImg" src=""></div>
+<div class="lightbox" id="lightbox"><img id="lightboxImg" src="" alt="Expanded image from the selected journal entry"></div>
 
 <script>
 (function(){
@@ -468,6 +468,7 @@
       const raw = localStorage.getItem(STORAGE_KEY);
       entries = raw ? JSON.parse(raw) : [];
     }catch(e){ entries = []; }
+    entries = Array.isArray(entries) ? entries.map(normalizeEntry).filter(Boolean) : [];
   }
   function persist(){
     localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
@@ -479,10 +480,45 @@
     return d.innerHTML;
   }
 
-  // turn plain text + auto-linkify URLs, escape everything else
+  function escapeAttr(value){
+    return String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+  function safeHttpUrl(value){
+    const url = String(value ?? '').trim();
+    return /^https?:\/\/[^\s"'<>]+$/i.test(url) ? url : '';
+  }
+  function safeImageSrc(value){
+    const src = String(value ?? '').trim();
+    return /^data:image\/(?:png|jpe?g|gif|webp|avif);base64,[a-z0-9+/=]+$/i.test(src) ? src : '';
+  }
+  const VALID_TAGS = new Set(['thought','sketch','film','book','music','history']);
+  function normalizeEntry(value){
+    if(!value || typeof value !== 'object' || Array.isArray(value)) return null;
+    const id = String(value.id ?? '').trim();
+    if(!id || id.length > 120) return null;
+    return {
+      id,
+      title: String(value.title ?? '').slice(0,300),
+      body: String(value.body ?? '').slice(0,20000),
+      link: safeHttpUrl(value.link),
+      tag: VALID_TAGS.has(value.tag) ? value.tag : 'thought',
+      images: Array.isArray(value.images) ? value.images.slice(0,8).map(safeImageSrc).filter(Boolean) : [],
+      createdAt: Number.isFinite(Number(value.createdAt)) ? Number(value.createdAt) : Date.now()
+    };
+  }
+
+  // Linkify only validated HTTP(S) URLs; escape text and attribute contexts separately.
   function renderBody(text){
-    const escaped = escapeHtml(text);
-    return escaped.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+    const value = String(text ?? '');
+    const urlPattern = /https?:\/\/[^\s<>"']+/gi;
+    let output = '', cursor = 0;
+    for(const match of value.matchAll(urlPattern)){
+      output += escapeHtml(value.slice(cursor, match.index));
+      const url = match[0];
+      output += '<a href="' + escapeAttr(url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(url) + '</a>';
+      cursor = match.index + url.length;
+    }
+    return output + escapeHtml(value.slice(cursor));
   }
 
   function fmtStamp(ts){
@@ -524,13 +560,18 @@
 
     feed.innerHTML = list.map(e => {
       const stamp = fmtStamp(e.createdAt);
-      const imgs = (e.images||[]).map(src => `<img src="${src}" data-full="${src}">`).join('');
-      const linkHtml = e.link ? `<div class="body-text"><a href="${escapeHtml(e.link)}" target="_blank" rel="noopener">${escapeHtml(e.link)}</a></div>` : '';
-      return `
-      <article class="entry" data-id="${e.id}">
+      const imgs = (e.images||[]).map(value => {
+        const src = safeImageSrc(value);
+        return src ? '<img src="' + escapeAttr(src) + '" data-full="' + escapeAttr(src) + '" alt="Attached image from this journal entry" loading="lazy">' : '';
+      }).join('');
+      const safeLink = safeHttpUrl(e.link);
+      const linkHtml = safeLink ? '<div class="body-text"><a href="' + escapeAttr(safeLink) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(safeLink) + '</a></div>' : '';
+      const safeTag = VALID_TAGS.has(e.tag) ? e.tag : 'thought';
+      return \`
+      <article class="entry" data-id="${escapeAttr(e.id)}">
         <div class="stamp"><div class="d1">${stamp.d1}</div><div class="d2">${stamp.d2}</div></div>
         <div class="entry-head">
-          <span class="entry-tag tag-${e.tag}">${e.tag}</span>
+          <span class="entry-tag tag-${safeTag}">${escapeHtml(safeTag)}</span>
           ${e.title ? `<h2>${escapeHtml(e.title)}</h2>` : ''}
           <div class="timestamp">${fmtFull(e.createdAt)}</div>
         </div>
@@ -583,9 +624,10 @@
 
   function renderPreviewStrip(){
     const strip = document.getElementById('previewStrip');
-    strip.innerHTML = pendingImages.map((src, i) =>
-      `<div class="thumb"><img src="${src}"><div class="rm" data-i="${i}">×</div></div>`
-    ).join('');
+    strip.innerHTML = pendingImages.map((value, i) => {
+      const src = safeImageSrc(value);
+      return src ? '<div class="thumb"><img src="' + escapeAttr(src) + '" alt="Image attachment preview"><div class="rm" data-i="' + i + '">×</div></div>' : '';
+    }).join('');
     strip.querySelectorAll('.rm').forEach(btn => {
       btn.addEventListener('click', () => {
         pendingImages.splice(parseInt(btn.dataset.i), 1);
@@ -654,7 +696,7 @@
       return;
     }
     if(e.target.tagName === 'IMG' && e.target.dataset.full){
-      document.getElementById('lightboxImg').src = e.target.dataset.full;
+      document.getElementById('lightboxImg').src = safeImageSrc(e.target.dataset.full);
       document.getElementById('lightbox').classList.add('open');
     }
   });
@@ -689,11 +731,18 @@
         const imported = JSON.parse(ev.target.result);
         if(!Array.isArray(imported)) throw new Error('bad format');
         const existingIds = new Set(entries.map(x => x.id));
-        const merged = imported.filter(x => !existingIds.has(x.id));
+        const merged = [];
+        imported.forEach(value => {
+          const entry = normalizeEntry(value);
+          if(entry && !existingIds.has(entry.id)){
+            existingIds.add(entry.id);
+            merged.push(entry);
+          }
+        });
         entries = entries.concat(merged);
         persist();
         render();
-        alert('Imported ' + merged.length + ' entries.');
+        alert('Imported ' + merged.length + ' valid entries. Invalid or duplicate entries were skipped.');
       }catch(err){
         alert('Could not read that backup file.');
       }
