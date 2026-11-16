@@ -1,382 +1,123 @@
-/* Atlas Standard UI — list-first collection system
-   Shared by every registered collection page. Content and behaviour stay page-owned. */
-:root{
-  --atlas-content-width:1160px;
-  --atlas-reading-width:900px;
-  --atlas-radius:9px;
-  --atlas-space:16px;
-}
-html[data-color-mode="dark"]{
-  --atlas-page:#101416;
-  --atlas-panel:#1b2224;
-  --atlas-panel-soft:#20282a;
-  --atlas-row:#171e20;
-  --atlas-border:#354044;
+/* Atlas shared visual system.
+   Deliberately standardises colour, controls and reading rhythm only.
+   Page-owned layout, editorial typography and content structure remain intact. */
+
+html[data-color-mode="dark"] body[data-atlas-page]{
+  --atlas-page:#111719;
+  --atlas-panel:#192124;
+  --atlas-panel-soft:#202a2d;
+  --atlas-row:#172024;
+  --atlas-border:#364347;
   --atlas-text:#e8e9e4;
   --atlas-muted:#aeb8b3;
   --atlas-accent:#91b8a8;
   --atlas-hover:#263331;
 }
-html[data-color-mode="light"]{
+html[data-color-mode="light"] body[data-atlas-page]{
   --atlas-page:#f3f4f1;
   --atlas-panel:#ffffff;
   --atlas-panel-soft:#f7f8f6;
-  --atlas-row:#ffffff;
+  --atlas-row:#edf1ed;
   --atlas-border:#d5dcd7;
   --atlas-text:#252d2a;
   --atlas-muted:#59645f;
   --atlas-accent:#426f5c;
-  --atlas-hover:#edf3ee;
+  --atlas-hover:#e8efea;
 }
 
-/* 1. Shared page frame and editorial hierarchy */
+/* Bridge common legacy palette names to the shared mode tokens.
+   This keeps existing page CSS usable without replacing its layout. */
 body[data-atlas-page]{
+  --bg:var(--atlas-page);
+  --bg2:var(--atlas-panel);
+  --bg3:var(--atlas-panel-soft);
+  --bg4:var(--atlas-row);
+  --surface:var(--atlas-panel);
+  --surface2:var(--atlas-panel-soft);
+  --panel:var(--atlas-panel);
+  --paper:var(--atlas-text);
+  --ink:var(--atlas-page);
+  --text:var(--atlas-text);
+  --text2:var(--atlas-muted);
+  --t1:var(--atlas-text);
+  --t2:var(--atlas-muted);
+  --muted:var(--atlas-muted);
+  --line:var(--atlas-border);
+  --border:var(--atlas-border);
+  --b1:var(--atlas-border);
+  --b2:var(--atlas-border);
+  --accent:var(--atlas-accent);
+  --gold:var(--atlas-accent);
+  --highlight:var(--atlas-hover);
   color:var(--atlas-text)!important;
-  background:var(--atlas-page)!important;
-  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif!important;
-  font-size:15px!important;
-  line-height:1.6!important;
+  background-color:var(--atlas-page)!important;
+  font-size:15px;
+  line-height:1.6;
 }
-body[data-atlas-page] :is(main,.main,.main-content,.content,.page-wrapper,.page-wrap,.page-content,.content-wrap,.container,.wrapper,.wrap,.shell,.app,.library,.curriculum,.inner,.main-container){
-  width:min(calc(100% - 48px),var(--atlas-content-width))!important;
-  max-width:var(--atlas-content-width)!important;
-  margin-inline:auto!important;
+body[data-atlas-page] :is(header,.header,.hdr,.masthead,.hero,.hero-header,.page-header,.controls,.toolbar,.filter-bar,.filter-wrap,.filter-row,.tabs,.tabs-bar,.nav-bar,.searchbar,.stats-bar,.results-bar,.sbar){
+  color:var(--atlas-text);
+  border-color:var(--atlas-border);
+  background-color:var(--atlas-panel);
 }
-body[data-atlas-page] :is(h1,.hero-title,.page-title,.main-title,.collection-title,.masthead-title,.hero-h1){
-  max-width:28ch!important;
-  margin:0 0 10px!important;
-  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif!important;
-  font-size:clamp(1.8rem,3.1vw,2.65rem)!important;
-  font-weight:700!important;
-  line-height:1.12!important;
-  letter-spacing:-.035em!important;
+body[data-atlas-page] :is(.card,.manga-card,.film-card,.book-card,.resource-card,.episode-card,.mc,.mi,.lcard,.arc-card,.result-card,.entry-card){
+  color:var(--atlas-text);
+  border-color:var(--atlas-border);
+  background-color:var(--atlas-panel);
+  box-shadow:none;
 }
-body[data-atlas-page] :is(h2,.section-title,.stage-title,.curriculum-title,.arc-title,.sec-title,.tier-title){
-  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif!important;
-  font-size:clamp(1.2rem,2vw,1.55rem)!important;
-  font-weight:650!important;
-  line-height:1.25!important;
-  letter-spacing:-.02em!important;
+body[data-atlas-page] :is(.card,.manga-card,.film-card,.book-card,.resource-card,.episode-card,.mc,.mi,.lcard,.arc-card,.result-card,.entry-card):is(:hover,:focus-within){
+  background-color:var(--atlas-hover);
+  border-color:var(--atlas-accent);
 }
-body[data-atlas-page] :is(h3,h4,.card-title,.book-title,.film-title,.manga-title,.entry-title){
-  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif!important;
-  font-size:1rem!important;
-  font-weight:650!important;
-  line-height:1.35!important;
+body[data-atlas-page] :is(input,select,textarea){
+  min-height:36px;
+  max-width:100%;
+  border:1px solid var(--atlas-border);
+  border-radius:7px;
+  background-color:var(--atlas-panel-soft);
+  color:var(--atlas-text);
+  font:inherit;
 }
-body[data-atlas-page] :is(p,li,.description,.card-desc,.book-desc,.film-why,.card-reflection){
-  font-size:.94rem!important;
-  line-height:1.65!important;
+body[data-atlas-page] :is(input,select,textarea)::placeholder{color:var(--atlas-muted);opacity:1}
+body[data-atlas-page] :is(button,.btn,.button,.filter-btn,.filter,.pill,.tab-btn,.nav-tab,.fb,.t-btn,.tbtn,.vbtn){
+  min-height:32px;
+  max-width:100%;
+  padding:6px 10px;
+  border:1px solid var(--atlas-border);
+  border-radius:7px;
+  background-color:var(--atlas-panel-soft);
+  color:var(--atlas-text);
+  font:600 12px/1.3 system-ui,-apple-system,"Segoe UI",sans-serif;
+  letter-spacing:normal;
+  text-transform:none;
+  box-shadow:none;
 }
-body[data-atlas-page] :is(.eyebrow,.hero-eyebrow,.header-eyebrow,.hd-label,.header-label,.hero-kicker,.section-eyebrow){
-  font-size:.68rem!important;
-  font-weight:650!important;
-  letter-spacing:.12em!important;
-  text-transform:uppercase!important;
-  color:var(--atlas-accent)!important;
-}
-
-/* 2. Headers: compact, left aligned, no full-screen theatrical mastheads */
-body[data-atlas-page] > header,
-body[data-atlas-page] > .header,
-body[data-atlas-page] > .hdr,
-body[data-atlas-page] > .masthead,
-body[data-atlas-page] > .hero,
-body[data-atlas-page] > .hero-header,
-body[data-atlas-page] > .page-header{
-  min-height:0!important;
-  height:auto!important;
-  padding:32px max(24px,calc((100vw - var(--atlas-content-width))/2)) 26px!important;
-  margin:0!important;
-  text-align:left!important;
-  background:var(--atlas-panel)!important;
-  background-image:none!important;
-  color:var(--atlas-text)!important;
-  border:0!important;
-  border-bottom:1px solid var(--atlas-border)!important;
-  box-shadow:none!important;
-}
-body[data-atlas-page] :is(.hero-content,.hero-inner,.header-inner,.masthead-inner,.hdr-inner){
-  width:100%!important;
-  max-width:var(--atlas-content-width)!important;
-  margin-inline:auto!important;
-  padding:0!important;
-}
-body[data-atlas-page] :is(header,.header,.masthead,.hero) :is(h1,.hero-title,.hero-h1,.hd-title){
-  color:var(--atlas-text)!important;
-  text-align:left!important;
-}
-body[data-atlas-page] :is(header,.header,.masthead,.hero) :is(p,.sub,.subtitle,.hero-sub,.hero-subtitle,.header-sub){
-  max-width:72ch!important;
-  color:var(--atlas-muted)!important;
-  font-size:.9rem!important;
-  letter-spacing:normal!important;
-  line-height:1.55!important;
-  text-transform:none!important;
-}
-body[data-atlas-page] :is(.hero-stats,.header-stats,.header-meta,.hero-meta,.hm,.hd-stats,.sts,.stats,.stats-bar){
-  display:flex!important;
-  flex-wrap:wrap!important;
-  gap:10px 22px!important;
-  align-items:center!important;
-  margin-top:16px!important;
-}
-body[data-atlas-page] :is(.stat,.stat-item,.ms,.hd-stat,.hero-stat,.hstat){
-  min-width:0!important;
-  padding:0!important;
-  background:transparent!important;
-  border:0!important;
-  box-shadow:none!important;
-}
-body[data-atlas-page] :is(.stat-n,.stat-num,.num,.ms .num,.hd-stat-n,.hero-stat-n,.sn){
-  font-size:1.25rem!important;
-  line-height:1.15!important;
-  color:var(--atlas-accent)!important;
-}
-body[data-atlas-page] :is(.stat-l,.stat-label,.lbl,.ms .lbl,.hd-stat-l,.hero-stat-l,.sl){
-  font-size:.68rem!important;
-  color:var(--atlas-muted)!important;
-  letter-spacing:.04em!important;
-}
-
-/* 3. Search, tabs and filters: compact shared controls */
-body[data-atlas-page] :is(.controls,.controls-wrap,.controls-inner,.ctrl,.ci,.filter-wrap,.filter-inner,.filter-bar,.filter-strip,.filter-row,.toolbar,.tabs-bar,.nav-bar,.tabs,.nav-inner){
-  position:relative!important;
-  inset:auto!important;
-  z-index:20!important;
-  display:flex!important;
-  align-items:center!important;
-  flex-wrap:wrap!important;
-  gap:8px!important;
-  width:100%!important;
-  padding:12px max(24px,calc((100vw - var(--atlas-content-width))/2))!important;
-  margin:0!important;
-  background:var(--atlas-panel)!important;
-  color:var(--atlas-text)!important;
-  border:0!important;
-  border-bottom:1px solid var(--atlas-border)!important;
-  box-shadow:none!important;
-  backdrop-filter:none!important;
-}
-body[data-atlas-page] :is(.search-wrap,.search-box,.search-field,.search-row,.sw,.sb,.sbox){
-  flex:1 1 240px!important;
-  min-width:min(100%,220px)!important;
-  max-width:520px!important;
-}
-body[data-atlas-page] :is(input[type="search"],input[type="text"],input[type="number"],select,textarea,.search-input,.search-box input,.search-wrap input,.sw input,.sb input){
-  min-height:38px!important;
-  width:100%!important;
-  padding:8px 11px!important;
-  border:1px solid var(--atlas-border)!important;
-  border-radius:7px!important;
-  background:var(--atlas-page)!important;
-  color:var(--atlas-text)!important;
-  font:400 13px/1.4 Inter,system-ui,sans-serif!important;
-  box-shadow:none!important;
-}
-body[data-atlas-page] :is(button,.btn,.button,.filter-btn,.fb,.f-btn,.t-btn,.tbtn,.tab-btn,.nav-tab,.ftab,.pill,.tbtn,.vbtn,.watch-btn,.check-btn){
-  min-height:32px!important;
-  padding:6px 10px!important;
-  border:1px solid var(--atlas-border)!important;
-  border-radius:7px!important;
-  background:var(--atlas-panel-soft)!important;
-  color:var(--atlas-text)!important;
-  font:600 12px/1.25 Inter,system-ui,sans-serif!important;
-  letter-spacing:0!important;
-  text-transform:none!important;
-  box-shadow:none!important;
-  transition:background .15s,border-color .15s,color .15s!important;
-}
-body[data-atlas-page] :is(button,.btn,.button,.filter-btn,.fb,.f-btn,.t-btn,.tbtn,.tab-btn,.nav-tab,.ftab,.pill,.vbtn):is(:hover,.active,.on,[aria-pressed="true"]){
-  background:var(--atlas-hover)!important;
-  color:var(--atlas-text)!important;
-  border-color:var(--atlas-accent)!important;
-}
-body[data-atlas-page] :is(.filter-label,.filter-label,.fl,.filter-group-label){
-  color:var(--atlas-muted)!important;
-  font-size:.7rem!important;
-  font-weight:650!important;
-  letter-spacing:.04em!important;
-  text-transform:uppercase!important;
-}
-
-/* 4. List-first content: replace card walls with calm full-width rows */
-body[data-atlas-page] :is(
- .mg,.manga-grid,.card-grid,.cards-grid,.cards,.films-grid,.episode-grid,
- .books-grid,.resource-grid,.arc-grid,.grid
-){
-  display:grid!important;
-  grid-template-columns:minmax(0,1fr)!important;
-  gap:0!important;
-  width:100%!important;
-  max-width:var(--atlas-content-width)!important;
-  margin-inline:auto!important;
-}
-body[data-atlas-page] :is(
- .mg > .mc,.manga-grid > .manga-card,.card-grid > .card,
- .cards-grid > .card,.cards > .card,.films-grid > .film-card,
- .episode-grid > .episode-card,.books-grid > .book-card,
- .resource-grid > .card,.arc-grid > .card,.grid > .card,
- .grid > .mc,.grid > .row,.card-grid > *, .cards-grid > *,
- .manga-grid > *, .films-grid > *, .episode-grid > *,
- .books-grid > *,.resource-grid > *,.arc-grid > *
-){
-  min-width:0!important;
-  width:100%!important;
-  margin:0!important;
-  padding:13px 14px!important;
-  border:0!important;
-  border-bottom:1px solid var(--atlas-border)!important;
-  border-radius:0!important;
-  background:transparent!important;
-  color:var(--atlas-text)!important;
-  box-shadow:none!important;
-  transform:none!important;
-}
-body[data-atlas-page] :is(
- .mg > .mc:hover,.manga-grid > .manga-card:hover,.card-grid > .card:hover,
- .cards-grid > .card:hover,.cards > .card:hover,.films-grid > .film-card:hover,
- .episode-grid > .episode-card:hover,.books-grid > .book-card:hover,
- .resource-grid > .card:hover,.arc-grid > .card:hover,.grid > .card:hover
-){
-  background:var(--atlas-hover)!important;
-  border-color:var(--atlas-border)!important;
-}
-body[data-atlas-page] :is(.mc,.manga-card,.film-card,.episode-card,.book-card,.resource-card){
-  min-width:0!important;
-  border-radius:0!important;
-  box-shadow:none!important;
-}
-body[data-atlas-page] :is(.mc,.manga-card,.film-card,.episode-card,.book-card) :is(.mt,.card-title,.manga-title,.film-title,.ep-title,.book-title){
-  color:var(--atlas-text)!important;
-  font-size:.96rem!important;
-  font-weight:650!important;
-}
-body[data-atlas-page] :is(.mc,.manga-card,.film-card,.episode-card,.book-card) :is(.ma,.card-desc,.manga-author,.film-meta,.ep-desc,.book-author,.book-meta){
-  color:var(--atlas-muted)!important;
-  font-size:.82rem!important;
+body[data-atlas-page] :is(button,.btn,.button,.filter-btn,.filter,.pill,.tab-btn,.nav-tab,.fb,.t-btn,.tbtn,.vbtn):is(:hover,.active,.on,[aria-pressed="true"]){
+  border-color:var(--atlas-accent);
+  background-color:var(--atlas-hover);
+  color:var(--atlas-text);
 }
 body[data-atlas-page] :is(.tag,.badge,.chip,.genre-badge,.country-badge,.cat-badge,.card-type,.card-theme-tag,.tag-genre,.tag-feel,.tag-length){
-  display:inline-flex!important;
-  align-items:center!important;
-  padding:3px 7px!important;
-  border:1px solid var(--atlas-border)!important;
-  border-radius:5px!important;
-  background:var(--atlas-panel-soft)!important;
-  color:var(--atlas-muted)!important;
-  font:600 10px/1.25 Inter,system-ui,sans-serif!important;
-  letter-spacing:0!important;
-  text-transform:none!important;
+  border-color:var(--atlas-border);
+  background-color:var(--atlas-panel-soft);
+  color:var(--atlas-muted);
 }
-
-/* 5. Section titles, progress and tables */
-body[data-atlas-page] :is(.section-header,.sec-header,.gh,.tier-header,.season-header,.arc-header,.phase-header,.curriculum-header,.stages-header){
-  display:flex!important;
-  align-items:baseline!important;
-  flex-wrap:wrap!important;
-  gap:8px 14px!important;
-  padding:12px 0 10px!important;
-  margin:24px 0 0!important;
-  border:0!important;
-  border-bottom:1px solid var(--atlas-border)!important;
-  background:transparent!important;
-  box-shadow:none!important;
+body[data-atlas-page] :is(.muted,.description,.subtitle,.sub,.meta,.metadata,.hint,.note,.card-desc,.book-desc,.film-meta,.manga-author,.film-why){
+  color:var(--atlas-muted);
 }
-body[data-atlas-page] :is(.section-count,.sec-count,.category-count,.gc,.ep-count,.rcount,.count-pill){
-  color:var(--atlas-muted)!important;
-  background:var(--atlas-panel-soft)!important;
-  border:1px solid var(--atlas-border)!important;
-  border-radius:5px!important;
-  padding:3px 7px!important;
-  font-size:10px!important;
+body[data-atlas-page] :is(th,td){border-color:var(--atlas-border)}
+body[data-atlas-page] a{color:inherit}
+body[data-atlas-page] a:hover{color:var(--atlas-accent)}
+body[data-atlas-page] :is(a,button,input,select,textarea,[tabindex]):focus-visible{
+  outline:2px solid var(--atlas-accent);
+  outline-offset:2px;
 }
-body[data-atlas-page] :is(.stats-bar,.results-bar,.sbar,.progress-wrap,.progress-bar-wrap){
-  background:var(--atlas-panel-soft)!important;
-  color:var(--atlas-muted)!important;
-  border:0!important;
-  border-bottom:1px solid var(--atlas-border)!important;
-  padding:9px 24px!important;
-  font-size:12px!important;
-}
-body[data-atlas-page] table{
-  width:100%!important;
-  border-collapse:collapse!important;
-  font-size:13px!important;
-}
-body[data-atlas-page] :is(th,td){
-  padding:10px 12px!important;
-  border-bottom:1px solid var(--atlas-border)!important;
-  text-align:left!important;
-  vertical-align:top!important;
-}
-
-/* 6. Keep interactive utilities functional and visually quiet */
-body[data-atlas-page] :is(.modal,.modal-wrap,.overlay,.ov,.lightbox,.atlas-dialog){
-  border:1px solid var(--atlas-border)!important;
-  border-radius:12px!important;
-  background:var(--atlas-panel)!important;
-  color:var(--atlas-text)!important;
-}
-body[data-atlas-page] :is(.no-results,.nores,.empty,.empty-state){
-  padding:24px!important;
-  color:var(--atlas-muted)!important;
-  background:var(--atlas-panel-soft)!important;
-  border:1px dashed var(--atlas-border)!important;
-  border-radius:8px!important;
-}
-body[data-atlas-page] :is(.controls,.toolbar,.filter-bar,.filter-wrap,.tabs,.nav-bar,.tabs-bar) button:focus-visible,
-body[data-atlas-page] input:focus-visible,
-body[data-atlas-page] select:focus-visible{
-  outline:2px solid var(--atlas-accent)!important;
-  outline-offset:2px!important;
-}
-
-/* 7. Mobile: compact title, stacked controls, no horizontal tile overflow */
+body[data-atlas-page] ::selection{background:var(--atlas-accent);color:#fff}
+body[data-atlas-page] img,body[data-atlas-page] video,body[data-atlas-page] canvas,body[data-atlas-page] iframe{max-width:100%}
 @media(max-width:760px){
- body[data-atlas-page] :is(main,.main,.main-content,.content,.page-wrapper,.page-wrap,.page-content,.content-wrap,.container,.wrapper,.wrap,.shell,.app,.library,.curriculum,.inner,.main-container){
-  width:calc(100% - 28px)!important;
-  max-width:none!important;
-  padding-left:0!important;
-  padding-right:0!important;
- }
- body[data-atlas-page] > header,
- body[data-atlas-page] > .header,
- body[data-atlas-page] > .hdr,
- body[data-atlas-page] > .masthead,
- body[data-atlas-page] > .hero,
- body[data-atlas-page] > .hero-header,
- body[data-atlas-page] > .page-header{
-  padding:22px 16px 18px!important;
- }
- body[data-atlas-page] :is(h1,.hero-title,.page-title,.main-title,.collection-title,.masthead-title,.hero-h1){
-  font-size:clamp(1.55rem,7vw,2.05rem)!important;
-  line-height:1.12!important;
- }
- body[data-atlas-page] :is(.controls,.controls-wrap,.controls-inner,.ctrl,.ci,.filter-wrap,.filter-inner,.filter-bar,.filter-strip,.filter-row,.toolbar,.tabs-bar,.nav-bar,.tabs,.nav-inner){
-  padding:10px 14px!important;
-  gap:7px!important;
- }
- body[data-atlas-page] :is(.search-wrap,.search-box,.search-field,.search-row,.sw,.sb,.sbox){
-  flex:1 1 100%!important;
-  min-width:0!important;
-  max-width:none!important;
- }
- body[data-atlas-page] :is(.mg,.manga-grid,.card-grid,.cards-grid,.cards,.films-grid,.episode-grid,.books-grid,.resource-grid,.arc-grid,.grid){
-  grid-template-columns:minmax(0,1fr)!important;
-  gap:0!important;
- }
- body[data-atlas-page] :is(.mg > .mc,.manga-grid > .manga-card,.card-grid > .card,.cards-grid > .card,.cards > .card,.films-grid > .film-card,.episode-grid > .episode-card,.books-grid > .book-card,.resource-grid > .card,.arc-grid > .card,.grid > .card,.grid > .mc){
-  padding:12px 10px!important;
- }
- body[data-atlas-page] :is(.hero-stats,.header-stats,.header-meta,.hero-meta,.hm,.hd-stats,.sts,.stats,.stats-bar){
-  gap:8px 16px!important;
- }
- body[data-atlas-page] :is(.table-wrap,.table-container,.table-responsive,.table-scroll,.tw){
-  max-width:100%!important;
-  overflow-x:auto!important;
-  -webkit-overflow-scrolling:touch;
- }
+  body[data-atlas-page]{font-size:14px;line-height:1.62}
+  body[data-atlas-page] :is(input,select,textarea){min-height:40px}
 }
 @media(prefers-reduced-motion:reduce){
- body[data-atlas-page] *{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+  body[data-atlas-page] *{scroll-behavior:auto!important;transition:none!important;animation:none!important}
 }
