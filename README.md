@@ -31,3 +31,7 @@ A personal, static library for manga and comics, art and making, life and learni
 
 ## Maintenance
 The homepage is the catalogue of record. When adding a collection, add its card and metadata to the shared search index in `assets/js/library.js`. Keep titles descriptive, use accurate content labels, and avoid duplicating entire datasets under multiple names.
+
+
+### Poetry
+- `aag-ki-kavitayen.html` — Aag Ki Kavitayen, presented as five Khands with 100 source catalogue records, poet attributions and opening-line excerpts. Full poem texts are not present in the available source.
