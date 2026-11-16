@@ -148,3 +148,65 @@ html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] fo
 html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] footer{border-color:var(--border)!important}
 html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] ::-webkit-scrollbar-track{background:var(--bg)!important}
 html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] ::-webkit-scrollbar-thumb{background:var(--border2)!important}
+
+
+/* Dark Ink: carry the shared light-mode switch through the full catalogue,
+   including its bespoke hero, theme rail, filters and reading cards. */
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"]{
+ --black:#f3f0e9;--near-black:#fffdf8;--dark:#e9e3d8;--mid:#d9d1c5;
+ --border:#d2c8b8;--muted:#655f56;--dim:#514b43;--paper:#28241f;
+ --cream:#26231e;--red:#a83b31;--red-glow:rgba(168,59,49,.12);
+ --gold:#89631f;--gold-dim:rgba(137,99,31,.12);--ink:#e9e3d8;
+ background:var(--black)!important;color:var(--paper)!important;color-scheme:light;
+}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .hero-bg{
+ background:
+  radial-gradient(ellipse 70% 60% at 10% 60%,rgba(168,59,49,.08) 0%,transparent 55%),
+  radial-gradient(ellipse 50% 70% at 90% 20%,rgba(137,99,31,.06) 0%,transparent 60%),
+  linear-gradient(160deg,#eee8dd 0%,#f8f5ef 60%);
+}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .hero-sub{color:var(--dim)!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .stat-l,
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .theme-name,
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .theme-panel-title,
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .card-year,
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .country-badge,
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .sec-sub,
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .sec-count,
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] footer{color:var(--muted)!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .theme-panel{background:#e8e2d7!important;border-color:var(--border)!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .theme-chip{
+ background:var(--near-black)!important;border-color:var(--border)!important;
+}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .theme-chip.active{
+ background:var(--gold-dim)!important;border-color:var(--gold)!important;
+}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .theme-n{color:var(--border)!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .theme-chip.active .theme-n{color:var(--gold)!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .controls-wrap{
+ background:rgba(248,246,240,.97)!important;border-color:var(--border)!important;
+}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .search-wrap input,
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] select,
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .count-pill{
+ background:var(--near-black)!important;color:var(--paper)!important;border-color:var(--border)!important;
+}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .search-wrap input::placeholder{color:var(--muted)!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .search-wrap:before{color:var(--muted)!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .t-btn{color:var(--dim)!important;border-color:var(--border)!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .t-btn:hover{color:var(--paper)!important;border-color:var(--muted)!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .sec-header{border-color:var(--border)!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .sec-meta{color:var(--dim)!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .grid{background:var(--border)!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .card{
+ background:var(--near-black)!important;color:var(--paper)!important;border-color:var(--border)!important;
+}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .card:hover{background:#f4efe6!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .card-title{color:var(--cream)!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .card-author,
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .card-desc{color:var(--dim)!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .card-controversy{color:#963b3b!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .ctag{color:var(--muted)!important;border-color:var(--border)!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] .ctag:hover{color:var(--cream)!important;border-color:var(--gold)!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] #noResults{color:var(--muted)!important}
+html[data-color-mode="light"] body[data-atlas-page="dark-ink-manga.html"] footer{border-color:var(--border)!important}
