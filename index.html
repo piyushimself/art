@@ -183,6 +183,42 @@ h2{font-size:clamp(24px,3vw,34px)!important;color:#eee9df!important;letter-spaci
  .atlas-dock a,.atlas-dock button,.atlas-dock label{flex:1 1 0!important;min-width:0!important;padding:7px 4px!important;font-size:11px!important}
 }
 @media(prefers-reduced-motion:reduce){.card,.shelf-meter span{transition:none!important}}
+
+/* FINAL HOME STANDARD — restrained editorial scale and compact controls */
+.hero{padding:38px 0 30px!important;gap:28px!important}
+h1{font-size:clamp(2.15rem,4.2vw,3.35rem)!important;line-height:1.04!important;letter-spacing:-.04em!important;margin:12px 0 14px!important;max-width:18ch!important}
+.hero-copy{font-size:14px!important;line-height:1.72!important;max-width:48ch!important}
+.artwork{height:250px!important}
+.filters{gap:6px!important;margin-top:7px!important}
+.filter{font-size:10px!important;padding:6px 9px!important;min-height:29px!important}
+h2{font-size:clamp(1.45rem,2.8vw,2rem)!important;line-height:1.18!important}
+.grid{gap:10px!important}
+.card{min-height:150px!important;padding:14px 15px!important;border-radius:9px!important}
+.card h3{font-size:18px!important;line-height:1.28!important;margin-bottom:8px!important}
+.card p{font-size:12.5px!important;line-height:1.62!important}
+.card-top{margin-bottom:18px!important}
+.card-bottom{padding-top:13px!important}
+.filter:focus-visible,.card:focus-visible,.shelf-actions button:focus-visible,.shelf-actions select:focus-visible{outline:2px solid #a7b99d!important;outline-offset:3px!important}
+@media(max-width:900px){
+ .hero{padding:32px 0 26px!important;gap:18px!important}
+ h1{font-size:clamp(2rem,5.2vw,2.8rem)!important}
+ .artwork{height:190px!important}
+}
+@media(max-width:640px){
+ .hero{padding:26px 0 20px!important}
+ h1{font-size:clamp(1.9rem,8vw,2.5rem)!important;line-height:1.08!important;max-width:16ch!important}
+ .hero-copy{font-size:13.5px!important}
+ .artwork{height:110px!important;display:flex!important;justify-content:flex-end!important}
+ .orbit,.dot{display:none!important}
+ .core{width:58px!important;height:58px!important;font-size:24px!important}
+ .hero-note{right:0!important;bottom:10px!important}
+ .filters{gap:5px!important}
+ .filter{font-size:9.5px!important;padding:6px 8px!important}
+ .section-head{margin-bottom:12px!important}
+ .section-desc{font-size:12px!important}
+ .card{padding:13px!important}
+ .card h3{font-size:17px!important}
+}
 </style>
 </head>
 <body data-library-theme="home">
