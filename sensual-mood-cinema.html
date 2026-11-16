@@ -83,6 +83,42 @@ footer{
   border-top:1px solid rgba(255,255,255,0.05);
   font-size:10px;letter-spacing:4px;color:#2a1a14;text-transform:uppercase;
 }
+
+/* Reading-room audit: mature cinema discovery, readable notes and clear context */
+body{font-family:Inter,system-ui,sans-serif;color:#eee7e0;font-size:15px;line-height:1.65}
+.hero{padding:34px 18px 26px}
+.hero-eye{font-size:11px;letter-spacing:2px;color:#d6a1bd}
+.hero h1{font-size:clamp(28px,5vw,44px);letter-spacing:.2px;line-height:1.15;margin-bottom:10px}
+.hero-sub{font-size:16px;line-height:1.65;max-width:720px;color:#c6b7bd}
+.hero-tag{font-size:11px;letter-spacing:1.4px;color:#b9a5ae}
+.tabs{top:0;justify-content:flex-start}
+.tab-btn{font:600 12px Inter,system-ui,sans-serif;letter-spacing:.02em;padding:13px 16px}
+.toolbar{max-width:1180px;padding:18px 22px 10px;gap:12px}
+.search-box{font:400 15px Inter,system-ui,sans-serif;padding:12px 14px;min-height:44px}
+.count{font:600 12px Inter,system-ui,sans-serif;letter-spacing:.04em;color:#cbbac2}
+#panels{max-width:1180px;margin:0 auto;padding:0 22px 30px}
+.panel{padding:8px 0 46px}
+.list-box{background:transparent;border:0;border-radius:0;overflow:visible;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:12px}
+.row{display:grid;grid-template-columns:34px minmax(0,1fr) 46px;gap:10px;align-items:start;padding:15px 14px;background:#15131b;border:1px solid rgba(255,255,255,.1);border-radius:10px;min-width:0}
+.row:hover{background:#1b1721;border-color:rgba(192,132,252,.35)}
+.row-n{font:600 11px Inter,system-ui,sans-serif;color:#a99aa8;text-align:left;padding-top:3px}
+.row-t{font:650 16px/1.4 Inter,system-ui,sans-serif;color:#f2e9ed;margin-bottom:6px;overflow-wrap:anywhere}
+.row.star .row-t{color:#f1c4dc}
+.row-d{font:400 13px/1.6 Inter,system-ui,sans-serif;color:#c1b3bd;font-style:normal}
+.row-y{font:600 12px Inter,system-ui,sans-serif;color:#e4c8d8;text-align:right;padding-top:3px}
+.empty{padding:48px 20px;text-align:center;color:#c4b5bf;font-size:15px}
+footer{font:500 11px Inter,system-ui,sans-serif;letter-spacing:1px;color:#b8a5af;padding:22px}
+@media(max-width:700px){
+ .hero{padding:26px 15px 20px}.hero h1{font-size:30px}
+ .tabs{position:sticky}.tab-btn{padding:12px 13px}
+ .toolbar{padding:14px 14px 8px;display:grid;grid-template-columns:1fr}
+ #panels{padding:0 12px 24px}
+ .list-box{grid-template-columns:1fr;gap:9px}
+ .row{grid-template-columns:26px minmax(0,1fr) 42px;padding:13px 12px}
+ .row-t{font-size:15px}.row-d{font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
 </style>
 <link rel="stylesheet" href="assets/css/mobile-system.css?v=template-20261115">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
