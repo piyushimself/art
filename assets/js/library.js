@@ -11,7 +11,7 @@ const body=document.body;
 if(!body)return;
 const templateStyles=document.createElement('link');
 templateStyles.rel='stylesheet';
-templateStyles.href='assets/css/collection-template.css?v=global-dark-20261116-3';
+templateStyles.href='assets/css/collection-template.css?v=global-theme-20261116-4';
 document.head.appendChild(templateStyles);
 const pageFile=(location.pathname.split('/').pop()||'index.html').toLowerCase();
 body.dataset.atlasPage=pageFile;
