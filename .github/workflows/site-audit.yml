@@ -13,6 +13,7 @@ on:
     paths:
       - '**/*.html'
       - 'assets/js/**'
+      - 'assets/css/**'
       - 'tools/audit_site.py'
       - '.github/workflows/site-audit.yml'
   workflow_dispatch:
