@@ -32,11 +32,14 @@ body[data-atlas-page]{
   --bg2:var(--atlas-panel);
   --bg3:var(--atlas-panel-soft);
   --bg4:var(--atlas-row);
+  --bg5:var(--atlas-panel-soft);
   --surface:var(--atlas-panel);
   --surface2:var(--atlas-panel-soft);
   --panel:var(--atlas-panel);
   --text:var(--atlas-text);
   --text2:var(--atlas-muted);
+  --text3:var(--atlas-muted);
+  --text4:var(--atlas-muted);
   --t1:var(--atlas-text);
   --t2:var(--atlas-muted);
   --t3:var(--atlas-muted);
@@ -48,16 +51,19 @@ body[data-atlas-page]{
   --muted:var(--atlas-muted);
   --line:var(--atlas-border);
   --border:var(--atlas-border);
+  --border2:var(--atlas-border);
+  --border3:var(--atlas-border);
   --b1:var(--atlas-border);
   --b2:var(--atlas-border);
   --accent:var(--atlas-accent);
+  --accent2:var(--atlas-accent);
   --highlight:var(--atlas-hover);
   color:var(--atlas-text)!important;
   background-color:var(--atlas-page)!important;
   font-size:15px;
   line-height:1.6;
 }
-body[data-atlas-page] :is(header,.header,.hdr,.masthead,.hero,.hero-header,.page-header,.controls,.toolbar,.filter-bar,.filter-wrap,.filter-row,.tabs,.tabs-bar,.nav-bar,.searchbar,.stats-bar,.results-bar,.sbar){
+body[data-atlas-page] :is(header,.header,.hdr,.masthead,.hero,.hero-header,.page-header,#hdr,#nav,#filters,#rbar,.controls,.toolbar,.filter-bar,.filter-wrap,.filter-row,.tabs,.tabs-bar,.nav-bar,.searchbar,.stats-bar,.results-bar,.sbar){
   color:var(--atlas-text);
   border-color:var(--atlas-border);
   background-color:var(--atlas-panel);
