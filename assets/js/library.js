@@ -197,7 +197,6 @@ window.addEventListener('pageshow',()=>{syncControls();renderDashboard();});
  const scaleKey='atlas.reader.scale.v1';
  let scale=1;try{const n=Number(localStorage.getItem(scaleKey));if(n>=.85&&n<=1.5)scale=n;}catch(_){}
  function applyScale(){
-  body.style.setProperty('--atlas-reader-scale',String(scale));
   if(contentRoot){
    const nodes=[...(contentRoot.matches('h1,h2,h3,h4,h5,h6,p,li,td,th,blockquote,figcaption,dd,dt,pre,code')?[contentRoot]:[]),...contentRoot.querySelectorAll('h1,h2,h3,h4,h5,h6,p,li,td,th,blockquote,figcaption,dd,dt,pre,code')];
    nodes.forEach(el=>{
