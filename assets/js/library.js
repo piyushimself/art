@@ -61,8 +61,11 @@ if(pageFile==='top-500-adult-manga.html'){
  document.head.appendChild(pageFix);
 }
 
-/* Page-specific layouts remain authoritative. The former global atlas-standard.css
-   used generic selectors that collapsed distinct editorial layouts into one template. */
+/* Shared palette and control system; deliberately does not rewrite page layout. */
+const standardStyles=document.createElement('link');
+standardStyles.rel='stylesheet';
+standardStyles.href='assets/css/atlas-standard.css?v=editorial-safe-20261117-1';
+document.head.appendChild(standardStyles);
 
 const theme=body.dataset.libraryTheme||'home';
 const progress=document.createElement('div');progress.className='atlas-progress';progress.setAttribute('aria-hidden','true');document.body.appendChild(progress);
