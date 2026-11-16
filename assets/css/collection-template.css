@@ -361,3 +361,64 @@ html[data-color-mode="dark"] body :is(
 ){
  color:#b2b8b6!important;
 }
+
+
+/* Page-specific dark-mode exceptions found in the 30-page source audit. */
+html[data-color-mode="dark"] body{
+ --bg:#101416;--bg2:#171d1f;--bg3:#20282a;--bg4:#242d30;--bg5:#293336;
+ --surface:#1b2224;--surface2:#20282a;--card:#1b2224;--card-h:#222b2d;
+ --paper:#171d1f;--paper2:#20282a;--paper3:#242d30;
+ --cream:#171d1f;--cream2:#20282a;--cream-white:#20282a;
+ --ink:#e9e7e1;--ink2:#c7ceca;--ink3:#adb7b2;--ink4:#929d99;
+ --text:#e9e7e1;--text2:#c3c9c6;--text3:#aab2af;--text4:#929d99;
+ --fg:#e9e7e1;--mut:#aab2af;--muted:#aab2af;
+ --border:#384246;--border2:#465256;--border3:#303a3d;
+ --bd:#384246;--hairline:#384246;
+ --color-background-primary:#101416;--color-background-secondary:#1b2224;
+ --color-background-tertiary:#242d30;
+ --color-text-primary:#e9e7e1;--color-text-secondary:#b8c0bc;
+ --color-text-tertiary:#929d99;
+}
+
+/* Neutralise the remaining explicitly pale badges, status chips and hover panels. */
+html[data-color-mode="dark"] body :is(
+ .base,.badge-beginner,.badge-intermediate,.badge-advanced,
+ .feedback-box,.feedback-box.good,.feedback-box.ok,.feedback-box.tip,
+ .t-gold,.t-teal,.t-purple,.t-red,.t-blue,.t-dim,.free-badge,
+ .ts,.tj,.te,.to,.tc,.ta,.tg,.t18,.aw,
+ .r-s,.r-a,.r-b,.r-c,
+ .b-seinen,.b-josei,.b-manhwa,.b-18,.b-classic,
+ .badge-c1,.badge-c2,.badge-c3,.badge-c4,
+ .tag-mubi,.tag-country,.results-bar,.load-more-wrap
+){
+ background-color:#263033!important;
+ color:#d6ddd9!important;
+ border-color:#465256!important;
+}
+html[data-color-mode="dark"] body :is(
+ .film-card:hover,.film-card.watched,.film-card.watched:hover,
+ .card:hover,.manga-card:hover,.mc:hover,.tbtn:hover,
+ .watch-btn:hover,.film-card.watched .watch-btn,
+ .film-card.watched .watch-btn:hover
+){
+ background-color:#222b2d!important;
+ color:#e9e7e1!important;
+ border-color:#52615d!important;
+}
+html[data-color-mode="dark"] body :is(
+ .tip-block,.feedback-box,.feedback-box.good,.feedback-box.ok,.feedback-box.tip,
+ .results-bar,.load-more-wrap,.controls,.base
+){
+ background-color:#1b2224!important;
+ color:#e1e4e1!important;
+ border-color:#384246!important;
+}
+html[data-color-mode="dark"] body :is(
+ .t-gold,.t-teal,.t-purple,.t-red,.t-blue,.t-dim,.free-badge,
+ .badge-beginner,.badge-intermediate,.badge-advanced,
+ .tag-mubi,.tag-country,.badge-c1,.badge-c2,.badge-c3,.badge-c4,
+ .b-seinen,.b-josei,.b-manhwa,.b-18,.b-classic,
+ .r-s,.r-a,.r-b,.r-c
+){
+ border-radius:6px;
+}
