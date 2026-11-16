@@ -571,7 +571,6 @@ body:not([data-library-theme="home"]){--atlas-reader-scale:1}
 .atlas-find-count{min-width:52px;text-align:right;color:var(--atlas-ui-muted,#5b6675);font:12px system-ui,sans-serif;white-space:nowrap}
 .atlas-find-hit{background:#ffe58a!important;color:#1b2430!important;border-radius:3px;padding:0 1px}
 .atlas-find-hit.current{outline:2px solid var(--atlas-ui-accent,#3b4cca);outline-offset:1px}
-.atlas-reader-content{font-size:calc(1rem * var(--atlas-reader-scale,1))}
 html[data-color-mode="light"] .atlas-reader-bar,html[data-color-mode="light"] .atlas-findbar{background:#f6f7f9!important;color:#1b2430!important;border-color:#dde1e8!important}
 html[data-color-mode="light"] .atlas-reader-back,html[data-color-mode="light"] .atlas-reader-actions button,html[data-color-mode="light"] .atlas-findbar>button{border-color:#cbd2dc!important;color:#1b2430!important}
 html[data-color-mode="light"] .atlas-find-input{background:#fff!important;border-color:#cbd2dc!important}
