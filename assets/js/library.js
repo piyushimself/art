@@ -196,7 +196,17 @@ window.addEventListener('pageshow',()=>{syncControls();renderDashboard();});
  const input=find.querySelector('input'),count=find.querySelector('.atlas-find-count');
  const scaleKey='atlas.reader.scale.v1';
  let scale=1;try{const n=Number(localStorage.getItem(scaleKey));if(n>=.85&&n<=1.5)scale=n;}catch(_){}
- function applyScale(){body.style.setProperty('--atlas-reader-scale',String(scale));}
+ function applyScale(){
+  body.style.setProperty('--atlas-reader-scale',String(scale));
+  if(contentRoot){
+   const nodes=[...(contentRoot.matches('h1,h2,h3,h4,h5,h6,p,li,td,th,blockquote,figcaption,dd,dt,pre,code')?[contentRoot]:[]),...contentRoot.querySelectorAll('h1,h2,h3,h4,h5,h6,p,li,td,th,blockquote,figcaption,dd,dt,pre,code')];
+   nodes.forEach(el=>{
+    if(!el.hasAttribute('data-atlas-reader-base-size'))el.setAttribute('data-atlas-reader-base-size',getComputedStyle(el).fontSize);
+    const base=parseFloat(el.getAttribute('data-atlas-reader-base-size'));
+    if(Number.isFinite(base))el.style.setProperty('font-size',(base*scale)+'px','important');
+   });
+  }
+ }
  applyScale();
  bar.querySelector('[data-reader-smaller]').addEventListener('click',()=>{scale=Math.max(.85,Math.round((scale-.1)*100)/100);applyScale();try{localStorage.setItem(scaleKey,String(scale));}catch(_){}});
  bar.querySelector('[data-reader-larger]').addEventListener('click',()=>{scale=Math.min(1.5,Math.round((scale+.1)*100)/100);applyScale();try{localStorage.setItem(scaleKey,String(scale));}catch(_){}});
