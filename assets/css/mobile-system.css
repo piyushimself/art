@@ -60,3 +60,36 @@ input,select,textarea,button{max-width:100%}
   font-size:clamp(2rem,3.6vw,2.65rem)!important;
  }
 }
+
+
+/* CINÉMA OBSCURA: keep its compact film catalogue readable on narrow screens.
+   The desktop table hides secondary metadata on mobile; remove the leftover
+   800px minimum width so the remaining useful columns fit the viewport. */
+@media(max-width:640px){
+ body[data-atlas-page="cinema-obscura.html"] .tw{overflow-x:hidden!important}
+ body[data-atlas-page="cinema-obscura.html"] .tw table{
+  width:100%!important;min-width:0!important;table-layout:fixed!important;
+ }
+ body[data-atlas-page="cinema-obscura.html"] .tw col.c0{width:26px!important}
+ body[data-atlas-page="cinema-obscura.html"] .tw col.c1{width:30px!important}
+ body[data-atlas-page="cinema-obscura.html"] .tw col.c2{width:auto!important}
+ body[data-atlas-page="cinema-obscura.html"] .tw col.c3{width:42px!important}
+ body[data-atlas-page="cinema-obscura.html"] .tw col.c7{width:58px!important}
+ body[data-atlas-page="cinema-obscura.html"] .tw col.c8{width:42px!important}
+ body[data-atlas-page="cinema-obscura.html"] .tw th,
+ body[data-atlas-page="cinema-obscura.html"] .tw td{padding:7px 3px!important}
+ body[data-atlas-page="cinema-obscura.html"] .tw th{
+  font-size:7px!important;letter-spacing:.04em!important;white-space:normal!important;
+ }
+ body[data-atlas-page="cinema-obscura.html"] .tw td.c-t{
+  white-space:normal!important;overflow-wrap:anywhere!important;font-size:13px!important;line-height:1.25!important;
+ }
+ body[data-atlas-page="cinema-obscura.html"] .tw td.c-t .c-to{font-size:10px!important;line-height:1.2!important}
+ body[data-atlas-page="cinema-obscura.html"] .tw td .tag{
+  padding:2px 3px!important;font-size:6px!important;letter-spacing:.03em!important;white-space:normal!important;
+ }
+ body[data-atlas-page="cinema-obscura.html"] .tw .imdb-hi,
+ body[data-atlas-page="cinema-obscura.html"] .tw .imdb-mid,
+ body[data-atlas-page="cinema-obscura.html"] .tw .imdb-lo{font-size:9px!important}
+ body[data-atlas-page="cinema-obscura.html"] .tw .wl-btn{font-size:13px!important;padding:2px!important}
+}
