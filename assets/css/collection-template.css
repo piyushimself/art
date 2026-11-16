@@ -550,3 +550,54 @@ html[data-color-mode="light"] ::selection{background:#c9dfd1;color:#1d3025}
 html[data-color-mode="light"] body :is(.accent,.eyebrow,.kicker,.section-kicker){
  color:#426f5c!important;
 }
+
+
+/* =========================================================
+   REFERENCE TEMPLATE — shared collection reader shell
+   Library home remains its own searchable catalogue. Every
+   collection page gets the compact page header and findbar.
+   ========================================================= */
+body:not([data-library-theme="home"]){--atlas-reader-scale:1}
+.atlas-reader-bar{position:sticky;top:0;z-index:10040;display:flex;align-items:center;gap:10px;min-height:58px;padding:8px 14px;background:var(--atlas-ui-bg,#f6f7f9);color:var(--atlas-ui-ink,#1b2430);border-bottom:1px solid var(--atlas-ui-line,#dde1e8);box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.atlas-reader-back{display:inline-flex;align-items:center;gap:6px;flex:none;min-height:40px;padding:0 11px;border:1px solid var(--atlas-ui-line,#dde1e8);border-radius:10px;color:inherit;text-decoration:none;font:600 13px/1.2 system-ui,sans-serif}
+.atlas-reader-title{flex:1;min-width:0;margin:0!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:inherit!important;font:600 16px/1.25 system-ui,sans-serif!important;letter-spacing:0!important}
+.atlas-reader-actions{display:flex;align-items:center;gap:6px;flex:none}
+.atlas-reader-actions button,.atlas-findbar>button{min-width:40px;min-height:40px;padding:0 10px;border:1px solid var(--atlas-ui-line,#dde1e8);border-radius:10px;background:transparent;color:inherit;font:600 13px system-ui,sans-serif;cursor:pointer}
+.atlas-reader-actions button:hover,.atlas-findbar>button:hover,.atlas-reader-back:hover{border-color:var(--atlas-ui-accent,#3b4cca)}
+.atlas-findbar{position:sticky;top:58px;z-index:10035;display:flex;align-items:center;gap:7px;padding:8px 14px;background:var(--atlas-ui-bg,#f6f7f9);color:var(--atlas-ui-ink,#1b2430);border-bottom:1px solid var(--atlas-ui-line,#dde1e8)}
+.atlas-find-input{display:flex;align-items:center;gap:8px;flex:1;min-width:0;min-height:40px;padding:0 11px;border:1px solid var(--atlas-ui-line,#dde1e8);border-radius:10px;background:var(--atlas-ui-surface,#fff)}
+.atlas-find-input>span{font-size:18px;color:var(--atlas-ui-muted,#5b6675)}
+.atlas-find-input input{width:100%;min-width:0;min-height:38px;padding:0;border:0!important;outline:0!important;background:transparent!important;color:inherit!important;font:14px system-ui,sans-serif!important}
+.atlas-find-count{min-width:52px;text-align:right;color:var(--atlas-ui-muted,#5b6675);font:12px system-ui,sans-serif;white-space:nowrap}
+.atlas-find-hit{background:#ffe58a!important;color:#1b2430!important;border-radius:3px;padding:0 1px}
+.atlas-find-hit.current{outline:2px solid var(--atlas-ui-accent,#3b4cca);outline-offset:1px}
+body:not([data-library-theme="home"]) main,
+body:not([data-library-theme="home"]) article,
+body:not([data-library-theme="home"]) .main,
+body:not([data-library-theme="home"]) .content,
+body:not([data-library-theme="home"]) .reader-wrap,
+body:not([data-library-theme="home"]) .page-content{font-size:calc(1rem * var(--atlas-reader-scale,1))}
+html[data-color-mode="light"] .atlas-reader-bar,html[data-color-mode="light"] .atlas-findbar{background:#f6f7f9!important;color:#1b2430!important;border-color:#dde1e8!important}
+html[data-color-mode="light"] .atlas-reader-back,html[data-color-mode="light"] .atlas-reader-actions button,html[data-color-mode="light"] .atlas-findbar>button{border-color:#cbd2dc!important;color:#1b2430!important}
+html[data-color-mode="light"] .atlas-find-input{background:#fff!important;border-color:#cbd2dc!important}
+html[data-color-mode="light"] .atlas-find-input input{color:#1b2430!important}
+html[data-color-mode="dark"] .atlas-reader-bar,html[data-color-mode="dark"] .atlas-findbar{background:#101416!important;color:#e9e7e1!important;border-color:#384246!important}
+html[data-color-mode="dark"] .atlas-reader-back,html[data-color-mode="dark"] .atlas-reader-actions button,html[data-color-mode="dark"] .atlas-findbar>button{border-color:#384246!important;color:#e9e7e1!important}
+html[data-color-mode="dark"] .atlas-find-input{background:#1b2224!important;border-color:#384246!important}
+html[data-color-mode="dark"] .atlas-find-input input{color:#e9e7e1!important}
+@media(max-width:600px){
+ .atlas-reader-bar{min-height:54px;gap:6px;padding:7px 9px}
+ .atlas-reader-back{min-height:38px;padding:0 8px;font-size:12px}
+ .atlas-reader-title{font-size:14px!important}
+ .atlas-reader-actions{gap:4px}
+ .atlas-reader-actions button,.atlas-findbar>button{min-width:36px;min-height:38px;padding:0 7px;font-size:12px}
+ .atlas-findbar{top:54px;gap:5px;padding:7px 9px}
+ .atlas-find-input{min-height:38px;padding:0 8px}
+ .atlas-find-input input{font-size:13px!important}
+ .atlas-find-count{min-width:42px;font-size:11px}
+}
+@media(max-width:380px){
+ .atlas-reader-back span{display:none}
+ .atlas-reader-actions button{min-width:34px;padding:0 5px}
+ .atlas-find-count{min-width:34px}
+}
