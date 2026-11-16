@@ -566,42 +566,6 @@ option{background:#1c1920}
   pointer-events: none;
 }
 
-
-/* Reading-room audit: film cards, ratings and filters at comfortable sizes */
-body{font-size:15px;line-height:1.65}
-:root{--sidebar:244px}
-.sidebar{width:var(--sidebar)}
-#grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:14px;padding:16px}
-.mc{padding:18px 18px 16px;gap:10px;border-radius:10px;min-width:0}
-.mc-title{font-size:18px;line-height:1.32;font-weight:700;letter-spacing:-.01em}
-.mc-year{font-size:13px}
-.mc-meta{font-size:12px;line-height:1.55;gap:7px 12px;flex-wrap:wrap}
-.mc-desc{font-size:14px;line-height:1.72;color:var(--text);margin-top:2px}
-.mc-tags{gap:6px;flex-wrap:wrap}
-.tag-chip{font-size:11px;padding:4px 8px;line-height:1.35}
-.badge .bdg-l{font-size:9px}.badge .bdg-v{font-size:15px}
-.watch-btn{min-width:34px;min-height:34px}
-.poster-body{padding:12px 12px 14px}
-.poster-title{font-size:15px;line-height:1.4}
-.poster-director,.poster-meta{font-size:12px;line-height:1.5}
-.poster-overlay-title{font-size:18px;line-height:1.3}
-.poster-overlay-desc{font-size:13px;line-height:1.55}
-.search-input,#searchInput,select{font-size:14px;min-height:40px}
-.filter-clear-all,.mtbtn,.vbtn{font-size:12px;min-height:34px}
-@media(max-width:760px){
- .app{display:block}
- .sidebar{position:relative;width:100%;height:auto;max-height:none;border-right:0;border-bottom:1px solid var(--border)}
- .sidebar.collapsed{width:100%;height:auto}
- .sidebar-inner{max-height:42vh}
- #grid{grid-template-columns:1fr;padding:12px;gap:10px}
- .mc{padding:16px}
- .mc-title{font-size:17px}
- .mc-desc{font-size:14px}
- .poster-card{max-width:100%}
- .toolbar,.controls,.filter-row{padding-inline:12px}
-}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-
 </style>
 <link rel="stylesheet" href="assets/css/mobile-system.css?v=template-20261115">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
