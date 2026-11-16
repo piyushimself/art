@@ -163,65 +163,6 @@ tbody tr:hover .c-t{color:var(--gold2)}
   col.c6{width:0}td:nth-child(7),th:nth-child(7){display:none}
   col.c2{width:44%}
 }
-
-/* Reading-room audit: editorial hierarchy and accessible film records */
-body{font-family:'Inter',system-ui,sans-serif;font-size:15px;line-height:1.65;color:#eee8df}
-header{padding:34px clamp(18px,4vw,56px) 26px}
-h1{font-size:clamp(34px,5vw,58px);line-height:1.04;letter-spacing:-.7px}
-.ey,.sl,.ll,.tag,.fb,.ubtn,.pb,th{letter-spacing:.08em}
-.ey{font-size:11px}.tl{font-size:18px;max-width:760px;line-height:1.55;color:#b9afa2}
-.sts{gap:24px;margin-top:20px}.sn{font-size:27px}.sl{font-size:10px;color:#aaa093}
-.ctrl{padding:12px clamp(14px,3vw,36px)}
-.ci{gap:9px}.sb{flex:1 1 280px}
-input[type=text],select{font:500 14px 'Inter',sans-serif;padding:10px 12px;border-radius:6px;min-height:40px}
-input[type=text]{padding-left:36px}.fb,.ubtn{font:600 11px 'Inter',sans-serif;letter-spacing:.04em;padding:9px 12px;border-radius:6px}
-main{padding:24px clamp(14px,3vw,36px) 64px}
-.leg{gap:9px;margin-bottom:18px}.ll{font-size:10px}
-.tag{font-size:10px;letter-spacing:.03em;padding:4px 9px}
-.tw{overflow-x:auto;border:1px solid var(--border);border-radius:10px;background:#100e12}
-table{min-width:1120px;table-layout:auto}
-th{font:700 10px 'Inter',sans-serif;padding:13px 10px;background:#17131a;color:#e8c97a}
-td{font:400 13px 'Inter',sans-serif;line-height:1.55;padding:12px 10px;color:#e5ded4;vertical-align:top}
-td.c-t{font-weight:650;font-size:15px;min-width:190px;color:#fff}
-td.c-t .c-to{display:block;font-size:12px;color:#b8a99a;font-weight:400}
-td.c-d{min-width:140px;color:#d8cbbd}
-td.desc-cell{min-width:250px;font-size:13px;line-height:1.65;color:#c8beb3;white-space:normal}
-td.c-co,td.c-la{font-size:12px;color:#c2b7aa}
-td.c-y{font-variant-numeric:tabular-nums;color:#e6d3a5}
-tbody tr{border-bottom:1px solid rgba(255,255,255,.07)}
-tbody tr:hover{background:rgba(201,168,76,.055)}
-.imdb-hi,.imdb-mid,.imdb-lo{font-size:13px}
-.pb{font-size:12px;padding:9px 13px}
-@media(max-width:760px){
- header{padding:26px 16px 20px}h1{font-size:36px;letter-spacing:-.4px}
- .sts{gap:14px}.sn{font-size:23px}.hdr-btns{margin-left:0;width:100%}
- .ctrl{position:static;padding:12px 14px}.ci{display:grid;grid-template-columns:1fr 1fr}
- .sb{grid-column:1/-1;min-width:0}.ci select{width:100%;min-width:0}
- .ci #genre-btns{grid-column:1/-1}
- main{padding:16px 12px 48px}.leg{align-items:flex-start}
- .tw{overflow:visible;border:0;background:transparent}
- table,tbody{display:block;min-width:0;width:100%}
- thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
- tbody tr{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;margin:0 0 12px;padding:12px;background:#151219;border:1px solid var(--border);border-radius:10px}
- tbody td{display:block!important;min-width:0!important;width:auto!important;padding:5px 2px;border:0;white-space:normal;overflow-wrap:anywhere}
- tbody td.c-n{display:none!important}
- tbody td.nc{display:block!important;text-align:left!important}
- tbody td:nth-child(2){grid-column:1/-1;justify-self:end;grid-row:1}
- tbody td.c-t{grid-column:1/-1;grid-row:2;font-size:17px;padding-right:40px}
- tbody td.c-y{grid-column:1}
- tbody td.c-co{grid-column:2}
- tbody td.c-la{grid-column:1}
- tbody td.c-d{grid-column:2}
- tbody td:nth-child(8),tbody td:nth-child(9){grid-column:auto}
- tbody td.desc-cell{grid-column:1/-1;border-top:1px solid var(--border);margin-top:6px;padding-top:10px;font-size:13px}
- tbody td.c-y:before{content:'YEAR · ';color:#a89984;font-size:10px}
- tbody td.c-co:before{content:'COUNTRY · ';color:#a89984;font-size:10px}
- tbody td.c-la:before{content:'LANGUAGE · ';color:#a89984;font-size:10px}
- tbody td.c-d:before{content:'DIRECTOR · ';color:#a89984;font-size:10px}
- tbody td.desc-cell:before{content:'ABOUT';display:block;color:#d4b76c;font-size:10px;letter-spacing:.1em;margin-bottom:4px}
-}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-
 </style>
 <link rel="stylesheet" href="assets/css/mobile-system.css?v=template-20261115">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1991,24 +1932,24 @@ function render(){
     const origLine = f.orig ? `<span class="c-to">${f.orig}</span>` : '';
     const descText = f.desc ? f.desc : '';
     return `<tr class="${inWl?'in-wl':''}">
-      <td class="el c-n" data-label="No.">${start+i+1}</td>
-      <td class="nc" data-label="Watchlist" style="text-align:center">
+      <td class="el c-n">${start+i+1}</td>
+      <td class="nc" style="text-align:center">
         <button class="wl-btn ${inWl?'wl-on':''}"
           onclick="toggleWL(FILMS[${f.idx-1}])"
           title="${inWl?'Remove from watchlist':'Add to watchlist'}">&#x2665;</button>
       </td>
-      <td class="el c-t" data-label="Title" title="${f.title}${f.orig?' / '+f.orig:''}">${f.title}${origLine}</td>
-      <td class="el c-y" data-label="Year">${f.year}</td>
-      <td class="el c-co" data-label="Country" title="${f.country}">${f.country}</td>
-      <td class="el c-la" data-label="Language" title="${f.language}">${f.language}</td>
-      <td class="el c-d" data-label="Director">
+      <td class="el c-t" title="${f.title}${f.orig?' / '+f.orig:''}">${f.title}${origLine}</td>
+      <td class="el c-y">${f.year}</td>
+      <td class="el c-co" title="${f.country}">${f.country}</td>
+      <td class="el c-la" title="${f.language}">${f.language}</td>
+      <td class="el c-d">
         <span class="c-dir-link" onclick="filterByDirector('${f.director.replace(/'/g,"\\'")}')">
           ${f.director}
         </span>
       </td>
-      <td class="nc" data-label="Genre">${tagHTML(f.genre)}</td>
-      <td class="nc" data-label="IMDb rating">${imdbHTML(f.imdb)}</td>
-      <td class="desc-cell" data-label="About" title="${descText}">${descText}</td>
+      <td class="nc">${tagHTML(f.genre)}</td>
+      <td class="nc">${imdbHTML(f.imdb)}</td>
+      <td class="desc-cell" title="${descText}">${descText}</td>
     </tr>`;
   }).join('');
 
