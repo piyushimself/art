@@ -175,3 +175,42 @@ window.addEventListener('atlas-progress-change',()=>{syncControls();renderDashbo
 window.addEventListener('storage',e=>{if(e.key===STORE){syncControls();renderDashboard();}});
 window.addEventListener('pageshow',()=>{syncControls();renderDashboard();});
 })();
+
+/* Reference-template reader shell: sticky title bar, in-page find, text sizing. */
+(()=>{'use strict';
+ if(document.body.dataset.libraryTheme==='home')return;
+ const body=document.body,root=document.documentElement;
+ if(document.querySelector('.atlas-reader-bar'))return;
+ const title=(document.title||'Collection').replace(/\\s+/g,' ').trim();
+ const bar=document.createElement('header');
+ bar.className='atlas-reader-bar';
+ bar.innerHTML='<a class="atlas-reader-back" href="index.html" aria-label="Back to library">← <span>Library</span></a><h1 class="atlas-reader-title"></h1><div class="atlas-reader-actions"><button type="button" data-reader-smaller aria-label="Smaller text" title="Smaller text">A−</button><button type="button" data-reader-larger aria-label="Larger text" title="Larger text">A+</button><button type="button" data-reader-theme aria-label="Toggle light or dark theme">Theme</button></div>';
+ bar.querySelector('.atlas-reader-title').textContent=title;
+ body.insertBefore(bar,body.firstChild);
+ const find=document.createElement('div');
+ find.className='atlas-findbar';
+ find.innerHTML='<label class="atlas-find-input"><span aria-hidden="true">⌕</span><input type="search" placeholder="Search in this page" aria-label="Search in this page" autocomplete="off"></label><span class="atlas-find-count" aria-live="polite"></span><button type="button" data-find-prev aria-label="Previous match" title="Previous match">↑</button><button type="button" data-find-next aria-label="Next match" title="Next match">↓</button>';
+ bar.insertAdjacentElement('afterend',find);
+ const input=find.querySelector('input'),count=find.querySelector('.atlas-find-count');
+ const scaleKey='atlas.reader.scale.v1';
+ let scale=1;try{const n=Number(localStorage.getItem(scaleKey));if(n>=.85&&n<=1.5)scale=n;}catch(_){}
+ function applyScale(){body.style.setProperty('--atlas-reader-scale',String(scale));}
+ applyScale();
+ bar.querySelector('[data-reader-smaller]').addEventListener('click',()=>{scale=Math.max(.85,Math.round((scale-.1)*100)/100);applyScale();try{localStorage.setItem(scaleKey,String(scale));}catch(_){}});
+ bar.querySelector('[data-reader-larger]').addEventListener('click',()=>{scale=Math.min(1.5,Math.round((scale+.1)*100)/100);applyScale();try{localStorage.setItem(scaleKey,String(scale));}catch(_){}});
+ bar.querySelector('[data-reader-theme]').addEventListener('click',()=>document.querySelector('.atlas-dock [data-atlas-theme]')?.click());
+ let hits=[],current=-1;
+ function clearMarks(){hits.forEach(m=>{if(m.isConnected)m.replaceWith(document.createTextNode(m.textContent||''));});hits=[];current=-1;body.normalize();}
+ function go(index){if(!hits.length){count.textContent=input.value.trim()?'0 results':'';return;}if(hits[current])hits[current].classList.remove('current');current=(index+hits.length)%hits.length;hits[current].classList.add('current');hits[current].scrollIntoView({block:'center',behavior:'smooth'});count.textContent=(current+1)+' / '+hits.length;}
+ function search(){clearMarks();const q=input.value.trim().toLocaleLowerCase();if(!q){count.textContent='';return;}
+  const skip='.atlas-reader-bar,.atlas-findbar,.atlas-dock,.atlas-overlay,.atlas-toc,.atlas-completed-panel,script,style,noscript,textarea,input,select,button';
+  const walker=document.createTreeWalker(body,NodeFilter.SHOW_TEXT,{acceptNode(node){const p=node.parentElement;if(!p||p.closest(skip)||!node.nodeValue.trim())return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT;}});
+  const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+  nodes.forEach(node=>{const value=node.nodeValue||'',lower=value.toLocaleLowerCase();let from=0,at;const frag=document.createDocumentFragment();let matched=false;while((at=lower.indexOf(q,from))!==-1){if(at>from)frag.append(document.createTextNode(value.slice(from,at)));const mark=document.createElement('mark');mark.className='atlas-find-hit';mark.textContent=value.slice(at,at+q.length);frag.append(mark);hits.push(mark);matched=true;from=at+q.length;}if(matched){if(from<value.length)frag.append(document.createTextNode(value.slice(from)));node.replaceWith(frag);}});
+  go(0);
+ }
+ input.addEventListener('input',search);
+ find.querySelector('[data-find-prev]').addEventListener('click',()=>go(current-1));
+ find.querySelector('[data-find-next]').addEventListener('click',()=>go(current+1));
+ input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();go(current+(e.shiftKey?-1:1));}if(e.key==='Escape'){input.value='';search();input.blur();}});
+})();
