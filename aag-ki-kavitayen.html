@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Aag Ki Kavitayen: a six-volume Hindi and Urdu poetry catalogue with 103 source records, organised by volume and theme.">
+<meta name="theme-color" content="#0f1319">
+<title>Aag Ki Kavitayen — Poetry Archive</title>
+<link rel="stylesheet" href="assets/css/library.css">
+<link rel="stylesheet" href="assets/css/mobile-system.css">
+<style>
+:root{--book-bg:#0f1319;--book-surface:#171c24;--book-text:#e6e9ee;--book-muted:#98a2b0;--book-line:#2a323e;--book-accent:#8c9bff;--book-mark:#6b5a12}
+html[data-color-mode="light"]{--book-bg:#f6f7f9;--book-surface:#fff;--book-text:#1b2430;--book-muted:#5b6675;--book-line:#dde1e8;--book-accent:#3b4cca;--book-mark:#ffe58a}
+body{margin:0;background:var(--book-bg);color:var(--book-text);font:400 1rem/1.55 Inter,"Segoe UI",system-ui,sans-serif}
+.archive-wrap{width:min(960px,calc(100% - 28px));margin:0 auto}
+.archive-hero{padding:34px 0 25px;border-bottom:1px solid var(--book-line)}
+.archive-kicker,.volume-kicker{font:600 10px/1.4 ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--book-accent)}
+.archive-hero h2{font:600 clamp(2rem,5vw,3rem)/1.08 Georgia,"Noto Serif",serif;letter-spacing:-.035em;margin:9px 0 8px;color:var(--book-text)}
+.archive-intro{max-width:68ch;color:var(--book-muted);font-size:15px;line-height:1.75;margin:0}
+.archive-stats{display:flex;gap:18px;flex-wrap:wrap;margin-top:19px}
+.archive-stat{padding:8px 12px;border:1px solid var(--book-line);border-radius:10px;background:var(--book-surface)}
+.archive-stat strong{display:block;font:600 18px Georgia,serif}
+.archive-stat span{display:block;color:var(--book-muted);font:10px ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase}
+.archive-note{margin:20px 0;padding:13px 15px;border:1px solid var(--book-line);border-left:3px solid var(--book-accent);border-radius:8px;background:var(--book-surface);color:var(--book-muted);font-size:13px;line-height:1.7}
+.archive-note strong{color:var(--book-text)}
+.archive-controls{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:18px 0}
+.archive-controls label{color:var(--book-muted);font-size:12px}
+.archive-controls select{min-height:40px;padding:0 12px;border:1px solid var(--book-line);border-radius:10px;background:var(--book-surface);color:var(--book-text);font:14px inherit}
+.archive-count{margin-left:auto;color:var(--book-muted);font:12px ui-monospace,monospace}
+.volume{margin:28px 0 38px;scroll-margin-top:118px}
+.volume-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--book-line)}
+.volume-head h3{margin:0;font:600 1.35rem/1.2 Georgia,"Noto Serif",serif}
+.volume-theme{margin-left:auto;color:var(--book-muted);font-size:12px}
+.poem-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.poem-record{min-width:0;display:flex;flex-direction:column;gap:7px;padding:14px;border:1px solid var(--book-line);border-radius:10px;background:var(--book-surface);color:var(--book-text)}
+.poem-record h4{margin:0;font:600 1rem/1.35 Inter,"Segoe UI",system-ui,sans-serif}
+.poem-record .record-number{color:var(--book-accent);font:11px ui-monospace,monospace}
+.poem-record .record-theme{margin-top:auto;padding-top:4px;color:var(--book-muted);font-size:12px}
+.poem-record.incomplete{border-style:dashed;opacity:.82}
+.poem-record[hidden],.volume[hidden]{display:none!important}
+.archive-footer{padding:18px 0 60px;border-top:1px solid var(--book-line);color:var(--book-muted);font:11px ui-monospace,monospace}
+@media(max-width:600px){.archive-hero{padding:25px 0 19px}.archive-intro{font-size:14px}.archive-stats{gap:8px}.archive-stat{flex:1 1 28%;padding:8px}.archive-controls select{flex:1;min-width:0}.archive-count{width:100%;margin:0}.poem-grid{grid-template-columns:minmax(0,1fr);gap:9px}.poem-record{padding:13px}}
+</style>
+</head>
+<body data-library-theme="art">
+<main class="archive-wrap">
+<header class="archive-hero">
+<div class="archive-kicker">Hindi & Urdu · Poetry catalogue</div>
+<h2>Aag Ki Kavitayen</h2>
+<p class="archive-intro">A six-volume catalogue arranged around struggle, humanity, hope, land and memory. This page preserves the titles and thematic groupings found in the existing library source, without inventing poem text or individual poet credits.</p>
+<div class="archive-stats"><div class="archive-stat"><strong>103</strong><span>Source records</span></div><div class="archive-stat"><strong>6</strong><span>Volumes</span></div><div class="archive-stat"><strong>100</strong><span>Named titles</span></div></div>
+</header>
+<aside class="archive-note"><strong>Source and attribution note.</strong> The source catalogue labels this collection “Paash tradition” but does not provide verified individual poet attributions or complete poem texts for these records. The final volume contains three incomplete placeholders. Titles and themes are retained as recorded; no opening lines or missing poems have been fabricated.</aside>
+<div class="archive-controls"><label for="volumeFilter">Browse volume</label><select id="volumeFilter"><option value="all">All six volumes</option><option value="1">Volume I — Flames of the Revolution</option><option value="2">Volume II — The Heart’s Rebellion</option><option value="3">Volume III — From Darkness to Light</option><option value="4">Volume IV — The Fire Within</option><option value="5">Volume V — Breath & Blade</option><option value="6">Volume VI — The Final Spark</option></select><span class="archive-count" id="archiveCount">103 source records</span></div>
+<div id="volumeList"></div>
+</main>
+<footer class="archive-wrap archive-footer">AAG KI KAVITAYEN · SOURCE CATALOGUE PRESERVED · FULL POEM TEXTS NOT PRESENT IN SOURCE</footer>
+<script>
+(()=>{'use strict';
+const groups=[{"n":"Volume I","subtitle":"Flames of the Revolution","theme":"Andhere Se Roshni Tak","titles":"Sabse Khatarnak|Zinda Rehna|Inquilaab|Deewarein|Khamoshi|Aadmi|Waqt|Khwaab|Mitti|Aandhiyan|Roshan Raasta|Doosra Aadmi|Shabd|Nayi Subah|Rang|Hum Sab|Koi Nahin Dekhta|Pehchaan|Aakaash|Bazar"},{"n":"Volume II","subtitle":"The Heart’s Rebellion","theme":"Insaan Aur Insaniyat","titles":"Ladaai|Phool Aur Kaante|Jhooth|Ek Aur Subah|Desh|Geelii Mitti|Chingaari|Toofan|Roshni|Koi Baat Nahin|Tamaasha|Aurat|Maa|Naukar|Pagal|Shahar|Bhook|Ibadat|Raat Ka Taara|Galti"},{"n":"Volume III","subtitle":"From Darkness to Light","theme":"Sangharsh Aur Umeed","titles":"Kal|Naata|Himmat|Uljhan|Sach Ka Ped|Jang|Parda|Sawaal|Anpadh Nahin|Kaagaz Ki Naav|Woh Din Aayega|Akela Nahin|Parchhaayi|Titli|Ek Aur Sapna|Aansu|Nayi Peedhi|Taraazu|Chhat|Dard Ka Geet"},{"n":"Volume IV","subtitle":"The Fire Within","theme":"Dharti Aur Sapne","titles":"Azaadi|Dopahar Ki Dhooph|Patthar|Irada|Ujiyara|Nadi|Kya Hua Agar|Awaaz|Apni Dharti|Roti|Sach Mein Woh|Kuch Mat Maango|Barabar|Sangharsh|Paheli|Chhota Sa Sapna|Bijli|Ek Sher|Nafsiyaati Sach|Shaam Ka Suraj"},{"n":"Volume V","subtitle":"Breath & Blade","theme":"Aakhiri Aawaz","titles":"Khat|Hum Kahan Hain|Jeet|Itna Toh Karo|Ek Naya Din|Main Nahin Maanunga|Andheron Mein Bhi|Woh Jo Ladha|Lehrein|Teri Meri Baat|Phir Uthenge|Aakhiri Kavita|Sheeshaa|Ek Hi Raat|Khali Haath|Gaon|Patton Ki Baat|Tasveer|Khud Se Milna|Nayi Duniya"},{"n":"Volume VI","subtitle":"The Final Spark","theme":"Source incomplete","titles":"— 99 —|— 100 —|A MEDITATION ON","incomplete":true}];
+const root=document.getElementById('volumeList');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let index=0;
+root.innerHTML=groups.map((g,gi)=>{
+ const titles=g.titles.split('|');
+ const cards=titles.map(title=>{index++;const incomplete=!!g.incomplete;return '<article class="poem-record entry'+(incomplete?' incomplete':'')+'" data-id="aag-'+index+'" data-search="'+esc((title+' '+g.theme+' '+g.subtitle).toLowerCase())+'"><span class="record-number">'+String(index).padStart(3,'0')+'</span><h4>'+esc(title)+'</h4><span class="record-theme">'+(incomplete?'Incomplete source placeholder':esc(g.theme))+'</span></article>';}).join('');
+ return '<section class="volume" data-volume="'+(gi+1)+'"><header class="volume-head"><span class="volume-kicker">'+esc(g.n)+'</span><h3>'+esc(g.subtitle)+'</h3><span class="volume-theme">'+titles.length+' records · '+esc(g.theme)+'</span></header><div class="poem-grid">'+cards+'</div></section>';
+}).join('');
+const filter=document.getElementById('volumeFilter'),count=document.getElementById('archiveCount');
+filter.addEventListener('change',()=>{let shown=0;document.querySelectorAll('.volume').forEach(v=>{const visible=filter.value==='all'||v.dataset.volume===filter.value;v.hidden=!visible;if(visible)shown+=v.querySelectorAll('.poem-record').length;});count.textContent=shown+' source records';});
+})();
+</script>
+<script src="assets/js/library.js" defer></script>
+</body>
+</html>
