@@ -93,3 +93,58 @@ input,select,textarea,button{max-width:100%}
  body[data-atlas-page="cinema-obscura.html"] .tw .imdb-lo{font-size:9px!important}
  body[data-atlas-page="cinema-obscura.html"] .tw .wl-btn{font-size:13px!important;padding:2px!important}
 }
+
+
+/* Manga & Comics Master Index: give the page content a real light palette too.
+   The shared theme switch sets data-color-mode; these tokens and surfaces keep
+   the catalogue readable instead of changing only the floating tool dock. */
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"]{
+ --bg:#f3efe6;--bg2:#ebe5da;--bg3:#fffdf8;--panel:#fffdf8;
+ --ink:#26231e;--ink2:#4d463c;--ink3:#6f6658;--ink4:#8a8071;
+ --red:#a83f3a;--red2:#b44f49;--gold:#8b6b25;--gold2:#8b6b25;
+ --teal:#397568;--purple:#67559a;--border:#d8d0c2;--border2:#c8bead;
+ background:var(--bg)!important;color:var(--ink)!important;color-scheme:light;
+}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .tabs-bar{
+ background:rgba(248,246,240,.97)!important;border-color:var(--border2)!important;
+}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .tab-btn{color:var(--ink3)!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .tab-btn:hover{color:var(--ink)!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .tab-btn.active{color:#79591c!important;border-color:#79591c!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .search-input{
+ background:var(--bg3)!important;color:var(--ink)!important;border-color:var(--border2)!important;
+}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .search-input::placeholder{color:var(--ink3)!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .f-btn{
+ background:var(--bg3)!important;color:var(--ink3)!important;border-color:var(--border)!important;
+}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .f-btn:hover{color:var(--ink)!important;border-color:var(--ink3)!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .f-btn.on{
+ background:#8b6b25!important;border-color:#8b6b25!important;color:#fff!important;
+}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .sec-header{border-color:var(--border)!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .sec-info h2{color:var(--ink)!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .sec-info p{color:var(--ink3)!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .card-grid{background:var(--border)!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .mc{
+ background:var(--panel)!important;color:var(--ink)!important;
+}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .mc:hover{background:#f7f1e7!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .mc-title{color:var(--ink)!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .mc-sub,
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .mc-desc{color:var(--ink3)!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .mc-note{color:var(--ink2)!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .mc-genre{color:#79591c!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .mc-controversy{color:#9d3d38!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .mc-tag{
+ background:#f4f0e8!important;color:var(--ink2)!important;border-color:var(--border2)!important;
+}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .mc-tag.tc{color:#28675d!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .mc-tag.to{color:#456b82!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .mc-tag.th{color:#92502d!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .mc-demo,
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] .empty,
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] footer{color:var(--ink3)!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] footer{border-color:var(--border)!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] ::-webkit-scrollbar-track{background:var(--bg)!important}
+html[data-color-mode="light"] body[data-atlas-page="manga-comics-index.html"] ::-webkit-scrollbar-thumb{background:var(--border2)!important}
