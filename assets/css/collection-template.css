@@ -307,3 +307,57 @@ html[data-color-mode="dark"] ::selection{
 
 /* Light mode remains a coherent neutral paper theme when explicitly chosen. */
 html[data-color-mode="light"]{color-scheme:light}
+
+
+/* Additional aliases and components used by the manga, manhwa and curriculum pages. */
+html[data-color-mode="dark"]{
+ --paper:#171d1f;--paper2:#20282a;--highlight:#30413b;
+ --red:#c17b73;--red-soft:#342526;--red2:#d18a80;
+ --gold:#c5a66d;--gold2:#d5bc88;--teal:#83b8a7;--purple:#a99bc8;
+ --sienna:#bd9275;--rust:#c17b73;--sage:#8eae96;--slate:#9aabb8;
+ --anime-col:#91a9bd;
+ --ink2:#c7ceca;--ink3:#adb7b2;--ink4:#929d99;
+ --color-text-primary:#e9e7e1;--color-text-secondary:#b8c0bc;
+ --color-text-tertiary:#929d99;
+ --color-border-primary:#465256;--color-border-secondary:#384246;
+ --color-border-tertiary:#303a3d;
+ --color-background-primary:#101416;--color-background-secondary:#1b2224;
+ --color-background-tertiary:#242d30;
+}
+html[data-color-mode="dark"] body :is(
+ .manga-card,.mc,.gc,.card,.book,.book-card,.film-card,.movie-card,
+ .resource-card,.work-card,.entry,.lcard,.practical-item,.task-item,
+ .episode-card,.stats-bar,.stats,.ms,.sc,.sbar,.legend,.tier-info,
+ .expand-body,.platform-row,.intro-essay,.no-results,.section-theme,
+ .card-reflection,.filter-panel,.controls,.controls-wrap,.search-wrap
+){
+ background-color:#1b2224!important;
+ color:#e1e4e1!important;
+ border-color:#384246!important;
+}
+html[data-color-mode="dark"] body :is(
+ .fb,.f-btn,.filter-btn,.nav-tab,.tab-btn,.pill,.sort-sel,
+ .tag-genre,.tag-feel,.tag-length,.card-type,.card-theme-tag,
+ .anime-tag,.no-anime,.cat-badge,.tag,.mn,.ma,.ts,.tj,.te,.to,.tc,.ta,.tg,
+ .category-count,.count-pill,.section-count
+){
+ background-color:#263033!important;
+ color:#cbd4d0!important;
+ border-color:#465256!important;
+}
+html[data-color-mode="dark"] body :is(
+ .fb.active,.f-btn.on,.filter-btn.active,.nav-tab.active,.tab-btn.active,
+ .pill.active,.fb:hover,.f-btn:hover,.filter-btn:hover,.nav-tab:hover,.tab-btn:hover
+){
+ background-color:#456b5e!important;
+ color:#f4f6f2!important;
+ border-color:#739a8a!important;
+}
+html[data-color-mode="dark"] body :is(
+ .header p,.header-sub,.subtitle,.sub,.masthead-sub,.tier-info p,
+ .card-desc,.rating,.manga-author,.mn,.ma,.muted,.muted-text,
+ .card-num,.rank-num,.stat-label,.count-label,.section-count,
+ .header-eyebrow,.header-label,.hd-label,.hd-stat-l
+){
+ color:#b2b8b6!important;
+}
