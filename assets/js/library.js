@@ -181,6 +181,8 @@ window.addEventListener('pageshow',()=>{syncControls();renderDashboard();});
  if(document.body.dataset.libraryTheme==='home')return;
  const body=document.body,root=document.documentElement;
  if(document.querySelector('.atlas-reader-bar'))return;
+ const contentRoot=body.querySelector('main')||body.querySelector('.main')||body.querySelector('.content')||body.querySelector('article')||body.querySelector('.reader-wrap');
+ if(contentRoot)contentRoot.classList.add('atlas-reader-content');
  const title=(document.title||'Collection').replace(/\\s+/g,' ').trim();
  const bar=document.createElement('header');
  bar.className='atlas-reader-bar';
