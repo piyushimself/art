@@ -186,7 +186,7 @@ window.addEventListener('pageshow',()=>{syncControls();renderDashboard();});
  const title=(document.title||'Collection').replace(/\\s+/g,' ').trim();
  const bar=document.createElement('header');
  bar.className='atlas-reader-bar';
- bar.innerHTML='<a class="atlas-reader-back" href="index.html" aria-label="Back to library">← <span>Library</span></a><h1 class="atlas-reader-title"></h1><div class="atlas-reader-actions"><button type="button" data-reader-smaller aria-label="Smaller text" title="Smaller text">A−</button><button type="button" data-reader-larger aria-label="Larger text" title="Larger text">A+</button><button type="button" data-reader-theme aria-label="Toggle light or dark theme">Theme</button></div>';
+ bar.innerHTML='<a class="atlas-reader-back" href="index.html" aria-label="Back to library">← <span>Library</span></a><div class="atlas-reader-title" role="heading" aria-level="1"></div><div class="atlas-reader-actions"><button type="button" data-reader-smaller aria-label="Smaller text" title="Smaller text">A−</button><button type="button" data-reader-larger aria-label="Larger text" title="Larger text">A+</button><button type="button" data-reader-theme aria-label="Toggle light or dark theme">Theme</button></div>';
  bar.querySelector('.atlas-reader-title').textContent=title;
  body.insertBefore(bar,body.firstChild);
  const find=document.createElement('div');
