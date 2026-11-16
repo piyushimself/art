@@ -61,6 +61,12 @@ if(pageFile==='top-500-adult-manga.html'){
  document.head.appendChild(pageFix);
 }
 
+/* Load the shared list-first design after legacy page repairs so it wins consistently. */
+const standardStyles=document.createElement('link');
+standardStyles.rel='stylesheet';
+standardStyles.href='assets/css/atlas-standard.css?v=20261116-1';
+document.head.appendChild(standardStyles);
+
 const theme=body.dataset.libraryTheme||'home';
 const progress=document.createElement('div');progress.className='atlas-progress';progress.setAttribute('aria-hidden','true');document.body.appendChild(progress);
 const dock=document.createElement('nav');dock.className='atlas-dock';dock.setAttribute('aria-label','Library tools');
