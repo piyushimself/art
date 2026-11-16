@@ -145,7 +145,8 @@ html[data-color-mode="light"] .atlas-done-kicker{color:#526d63!important}
 
 
 /* Tracker placement: keep checkboxes inside card surfaces, never as grid siblings. */
-.atlas-trackable:has(>.atlas-item-check--inside-link){padding-bottom:52px!important}
+.atlas-card-track-wrap{position:relative!important;display:block!important;min-width:0!important;height:100%!important}
+.atlas-card-track-wrap>.card{display:block!important;height:100%!important;padding-bottom:52px!important}
 .atlas-item-check--inside-link{position:absolute!important;right:12px!important;bottom:12px!important;margin:0!important;z-index:4!important}
 body[data-library-theme="art"] .atlas-item-check--inside-link,
 body[data-library-theme="learning"] .atlas-item-check--inside-link{
