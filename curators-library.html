@@ -503,7 +503,7 @@ function drawLists(){
 
 // ── modal ─────────────────────────────────────────────────
 function openModal(idx){
-  const l=LISTS[+idx]; if(!l) return;
+  const l=LISTS.find(x=>x.idx===+idx); if(!l) return;
   const items=ITEMS.filter(i=>i.list_idx===+idx);
   document.getElementById('mbar').style.background=COL[l.type]||'#888';
   document.getElementById('mcat').textContent=l.cat;
