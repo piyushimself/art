@@ -156,3 +156,154 @@ body[data-library-theme="art"] .atlas-item-check--inside-link:hover,
 body[data-library-theme="learning"] .atlas-item-check--inside-link:hover{
  background:#f3eadb!important;color:#29231e!important;
 }
+
+
+/* =========================================================
+   ATLAS GLOBAL THEME — one coherent dark palette for every page
+   The theme toggle sets html[data-color-mode]. Page layouts and
+   typography remain authored per page; surfaces and text do not.
+   ========================================================= */
+html[data-color-mode="dark"]{
+ color-scheme:dark;
+ --atlas-ui-bg:#101416;
+ --atlas-ui-surface:#1b2224;
+ --atlas-ui-ink:#e9e7e1;
+ --atlas-ui-muted:#b2b8b6;
+ --atlas-ui-line:#384246;
+ --atlas-ui-accent:#91b8a8;
+
+ /* Common legacy page tokens, mapped onto the same dark palette. */
+ --bg:#101416;--bg2:#171d1f;--bg3:#20282a;
+ --background:#101416;--surface:#1b2224;--surface-2:#222b2d;
+ --card:#1b2224;--panel:#1b2224;--paper:#171d1f;
+ --cream:#171d1f;--warm-white:#1b2224;--parchment:#141a1c;
+ --parchment2:#1b2224;--parchment3:#242d2f;--cream-white:#20282a;
+ --ink:#e9e7e1;--text:#e9e7e1;--text2:#c3c9c6;--text3:#aab2af;
+ --text-muted:#b2b8b6;--muted:#aab2af;--ink-soft:#c3c9c6;
+ --bark:#20282a;--bark-light:#aab2af;
+ --line:#384246;--border:#384246;
+ --accent:#91b8a8;--accent2:#91b8a8;
+ --gold:#c4a56b;--gold-light:#d7bd8d;
+ --atlas-bg:#101416;--atlas-paper:#171d1f;--atlas-ink:#e9e7e1;
+ --atlas-muted:#b2b8b6;--atlas-line:#384246;--atlas-panel:#1b2224;
+ --atlas-shadow:0 14px 38px rgba(0,0,0,.28);
+ background:#101416!important;
+}
+html[data-color-mode="dark"] body,
+html[data-color-mode="dark"] body[data-library-theme]{
+ background:#101416!important;
+ background-color:#101416!important;
+ color:#e9e7e1!important;
+ color-scheme:dark;
+}
+
+/* Reusable page surfaces: hero/header, controls and content cards. */
+html[data-color-mode="dark"] body :is(
+ .hero,.hero-inner,.hero-content,.hero-panel,.hero-card,
+ header,.header,.masthead,.page-header,.page-hero,.hero-header,
+ .preamble,.intro,.intro-panel,.title-panel,
+ .filter-wrap,.filter-bar,.filter-panel,.filters,.controls,.controls-wrap,
+ .toolbar,.searchbar,.search-panel,.search-wrap,.legend,.stats-panel,
+ .card,.card-inner,.panel,.tile,.content-card,.resource-card,.manga-card,
+ .film-card,.arc-card,.entry-card,.item-card,.task-card,.prompt-card,
+ .chapter-card,.episode-card,.season-block,.season-header,.phase-header,
+ .phase-intro-box,.progress-wrap,.tip-block,.callout,.quote-block,
+ .table-wrap,.table-container,.table-responsive,.table-scroll
+){
+ background-color:#1b2224!important;
+ color:#e9e7e1!important;
+ border-color:#384246!important;
+ box-shadow:0 5px 18px rgba(0,0,0,.16);
+}
+
+/* Neutralise inline light panels left over from individually designed pages. */
+html[data-color-mode="dark"] body [style*="background-color"],
+html[data-color-mode="dark"] body [style*="background:"]{
+ background-color:#1b2224!important;
+ background-image:none!important;
+ color:#e9e7e1!important;
+ border-color:#384246!important;
+}
+
+/* Readable text hierarchy across all page-specific palettes. */
+html[data-color-mode="dark"] body :is(
+ h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,
+ label,legend,th,td,.subtitle,.description,.subtext,.eyebrow,
+ .section-title,.section-label,.hero-sub,.hero-copy,.header-sub,
+ .header-eyebrow,.stat-label,.meta-label,.muted,.muted-text
+){
+ color:#e1e4e1!important;
+}
+html[data-color-mode="dark"] body :is(small,.muted,.muted-text,.subtitle,.description,.subtext,.eyebrow,.stat-label,.meta-label){
+ color:#b2b8b6!important;
+}
+html[data-color-mode="dark"] body :is(strong,b,em){
+ color:#f0eee8;
+}
+html[data-color-mode="dark"] body a:not(.atlas-home):not(.atlas-result){
+ color:#9bc7b5;
+}
+html[data-color-mode="dark"] body a:hover{
+ color:#c2e1d4;
+}
+
+/* Tags, genre labels and filters: muted, not neon or pastel. */
+html[data-color-mode="dark"] body :is(
+ .tag,.badge,.chip,.pill,.genre,.category,.meta-pill,.level-pill,
+ .filter-btn,.tab-btn,.ftab,.filter,.filter-chip,.nav-tab,.tab,
+ .status,.label,.count-badge
+){
+ background:#263033!important;
+ color:#cbd4d0!important;
+ border-color:#465256!important;
+}
+html[data-color-mode="dark"] body :is(
+ .filter-btn.active,.tab-btn.active,.ftab.active,.filter.active,
+ .filter-chip.active,.nav-tab.active,.tab.active,[aria-pressed="true"]
+){
+ background:#456b5e!important;
+ color:#f4f6f2!important;
+ border-color:#739a8a!important;
+}
+
+/* Inputs, selects, textareas and native form controls. */
+html[data-color-mode="dark"] body :is(input,select,textarea){
+ background-color:#151c1e!important;
+ color:#e9e7e1!important;
+ border-color:#465256!important;
+ accent-color:#91b8a8;
+}
+html[data-color-mode="dark"] body :is(input,select,textarea)::placeholder{
+ color:#929d99!important;opacity:1;
+}
+html[data-color-mode="dark"] body :is(button){
+ color:#e9e7e1;
+}
+html[data-color-mode="dark"] body :is(button,.button,.btn){
+ border-color:#465256;
+}
+html[data-color-mode="dark"] body :is(button:hover,.button:hover,.btn:hover){
+ filter:brightness(1.12);
+}
+
+/* Tables and separators. */
+html[data-color-mode="dark"] body table{
+ color:#e1e4e1!important;border-color:#384246!important;
+}
+html[data-color-mode="dark"] body :is(th,td){
+ border-color:#384246!important;
+}
+html[data-color-mode="dark"] body :is(hr,.divider,.separator){
+ border-color:#384246!important;
+}
+
+/* Preserve media, artwork and deliberately darkened image treatments. */
+html[data-color-mode="dark"] body :is(img,video,canvas,svg,iframe){
+ filter:none;
+}
+html[data-color-mode="dark"] ::selection{
+ background:#456b5e;color:#fff;
+}
+
+/* Light mode remains a coherent neutral paper theme when explicitly chosen. */
+html[data-color-mode="light"]{color-scheme:light}
