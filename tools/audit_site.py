@@ -134,8 +134,8 @@ def main():
         home_html = home_path.read_text(encoding="utf-8", errors="replace")
         film_html = film_path.read_text(encoding="utf-8", errors="replace")
         film_title = re.search(r"<title[^>]*>(.*?)</title>", film_html, re.I | re.S)
-        count_match = re.search(r"([0-9][0-9,]*)\\s+Films", film_title.group(1)) if film_title else None
-        card_match = re.search(r'<a\\b[^>]*href="film-collection\\.html"[^>]*>[\\s\\S]*?</a>', home_html, re.I)
+        count_match = re.search(r"([0-9][0-9,]*)\s+Films", film_title.group(1)) if film_title else None
+        card_match = re.search(r'<a\b[^>]*href="film-collection\.html"[^>]*>[\s\S]*?</a>', home_html, re.I)
         if count_match:
             canonical_count = count_match.group(1)
             if not card_match or canonical_count not in card_match.group(0):
