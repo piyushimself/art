@@ -128,6 +128,14 @@ def main():
         totals["inline_scripts"] += len(parser.inline_scripts)
         totals["images_without_alt"] += len(parser.missing_alt)
         totals["duplicate_id_pages"] += bool(duplicates)
+    # Keep the homepage collection total aligned with its actual linked cards.
+    home_path = ROOT / "index.html"
+    if home_path.exists():
+        home_html = home_path.read_text(encoding="utf-8", errors="replace")
+        collection_cards = re.findall(r'<a\\b[^>]*class="card"[^>]*href="[^"]+"', home_html, re.I)
+        stamp_match = re.search(r'<span class="stamp">\\s*(\\d+)\\s+COLLECTIONS\\s*</span>', home_html, re.I)
+        if stamp_match and int(stamp_match.group(1)) != len(collection_cards):
+            errors.append("index.html: collection total stamp does not match linked collection cards (" + str(len(collection_cards)) + ")")
     # Keep the homepage's film-tracker count aligned with the canonical catalogue.
     home_path = ROOT / "index.html"
     film_path = ROOT / "film-collection.html"
