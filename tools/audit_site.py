@@ -2,6 +2,7 @@
 """Static quality gate for every published HTML page in the Art repository."""
 from collections import Counter
 from html.parser import HTMLParser
+import re
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 import subprocess
