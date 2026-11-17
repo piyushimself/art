@@ -25,6 +25,7 @@ A personal, static library for manga and comics, art and making, life and learni
 
 ## Structure
 - `index.html` — library home, search, filters and tracker controls.
+- `aag-ki-kavitayen.html` — six-volume poetry catalogue with 103 source records; incomplete metadata is labelled rather than invented.
 - `assets/css/library.css` — shared reading/navigation styles.
 - `assets/js/library.js` — cross-library search, contents navigation and reading progress.
 - `assets/css/shelf.css` / `assets/js/shelf.js` — collection checklist, progress, status filter and list/grid view.
