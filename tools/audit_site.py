@@ -127,6 +127,22 @@ def main():
         totals["inline_scripts"] += len(parser.inline_scripts)
         totals["images_without_alt"] += len(parser.missing_alt)
         totals["duplicate_id_pages"] += bool(duplicates)
+    # Keep the homepage's film-tracker count aligned with the canonical catalogue.
+    home_path = ROOT / "index.html"
+    film_path = ROOT / "film-collection.html"
+    if home_path.exists() and film_path.exists():
+        home_html = home_path.read_text(encoding="utf-8", errors="replace")
+        film_html = film_path.read_text(encoding="utf-8", errors="replace")
+        film_title = re.search(r"<title[^>]*>(.*?)</title>", film_html, re.I | re.S)
+        count_match = re.search(r"([0-9][0-9,]*)\\s+Films", film_title.group(1)) if film_title else None
+        card_match = re.search(r'<a\\b[^>]*href="film-collection\\.html"[^>]*>[\\s\\S]*?</a>', home_html, re.I)
+        if count_match:
+            canonical_count = count_match.group(1)
+            if not card_match or canonical_count not in card_match.group(0):
+                errors.append("index.html: film tracker card count does not match film-collection.html (" + canonical_count + ")")
+            if re.search(r"1,619", home_html):
+                errors.append("index.html: stale 1,619-film count remains after the catalogue was updated")
+
     js_files = sorted((ROOT / "assets" / "js").glob("*.js"))
     for path in js_files:
         issue = check_js(path.read_text(encoding="utf-8", errors="replace"), path.relative_to(ROOT).as_posix())
